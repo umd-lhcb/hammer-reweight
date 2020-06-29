@@ -37,4 +37,4 @@ make
 make install
 ```
 
-
+You should then be able to find example code and their excutables under `/Hammer-install/share/Hammer/examples`.
