@@ -6,6 +6,6 @@ in
 pkgs.mkShell {
   name = "hammer-redist";
   buildInputs = with pkgs; [
-    hammer
+    hammer-phys
   ];
 }

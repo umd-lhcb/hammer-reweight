@@ -1,4 +1,6 @@
-{ stdenv, fetchgit, boost, python, root }:
+{ stdenv, fetchgit
+, cmake, makeWrapper, pkgconfig, libyamlcpp
+, boost, python, root }:
 
 stdenv.mkDerivation rec {
   pname = "hammer-phys";
@@ -6,14 +8,15 @@ stdenv.mkDerivation rec {
 
   src = fetchgit {
     url = "https://gitlab.com/mpapucci/Hammer.git";
-    ref = "developmnt";
+    branchName = "developmnt";
     rev = version;
     sha256 = "14j09s87926z4mffi9rdjqp4xnryml4q4vs7y8c02d7hahlwfn9f";
   };
 
-  nativeBuildInputs = [ cmake makeWrapper ];
+  nativeBuildInputs = [ cmake makeWrapper pkgconfig ];
   buildInputs = [
     boost
+    libyamlcpp
     python
     root
   ];
