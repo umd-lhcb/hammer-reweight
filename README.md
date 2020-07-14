@@ -1,7 +1,7 @@
 # hammer-redist
 HAMMER-related info.
 
-## To compile Hammer
+## Compile Hammer in a recent Linux distribution
 Hammer uses `CMake` to configure out-of-source build. System requirements and
 configurations are described in https://hammer.physics.lbl.gov/readme.html.
 
