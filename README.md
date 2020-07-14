@@ -40,10 +40,19 @@ C++14.
 ```
 mkdir Hammer-build
 cd Hammer-build
-cmake -DCMAKE_INSTALL_PREFIX=../Hammer-install -DWITH_PYTHON=ON -DWITH_ROOT=ON -DWITH_EXAMPLES=ON -DINSTALL_EXTERNAL_DEPENDENCIES=ON -DMAX_CXX_IS_14=OFF ../Hammer-source
+cmake -DCMAKE_INSTALL_PREFIX=../Hammer-install \
+    -DWITH_PYTHON=ON -DWITH_ROOT=ON \
+    -DFORCE_YAMLCPP=ON \
+    -DWITH_EXAMPLES=ON \
+    -DINSTALL_EXTERNAL_DEPENDENCIES=ON \
+    -DMAX_CXX_IS_14=OFF \
+    ../Hammer-source
 make
 make install
 ```
+
+Note that here we'll install a local copy of `yaml-cpp`, regardless of if it's
+available globally.
 
 You should then be able to find example code and their executables under
 `Hammer-install/share/Hammer/examples`.
