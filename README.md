@@ -3,30 +3,22 @@ HAMMER-related info.
 
 ## Compile Hammer in a recent Linux distribution
 Hammer uses `CMake` to configure out-of-source build. System requirements and
-configurations are described in https://hammer.physics.lbl.gov/readme.html.
+configurations are described in [Hammer documentation](https://hammer.physics.lbl.gov/readme.html).
 
-It's been compiled successfully with `gcc 10.1.0`, with interfaces to `Python 3.8.3` and `ROOT 6.20/04`.
+It's been compiled successfully with `gcc 10.1.0`, with interfaces to `Python
+3.8.3` and `ROOT 6.20/04`, on Arch Linux.
 
-
-### Install Boost
-If `boost` is not installed on the system, install it first.
-
+### Install dependencies on Arch Linux
 ```
-tar xzvf tar.gz
-cd boost_1_73_0/
-./bootstrap.sh --prefix=path/to/install
-./b2 install
+sudo pacman -S boost yaml-cpp root
 ```
-
-And environment variable is defined:
-`export BOOST_DIR=boost-install/lib`
-
 
 ### Build Hammer
-Get source code from https://gitlab.com/mpapucci/Hammer.git.
-
-You may want to switch to the `development` branch to pull in the most recent
-developments.
+Get source code from Hammer's official repository. We prefer the `development`
+branch for now:
+```
+git clone -b development --single-branch https://gitlab.com/mpapucci/Hammer.git
+```
 
 At the time of documenting this, one minor edit of the source code was necessary:
 add `#include <string>` to `Hammer-source/include/Hammer/Math/Units.hh`.
@@ -34,18 +26,17 @@ add `#include <string>` to `Hammer-source/include/Hammer/Math/Units.hh`.
 Then configure with CMake. The following command includes installing external
 dependencies, Python binding and ROOT interface.
 
-Later ROOT versions can be compiled with C++17 spec so we don't need to enforce
-C++14.
+**Note**: The C++ flags need to be in sync with ROOT's flags!
 
 ```
 mkdir Hammer-build
 cd Hammer-build
-cmake -DCMAKE_INSTALL_PREFIX=../Hammer-install \
+cmake \
+    -DCMAKE_INSTALL_PREFIX=../Hammer-install \
     -DWITH_PYTHON=ON -DWITH_ROOT=ON \
-    -DFORCE_YAMLCPP=ON \
     -DWITH_EXAMPLES=ON \
-    -DINSTALL_EXTERNAL_DEPENDENCIES=ON \
-    -DMAX_CXX_IS_14=OFF \
+    -DINSTALL_EXTERNAL_DEPENDENCIES=ON \  # Install required Python packages
+    -DMAX_CXX_IS_14=OFF \  # on Arch, ROOT is compiled with c++17 flag, on NixOS, it is c++11.
     ../Hammer-source
 make
 make install
