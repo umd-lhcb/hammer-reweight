@@ -1,4 +1,4 @@
-{ stdenv, buildPythonPackage, fetchPypi, cython }:
+{ stdenv, buildPythonPackage, fetchPypi }:
 
 buildPythonPackage rec {
   pname = "cymove";
@@ -9,10 +9,6 @@ buildPythonPackage rec {
     extension = "tar.gz";
     sha256 = "79c1350db2f1f92a459b87ee9072ec0790faab233bfaeb73bf78a5caadd5aaa8";
   };
-
-  propagatedBuildInputs = [
-    cython
-  ];
 
   doCheck = false;
 }
