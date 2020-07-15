@@ -3,3 +3,4 @@ dev-shell:
 
 clean:
 	@sudo rm -rf ./Hammer-*
+	@sudo rm -rf ./out
