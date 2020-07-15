@@ -29,10 +29,8 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [
-    "-Drpath=ON"
+    "-DCMAKE_INSTALL_PREFIX=$out"
     "-DBUILD_SHARED_LIBS=ON"
-    "-DCMAKE_INSTALL_LIBDIR=lib"
-    "-DCMAKE_INSTALL_INCLUDEDIR=include"
     "-DWITH_PYTHON=ON"
     "-DWITH_ROOT=ON"
     "-DINSTALL_EXTERNAL_DEPENDENCIES=OFF"
