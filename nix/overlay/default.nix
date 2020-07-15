@@ -10,4 +10,5 @@ in
 
 {
   hammer-phys = super.callPackage ./hammer-phys {};
+  python3 = super.python3.override pythonOverrides;
 }
