@@ -1,6 +1,6 @@
 { stdenv, fetchgit
 , cmake, makeWrapper, pkgconfig, libyamlcpp
-, boost, python3, root }:
+, boost, root, python3 }:
 
 stdenv.mkDerivation rec {
   pname = "hammer-phys";
@@ -25,14 +25,17 @@ stdenv.mkDerivation rec {
     cymove
     numpy
     matplotlib
+    setuptools
   ];
 
   cmakeFlags = [
     "-Drpath=ON"
+    "-DBUILD_SHARED_LIBS=ON"
     "-DCMAKE_INSTALL_LIBDIR=lib"
     "-DCMAKE_INSTALL_INCLUDEDIR=include"
     "-DWITH_PYTHON=ON"
     "-DWITH_ROOT=ON"
+    "-DINSTALL_EXTERNAL_DEPENDENCIES=OFF"
     "-DMAX_CXX_IS_14=ON"  # on NixOS, ROOT is compiled with c++11 flag.
   ];
 }
