@@ -1,6 +1,6 @@
 { stdenv, fetchgit
 , cmake, makeWrapper, pkgconfig, libyamlcpp
-, boost, python, root }:
+, boost, python3, root }:
 
 stdenv.mkDerivation rec {
   pname = "hammer-phys";
@@ -17,8 +17,14 @@ stdenv.mkDerivation rec {
   buildInputs = [
     boost
     libyamlcpp
-    python
+    python3
     root
+  ];
+  propagatedBuildInputs = with python3.pkgs; [
+    cython
+    cymove
+    numpy
+    matplotlib
   ];
 
   cmakeFlags = [
@@ -27,5 +33,6 @@ stdenv.mkDerivation rec {
     "-DCMAKE_INSTALL_INCLUDEDIR=include"
     "-DWITH_PYTHON=ON"
     "-DWITH_ROOT=ON"
+    "-DMAX_CXX_IS_14=ON"  # on NixOS, ROOT is compiled with c++11 flag.
   ];
 }
