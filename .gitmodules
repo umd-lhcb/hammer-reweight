@@ -1,0 +1,3 @@
+[submodule "Hammer"]
+	path = Hammer
+	url = https://gitlab.com/mpapucci/Hammer.git
