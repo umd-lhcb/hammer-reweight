@@ -26,10 +26,12 @@ sudo pacman -S boost yaml-cpp root
 
 
 ## Build Hammer
-Get source code from Hammer's official repository. We prefer the `development`
-branch for now:
+Hammer is included as a submodule for this project. We use `development` branch
+and pinpoint a specific commit to ensure everybody gets the same version.
+
+To checkout this specific version of hammer:
 ```
-git clone -b development --single-branch https://gitlab.com/mpapucci/Hammer.git
+git submodule update --init
 ```
 
 Now, you just need to type:
