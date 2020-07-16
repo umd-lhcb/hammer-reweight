@@ -1,6 +1,6 @@
 { stdenv, fetchgit
-, cmake, makeWrapper, pkgconfig, libyamlcpp
-, boost, root, python3 }:
+, cmake, makeWrapper, pkgconfig
+, boost, python3, libyamlcpp, root }:
 
 stdenv.mkDerivation rec {
   pname = "hammer-phys";
