@@ -28,6 +28,8 @@ stdenv.mkDerivation rec {
     setuptools
   ];
 
+  patches = [ ./add_missing_header.patch ];
+
   cmakeFlags = [
     "-DCMAKE_INSTALL_PREFIX=$out"
     "-DBUILD_SHARED_LIBS=ON"
