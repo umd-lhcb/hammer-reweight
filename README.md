@@ -4,8 +4,10 @@ HAMMER-related info.
 Hammer uses `CMake` to configure out-of-source build. System requirements and
 configurations are described in [Hammer documentation](https://hammer.physics.lbl.gov/readme.html).
 
-It's been compiled successfully with `gcc 10.1.0`, with interfaces to `Python
-3.8.3` and `ROOT 6.20/04`, on Arch Linux.
+Hammer has been compiled successfully on:
+
+- Arch Linux, with `gcc 10.1.0`, `Python 3.8.3`, and `ROOT 6.20/04`.
+- macOS with `nix`, with `clang 7.1.0`, `Python 3.7.6`, and `ROOT 6.18/04`.
 
 
 ## Install dependencies
