@@ -50,7 +50,7 @@ necessary:
 
 This editing is included as a patch in:
 ```
-./nix/overlay/hammer-phys/default.nix
+./nix/overlay/hammer-phys/add_missing_header.patch
 ```
 
 And can be applied with:
