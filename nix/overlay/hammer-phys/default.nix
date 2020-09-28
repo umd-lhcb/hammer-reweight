@@ -23,11 +23,21 @@ stdenv.mkDerivation rec {
   patches = [ ./add_missing_header.patch ];
 
   cmakeFlags = [
-    "-DCMAKE_INSTALL_PREFIX=$out"
+    "-DCMAKE_INSTALL_LIBDIR=lib"
+    "-DCMAKE_INSTALL_INCLUDEDIR=include"
     "-DBUILD_SHARED_LIBS=ON"
     "-DWITH_PYTHON=OFF"
     "-DWITH_ROOT=ON"
     "-DINSTALL_EXTERNAL_DEPENDENCIES=OFF"
     "-DMAX_CXX_IS_14=ON"  # on NixOS, ROOT is compiled with c++11 flag.
   ];
+
+  # Move the .so files to the lib folder so the output looks like this:
+  #   lib/*.so
+  # instead of:
+  #   lib/Hammer/*.so
+  postFixup = ''
+    mv $out/lib/Hammer/* $out/lib
+    rm -rf $out/lib/Hammer
+  '';
 }
