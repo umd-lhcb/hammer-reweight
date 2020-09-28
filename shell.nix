@@ -8,4 +8,10 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     hammer-phys
   ];
+
+  propagatedBuildInputs = with pkgs; [
+    boost
+    libyamlcpp
+    root
+  ];
 }
