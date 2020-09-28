@@ -5,11 +5,8 @@ in
 
 pkgs.mkShell {
   name = "hammer-redist";
-  buildInputs = with pkgs; [
-    hammer-phys
-  ];
-
   propagatedBuildInputs = with pkgs; [
+    hammer-phys
     boost
     libyamlcpp
     root
