@@ -1,4 +1,4 @@
-{ stdenv, fetchgit
+{ stdenv
 , cmake, makeWrapper, pkgconfig
 , boost, libyamlcpp, root }:
 
@@ -6,12 +6,13 @@ stdenv.mkDerivation rec {
   pname = "hammer-phys";
   version = "f7827bf";  # Updated on Jun 17, 2020, 03:17 CST.
 
-  src = fetchgit {
-    url = "https://gitlab.com/mpapucci/Hammer.git";
-    branchName = "developmnt";
-    rev = version;
-    sha256 = "0dnv2vwh1fz61gl60x7bymkd4mxi16523jygwj7b1135lqsbms2z";
-  };
+  # src = fetchgit {
+  #   url = "https://gitlab.com/mpapucci/Hammer.git";
+  #   branchName = "developmnt";
+  #   rev = version;
+  #   sha256 = "0dnv2vwh1fz61gl60x7bymkd4mxi16523jygwj7b1135lqsbms2z";
+  # };
+  src = builtins.path { path = ../../../Hammer; name = "hammer"; };
 
   nativeBuildInputs = [ cmake makeWrapper pkgconfig ];
   buildInputs = [
