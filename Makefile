@@ -1,9 +1,23 @@
-.PHONY: dev-shell clean-nix clean-general patch build
+.PHONY: dev-shell clean clean-nix clean-general patch build
 
+BINPATH	:=	bin
+VPATH	:=	src
+
+# System env
 PWD=$(shell pwd)
+
+# Compiler settings
+COMPILER	:=	$(shell root-config --cxx)
+#CXXFLAGS	:=	$(shell root-config --cflags)
+CXXFLAGS	:=	-pthread -std=c++14 -m64
+LINKFLAGS	:=	$(shell root-config --libs)
+ADDLINKFLAGS	:=	-lHammerTools -lHammerBase -lHammerCore -lFormFactors -lAmplitudes -lRates
 
 dev-shell:
 	@nix-shell --pure -E "with import <nixpkgs> { overlays = [(import ./nix/overlay)]; }; callPackage ./nix/overlay/hammer-phys {}"
+
+clean:
+	@rm -rf ./bin/*
 
 clean-nix:
 	@sudo rm -rf ./Hammer-*
@@ -33,3 +47,11 @@ build: patch
 	@echo "Please add the following lines to your shell config:"
 	@echo "export=CPLUS_INCLUDE_PATH=$(PWD)/out/include:"'$$CPLUS_INCLUDE_PATH'
 	@echo "export=LD_LIBRARY_PATH=$(PWD)/out/lib:"'$$LD_LIBRARY_PATH'
+
+
+####################
+# Generic patterns #
+####################
+
+%: %.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
