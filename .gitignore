@@ -1,4 +1,6 @@
 Hammer-*
 out
+bin
 
 .envrc
+.lvimrc
