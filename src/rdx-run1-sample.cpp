@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Oct 05, 2020 at 09:24 PM +0800
+// Last Change: Thu Oct 08, 2020 at 01:59 AM +0800
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
@@ -27,60 +27,71 @@ auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
 }
 
 void reweight_dst(TFile* input_file, TFile* output_file,
-                  const char* tree = "mc_dst_tau_aux") {
+                  const char* tree        = "mc_dst_tau_aux",
+                  const char* tree_output = "mc_dst_tau_ff_w") {
   TTreeReader reader(tree, input_file);
-  TTree       output(tree, tree);
+  TTree       output(tree_output, tree_output);
 
   // Read input branches ///////////////////////////////////////////////////////
   // General
   TTreeReaderValue<ULong64_t> eventNumber(reader, "eventNumber");
   TTreeReaderValue<UInt_t>    runNumber(reader, "runNumber");
   // B
+  TTreeReaderValue<Int_t>    b_id(reader, "b_id");
   TTreeReaderValue<Double_t> b_true_pe(reader, "b_true_pe");
   TTreeReaderValue<Double_t> b_true_px(reader, "b_true_px");
   TTreeReaderValue<Double_t> b_true_py(reader, "b_true_py");
   TTreeReaderValue<Double_t> b_true_pz(reader, "b_true_pz");
   // D*
+  TTreeReaderValue<Int_t>    dst_id(reader, "dst_id");
   TTreeReaderValue<Double_t> dst_true_pe(reader, "dst_true_pe");
   TTreeReaderValue<Double_t> dst_true_px(reader, "dst_true_px");
   TTreeReaderValue<Double_t> dst_true_py(reader, "dst_true_py");
   TTreeReaderValue<Double_t> dst_true_pz(reader, "dst_true_pz");
   // D0
+  TTreeReaderValue<Int_t>    d0_id(reader, "d0_id");
   TTreeReaderValue<Double_t> d0_true_pe(reader, "d0_true_pe");
   TTreeReaderValue<Double_t> d0_true_px(reader, "d0_true_px");
   TTreeReaderValue<Double_t> d0_true_py(reader, "d0_true_py");
   TTreeReaderValue<Double_t> d0_true_pz(reader, "d0_true_pz");
   // Mu
+  TTreeReaderValue<Int_t>    mu_id(reader, "mu_id");
   TTreeReaderValue<Double_t> mu_true_pe(reader, "mu_true_pe");
   TTreeReaderValue<Double_t> mu_true_px(reader, "mu_true_px");
   TTreeReaderValue<Double_t> mu_true_py(reader, "mu_true_py");
   TTreeReaderValue<Double_t> mu_true_pz(reader, "mu_true_pz");
   // K
+  TTreeReaderValue<Int_t>    k_id(reader, "k_id");
   TTreeReaderValue<Double_t> k_true_pe(reader, "k_true_pe");
   TTreeReaderValue<Double_t> k_true_px(reader, "k_true_px");
   TTreeReaderValue<Double_t> k_true_py(reader, "k_true_py");
   TTreeReaderValue<Double_t> k_true_pz(reader, "k_true_pz");
   // Pi
+  TTreeReaderValue<Int_t>    pi_id(reader, "pi_id");
   TTreeReaderValue<Double_t> pi_true_pe(reader, "pi_true_pe");
   TTreeReaderValue<Double_t> pi_true_px(reader, "pi_true_px");
   TTreeReaderValue<Double_t> pi_true_py(reader, "pi_true_py");
   TTreeReaderValue<Double_t> pi_true_pz(reader, "pi_true_pz");
   // Slow Pi
+  TTreeReaderValue<Int_t>    spi_id(reader, "spi_id");
   TTreeReaderValue<Double_t> spi_true_pe(reader, "spi_true_pe");
   TTreeReaderValue<Double_t> spi_true_px(reader, "spi_true_px");
   TTreeReaderValue<Double_t> spi_true_py(reader, "spi_true_py");
   TTreeReaderValue<Double_t> spi_true_pz(reader, "spi_true_pz");
   // Anti-Nu_Tau
+  TTreeReaderValue<Int_t>    anu_tau_id(reader, "anu_tau_id");
   TTreeReaderValue<Double_t> anu_tau_true_pe(reader, "anu_tau_true_pe");
   TTreeReaderValue<Double_t> anu_tau_true_px(reader, "anu_tau_true_px");
   TTreeReaderValue<Double_t> anu_tau_true_py(reader, "anu_tau_true_py");
   TTreeReaderValue<Double_t> anu_tau_true_pz(reader, "anu_tau_true_pz");
   // Nu_Tau
+  TTreeReaderValue<Int_t>    nu_tau_id(reader, "nu_tau_id");
   TTreeReaderValue<Double_t> nu_tau_true_pe(reader, "nu_tau_true_pe");
   TTreeReaderValue<Double_t> nu_tau_true_px(reader, "nu_tau_true_px");
   TTreeReaderValue<Double_t> nu_tau_true_py(reader, "nu_tau_true_py");
   TTreeReaderValue<Double_t> nu_tau_true_pz(reader, "nu_tau_true_pz");
   // Anti-Nu_Mu
+  TTreeReaderValue<Int_t>    anu_mu_id(reader, "anu_mu_id");
   TTreeReaderValue<Double_t> anu_mu_true_pe(reader, "anu_mu_true_pe");
   TTreeReaderValue<Double_t> anu_mu_true_px(reader, "anu_mu_true_px");
   TTreeReaderValue<Double_t> anu_mu_true_py(reader, "anu_mu_true_py");
@@ -92,6 +103,8 @@ void reweight_dst(TFile* input_file, TFile* output_file,
 int main(int, char** argv) {
   TFile* input_file  = new TFile(argv[1], "read");
   TFile* output_file = new TFile(argv[2], "recreate");
+
+  reweight_dst(input_file, output_file);
 
   delete input_file;
   delete output_file;
