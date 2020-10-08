@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Oct 08, 2020 at 10:28 PM +0800
+// Last Change: Fri Oct 09, 2020 at 01:14 AM +0800
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
@@ -116,14 +116,13 @@ void reweight_dst(TFile* input_file, TFile* output_file,
   Hammer::IOBuffer ham_buf;
 
   auto semi_tau_decay = vector<string>{"BD*TauNu", "TauEllNuNu"};
-  // auto semi_tau_decay = vector<string>{"BD*TauNu"};
 
   ham.includeDecay(semi_tau_decay);
   ham.addFFScheme("Scheme1", {{"BD*", "BGL"}});
   ham.setOptions("BctoJpsiBGL: {dvec: [0., 0., 0.] }");
   ham.setFFInputScheme({{"BD*", "CLN"}});
 
-  ham.setUnits("GeV");  // This is the default, but let's be explicit.
+  ham.setUnits("MeV");
 
   ham.initRun();
 
