@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Oct 09, 2020 at 01:14 AM +0800
+// Last Change: Fri Oct 09, 2020 at 01:36 AM +0800
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
@@ -108,8 +108,8 @@ void reweight_dst(TFile* input_file, TFile* output_file,
   output.Branch("eventNumber", &eventNumber_out);
   UInt_t runNumber_out;
   output.Branch("runNumber", &runNumber_out);
-  Int_t ham_proc_id_out;
-  output.Branch("ham_proc_id", &ham_proc_id_out);
+  Double_t w_ff_out;
+  output.Branch("w_ff", &w_ff_out);
 
   // Setup HAMMER //////////////////////////////////////////////////////////////
   Hammer::Hammer   ham{};
@@ -175,10 +175,9 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     auto proc_id = ham.addProcess(proc);
 
     if (proc_id != 0) {
-      ham_proc_id_out = proc_id;
-
       ham.processEvent();
-      ham_buf = ham.saveEventWeights();
+      auto ff_weight_proc_id = vector<Hammer::HashId>{proc_id};
+      w_ff_out               = ham.getWeight("Scheme1", ff_weight_proc_id);
 
       output.Fill();
     }
