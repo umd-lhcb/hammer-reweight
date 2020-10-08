@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Oct 08, 2020 at 10:01 PM +0800
+// Last Change: Thu Oct 08, 2020 at 10:28 PM +0800
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
@@ -78,6 +78,12 @@ void reweight_dst(TFile* input_file, TFile* output_file,
   TTreeReaderValue<Double_t> spi_true_px(reader, "spi_true_px");
   TTreeReaderValue<Double_t> spi_true_py(reader, "spi_true_py");
   TTreeReaderValue<Double_t> spi_true_pz(reader, "spi_true_pz");
+  // Tau
+  TTreeReaderValue<Int_t>    tau_id(reader, "tau_id");
+  TTreeReaderValue<Double_t> tau_true_pe(reader, "tau_true_pe");
+  TTreeReaderValue<Double_t> tau_true_px(reader, "tau_true_px");
+  TTreeReaderValue<Double_t> tau_true_py(reader, "tau_true_py");
+  TTreeReaderValue<Double_t> tau_true_pz(reader, "tau_true_pz");
   // Anti-Nu_Tau
   TTreeReaderValue<Int_t>    anu_tau_id(reader, "anu_tau_id");
   TTreeReaderValue<Double_t> anu_tau_true_pe(reader, "anu_tau_true_pe");
@@ -109,7 +115,10 @@ void reweight_dst(TFile* input_file, TFile* output_file,
   Hammer::Hammer   ham{};
   Hammer::IOBuffer ham_buf;
 
-  ham.includeDecay("BD*TauNu");
+  auto semi_tau_decay = vector<string>{"BD*TauNu", "TauEllNuNu"};
+  // auto semi_tau_decay = vector<string>{"BD*TauNu"};
+
+  ham.includeDecay(semi_tau_decay);
   ham.addFFScheme("Scheme1", {{"BD*", "BGL"}});
   ham.setOptions("BctoJpsiBGL: {dvec: [0., 0., 0.] }");
   ham.setFFInputScheme({{"BD*", "CLN"}});
@@ -134,6 +143,8 @@ void reweight_dst(TFile* input_file, TFile* output_file,
         particle(*pi_true_pe, *pi_true_px, *pi_true_py, *pi_true_pz, *pi_id);
     auto Mu =
         particle(*mu_true_pe, *mu_true_px, *mu_true_py, *mu_true_pz, *mu_id);
+    auto Tau = particle(*tau_true_pe, *tau_true_px, *tau_true_py, *tau_true_pz,
+                        *tau_id);
     auto Anti_Nu_Mu = particle(*anu_mu_true_pe, *anu_mu_true_px,
                                *anu_mu_true_py, *anu_mu_true_pz, *anu_mu_id);
     auto Anti_Nu_Tau =
@@ -151,12 +162,13 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     auto K_idx           = proc.addParticle(K);
     auto Pi_idx          = proc.addParticle(Pi);
     auto Mu_idx          = proc.addParticle(Mu);
+    auto Tau_idx         = proc.addParticle(Tau);
     auto Anti_Nu_Mu_idx  = proc.addParticle(Anti_Nu_Mu);
     auto Anti_Nu_Tau_idx = proc.addParticle(Anti_Nu_Tau);
     auto Nu_Tau_idx      = proc.addParticle(Nu_Tau);
 
-    proc.addVertex(
-        B_idx, {Dst_idx, Mu_idx, Anti_Nu_Mu_idx, Anti_Nu_Tau_idx, Nu_Tau_idx});
+    proc.addVertex(B_idx, {Dst_idx, Tau_idx, Anti_Nu_Tau_idx});
+    proc.addVertex(Tau_idx, {Mu_idx, Nu_Tau_idx, Anti_Nu_Mu_idx});
     proc.addVertex(Dst_idx, {D0_idx, SlowPi_idx});
     proc.addVertex(D0_idx, {K_idx, Pi_idx});
 
