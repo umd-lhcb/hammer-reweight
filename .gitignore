@@ -4,3 +4,5 @@ bin
 
 .envrc
 .lvimrc
+
+*.root
