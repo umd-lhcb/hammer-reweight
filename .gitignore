@@ -1,6 +1,7 @@
 Hammer-*
 out
 bin
+gen
 
 .envrc
 .lvimrc
