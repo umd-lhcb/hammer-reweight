@@ -1,8 +1,9 @@
 // Author: Yipeng Sun
-// Last Change: Fri Oct 09, 2020 at 05:32 PM +0800
+// License: GPLv2
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
+// Last Change: Fri Oct 09, 2020 at 09:39 PM +0800
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
