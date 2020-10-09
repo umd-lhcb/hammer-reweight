@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Oct 09, 2020 at 01:36 AM +0800
+// Last Change: Fri Oct 09, 2020 at 05:32 PM +0800
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
@@ -176,8 +176,12 @@ void reweight_dst(TFile* input_file, TFile* output_file,
 
     if (proc_id != 0) {
       ham.processEvent();
-      auto ff_weight_proc_id = vector<Hammer::HashId>{proc_id};
-      w_ff_out               = ham.getWeight("Scheme1", ff_weight_proc_id);
+      w_ff_out = ham.getWeight("Scheme1");
+
+      if (w_ff_out > 10) {
+        std::cout << "Problematic weight of " << w_ff_out << " at "
+                  << *eventNumber << std::endl;
+      }
 
       output.Fill();
     }
