@@ -1,7 +1,9 @@
 .PHONY: dev-shell clean clean-nix clean-general patch build
 
 BINPATH	:=	bin
-VPATH	:=	src
+VPATH	:=	utils:src:$(BINPATH)
+
+export PATH := utils:$(BINPATH):$(PATH)
 
 # System env
 PWD=$(shell pwd)
@@ -59,12 +61,12 @@ sample-plots: gen/el.png gen/q2.png gen/mm2.png
 gen/el.png gen/q2.png gen/mm2.png &: \
 	samples/rdst-run1.root \
 	gen/rdst-run1-ff_w.root \
-	./utils/plot_ratio.py
+	plot_ratio.py
 	$(word 3, $^) -d $< -w $(word 2, $^) -t mc_dst_tau -T mc_dst_tau_ff_w
 
 gen/rdst-run1-ff_w.root: \
 	samples/rdst-run1.root \
-	./bin/rdx-run1-sample
+	rdx-run1-sample
 	$(word 2, $^) $< $@
 
 
