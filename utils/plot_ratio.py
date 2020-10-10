@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Sat Oct 10, 2020 at 10:32 PM +0800
+# Last Change: Sat Oct 10, 2020 at 10:34 PM +0800
 
 import ROOT as rt
 
@@ -107,7 +107,7 @@ def plot_ratio(tree, output_path,
                bin_range,
                up_y_min, up_y_max,
                down_y_min, down_y_max):
-    rt.gStyle.SetOptStat(0)
+    # rt.gStyle.SetOptStat(0)
     canvas = rt.TCanvas('canvas', 'A ratio plot')
 
     tree.Draw('{}>>h1{}'.format(var, bin_range), '', 'goff', 50000, 20000)
@@ -123,6 +123,7 @@ def plot_ratio(tree, output_path,
 
     rp = rt.TRatioPlot(h1, h2, 'divsym')
     rp.Draw()
+
     rp.GetLowerRefXaxis().SetTitle(title)
     rp.GetUpperRefYaxis().SetRangeUser(up_y_min, up_y_max)
     rp.GetLowerRefYaxis().SetRangeUser(down_y_min, down_y_max)
