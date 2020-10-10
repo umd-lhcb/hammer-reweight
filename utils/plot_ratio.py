@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Sat Oct 10, 2020 at 10:34 PM +0800
+# Last Change: Sat Oct 10, 2020 at 10:37 PM +0800
 
 import ROOT as rt
 
@@ -146,6 +146,7 @@ if __name__ == '__main__':
     #  https://root.cern.ch/doc/master/classTTreeIndex.html
     # under "TreeIndex and Friend Trees" section for more info.
     data_tree.BuildIndex("runNumber", "eventNumber")
+    weight_tree.BuildIndex("runNumber", "eventNumber")
     weight_tree.AddFriend(data_tree)
 
     for var, bin_range, up_y_min, up_y_max, down_y_min, down_y_max in \
