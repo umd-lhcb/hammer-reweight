@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Sat Oct 10, 2020 at 12:35 AM +0800
+# Last Change: Sat Oct 10, 2020 at 10:24 PM +0800
 
 import ROOT as rt
 
@@ -49,6 +49,52 @@ specify tree name in fit-variable ntuple.''')
                         help='''
 specify tree name in weight ntuple.''')
 
+    parser.add_argument('--ff-weight',
+                        nargs='?',
+                        default='w_ff',
+                        help='''
+specify branch name of the FF weight.''')
+
+    parser.add_argument('--vars',
+                        nargs='+',
+                        default=['q2', 'el', 'mm2'],
+                        help='''
+specify variables to plot.''')
+
+    parser.add_argument('--bin-ranges',
+                        nargs='+',
+                        default=['(80,-3,12)', '(80,-1,3.5)', '(80,-1,3.5)'],
+                        help='''
+specify number of bins and x ranges.''')
+
+    parser.add_argument('--up-y-min',
+                        nargs='+',
+                        default=[0, 0, 0],
+                        type=float,
+                        help='''
+specify up plot min y.''')
+
+    parser.add_argument('--up-y-max',
+                        nargs='+',
+                        default=[80, 180, 200],
+                        type=float,
+                        help='''
+specify up plot max y.''')
+
+    parser.add_argument('--down-y-min',
+                        nargs='+',
+                        default=[0.5, 0.5, 0.5],
+                        type=float,
+                        help='''
+specify down plot min y.''')
+
+    parser.add_argument('--down-y-max',
+                        nargs='+',
+                        default=[1.2, 1.2, 1.2],
+                        type=float,
+                        help='''
+specify down plot max y.''')
+
     return parser.parse_args()
 
 
@@ -56,21 +102,22 @@ specify tree name in weight ntuple.''')
 # Helpers #
 ###########
 
-def plot_ratio(tree1, tree2, output_path,
-               var, title,
+def plot_ratio(tree, output_path,
+               var, weight, title,
                bin_range,
                up_y_min, up_y_max,
                down_y_min, down_y_max):
     rt.gStyle.SetOptStat(0)
-    canvas = rt.TCanvas("canvas", "A ratio plot")
+    canvas = rt.TCanvas('canvas', 'A ratio plot')
 
-    tree1.Draw('{}>>h1{}'.format(var, bin_range), "", "goff", 50000, 20000)
-    h1 = rt.gDirectory.Get("h1")
+    tree.Draw('{}>>h1{}'.format(var, bin_range), '', 'goff', 50000, 20000)
+    h1 = rt.gDirectory.Get('h1')
     h1.SetMarkerColor(rt.kBlue)
     h1.SetLineColor(rt.kBlue)
 
-    tree2.Draw('{}>>h2{}'.format(var, bin_range), "", "goff", 50000, 20000)
-    h2 = rt.gDirectory.Get("h2")
+    tree.Draw('{}*{}>>h2{}'.format(var, weight, bin_range),
+              '', 'goff', 50000, 20000)
+    h2 = rt.gDirectory.Get('h2')
     h2.SetMarkerColor(rt.kRed)
     h2.SetLineColor(rt.kRed)
 
@@ -97,18 +144,14 @@ if __name__ == '__main__':
     # NOTE: We need to build index first before adding as friend. See
     #  https://root.cern.ch/doc/master/classTTreeIndex.html
     # under "TreeIndex and Friend Trees" section for more info.
-    weight_tree.BuildIndex("runNumber", "eventNumber")
-    data_tree.AddFriend(weight_tree)
+    data_tree.BuildIndex("runNumber", "eventNumber")
+    weight_tree.AddFriend(data_tree)
 
-    plots = (
-        ('q2',  '(50,0,12)'),
-        ('el',  '(80,0,3.5)'),
-        ('mm2', '(80,0,3.5)'),
-    )
-
-    for var, bin_range in plots:
-        plot_ratio(data_tree, weight_tree, args.output_path,
-                   var, var,
+    for var, bin_range, up_y_min, up_y_max, down_y_min, down_y_max in \
+        zip(args.vars, args.bin_ranges, args.up_y_min, args.up_y_max,
+            args.down_y_min, args.down_y_max):
+        plot_ratio(weight_tree, args.output_path,
+                   var, args.ff_weight, var,
                    bin_range,
-                   0, 2000,
-                   0.5, 1.2)
+                   up_y_min, up_y_max,
+                   down_y_min, down_y_max)
