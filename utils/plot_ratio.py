@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Sat Oct 10, 2020 at 10:24 PM +0800
+# Last Change: Sat Oct 10, 2020 at 10:32 PM +0800
 
 import ROOT as rt
 
@@ -57,13 +57,13 @@ specify branch name of the FF weight.''')
 
     parser.add_argument('--vars',
                         nargs='+',
-                        default=['q2', 'el', 'mm2'],
+                        default=['q2', 'mm2', 'el'],
                         help='''
 specify variables to plot.''')
 
     parser.add_argument('--bin-ranges',
                         nargs='+',
-                        default=['(80,-3,12)', '(80,-1,3.5)', '(80,-1,3.5)'],
+                        default=['(80,-3,12)', '(80,-3,12)', '(80,-0.5,3.5)'],
                         help='''
 specify number of bins and x ranges.''')
 
@@ -121,7 +121,7 @@ def plot_ratio(tree, output_path,
     h2.SetMarkerColor(rt.kRed)
     h2.SetLineColor(rt.kRed)
 
-    rp = rt.TRatioPlot(h1, h2)
+    rp = rt.TRatioPlot(h1, h2, 'divsym')
     rp.Draw()
     rp.GetLowerRefXaxis().SetTitle(title)
     rp.GetUpperRefYaxis().SetRangeUser(up_y_min, up_y_max)
