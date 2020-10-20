@@ -3,7 +3,7 @@
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
-// Last Change: Fri Oct 09, 2020 at 09:39 PM +0800
+// Last Change: Wed Oct 21, 2020 at 01:20 AM +0200
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -131,7 +131,15 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     eventNumber_out = *eventNumber;
     runNumber_out   = *runNumber;
 
-    auto B   = particle(*b_true_pe, *b_true_px, *b_true_py, *b_true_pz, *b_id);
+    // We need to fix the ID for B0's that oscillate to B~0
+    // a.k.a Manually fix 'wrong-sign' IDs
+    int b_id_fix;
+    if (*b_id * *dst_id > 0)
+      b_id_fix = -*b_id;
+    else
+      b_id_fix = *b_id;
+
+    auto B = particle(*b_true_pe, *b_true_px, *b_true_py, *b_true_pz, b_id_fix);
     auto Dst = particle(*dst_true_pe, *dst_true_px, *dst_true_py, *dst_true_pz,
                         *dst_id);
     auto SlowPi = particle(*spi_true_pe, *spi_true_px, *spi_true_py,
