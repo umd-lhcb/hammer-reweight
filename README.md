@@ -1,5 +1,5 @@
 # hammer-redist
-HAMMER-related info.
+MC reweighting code with HAMMER.
 
 Hammer uses `CMake` to configure out-of-source build. System requirements and
 configurations are described in [Hammer documentation](https://hammer.physics.lbl.gov/readme.html).
