@@ -3,7 +3,7 @@
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
-// Last Change: Wed Oct 21, 2020 at 01:20 AM +0200
+// Last Change: Wed Oct 21, 2020 at 01:46 PM +0200
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -121,7 +121,7 @@ void reweight_dst(TFile* input_file, TFile* output_file,
   ham.includeDecay(semi_tau_decay);
   ham.addFFScheme("Scheme1", {{"BD*", "BGL"}});
   ham.setOptions("BctoJpsiBGL: {dvec: [0., 0., 0.] }");
-  ham.setFFInputScheme({{"BD*", "CLN"}});
+  ham.setFFInputScheme({{"BD*", "ISGW2"}});
 
   ham.setUnits("MeV");
 
