@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Wed Oct 21, 2020 at 12:07 PM +0200
+# Last Change: Wed Oct 21, 2020 at 12:51 PM +0200
 
 import ROOT as rt
 
@@ -63,7 +63,7 @@ specify variables to plot.''')
 
     parser.add_argument('--bin-ranges',
                         nargs='+',
-                        default=['(80,-5,20)', '(80,-5,20)', '(80,-1,7)'],
+                        default=['(80,-4,15)', '(80,-5,12)', '(80,-0.5,2.5)'],
                         help='''
 specify number of bins and x ranges.''')
 
@@ -76,21 +76,21 @@ specify up plot min y.''')
 
     parser.add_argument('--up-y-max',
                         nargs='+',
-                        default=[80, 180, 200],
+                        default=[180, 150, 120],
                         type=float,
                         help='''
 specify up plot max y.''')
 
     parser.add_argument('--down-y-min',
                         nargs='+',
-                        default=[0.5, 0.5, 0.5],
+                        default=[0.2, 0.5, 0.5],
                         type=float,
                         help='''
 specify down plot min y.''')
 
     parser.add_argument('--down-y-max',
                         nargs='+',
-                        default=[1.2, 1.2, 1.2],
+                        default=[1.6, 1.2, 1.2],
                         type=float,
                         help='''
 specify down plot max y.''')
