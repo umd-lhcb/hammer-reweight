@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Sat Oct 10, 2020 at 10:37 PM +0800
+# Last Change: Wed Oct 21, 2020 at 12:07 PM +0200
 
 import ROOT as rt
 
@@ -63,7 +63,7 @@ specify variables to plot.''')
 
     parser.add_argument('--bin-ranges',
                         nargs='+',
-                        default=['(80,-3,12)', '(80,-3,12)', '(80,-0.5,3.5)'],
+                        default=['(80,-5,20)', '(80,-5,20)', '(80,-1,7)'],
                         help='''
 specify number of bins and x ranges.''')
 
@@ -110,13 +110,12 @@ def plot_ratio(tree, output_path,
     # rt.gStyle.SetOptStat(0)
     canvas = rt.TCanvas('canvas', 'A ratio plot')
 
-    tree.Draw('{}>>h1{}'.format(var, bin_range), '', 'goff', 50000, 20000)
+    tree.Draw('{}>>h1{}'.format(var, bin_range))
     h1 = rt.gDirectory.Get('h1')
     h1.SetMarkerColor(rt.kBlue)
     h1.SetLineColor(rt.kBlue)
 
-    tree.Draw('{}*{}>>h2{}'.format(var, weight, bin_range),
-              '', 'goff', 50000, 20000)
+    tree.Draw('{}*{}>>h2{}'.format(var, weight, bin_range))
     h2 = rt.gDirectory.Get('h2')
     h2.SetMarkerColor(rt.kRed)
     h2.SetLineColor(rt.kRed)
@@ -129,7 +128,7 @@ def plot_ratio(tree, output_path,
     rp.GetLowerRefYaxis().SetRangeUser(down_y_min, down_y_max)
     canvas.Update()
 
-    canvas.Print('{}/{}.png'.format(output_path, var))
+    canvas.Print('{}/{}.png'.format(output_path, title))
 
 
 if __name__ == '__main__':
@@ -145,14 +144,13 @@ if __name__ == '__main__':
     # NOTE: We need to build index first before adding as friend. See
     #  https://root.cern.ch/doc/master/classTTreeIndex.html
     # under "TreeIndex and Friend Trees" section for more info.
-    data_tree.BuildIndex("runNumber", "eventNumber")
     weight_tree.BuildIndex("runNumber", "eventNumber")
-    weight_tree.AddFriend(data_tree)
+    data_tree.AddFriend(weight_tree)
 
     for var, bin_range, up_y_min, up_y_max, down_y_min, down_y_max in \
         zip(args.vars, args.bin_ranges, args.up_y_min, args.up_y_max,
             args.down_y_min, args.down_y_max):
-        plot_ratio(weight_tree, args.output_path,
+        plot_ratio(data_tree, args.output_path,
                    var, args.ff_weight, var,
                    bin_range,
                    up_y_min, up_y_max,
