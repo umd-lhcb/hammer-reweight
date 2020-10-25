@@ -46,7 +46,12 @@ make build
 At the time of documenting this, one minor edit of the source code was
 necessary:
 
-- Add `#include <string>` to `include/Hammer/Math/Units.hh`.
+Add:
+```cpp
+#include <cstring>
+#include <climits>
+```
+to `include/Hammer/Math/Units.hh`.
 
 This editing is included as a patch in:
 ```
