@@ -3,7 +3,7 @@
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
-// Last Change: Sun Oct 25, 2020 at 04:37 PM +0100
+// Last Change: Sun Oct 25, 2020 at 04:57 PM +0100
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -22,12 +22,20 @@
 
 using namespace std;
 
+//////////////////////////////
+// General helper functions //
+//////////////////////////////
+
 auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
   auto four_mom = Hammer::FourMomentum(pe, px, py, pz);
   auto part_id  = static_cast<Hammer::PdgId>(pid);
 
   return Hammer::Particle(four_mom, part_id);
 }
+
+///////////////////////////////////////////
+// Helper functions for B0 -> Dst Tau Nu //
+///////////////////////////////////////////
 
 // clang-format off
 void calc_true_fit_vars(Double_t& q2, Double_t& mm2, Double_t& el,
@@ -44,9 +52,41 @@ void calc_true_fit_vars(Double_t& q2, Double_t& mm2, Double_t& el,
   el = mu_mom.E() / 1E3;
 }
 
-void reweight_dst(TFile* input_file, TFile* output_file,
-                  const char* tree        = "mc_dst_tau_aux",
-                  const char* tree_output = "mc_dst_tau_ff_w") {
+// clang-format off
+void add_ham_part_Tau(Hammer::Process& proc,
+                      Hammer::Particle& B0,
+                      Hammer::Particle& Dst,
+                      Hammer::Particle& D0, Hammer::Particle& SlowPi,
+                      Hammer::Particle& K, Hammer::Particle& Pi,
+                      Hammer::Particle& Tau, Hammer::Particle& Anti_Nu_Tau,
+                      Hammer::Particle& Nu_Tau,
+                      Hammer::Particle& Mu, Hammer::Particle& Anti_Nu_Mu) {
+  // clang-format on
+  auto B0_idx          = proc.addParticle(B0);
+  auto Dst_idx         = proc.addParticle(Dst);
+  auto SlowPi_idx      = proc.addParticle(SlowPi);
+  auto D0_idx          = proc.addParticle(D0);
+  auto K_idx           = proc.addParticle(K);
+  auto Pi_idx          = proc.addParticle(Pi);
+  auto Mu_idx          = proc.addParticle(Mu);
+  auto Tau_idx         = proc.addParticle(Tau);
+  auto Anti_Nu_Mu_idx  = proc.addParticle(Anti_Nu_Mu);
+  auto Anti_Nu_Tau_idx = proc.addParticle(Anti_Nu_Tau);
+  auto Nu_Tau_idx      = proc.addParticle(Nu_Tau);
+
+  proc.addVertex(B0_idx, {Dst_idx, Tau_idx, Anti_Nu_Tau_idx});
+  proc.addVertex(Tau_idx, {Mu_idx, Nu_Tau_idx, Anti_Nu_Mu_idx});
+  proc.addVertex(Dst_idx, {D0_idx, SlowPi_idx});
+  proc.addVertex(D0_idx, {K_idx, Pi_idx});
+}
+
+//////////////////////////////
+// Main reweighting routine //
+//////////////////////////////
+
+void reweight(TFile* input_file, TFile* output_file,
+              const char* tree        = "mc_dst_tau_aux",
+              const char* tree_output = "mc_dst_tau_ff_w") {
   TTreeReader reader(tree, input_file);
   TTree       output(tree_output, tree_output);
 
@@ -142,8 +182,8 @@ void reweight_dst(TFile* input_file, TFile* output_file,
   auto semi_tau_decay = vector<string>{"BD*TauNu", "TauEllNuNu"};
 
   ham.includeDecay(semi_tau_decay);
-  ham.addFFScheme("Scheme1", {{"BD*", "BGL"}});
-  ham.setOptions("BctoJpsiBGL: {dvec: [0., 0., 0.] }");
+  ham.addFFScheme("SemiTauonic", {{"BD*", "BGL"}});
+  // ham.setOptions("BctoJpsiBGL: {dvec: [0., 0., 0.] }");
   ham.setFFInputScheme({{"BD*", "ISGW2"}});
 
   ham.setUnits("MeV");
@@ -162,9 +202,7 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     else
       b_id_fix = *b_id;
 
-    /////////////////////////////
-    // Compute q2, mm2, and el //
-    /////////////////////////////
+    // Compute q2, mm2, and el /////////////////////////////////////////////////
 
     // Find B velocity in the lab frame
     auto v_x = *b_true_px / *b_true_pe;
@@ -183,12 +221,11 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     calc_true_fit_vars(q2_out, mm2_out, el_out, b_lab_v, b_mom, dst_mom,
                        mu_mom);
 
-    ///////////////////////
-    // Compute FF weight //
-    ///////////////////////
+    // Compute FF weight ///////////////////////////////////////////////////////
 
     // Define MC truth particles for FF reweighting
-    auto B = particle(*b_true_pe, *b_true_px, *b_true_py, *b_true_pz, b_id_fix);
+    auto B0 =
+        particle(*b_true_pe, *b_true_px, *b_true_py, *b_true_pz, b_id_fix);
     auto Dst = particle(*dst_true_pe, *dst_true_px, *dst_true_py, *dst_true_pz,
                         *dst_id);
     auto SlowPi = particle(*spi_true_pe, *spi_true_px, *spi_true_py,
@@ -211,30 +248,15 @@ void reweight_dst(TFile* input_file, TFile* output_file,
                            *nu_tau_true_pz, *nu_tau_id);
 
     Hammer::Process proc;
-
-    auto B_idx           = proc.addParticle(B);
-    auto Dst_idx         = proc.addParticle(Dst);
-    auto SlowPi_idx      = proc.addParticle(SlowPi);
-    auto D0_idx          = proc.addParticle(D0);
-    auto K_idx           = proc.addParticle(K);
-    auto Pi_idx          = proc.addParticle(Pi);
-    auto Mu_idx          = proc.addParticle(Mu);
-    auto Tau_idx         = proc.addParticle(Tau);
-    auto Anti_Nu_Mu_idx  = proc.addParticle(Anti_Nu_Mu);
-    auto Anti_Nu_Tau_idx = proc.addParticle(Anti_Nu_Tau);
-    auto Nu_Tau_idx      = proc.addParticle(Nu_Tau);
-
-    proc.addVertex(B_idx, {Dst_idx, Tau_idx, Anti_Nu_Tau_idx});
-    proc.addVertex(Tau_idx, {Mu_idx, Nu_Tau_idx, Anti_Nu_Mu_idx});
-    proc.addVertex(Dst_idx, {D0_idx, SlowPi_idx});
-    proc.addVertex(D0_idx, {K_idx, Pi_idx});
+    add_ham_part_Tau(proc, B0, Dst, D0, SlowPi, K, Pi, Tau, Anti_Nu_Tau, Nu_Tau,
+                     Mu, Anti_Nu_Mu);
 
     ham.initEvent();
     auto proc_id = ham.addProcess(proc);
 
     if (proc_id != 0) {
       ham.processEvent();
-      w_ff_out = ham.getWeight("Scheme1");
+      w_ff_out = ham.getWeight("SemiTauonic");
 
       if (w_ff_out > 10) {
         std::cout << "Problematic weight of " << w_ff_out << " at "
@@ -252,7 +274,7 @@ int main(int, char** argv) {
   TFile* input_file  = new TFile(argv[1], "read");
   TFile* output_file = new TFile(argv[2], "recreate");
 
-  reweight_dst(input_file, output_file);
+  reweight(input_file, output_file);
 
   delete input_file;
   delete output_file;
