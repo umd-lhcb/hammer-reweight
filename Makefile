@@ -62,7 +62,7 @@ gen/el.png gen/q2.png gen/mm2.png &: \
 	samples/rdst-run1.root \
 	gen/rdst-run1-ff_w.root \
 	plot_ratio.py
-	$(word 3, $^) -d $< -w $(word 2, $^) -t mc_dst_tau -T mc_dst_tau_ff_w
+	$(word 3, $^) -d $< -w $(word 2, $^) -t dst_iso -T mc_dst_tau_ff_w
 
 gen/rdst-run1-ff_w.root: \
 	samples/rdst-run1.root \
