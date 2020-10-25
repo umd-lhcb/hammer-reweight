@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Wed Oct 21, 2020 at 12:51 PM +0200
+# Last Change: Sun Oct 25, 2020 at 05:18 PM +0100
 
 import ROOT as rt
 
@@ -57,7 +57,7 @@ specify branch name of the FF weight.''')
 
     parser.add_argument('--vars',
                         nargs='+',
-                        default=['q2', 'mm2', 'el'],
+                        default=['q2_true', 'mm2_true', 'el_true'],
                         help='''
 specify variables to plot.''')
 
@@ -76,7 +76,7 @@ specify up plot min y.''')
 
     parser.add_argument('--up-y-max',
                         nargs='+',
-                        default=[180, 150, 120],
+                        default=[150, 150, 120],
                         type=float,
                         help='''
 specify up plot max y.''')
