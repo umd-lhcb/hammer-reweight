@@ -3,7 +3,7 @@
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
-// Last Change: Sun Oct 25, 2020 at 04:57 PM +0100
+// Last Change: Mon Oct 26, 2020 at 12:14 AM +0100
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -18,6 +18,7 @@
 #include <TTreeReader.h>
 #include <TVector.h>
 
+#include <initializer_list>
 #include <string>
 
 using namespace std;
@@ -33,18 +34,29 @@ auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
   return Hammer::Particle(four_mom, part_id);
 }
 
+template <class T>
+auto calc_mm2_with_nu(initializer_list<T> momenta) {
+  TLorentzVector tot_mom;
+  tot_mom.SetPxPyPzE(0, 0, 0, 0);
+
+  for (auto mom : momenta) {
+    tot_mom += mom;
+  }
+
+  return tot_mom.M2() / 1E6;
+}
+
 ///////////////////////////////////////////
 // Helper functions for B0 -> Dst Tau Nu //
 ///////////////////////////////////////////
 
 // clang-format off
-void calc_true_fit_vars(Double_t& q2, Double_t& mm2, Double_t& el,
-                        TVector3& b_lab_v, TLorentzVector& b_mom,
-                        TLorentzVector& dst_mom,
+void calc_true_fit_vars(Double_t& q2, Double_t& el,
+                        TVector3& b_lab_v,
+                        TLorentzVector& b_mom, TLorentzVector& dst_mom,
                         TLorentzVector mu_mom) {
   // clang-format on
-  q2  = (b_mom - dst_mom).M2() / 1E6;
-  mm2 = (b_mom - dst_mom - mu_mom).M2() / 1E6;
+  q2 = (b_mom - dst_mom).M2() / 1E6;
 
   // NOTE: The Mu momentum is copied so that we don't mess up with later
   // calculation!
@@ -210,16 +222,24 @@ void reweight(TFile* input_file, TFile* output_file,
     auto v_z = *b_true_pz / *b_true_pe;
 
     // velocity of B in the lab frame
-    auto           b_lab_v = TVector3(v_x, v_y, v_z);
-    TLorentzVector b_mom, dst_mom, mu_mom;
+    auto b_lab_v = TVector3(v_x, v_y, v_z);
 
+    // Compute q2 and el
+    TLorentzVector b_mom, dst_mom, mu_mom;
     b_mom.SetPxPyPzE(*b_true_px, *b_true_py, *b_true_pz, *b_true_pe);
     dst_mom.SetPxPyPzE(*dst_true_px, *dst_true_py, *dst_true_pz, *dst_true_pe);
     mu_mom.SetPxPyPzE(*mu_true_px, *mu_true_py, *mu_true_pz, *mu_true_pe);
+    calc_true_fit_vars(q2_out, el_out, b_lab_v, b_mom, dst_mom, mu_mom);
 
-    // Compute all 3 key variables
-    calc_true_fit_vars(q2_out, mm2_out, el_out, b_lab_v, b_mom, dst_mom,
-                       mu_mom);
+    // Compute mm2
+    TLorentzVector nu_tau_mom, anu_tau_mom, anu_mu_mom;
+    nu_tau_mom.SetPxPyPzE(*nu_tau_true_px, *nu_tau_true_py, *nu_tau_true_pz,
+                          *nu_tau_true_pe);
+    anu_tau_mom.SetPxPyPzE(*anu_tau_true_px, *anu_tau_true_py, *anu_tau_true_pz,
+                           *anu_tau_true_pe);
+    anu_mu_mom.SetPxPyPzE(*anu_mu_true_px, *anu_mu_true_py, *anu_mu_true_pz,
+                          *anu_mu_true_pe);
+    mm2_out = calc_mm2_with_nu({nu_tau_mom, anu_tau_mom, anu_mu_mom});
 
     // Compute FF weight ///////////////////////////////////////////////////////
 
