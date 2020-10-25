@@ -3,7 +3,7 @@
 // Description: FF reweighting for R(D(*)) run 1, step 1 ntuples.
 // Based on:
 //   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/Bc2JpsiMuNu.cc
-// Last Change: Sun Oct 25, 2020 at 04:33 PM +0100
+// Last Change: Sun Oct 25, 2020 at 04:37 PM +0100
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -172,11 +172,8 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     auto v_z = *b_true_pz / *b_true_pe;
 
     // velocity of B in the lab frame
-    auto b_lab_v = TVector3(v_x, v_y, v_z);
-
-    TLorentzVector b_mom;
-    TLorentzVector dst_mom;
-    TLorentzVector mu_mom;
+    auto           b_lab_v = TVector3(v_x, v_y, v_z);
+    TLorentzVector b_mom, dst_mom, mu_mom;
 
     b_mom.SetPxPyPzE(*b_true_px, *b_true_py, *b_true_pz, *b_true_pe);
     dst_mom.SetPxPyPzE(*dst_true_px, *dst_true_py, *dst_true_pz, *dst_true_pe);
@@ -190,6 +187,7 @@ void reweight_dst(TFile* input_file, TFile* output_file,
     // Compute FF weight //
     ///////////////////////
 
+    // Define MC truth particles for FF reweighting
     auto B = particle(*b_true_pe, *b_true_px, *b_true_py, *b_true_pz, b_id_fix);
     auto Dst = particle(*dst_true_pe, *dst_true_px, *dst_true_py, *dst_true_pz,
                         *dst_id);
