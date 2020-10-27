@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Sun Oct 25, 2020 at 05:18 PM +0100
+# Last Change: Tue Oct 27, 2020 at 11:34 AM +0100
 
 import ROOT as rt
 
@@ -115,7 +115,7 @@ def plot_ratio(tree, output_path,
     h1.SetMarkerColor(rt.kBlue)
     h1.SetLineColor(rt.kBlue)
 
-    tree.Draw('{}*{}>>h2{}'.format(var, weight, bin_range))
+    tree.Draw('{}>>h2{}'.format(var, bin_range), weight)
     h2 = rt.gDirectory.Get('h2')
     h2.SetMarkerColor(rt.kRed)
     h2.SetLineColor(rt.kRed)
