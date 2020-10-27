@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Tue Oct 27, 2020 at 10:05 PM +0100
+# Last Change: Tue Oct 27, 2020 at 10:25 PM +0100
 
 import ROOT as rt
 
@@ -63,7 +63,7 @@ specify variables to plot.''')
 
     parser.add_argument('--bin-ranges',
                         nargs='+',
-                        default=['(80,-4,15)', '(80,-5,12)', '(80,-0.5,2.5)'],
+                        default=['(80,3,11)', '(80,-0.2,10)', '(80,0.,2.1)'],
                         help='''
 specify number of bins and x ranges.''')
 
@@ -107,17 +107,15 @@ def plot_ratio(tree, output_path,
                bin_range,
                up_y_min, up_y_max,
                down_y_min, down_y_max):
-    rt.gROOT.SetBatch(rt.kTRUE)
-
     # rt.gStyle.SetOptStat(0)
     canvas = rt.TCanvas('canvas', 'A ratio plot')
 
-    tree.Draw('{}>>h1{}'.format(var, bin_range))
+    tree.Draw('{}>>h1{}'.format(var, bin_range), '', 'goff')
     h1 = rt.gDirectory.Get('h1')
     h1.SetMarkerColor(rt.kBlue)
     h1.SetLineColor(rt.kBlue)
 
-    tree.Draw('{}>>h2{}'.format(var, bin_range), weight)
+    tree.Draw('{}>>h2{}'.format(var, bin_range), weight, 'goff')
     h2 = rt.gDirectory.Get('h2')
     h2.SetMarkerColor(rt.kRed)
     h2.SetLineColor(rt.kRed)
@@ -125,10 +123,10 @@ def plot_ratio(tree, output_path,
     rp = rt.TRatioPlot(h1, h2, 'divsym')
     rp.Draw()
 
-    rp.GetLowerRefXaxis().SetTitle(title)
+    canvas.Update()
+    rp.GetUpperRefXaxis().SetTitle(title)
     rp.GetUpperRefYaxis().SetRangeUser(up_y_min, up_y_max)
     rp.GetLowerRefYaxis().SetRangeUser(down_y_min, down_y_max)
-    canvas.Update()
 
     canvas.Print('{}/{}.png'.format(output_path, title))
 
@@ -148,6 +146,8 @@ if __name__ == '__main__':
     # under "TreeIndex and Friend Trees" section for more info.
     weight_tree.BuildIndex("runNumber", "eventNumber")
     data_tree.AddFriend(weight_tree)
+
+    rt.gROOT.SetBatch(rt.kTRUE)  # Don't output anything on screen
 
     for var, bin_range, up_y_min, up_y_max, down_y_min, down_y_max in \
         zip(args.vars, args.bin_ranges, args.up_y_min, args.up_y_max,
