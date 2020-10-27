@@ -4,3 +4,5 @@ clang
 
 %h -x
 %h c++-header
+
+-Ivalidation/ff_calc/inc

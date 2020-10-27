@@ -24,12 +24,14 @@
 //      Michael Mazur                             INFN Pisa
 //
 // Revision History:
-//      12/05/10 manuelf -- Normalization validated with EvtGen, including Higgs
-//                          Added the theta spectrum integrated over q2 *NOT
-//                          VALIDATED*
-//      12/05/09 manuelf -- Corrected a missing sin(thetaL)sin(thetaV) and added
-//      D*->Dgamma 12/05/03 manuelf -- Added the NP dependence in terms of gSR
-//      12/04/02 manuelf -- Created off XSLBToDstrtaunu_CLN.cc by M. Mazur
+//      20/10/27 yipengsun -- Reformatted with clang-format
+//      12/05/10 manuelf   -- Normalization validated with EvtGen, including
+//                            Higgs Added the theta spectrum integrated over q2
+//                            *NOT VALIDATED*
+//      12/05/09 manuelf   -- Corrected a missing sin(thetaL)sin(thetaV) and
+//                            added D*->Dgamma
+//      12/05/03 manuelf   -- Added the NP dependence in terms of gSR
+//      12/04/02 manuelf   -- Created off XSLBToDstrtaunu_CLN.cc by M. Mazur
 //------------------------------------------------------------------------------
 
 #include "ff_dstaunu.hpp"
