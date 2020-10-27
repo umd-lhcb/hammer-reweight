@@ -10,5 +10,6 @@ pkgs.mkShell {
     boost
     libyamlcpp
     root
+    ff_calc
   ];
 }

@@ -9,6 +9,8 @@ let
 in
 
 {
-  hammer-phys = super.callPackage ./hammer-phys {};
   python3 = super.python3.override pythonOverrides;
+
+  hammer-phys = super.callPackage ./hammer-phys {};
+  ff_calc = super.callPackage ./ff_calc {};
 }
