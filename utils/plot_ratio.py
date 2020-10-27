@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Tue Oct 27, 2020 at 11:34 AM +0100
+# Last Change: Tue Oct 27, 2020 at 10:05 PM +0100
 
 import ROOT as rt
 
@@ -83,14 +83,14 @@ specify up plot max y.''')
 
     parser.add_argument('--down-y-min',
                         nargs='+',
-                        default=[0.2, 0.5, 0.5],
+                        default=[0.6, 0.6, 0.6],
                         type=float,
                         help='''
 specify down plot min y.''')
 
     parser.add_argument('--down-y-max',
                         nargs='+',
-                        default=[1.6, 1.2, 1.2],
+                        default=[1.6, 1.6, 1.6],
                         type=float,
                         help='''
 specify down plot max y.''')
@@ -107,6 +107,8 @@ def plot_ratio(tree, output_path,
                bin_range,
                up_y_min, up_y_max,
                down_y_min, down_y_max):
+    rt.gROOT.SetBatch(rt.kTRUE)
+
     # rt.gStyle.SetOptStat(0)
     canvas = rt.TCanvas('canvas', 'A ratio plot')
 
