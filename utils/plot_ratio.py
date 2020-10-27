@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Tue Oct 27, 2020 at 10:26 PM +0100
+# Last Change: Wed Oct 28, 2020 at 12:58 AM +0100
 
 import ROOT as rt
 
@@ -124,7 +124,6 @@ def plot_ratio(tree, output_path,
     rp.Draw()
 
     canvas.Update()
-    rp.GetUpperRefXaxis().SetTitle(title)
     rp.GetUpperRefYaxis().SetRangeUser(up_y_min, up_y_max)
     rp.GetLowerRefYaxis().SetRangeUser(down_y_min, down_y_max)
 

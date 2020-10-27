@@ -1,7 +1,7 @@
 .PHONY: dev-shell clean clean-nix clean-general patch build
 
 BINPATH	:=	bin
-VPATH	:=	utils:src:$(BINPATH)
+VPATH	:=	utils:src:validation:$(BINPATH)
 
 export PATH := utils:$(BINPATH):$(PATH)
 
@@ -14,6 +14,7 @@ COMPILER	:=	$(shell root-config --cxx)
 CXXFLAGS	:=	-pthread -std=c++14 -m64
 LINKFLAGS	:=	$(shell root-config --libs)
 ADDLINKFLAGS	:=	-lHammerTools -lHammerBase -lHammerCore -lFormFactors -lAmplitudes -lRates
+VALLINKFLAGS	:=	-lff_dstaunu
 
 dev-shell:
 	@nix-shell --pure -E "with import <nixpkgs> { overlays = [(import ./nix/overlay)]; }; callPackage ./nix/overlay/hammer-phys {}"
@@ -66,7 +67,7 @@ gen/el_true.png gen/q2_true.png gen/mm2_true.png &: \
 
 gen/rdst-run1-ff_w.root: \
 	samples/rdst-run1.root \
-	rdx-run1-sample
+	rdx-run1-sample.w
 	$(word 2, $^) $< $@
 
 
@@ -74,5 +75,10 @@ gen/rdst-run1-ff_w.root: \
 # Generic patterns #
 ####################
 
-%: %.cpp
+# Reweighters with HAMMER
+%.w: %.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
+
+# Validation scripts
+%.v: %.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(VALLINKFLAGS)
