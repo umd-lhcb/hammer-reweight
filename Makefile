@@ -56,9 +56,9 @@ build: patch
 # Sample plot #
 ###############
 
-sample-plots: gen/el.png gen/q2.png gen/mm2.png
+sample-plots: gen/el_true.png gen/q2_true.png gen/mm2_true.png
 
-gen/el.png gen/q2.png gen/mm2.png &: \
+gen/el_true.png gen/q2_true.png gen/mm2_true.png &: \
 	samples/rdst-run1.root \
 	gen/rdst-run1-ff_w.root \
 	plot_ratio.py
