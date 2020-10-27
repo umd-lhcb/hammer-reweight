@@ -8,6 +8,7 @@ Hammer has been compiled successfully on:
 
 - Arch Linux, with `gcc 10.1.0`, `Python 3.8.3`, and `ROOT 6.20/04`.
 - macOS with `nix`, with `clang 7.1.0`, `Python 3.7.6`, and `ROOT 6.18/04`.
+- NixOS (`unstable` channel), with `gcc 9.3.0`, `Python 3.8.5`, and `ROOT 6.18/04`
 
 
 ## Install dependencies
