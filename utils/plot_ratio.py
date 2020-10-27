@@ -4,7 +4,7 @@
 # License: GPLv2
 # Based on:
 #   https://github.com/ZishuoYang/my-hammer-reweighting/blob/master/plot_ratio.py
-# Last Change: Tue Oct 27, 2020 at 10:25 PM +0100
+# Last Change: Tue Oct 27, 2020 at 10:26 PM +0100
 
 import ROOT as rt
 
@@ -76,7 +76,7 @@ specify up plot min y.''')
 
     parser.add_argument('--up-y-max',
                         nargs='+',
-                        default=[150, 150, 120],
+                        default=[85, 85, 85],
                         type=float,
                         help='''
 specify up plot max y.''')
