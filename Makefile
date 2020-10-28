@@ -71,6 +71,13 @@ gen/rdst-run1-ff_w.root: \
 	$(word 2, $^) $< $@
 
 
+##############
+# Validation #
+##############
+
+val_cln.v:
+
+
 ####################
 # Generic patterns #
 ####################

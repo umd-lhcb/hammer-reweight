@@ -1,15 +1,15 @@
-{ stdenv , makeWrapper }:
+{ stdenv
+, makeWrapper, cmake, root }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "ff_calc";
-  version = "2020-10-27";
+  version = "1.1";
 
   src = builtins.path { path = ./../../../validation/ff_calc; name = "ff_calc"; };
 
   postInstall = ''
-    cp -r build/lib $out/lib
-    cp -r inc $out/include
+    cp -r ${src}/inc $out/include
   '';
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper cmake root ];
 }
