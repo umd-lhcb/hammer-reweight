@@ -75,7 +75,7 @@ gen/rdst-run1-ff_w.root: \
 # Validation #
 ##############
 
-val_cln.v:
+validate_ff_calc.v:
 
 
 ####################
