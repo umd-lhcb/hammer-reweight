@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Mon Nov 02, 2020 at 03:10 PM +0100
+// Last Change: Mon Nov 02, 2020 at 03:42 PM +0100
 
 #include <iostream>
 #include <string>
@@ -65,6 +65,23 @@ TH1D fill_histo(TTree* tree, const char* branch, const char* name,
   return histo;
 }
 
+TH1D fill_histo(TTree* tree, const char* branch, const char* weight,
+                const char* name, const char* title, Double_t nbinsx,
+                Double_t xlow, Double_t xup) {
+  auto histo = TH1D(name, title, nbinsx, xlow, xup);
+
+  Double_t val, val_w;
+  tree->SetBranchAddress(branch, &val);
+  tree->SetBranchAddress(weight, &val_w);
+
+  for (Long64_t i = 0; i < tree->GetEntries(); i++) {
+    tree->GetEntry(i);
+    histo.Fill(val, val_w);
+  }
+
+  return histo;
+}
+
 int main(int, char** argv) {
   TFile* data_file   = new TFile(argv[1], "read");
   TFile* weight_file = new TFile(argv[2], "read");
@@ -84,7 +101,7 @@ int main(int, char** argv) {
   // Reference CLN
   auto histo_ref_cln_B0ToDstTauNu =
       q2_histo(BMeson::Neutral, FFType::CLN, m_Tau, normalization, "CLN",
-               "Reference CLN", 80, 2.5, 12);
+               "Reference CLN", 800, 2.5, 12);
 
   histo_ref_cln_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_cln_B0ToDstTauNu.SetLineColor(kRed);
@@ -92,31 +109,41 @@ int main(int, char** argv) {
   // Reference ISGW2
   auto histo_ref_isgw2_B0ToDstTauNu =
       q2_histo(BMeson::Neutral, FFType::ISGW2, m_Tau, normalization, "ISGW2",
-               "Reference ISGW2", 80, 2.5, 12);
+               "Reference ISGW2", 800, 2.5, 12);
   histo_ref_isgw2_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_isgw2_B0ToDstTauNu.SetLineColor(kBlue);
 
-  // Reweighted CLN
-  auto histo_reweighted =
+  // Original ISGW2
+  auto histo_orig =
       fill_histo(data_tree, "q2", "q2_orig", "q2 original", 80, 2.5, 12);
-  histo_reweighted.SetLineStyle(kDashed);
-  histo_reweighted.SetLineColor(kMagenta);
-  histo_reweighted.SetLineWidth(3);
+  histo_orig.SetLineColor(kMagenta);
+  histo_orig.SetLineWidth(0);
 
-  // Reweighted plot
+  // Reweighted CLN
+  auto histo_reweighted = fill_histo(data_tree, "q2", "w_ff", "q2_reweighted",
+                                     "q2 reweighted", 80, 2.5, 12);
+
+  // Original plot
   auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
   histo_ref_cln_B0ToDstTauNu.Draw();
   histo_ref_isgw2_B0ToDstTauNu.Draw("same");
-  histo_reweighted.Draw("same");
+  histo_orig.Draw("same *H");
 
   // Legend
   auto legend = new TLegend(0.1, 0.8, 0.3, 0.9);
   legend->SetTextSize(0.03);
   legend->AddEntry(&histo_ref_cln_B0ToDstTauNu, "CLN", "f");
   legend->AddEntry(&histo_ref_isgw2_B0ToDstTauNu, "ISGW2", "f");
-  legend->AddEntry(&histo_reweighted, "Reweighted", "f");
+  legend->AddEntry(&histo_orig, "Original", "f");
   legend->Draw();
   // canvas->BuildLegend();
+
+  canvas->Update();
+  canvas->Print((output_dir + "/ff_cln_original.png").c_str());
+  canvas->Clear();
+
+  // Reweighted plot
+  histo_reweighted.Draw("*H");
 
   canvas->Update();
   canvas->Print((output_dir + "/ff_cln_reweighted.png").c_str());

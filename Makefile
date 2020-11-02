@@ -77,7 +77,7 @@ gen/rdst-run1-ff_w.root: \
 
 validation-plots: gen/ff_cln_reweighted.png
 
-gen/ff_cln_reweighted.png: \
+gen/ff_cln_reweighted.png gen/ff_cln_original.png &: \
 	samples/rdst-run1.root \
 	gen/rdst-run1-ff_w.root \
 	validate_ff_calc.v
