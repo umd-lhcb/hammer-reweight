@@ -75,12 +75,13 @@ gen/rdst-run1-ff_w.root: \
 # Validation #
 ##############
 
-validation-plots: gen/ff_cln.png
+validation-plots: gen/ff_cln_reweighted.png
 
-gen/ff_cln.png: \
+gen/ff_cln_reweighted.png: \
+	samples/rdst-run1.root \
 	gen/rdst-run1-ff_w.root \
 	validate_ff_calc.v
-	$(word 2, $^) $< gen
+	$(word 3, $^) $< $(word 2, $^) gen
 
 
 ####################

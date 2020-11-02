@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Mon Nov 02, 2020 at 12:44 PM +0100
+// Last Change: Mon Nov 02, 2020 at 03:10 PM +0100
 
 #include <iostream>
 #include <string>
@@ -12,6 +12,7 @@
 #include <TLegend.h>
 #include <TROOT.h>
 #include <TStyle.h>
+#include <TTree.h>
 
 #include <ff_dstaunu.hpp>
 
@@ -27,9 +28,9 @@ const Double_t m_Bplus = 5.2792;
 const Double_t m_Tau   = 1.7768;
 
 // q2 distributions with a particular FF parameterization
-TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep, Int_t nbinsx,
-              Double_t xlow, Double_t xup, const char* name,
-              const char* title) {
+TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep,
+              Long64_t normalization, const char* name, const char* title,
+              Int_t nbinsx, Double_t xlow, Double_t xup) {
   auto histo   = TH1D(name, title, nbinsx, xlow, xup);
   auto ff_calc = BToDstaunu{};
 
@@ -42,46 +43,90 @@ TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep, Int_t nbinsx,
     histo.SetBinContent(bin, q2_dist);
   }
 
+  histo.ComputeIntegral();
+  cout << title << " has a " << *(histo.GetIntegral()) << " integral." << endl;
+
+  return histo;
+}
+
+TH1D fill_histo(TTree* tree, const char* branch, const char* name,
+                const char* title, Double_t nbinsx, Double_t xlow,
+                Double_t xup) {
+  auto histo = TH1D(name, title, nbinsx, xlow, xup);
+
+  Double_t val;
+  tree->SetBranchAddress(branch, &val);
+
+  for (Long64_t i = 0; i < tree->GetEntries(); i++) {
+    tree->GetEntry(i);
+    histo.Fill(val);
+  }
+
   return histo;
 }
 
 int main(int, char** argv) {
-  TFile* input_file = new TFile(argv[1], "read");
-  string output_dir = argv[2];
+  TFile* data_file   = new TFile(argv[1], "read");
+  TFile* weight_file = new TFile(argv[2], "read");
+  string output_dir  = argv[3];
 
   gROOT->SetBatch(kTRUE);
   gStyle->SetOptStat(0);
-  auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
-https:  // root.cern.ch/doc/master/classTLegend.html
+
+  TTree* data_tree   = data_file->Get<TTree>("dst_iso");
+  TTree* weight_tree = weight_file->Get<TTree>("mc_dst_tau_ff_w");
+
+  weight_tree->BuildIndex("runNumber", "eventNumber");
+  data_tree->AddFriend(weight_tree);
+
+  auto normalization = data_tree->GetEntries();
+
   // Reference CLN
-  auto histo_ref_cln_B0ToDstTauNu = q2_histo(
-      BMeson::Neutral, FFType::CLN, m_Tau, 400, 3, 12, "CLN", "Reference CLN");
+  auto histo_ref_cln_B0ToDstTauNu =
+      q2_histo(BMeson::Neutral, FFType::CLN, m_Tau, normalization, "CLN",
+               "Reference CLN", 80, 2.5, 12);
 
   histo_ref_cln_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_cln_B0ToDstTauNu.SetLineColor(kRed);
-  histo_ref_cln_B0ToDstTauNu.Draw();
 
   // Reference ISGW2
   auto histo_ref_isgw2_B0ToDstTauNu =
-      q2_histo(BMeson::Neutral, FFType::ISGW2, m_Tau, 400, 3, 12, "ISGW2",
-               "Reference ISGW2");
+      q2_histo(BMeson::Neutral, FFType::ISGW2, m_Tau, normalization, "ISGW2",
+               "Reference ISGW2", 80, 2.5, 12);
   histo_ref_isgw2_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_isgw2_B0ToDstTauNu.SetLineColor(kBlue);
+
+  // Reweighted CLN
+  auto histo_reweighted =
+      fill_histo(data_tree, "q2", "q2_orig", "q2 original", 80, 2.5, 12);
+  histo_reweighted.SetLineStyle(kDashed);
+  histo_reweighted.SetLineColor(kMagenta);
+  histo_reweighted.SetLineWidth(3);
+
+  // Reweighted plot
+  auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
+  histo_ref_cln_B0ToDstTauNu.Draw();
   histo_ref_isgw2_B0ToDstTauNu.Draw("same");
+  histo_reweighted.Draw("same");
 
   // Legend
   auto legend = new TLegend(0.1, 0.8, 0.3, 0.9);
   legend->SetTextSize(0.03);
   legend->AddEntry(&histo_ref_cln_B0ToDstTauNu, "CLN", "f");
   legend->AddEntry(&histo_ref_isgw2_B0ToDstTauNu, "ISGW2", "f");
+  legend->AddEntry(&histo_reweighted, "Reweighted", "f");
   legend->Draw();
   // canvas->BuildLegend();
 
   canvas->Update();
+  canvas->Print((output_dir + "/ff_cln_reweighted.png").c_str());
 
-  canvas->Print((output_dir + "/ff_cln.png").c_str());
-
-  delete input_file;
   delete canvas;
   delete legend;
+
+  delete data_tree;
+  delete weight_tree;
+
+  delete data_file;
+  delete weight_file;
 }
