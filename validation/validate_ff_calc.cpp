@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Mon Nov 02, 2020 at 03:42 PM +0100
+// Last Change: Thu Nov 05, 2020 at 12:54 AM +0100
 
 #include <iostream>
 #include <string>
@@ -43,8 +43,7 @@ TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep,
     histo.SetBinContent(bin, q2_dist);
   }
 
-  histo.ComputeIntegral();
-  cout << title << " has a " << *(histo.GetIntegral()) << " integral." << endl;
+  cout << title << " has a " << histo.Integral() << " integral." << endl;
 
   return histo;
 }
