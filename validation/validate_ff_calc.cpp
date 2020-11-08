@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Sun Nov 08, 2020 at 01:46 AM +0100
+// Last Change: Sun Nov 08, 2020 at 01:57 AM +0100
 
 #include <iostream>
 #include <string>
@@ -111,43 +111,38 @@ int main(int, char** argv) {
   auto histo_ref_isgw2_B0ToDstTauNu =
       q2_histo(BMeson::Neutral, FFType::ISGW2, m_Tau, normalization, "ISGW2",
                "Reference ISGW2", 800, 2.5, 12);
+
   histo_ref_isgw2_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_isgw2_B0ToDstTauNu.SetLineColor(kBlue);
 
   // Original ISGW2
   auto histo_orig =
       fill_histo(data_tree, "q2", "q2_orig", "q2 original", 80, 2.5, 12);
-  histo_orig.SetLineColor(kMagenta);
-  histo_orig.SetLineWidth(0);
   histo_orig.Scale(1 / histo_orig.Integral("width"));
+
+  histo_orig.SetLineWidth(4);
+  histo_orig.SetLineColor(kMagenta);
 
   // Reweighted CLN
   auto histo_reweighted = fill_histo(data_tree, "q2", "w_ff", "q2_reweighted",
-                                     "q2 reweighted", 800, 2.5, 12);
+                                     "q2 reweighted", 80, 2.5, 12);
   histo_reweighted.Scale(1 / histo_reweighted.Integral("width"));
+
+  histo_reweighted.SetLineWidth(4);
+  histo_reweighted.SetLineColor(kOrange);
 
   // Original plot
   auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
   histo_ref_cln_B0ToDstTauNu.Draw("hist C");
   histo_ref_isgw2_B0ToDstTauNu.Draw("same hist C");
-  histo_orig.Draw("same *H");
+  histo_orig.Draw("same hist");
+  histo_reweighted.Draw("same hist");
 
   // Legend
   canvas->BuildLegend();
 
   canvas->Update();
-  canvas->Print((output_dir + "/ff_cln_original.png").c_str());
-
-  // Reweighted plot
-  canvas->Clear();
-
-  histo_ref_cln_B0ToDstTauNu.Draw("hist C");
-  histo_ref_isgw2_B0ToDstTauNu.Draw("same hist C");
-  histo_reweighted.Draw("hist same *H");
-  canvas->BuildLegend();
-
-  canvas->Update();
-  canvas->Print((output_dir + "/ff_cln_reweighted.png").c_str());
+  canvas->Print((output_dir + "/validate_ff.png").c_str());
 
   delete canvas;
 
