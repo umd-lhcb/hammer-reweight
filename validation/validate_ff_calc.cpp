@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Sun Nov 08, 2020 at 01:57 AM +0100
+// Last Change: Sun Nov 08, 2020 at 02:02 AM +0100
 
 #include <iostream>
 #include <string>
@@ -30,7 +30,8 @@ const Double_t m_Tau   = 1.7768;
 // q2 distributions with a particular FF parameterization
 TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep,
               Long64_t normalization, const char* name, const char* title,
-              Int_t nbinsx, Double_t xlow, Double_t xup) {
+              Int_t nbinsx, Double_t xlow, Double_t xup,
+              Option_t* scale_opt = "width") {
   auto histo   = TH1D(name, title, nbinsx, xlow, xup);
   auto ff_calc = BToDstaunu{};
 
@@ -43,9 +44,9 @@ TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep,
     histo.SetBinContent(bin, q2_dist);
   }
 
-  histo.Scale(1 / histo.Integral("width"));
+  histo.Scale(1 / histo.Integral(scale_opt));
   cout << "Histogram " << title << " has been normalized to "
-       << histo.Integral("width") << endl;
+       << histo.Integral(scale_opt) << endl;
 
   return histo;
 }
@@ -110,7 +111,7 @@ int main(int, char** argv) {
   // Reference ISGW2
   auto histo_ref_isgw2_B0ToDstTauNu =
       q2_histo(BMeson::Neutral, FFType::ISGW2, m_Tau, normalization, "ISGW2",
-               "Reference ISGW2", 800, 2.5, 12);
+               "Reference ISGW2", 80, 2.5, 12);
 
   histo_ref_isgw2_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_isgw2_B0ToDstTauNu.SetLineColor(kBlue);
