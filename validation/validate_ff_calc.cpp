@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Sun Nov 08, 2020 at 02:33 AM +0100
+// Last Change: Sun Nov 08, 2020 at 02:36 AM +0100
 
 #include <iostream>
 #include <string>
@@ -91,6 +91,11 @@ void debug_histo(T histo, Option_t* scale_opt = "") {
        << endl;
 }
 
+template <class T>
+void rescale_histos(T histo1, T histo2) {
+  histo1->Scale(histo2->GetMaximum() / histo1->GetMaximum());
+}
+
 int main(int, char** argv) {
   TFile* data_file   = new TFile(argv[1], "read");
   TFile* weight_file = new TFile(argv[2], "read");
@@ -123,6 +128,7 @@ int main(int, char** argv) {
       fill_histo(data_tree, "q2", "q2_orig", "q2 original", 70, 2.5, 12);
   histo_orig.Scale(1 / histo_orig.Integral());
   debug_histo(&histo_orig);
+  rescale_histos(&histo_orig, &histo_ref_isgw2_B0ToDstTauNu);
 
   // We want to align the maximum of the real data points with its reference
   // distribution
@@ -137,6 +143,7 @@ int main(int, char** argv) {
                                      "q2 reweighted", 70, 2.5, 12);
   histo_reweighted.Scale(1 / histo_reweighted.Integral());
   debug_histo(&histo_reweighted);
+  rescale_histos(&histo_reweighted, &histo_ref_cln_B0ToDstTauNu);
 
   histo_reweighted.SetLineWidth(4);
   histo_reweighted.SetLineColor(kOrange);
