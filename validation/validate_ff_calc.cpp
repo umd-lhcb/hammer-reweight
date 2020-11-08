@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Sun Nov 08, 2020 at 01:44 AM +0100
+// Last Change: Sun Nov 08, 2020 at 01:46 AM +0100
 
 #include <iostream>
 #include <string>
@@ -133,26 +133,23 @@ int main(int, char** argv) {
   histo_orig.Draw("same *H");
 
   // Legend
-  auto legend = new TLegend(0.1, 0.8, 0.3, 0.9);
-  legend->SetTextSize(0.03);
-  legend->AddEntry(&histo_ref_cln_B0ToDstTauNu, "CLN", "f");
-  legend->AddEntry(&histo_ref_isgw2_B0ToDstTauNu, "ISGW2", "f");
-  legend->AddEntry(&histo_orig, "Original", "f");
-  legend->Draw();
-  // canvas->BuildLegend();
+  canvas->BuildLegend();
 
   canvas->Update();
   canvas->Print((output_dir + "/ff_cln_original.png").c_str());
-  canvas->Clear();
 
   // Reweighted plot
-  histo_reweighted.Draw("*H");
+  canvas->Clear();
+
+  histo_ref_cln_B0ToDstTauNu.Draw("hist C");
+  histo_ref_isgw2_B0ToDstTauNu.Draw("same hist C");
+  histo_reweighted.Draw("hist same *H");
+  canvas->BuildLegend();
 
   canvas->Update();
   canvas->Print((output_dir + "/ff_cln_reweighted.png").c_str());
 
   delete canvas;
-  delete legend;
 
   delete data_tree;
   delete weight_tree;
