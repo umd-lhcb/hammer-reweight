@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Thu Nov 05, 2020 at 12:54 AM +0100
+// Last Change: Sun Nov 08, 2020 at 01:44 AM +0100
 
 #include <iostream>
 #include <string>
@@ -37,13 +37,15 @@ TH1D q2_histo(BMeson b_type, FFType ff_type, Double_t m_lep,
   ff_calc.SetMasses(b_type);
 
   for (auto bin = 1; bin <= nbinsx; bin++) {
-    auto q2      = histo.GetXaxis()->GetBinCenter(bin);
-    auto q2_dist = ff_calc.Compute(q2, ff_type, m_lep);
+    auto     q2      = histo.GetBinCenter(bin);
+    Double_t q2_dist = ff_calc.Compute(q2, ff_type, m_lep);
 
     histo.SetBinContent(bin, q2_dist);
   }
 
-  cout << title << " has a " << histo.Integral() << " integral." << endl;
+  histo.Scale(1 / histo.Integral("width"));
+  cout << "Histogram " << title << " has been normalized to "
+       << histo.Integral("width") << endl;
 
   return histo;
 }
@@ -100,7 +102,7 @@ int main(int, char** argv) {
   // Reference CLN
   auto histo_ref_cln_B0ToDstTauNu =
       q2_histo(BMeson::Neutral, FFType::CLN, m_Tau, normalization, "CLN",
-               "Reference CLN", 800, 2.5, 12);
+               "Reference CLN", 80, 2.5, 12);
 
   histo_ref_cln_B0ToDstTauNu.SetLineWidth(2);
   histo_ref_cln_B0ToDstTauNu.SetLineColor(kRed);
@@ -117,15 +119,17 @@ int main(int, char** argv) {
       fill_histo(data_tree, "q2", "q2_orig", "q2 original", 80, 2.5, 12);
   histo_orig.SetLineColor(kMagenta);
   histo_orig.SetLineWidth(0);
+  histo_orig.Scale(1 / histo_orig.Integral("width"));
 
   // Reweighted CLN
   auto histo_reweighted = fill_histo(data_tree, "q2", "w_ff", "q2_reweighted",
-                                     "q2 reweighted", 80, 2.5, 12);
+                                     "q2 reweighted", 800, 2.5, 12);
+  histo_reweighted.Scale(1 / histo_reweighted.Integral("width"));
 
   // Original plot
   auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
-  histo_ref_cln_B0ToDstTauNu.Draw();
-  histo_ref_isgw2_B0ToDstTauNu.Draw("same");
+  histo_ref_cln_B0ToDstTauNu.Draw("hist C");
+  histo_ref_isgw2_B0ToDstTauNu.Draw("same hist C");
   histo_orig.Draw("same *H");
 
   // Legend
