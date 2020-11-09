@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Mon Nov 09, 2020 at 01:23 AM +0100
+// Last Change: Mon Nov 09, 2020 at 01:28 AM +0100
 
 #include <iostream>
 #include <string>
@@ -133,13 +133,6 @@ int main(int, char** argv) {
       fill_histo(data_tree, "q2_true", "q2_orig", "q2 original", 70, 2.5, 12);
   histo_orig.Scale(1 / histo_orig.Integral("width"));
   debug_histo(&histo_orig, "width");
-  // auto scale_ratio = rescale_histos(&histo_orig,
-  // &histo_ref_isgw2_B0ToDstTauNu);
-
-  // We want to align the maximum of the real data points with its reference
-  // distribution
-  histo_orig.Scale(histo_ref_isgw2_B0ToDstTauNu.GetMaximum() /
-                   histo_orig.GetMaximum());
 
   histo_orig.SetLineWidth(4);
   histo_orig.SetLineColor(kGreen);
@@ -150,10 +143,14 @@ int main(int, char** argv) {
                  70, 2.5, 12);
   histo_reweighted.Scale(1 / histo_reweighted.Integral("width"));
   debug_histo(&histo_reweighted, "width");
-  // histo_reweighted.Scale(scale_ratio);
 
   histo_reweighted.SetLineWidth(4);
   histo_reweighted.SetLineColor(kOrange);
+
+  // We want to align the maximum of the real data points with its reference
+  // distribution
+  auto scale_ratio = rescale_histos(&histo_orig, &histo_ref_isgw2_B0ToDstTauNu);
+  histo_reweighted.Scale(scale_ratio);
 
   // Plot
   auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
