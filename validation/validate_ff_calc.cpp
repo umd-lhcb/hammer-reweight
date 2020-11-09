@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Sun Nov 08, 2020 at 04:29 PM +0100
+// Last Change: Mon Nov 09, 2020 at 01:23 AM +0100
 
 #include <iostream>
 #include <string>
@@ -125,12 +125,16 @@ int main(int, char** argv) {
       q2_histo(BMeson::Neutral, FFType::ISGW2, m_Tau, "ISGW2",
                "Reference ISGW2", 200, 2.5, 12);
 
+  histo_ref_isgw2_B0ToDstTauNu.SetLineWidth(2);
+  histo_ref_isgw2_B0ToDstTauNu.SetLineColor(kBlue);
+
   // Original ISGW2
   auto histo_orig =
-      fill_histo(data_tree, "q2", "q2_orig", "q2 original", 70, 2.5, 12);
+      fill_histo(data_tree, "q2_true", "q2_orig", "q2 original", 70, 2.5, 12);
   histo_orig.Scale(1 / histo_orig.Integral("width"));
   debug_histo(&histo_orig, "width");
-  auto scale_ratio = rescale_histos(&histo_orig, &histo_ref_isgw2_B0ToDstTauNu);
+  // auto scale_ratio = rescale_histos(&histo_orig,
+  // &histo_ref_isgw2_B0ToDstTauNu);
 
   // We want to align the maximum of the real data points with its reference
   // distribution
@@ -141,17 +145,15 @@ int main(int, char** argv) {
   histo_orig.SetLineColor(kGreen);
 
   // Reweighted CLN
-  auto histo_reweighted = fill_histo(data_tree, "q2", "w_ff", "q2_reweighted",
-                                     "q2 reweighted", 70, 2.5, 12);
+  auto histo_reweighted =
+      fill_histo(data_tree, "q2_true", "w_ff", "q2_reweighted", "q2 reweighted",
+                 70, 2.5, 12);
   histo_reweighted.Scale(1 / histo_reweighted.Integral("width"));
   debug_histo(&histo_reweighted, "width");
-  histo_reweighted.Scale(scale_ratio);
+  // histo_reweighted.Scale(scale_ratio);
 
   histo_reweighted.SetLineWidth(4);
   histo_reweighted.SetLineColor(kOrange);
-
-  histo_ref_isgw2_B0ToDstTauNu.SetLineWidth(2);
-  histo_ref_isgw2_B0ToDstTauNu.SetLineColor(kBlue);
 
   // Plot
   auto canvas = new TCanvas("canvas", "FF validation", 4000, 3000);
