@@ -1,7 +1,7 @@
 // Author: Yipeng Sun
 // License: GPLv2
 // Description: Validation of FF reweighting from ISGW2 -> CLN
-// Last Change: Mon Nov 09, 2020 at 01:28 AM +0100
+// Last Change: Mon Nov 09, 2020 at 01:36 AM +0100
 
 #include <iostream>
 #include <string>
@@ -130,7 +130,7 @@ int main(int, char** argv) {
 
   // Original ISGW2
   auto histo_orig =
-      fill_histo(data_tree, "q2_true", "q2_orig", "q2 original", 70, 2.5, 12);
+      fill_histo(data_tree, "q2_true", "q2_orig", "q2 original", 50, 2.5, 12);
   histo_orig.Scale(1 / histo_orig.Integral("width"));
   debug_histo(&histo_orig, "width");
 
@@ -140,7 +140,7 @@ int main(int, char** argv) {
   // Reweighted CLN
   auto histo_reweighted =
       fill_histo(data_tree, "q2_true", "w_ff", "q2_reweighted", "q2 reweighted",
-                 70, 2.5, 12);
+                 50, 2.5, 12);
   histo_reweighted.Scale(1 / histo_reweighted.Integral("width"));
   debug_histo(&histo_reweighted, "width");
 
