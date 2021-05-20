@@ -4,41 +4,8 @@ MC reweighting code with HAMMER.
 Hammer uses `CMake` to configure out-of-source build. System requirements and
 configurations are described in [Hammer documentation](https://hammer.physics.lbl.gov/readme.html).
 
-Hammer has been compiled successfully on:
-
-- Arch Linux, with `gcc 10.1.0`, `Python 3.8.3`, and `ROOT 6.20/04`.
-- macOS with `nix`, with `clang 7.1.0`, `Python 3.7.6`, and `ROOT 6.18/04`.
-- NixOS (`unstable` channel), with `gcc 9.3.0`, `Python 3.8.5`, and `ROOT 6.18/04`
-
-
-## Install dependencies
-Hammer requires the following dependencies, at least in our case:
-
-- `boost`
-- `yaml-cpp`
-- `root`
-
-### Arch Linux
-In Arch, these dependencies can be installed via:
-
-```
-sudo pacman -S boost yaml-cpp root
-```
-
-
-## Build Hammer
-Hammer is included as a submodule for this project. We use `development` branch
-and pinpoint a specific commit to ensure everybody gets the same version.
-
-To checkout this specific version of hammer:
-```
-git submodule update --init
-```
-
-Now, you just need to type:
-```
-make build
-```
+For old instructions on installing Hammer on non-NixOS Linux distributions,
+please take a look at [version `0.1`](https://github.com/umd-lhcb/hammer-redist/tree/0.1).
 
 
 ## More details on building Hammer
