@@ -28,6 +28,7 @@
             root
             hammer-phys
             ff_calc
+            python3
           ];
         };
       });
