@@ -27,7 +27,7 @@
           buildInputs = with pkgs; [
             root
             hammer-phys
-            #ff_calc
+            ff_calc
           ];
         };
       });
