@@ -23,4 +23,4 @@ git apply <path_to_the_patch>
 ### `ff_calc`
 
 [`ff_calc`](https://github.com/manuelfs/babar_code/blob/master/inc/ff_dstaunu.hpp) is used to plot
-theoretical distributions of fit variables (`q2, mmiss2, el`) with CLN form factor.
+theoretical distributions of fit variables (`q2, mmiss2, el`) with given form factor.
