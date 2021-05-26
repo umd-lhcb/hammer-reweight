@@ -1,6 +1,0 @@
-clang
-
-%cpp -std=c++14
-
-%h -x
-%h c++-header
