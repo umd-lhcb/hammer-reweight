@@ -5,17 +5,18 @@
 , boost
 , libyamlcpp
 , root
+, fetchFromGitLab
 }:
 
 stdenv.mkDerivation rec {
   pname = "hammer-phys";
-  version = "f7827bf"; # Updated on Jun 17, 2020, 03:17 CST.
+  version = "1.1.0";
 
-  src = fetchgit {
-    url = "https://gitlab.com/mpapucci/Hammer.git";
-    branchName = "developmnt";
-    rev = version;
-    sha256 = "0dnv2vwh1fz61gl60x7bymkd4mxi16523jygwj7b1135lqsbms2z";
+  src = fetchFromGitLab {
+    owner = "mpapucci";
+    repo = "Hammer";
+    rev = "v${version}";
+    sha256 = "0ldf7h6capzbwigzqdklm9wrglrli5byhsla8x79vnq7v63xx332";
   };
 
   nativeBuildInputs = [ cmake makeWrapper pkgconfig ];
@@ -34,7 +35,6 @@ stdenv.mkDerivation rec {
     "-DWITH_PYTHON=OFF"
     "-DWITH_ROOT=ON"
     "-DINSTALL_EXTERNAL_DEPENDENCIES=OFF"
-    "-DMAX_CXX_IS_14=ON" # on NixOS, ROOT is compiled with c++11 flag.
   ];
 
   # Move the .so files to the lib folder so the output looks like this:
