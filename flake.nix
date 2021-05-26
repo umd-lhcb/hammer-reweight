@@ -18,7 +18,10 @@
           overlays = [ root-curated.overlay self.overlay ];
         };
       in
-      {
+      rec {
+        packages = flake-utils.lib.flattenTree {
+          dev-shell = devShell.inputDerivation;
+        };
         devShell = pkgs.mkShell {
           name = "hammer-redist";
           buildInputs = with pkgs; [
