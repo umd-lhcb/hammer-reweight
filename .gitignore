@@ -3,7 +3,6 @@ out
 bin
 gen
 
-.envrc
 .lvimrc
 .DS_Store
 
