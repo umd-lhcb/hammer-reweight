@@ -1,5 +1,5 @@
 {
-  description = "MC reweighting code with HAMMER.";
+  description = "Redistribute HAMMER and related tools.";
 
   inputs = {
     root-curated.url = "github:umd-lhcb/root-curated";
