@@ -1,5 +1,5 @@
 {
-  description = "Redistribute HAMMER and related tools.";
+  description = "Code for FF reweighting in  HAMMER.";
 
   inputs = {
     root-curated.url = "github:umd-lhcb/root-curated";
@@ -23,7 +23,7 @@
           dev-shell = devShell.inputDerivation;
         };
         devShell = pkgs.mkShell {
-          name = "hammer-redist";
+          name = "hammer-reweight";
           buildInputs = with pkgs; [
             root
             hammer-phys
