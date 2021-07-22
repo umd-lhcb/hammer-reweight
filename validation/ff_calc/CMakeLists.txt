@@ -4,6 +4,8 @@ project(ff_calc VERSION 1.2
                 DESCRIPTION "Form factor calcuator"
                 LANGUAGES CXX)
 
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+
 # Require out-of-source builds
 file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
 if(EXISTS "${LOC_PATH}")
@@ -14,6 +16,7 @@ endif()
 find_package(ROOT)
 
 # Use the same C++ standard version that ROOT is compiled with
+message("C++ standard: ${ROOT_CXX_STANDARD}")
 set(CMAKE_CXX_STANDARD ${ROOT_CXX_STANDARD})
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(CMAKE_CXX_EXTENSIONS OFF)
