@@ -29,6 +29,7 @@
             hammer-phys
             ff_calc
             python3
+            clang-tools
           ];
         };
       });
