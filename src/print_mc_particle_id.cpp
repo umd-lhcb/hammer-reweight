@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Jul 26, 2021 at 11:56 PM +0200
+// Last Change: Tue Jul 27, 2021 at 01:07 AM +0200
 
 #include <iostream>
 #include <map>
@@ -13,14 +13,16 @@ using namespace std;
 
 // clang-format off
 auto B_MESON = map<TString, TString>{
-  {"TupleBminus", "b"},
-  {"TupleB0", "b0"}
+  {"TupleBminus/DecayTree", "b"},
+  {"TupleB0/DecayTree", "b0"}
 };
 // clang-format on
 
-void print_id(TFile* input_file, TString tree, int modulo = 40) {
+int print_id(TFile* input_file, TString tree, int modulo = 40) {
   TTreeReader reader(tree, input_file);
-  TString     b_meson = B_MESON[tree];
+
+  if (B_MESON.find(tree) == B_MESON.end()) return 255;
+  TString b_meson = B_MESON[tree];
 
   // B meson truth info
   TTreeReaderValue<Double_t> b_px(reader, b_meson + "_TRUEP_X");
@@ -192,12 +194,23 @@ void print_id(TFile* input_file, TString tree, int modulo = 40) {
       cout << "======" << endl;
       cout << "B meson ID: " << *b_id << endl;
       cout << "First D meson ID: " << *d_idx0_id << endl;
+      cout << "  First daughter ID: " << *d_idx0_gd0_id << endl;
+      cout << "  Second daughter ID: " << *d_idx0_gd1_id << endl;
+      cout << "  Third daughter ID: " << *d_idx0_gd2_id << endl;
       cout << "Second D meson ID: " << *d_idx1_id << endl;
+      cout << "  First daughter ID: " << *d_idx1_gd0_id << endl;
+      cout << "  Second daughter ID: " << *d_idx1_gd1_id << endl;
+      cout << "  Third daughter ID: " << *d_idx1_gd2_id << endl;
       cout << "Third D meson ID: " << *d_idx2_id << endl;
+      cout << "  First daughter ID: " << *d_idx2_gd0_id << endl;
+      cout << "  Second daughter ID: " << *d_idx2_gd1_id << endl;
+      cout << "  Third daughter ID: " << *d_idx2_gd2_id << endl;
     }
 
     counter += 1;
   }
+
+  return 0;
 }
 
 int main(int, char** argv) {
