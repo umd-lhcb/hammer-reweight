@@ -19,6 +19,13 @@ clean:
 	@rm -rf ./bin/*
 	@rm -rf ./gen/*
 
+#########
+# Tools #
+#########
+
+print_mc_particle_id:
+
+
 ###############
 # Sample plot #
 ###############
@@ -55,7 +62,7 @@ gen/validate_ff.png: \
 ####################
 
 # Reweighters with HAMMER
-%.w: %.cpp
+%: %.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
 # Validation scripts
