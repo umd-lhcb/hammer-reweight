@@ -40,7 +40,7 @@ gen/el_true.png gen/q2_true.png gen/mm2_true.png &: \
 
 gen/rdst-run1-ff_w.root: \
 	samples/rdst-run1.root \
-	rdx-run1-sample.w
+	rdx-run1-sample
 	$(word 2, $^) $< $@
 
 
