@@ -1,27 +1,80 @@
 // Author: Yipeng Sun
-// Last Change: Tue Jul 27, 2021 at 01:07 AM +0200
+// Last Change: Tue Jul 27, 2021 at 03:19 PM +0200
 
 #include <iostream>
 #include <map>
+#include <string>
+#include <string_view>
+#include <vector>
 
+#include <TDatabasePDG.h>
 #include <TFile.h>
+#include <TMath.h>
 #include <TString.h>
 #include <TTree.h>
 #include <TTreeReader.h>
 
 using namespace std;
 
+typedef map<vector<Int_t>, unsigned long> DecayFreq;
+
 // clang-format off
 auto B_MESON = map<TString, TString>{
   {"TupleBminus/DecayTree", "b"},
   {"TupleB0/DecayTree", "b0"}
 };
+
+auto DECAY_NAMES = vector<string_view>{
+  "B meson ID: ",
+  "First D meson ID: ",
+  "  First daughter ID: ",
+  "  Second daughter ID: ",
+  "  Third daughter ID: ",
+  "Second D meson ID: ",
+  "  First daughter ID: ",
+  "  Second daughter ID: ",
+  "  Third daughter ID: ",
+  "Third D meson ID: ",
+  "  First daughter ID: ",
+  "  Second daughter ID: ",
+  "  Third daughter ID: "
+};
 // clang-format on
 
-int print_id(TFile* input_file, TString tree, int modulo = 40) {
-  TTreeReader reader(tree, input_file);
+string get_particle_name(Int_t id, TDatabasePDG* db) {
+  if (!id) return "None"s;
 
-  if (B_MESON.find(tree) == B_MESON.end()) return 255;
+  auto abs_id = TMath::Abs(id);
+  char buf[50];
+  sprintf(buf, " (%d)", abs_id);
+  auto str_id   = string(buf);
+  auto particle = db->GetParticle(abs_id);
+
+  if (particle != nullptr) return string(particle->GetName()) + buf;
+  return "Unknown"s + buf;
+}
+
+void print_decay_freq(DecayFreq freq) {
+  auto db = new TDatabasePDG();
+
+  for (auto const& [key, val] : freq) {
+    cout << "======" << endl;
+    cout << "The following decay has " << val << " candidates." << endl;
+    for (auto idx = 0; idx < key.size(); idx++) {
+      if (key[idx]) {
+        cout << DECAY_NAMES[idx] << get_particle_name(key[idx], db) << endl;
+      }
+    }
+  }
+
+  delete db;
+}
+
+DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
+  TTreeReader reader(tree, input_file);
+  auto        freq = DecayFreq{};
+
+  if (B_MESON.find(tree) == B_MESON.end()) return freq;
   TString b_meson = B_MESON[tree];
 
   // B meson truth info
@@ -190,34 +243,42 @@ int print_id(TFile* input_file, TString tree, int modulo = 40) {
       cout << "Tau E: " << *tau_pe << endl;
       cout << "Secondary Tau neutrino E: " << *nu_tau_pe << endl;
       cout << "Secondary Mu neutrino E: " << *anu_mu_pe << endl;
-
-      cout << "======" << endl;
-      cout << "B meson ID: " << *b_id << endl;
-      cout << "First D meson ID: " << *d_idx0_id << endl;
-      cout << "  First daughter ID: " << *d_idx0_gd0_id << endl;
-      cout << "  Second daughter ID: " << *d_idx0_gd1_id << endl;
-      cout << "  Third daughter ID: " << *d_idx0_gd2_id << endl;
-      cout << "Second D meson ID: " << *d_idx1_id << endl;
-      cout << "  First daughter ID: " << *d_idx1_gd0_id << endl;
-      cout << "  Second daughter ID: " << *d_idx1_gd1_id << endl;
-      cout << "  Third daughter ID: " << *d_idx1_gd2_id << endl;
-      cout << "Third D meson ID: " << *d_idx2_id << endl;
-      cout << "  First daughter ID: " << *d_idx2_gd0_id << endl;
-      cout << "  Second daughter ID: " << *d_idx2_gd1_id << endl;
-      cout << "  Third daughter ID: " << *d_idx2_gd2_id << endl;
     }
+
+    auto key = vector<Int_t>{};
+    key.push_back(*b_id);
+    key.push_back(*d_idx0_id);
+    key.push_back(*d_idx0_gd0_id);
+    key.push_back(*d_idx0_gd1_id);
+    key.push_back(*d_idx0_gd2_id);
+    key.push_back(*d_idx1_id);
+    key.push_back(*d_idx1_gd0_id);
+    key.push_back(*d_idx1_gd1_id);
+    key.push_back(*d_idx1_gd2_id);
+    key.push_back(*d_idx2_id);
+    key.push_back(*d_idx2_gd0_id);
+    key.push_back(*d_idx2_gd1_id);
+    key.push_back(*d_idx2_gd2_id);
+
+    if (freq.find(key) == freq.end())
+      freq[key] = 1l;
+    else
+      freq[key] += 1;
 
     counter += 1;
   }
 
-  return 0;
+  return freq;
 }
 
 int main(int, char** argv) {
   auto    ntp       = new TFile(argv[1], "read");
   TString tree_name = argv[2];
+  auto    db        = new TDatabasePDG();
 
-  print_id(ntp, tree_name);
+  auto freq = print_id(ntp, tree_name);
+  print_decay_freq(freq);
 
   delete ntp;
+  delete db;
 }
