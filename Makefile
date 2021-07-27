@@ -23,8 +23,8 @@ clean:
 # Tools #
 #########
 
-print_mc_particle_id:
-
+print_mc_particle_id: print_mc_particle_id.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) -lEG
 
 ###############
 # Sample plot #
