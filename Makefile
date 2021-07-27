@@ -1,12 +1,5 @@
-.PHONY: dev-shell clean clean-nix clean-general patch build
-
 BINPATH	:=	bin
 VPATH	:=	utils:src:validation:$(BINPATH)
-
-export PATH := utils:$(BINPATH):$(PATH)
-
-# System env
-PWD=$(shell pwd)
 
 # Compiler settings
 COMPILER	:=	$(shell root-config --cxx)
@@ -15,6 +8,7 @@ LINKFLAGS	:=	$(shell root-config --libs)
 ADDLINKFLAGS	:=	-lHammerTools -lHammerBase -lHammerCore -lFormFactors -lAmplitudes -lRates
 VALLINKFLAGS	:=	-lff_dstaunu
 
+.PHONY: clean
 clean:
 	@rm -rf ./bin/*
 	@rm -rf ./gen/*
