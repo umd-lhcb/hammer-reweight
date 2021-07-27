@@ -31,6 +31,10 @@
             python3
             clang-tools
           ];
+
+          shellHook = ''
+            export PATH=$(pwd)/bin:$PATH
+          '';
         };
       });
 }
