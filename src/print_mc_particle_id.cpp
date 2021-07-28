@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Jul 27, 2021 at 03:19 PM +0200
+// Last Change: Wed Jul 28, 2021 at 04:20 PM +0200
 
 #include <iostream>
 #include <map>
@@ -26,18 +26,19 @@ auto B_MESON = map<TString, TString>{
 
 auto DECAY_NAMES = vector<string_view>{
   "B meson ID: ",
-  "First D meson ID: ",
-  "  First daughter ID: ",
-  "  Second daughter ID: ",
-  "  Third daughter ID: ",
-  "Second D meson ID: ",
-  "  First daughter ID: ",
-  "  Second daughter ID: ",
-  "  Third daughter ID: ",
-  "Third D meson ID: ",
-  "  First daughter ID: ",
-  "  Second daughter ID: ",
-  "  Third daughter ID: "
+  "Mother ID: ",
+  "First daughter ID: ",
+  "  First G-daughter ID: ",
+  "  Second G-daughter ID: ",
+  "  Third G-daughter ID: ",
+  "Second daughter meson ID: ",
+  "  First G-daughter ID: ",
+  "  Second G-daughter ID: ",
+  "  Third G-daughter ID: ",
+  "Third daughter meson ID: ",
+  "  First G-daughter ID: ",
+  "  Second G-daughter ID: ",
+  "  Third G-daughter ID: "
 };
 // clang-format on
 
@@ -83,6 +84,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   TTreeReaderValue<Double_t> b_pz(reader, b_meson + "_TRUEP_Z");
   TTreeReaderValue<Double_t> b_pe(reader, b_meson + "_TRUEP_E");
   TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_ID");
+  TTreeReaderValue<Int_t>    mother_id(reader, b_meson + "_TrueHadron_M_ID");
 
   // Muon
   TTreeReaderValue<Double_t> mu_px(reader, b_meson + "_TrueMu_PX");
@@ -247,6 +249,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
 
     auto key = vector<Int_t>{};
     key.push_back(*b_id);
+    key.push_back(*mother_id);
     key.push_back(*d_idx0_id);
     key.push_back(*d_idx0_gd0_id);
     key.push_back(*d_idx0_gd1_id);
