@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Jul 28, 2021 at 04:20 PM +0200
+// Last Change: Wed Jul 28, 2021 at 05:33 PM +0200
 
 #include <iostream>
 #include <map>
@@ -83,7 +83,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   TTreeReaderValue<Double_t> b_py(reader, b_meson + "_TRUEP_Y");
   TTreeReaderValue<Double_t> b_pz(reader, b_meson + "_TRUEP_Z");
   TTreeReaderValue<Double_t> b_pe(reader, b_meson + "_TRUEP_E");
-  TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_ID");
+  TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_TRUEID");
   TTreeReaderValue<Int_t>    mother_id(reader, b_meson + "_TrueHadron_M_ID");
 
   // Muon
