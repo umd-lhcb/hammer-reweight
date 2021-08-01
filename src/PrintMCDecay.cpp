@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Aug 02, 2021 at 01:09 AM +0200
+// Last Change: Mon Aug 02, 2021 at 01:22 AM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -264,19 +264,19 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   while (reader.Next()) {
     if (TMath::Abs(*b_id) == 511 && *q2 > 100 * 100) {
       auto key = vector<Int_t>{};
-      key.push_back(*b_id);
-      key.push_back(*d_idx0_id);
-      key.push_back(*d_idx0_gd0_id);
-      key.push_back(*d_idx0_gd1_id);
-      key.push_back(*d_idx0_gd2_id);
-      key.push_back(*d_idx1_id);
-      key.push_back(*d_idx1_gd0_id);
-      key.push_back(*d_idx1_gd1_id);
-      key.push_back(*d_idx1_gd2_id);
-      key.push_back(*d_idx2_id);
-      key.push_back(*d_idx2_gd0_id);
-      key.push_back(*d_idx2_gd1_id);
-      key.push_back(*d_idx2_gd2_id);
+      key.push_back(TMath::Abs(*b_id));
+      key.push_back(TMath::Abs(*d_idx0_id));
+      key.push_back(TMath::Abs(*d_idx0_gd0_id));
+      key.push_back(TMath::Abs(*d_idx0_gd1_id));
+      key.push_back(TMath::Abs(*d_idx0_gd2_id));
+      key.push_back(TMath::Abs(*d_idx1_id));
+      key.push_back(TMath::Abs(*d_idx1_gd0_id));
+      key.push_back(TMath::Abs(*d_idx1_gd1_id));
+      key.push_back(TMath::Abs(*d_idx1_gd2_id));
+      key.push_back(TMath::Abs(*d_idx2_id));
+      key.push_back(TMath::Abs(*d_idx2_gd0_id));
+      key.push_back(TMath::Abs(*d_idx2_gd1_id));
+      key.push_back(TMath::Abs(*d_idx2_gd2_id));
 
       if (freq.find(key) == freq.end())
         freq[key] = 1l;
