@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Jul 28, 2021 at 05:33 PM +0200
+// Last Change: Sun Aug 01, 2021 at 03:27 PM +0200
 
 #include <iostream>
 #include <map>
@@ -24,9 +24,8 @@ auto B_MESON = map<TString, TString>{
   {"TupleB0/DecayTree", "b0"}
 };
 
-auto DECAY_NAMES = vector<string_view>{
+const auto DECAY_NAMES = vector<string_view>{
   "B meson ID: ",
-  "Mother ID: ",
   "First daughter ID: ",
   "  First G-daughter ID: ",
   "  Second G-daughter ID: ",
@@ -55,9 +54,7 @@ string get_particle_name(Int_t id, TDatabasePDG* db) {
   return "Unknown"s + buf;
 }
 
-void print_decay_freq(DecayFreq freq) {
-  auto db = new TDatabasePDG();
-
+void print_decay_freq(DecayFreq freq, TDatabasePDG* db) {
   for (auto const& [key, val] : freq) {
     cout << "======" << endl;
     cout << "The following decay has " << val << " candidates." << endl;
@@ -67,8 +64,6 @@ void print_decay_freq(DecayFreq freq) {
       }
     }
   }
-
-  delete db;
 }
 
 DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
@@ -84,7 +79,6 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   TTreeReaderValue<Double_t> b_pz(reader, b_meson + "_TRUEP_Z");
   TTreeReaderValue<Double_t> b_pe(reader, b_meson + "_TRUEP_E");
   TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_TRUEID");
-  TTreeReaderValue<Int_t>    mother_id(reader, b_meson + "_TrueHadron_M_ID");
 
   // Muon
   TTreeReaderValue<Double_t> mu_px(reader, b_meson + "_TrueMu_PX");
@@ -236,40 +230,42 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   TTreeReaderValue<Int_t>    d_idx2_gd2_id(reader,
                                         b_meson + "_TrueHadron_D2_GD2_ID");
 
-  unsigned long counter = 0;
+  unsigned long num_of_evt           = 0l;
+  unsigned long num_of_evt_w_b_meson = 0l;
   while (reader.Next()) {
-    if (!(counter % modulo)) {
-      cout << "======" << endl;
-      cout << "Muon E: " << *mu_pe << endl;
-      cout << "Primary neutrino E: " << *anu_pe << endl;
-      cout << "Tau E: " << *tau_pe << endl;
-      cout << "Secondary Tau neutrino E: " << *nu_tau_pe << endl;
-      cout << "Secondary Mu neutrino E: " << *anu_mu_pe << endl;
+    if (abs(*b_id) == 511) {
+      auto key = vector<Int_t>{};
+      key.push_back(*b_id);
+      key.push_back(*d_idx0_id);
+      key.push_back(*d_idx0_gd0_id);
+      key.push_back(*d_idx0_gd1_id);
+      key.push_back(*d_idx0_gd2_id);
+      key.push_back(*d_idx1_id);
+      key.push_back(*d_idx1_gd0_id);
+      key.push_back(*d_idx1_gd1_id);
+      key.push_back(*d_idx1_gd2_id);
+      key.push_back(*d_idx2_id);
+      key.push_back(*d_idx2_gd0_id);
+      key.push_back(*d_idx2_gd1_id);
+      key.push_back(*d_idx2_gd2_id);
+
+      if (freq.find(key) == freq.end())
+        freq[key] = 1l;
+      else
+        freq[key] += 1;
+
+      num_of_evt_w_b_meson += 1;
     }
 
-    auto key = vector<Int_t>{};
-    key.push_back(*b_id);
-    key.push_back(*mother_id);
-    key.push_back(*d_idx0_id);
-    key.push_back(*d_idx0_gd0_id);
-    key.push_back(*d_idx0_gd1_id);
-    key.push_back(*d_idx0_gd2_id);
-    key.push_back(*d_idx1_id);
-    key.push_back(*d_idx1_gd0_id);
-    key.push_back(*d_idx1_gd1_id);
-    key.push_back(*d_idx1_gd2_id);
-    key.push_back(*d_idx2_id);
-    key.push_back(*d_idx2_gd0_id);
-    key.push_back(*d_idx2_gd1_id);
-    key.push_back(*d_idx2_gd2_id);
-
-    if (freq.find(key) == freq.end())
-      freq[key] = 1l;
-    else
-      freq[key] += 1;
-
-    counter += 1;
+    num_of_evt += 1;
   }
+
+  cout << "Total number of candidates: " << num_of_evt << endl;
+  cout << "Truth-matched candidates: " << num_of_evt_w_b_meson << endl;
+  cout << "Truth-matched fraction: "
+       << static_cast<float>(num_of_evt_w_b_meson) /
+              static_cast<float>(num_of_evt)
+       << endl;
 
   return freq;
 }
@@ -280,7 +276,7 @@ int main(int, char** argv) {
   auto    db        = new TDatabasePDG();
 
   auto freq = print_id(ntp, tree_name);
-  print_decay_freq(freq);
+  print_decay_freq(freq, db);
 
   delete ntp;
   delete db;
