@@ -17,7 +17,7 @@ clean:
 # Tools #
 #########
 
-print_mc_particle_id: print_mc_particle_id.cpp
+PrintMCDecay: PrintMCDecay.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) -lEG
 
 ###############
