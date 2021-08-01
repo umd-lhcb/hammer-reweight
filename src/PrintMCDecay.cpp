@@ -1,10 +1,12 @@
 // Author: Yipeng Sun
-// Last Change: Mon Aug 02, 2021 at 12:47 AM +0200
+// Last Change: Mon Aug 02, 2021 at 01:05 AM +0200
 
+#include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
 #include <map>
 #include <string>
 #include <string_view>
+#include <tuple>
 #include <vector>
 
 #include <TDatabasePDG.h>
@@ -15,6 +17,10 @@
 #include <TTreeReader.h>
 
 using namespace std;
+
+///////////////////
+// Configurables //
+///////////////////
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -41,6 +47,23 @@ const auto DECAY_NAMES = vector<string_view>{
 };
 // clang-format on
 
+/////////////
+// Helpers //
+/////////////
+
+template <typename A, typename B>
+pair<B, A> flip_pair(const pair<A, B>& p) {
+  return pair<B, A>(p.second, p.first);
+}
+
+template <typename A, typename B>
+multimap<B, A> flip_map(const map<A, B>& src) {
+  multimap<B, A> dst;
+  transform(src.begin(), src.end(), inserter(dst, dst.begin()),
+            flip_pair<A, B>);
+  return dst;
+}
+
 string get_particle_name(Int_t id, TDatabasePDG* db) {
   if (!id) return "None"s;
 
@@ -54,8 +77,13 @@ string get_particle_name(Int_t id, TDatabasePDG* db) {
   return "Unknown"s + buf;
 }
 
+//////////////
+// Printers //
+//////////////
+
 void print_decay_freq(DecayFreq freq, TDatabasePDG* db) {
-  for (auto const& [key, val] : freq) {
+  auto sorted = flip_map(freq);
+  for (auto const& [val, key] : boost::adaptors::reverse(sorted)) {
     cout << "======" << endl;
     cout << "The following decay has " << val << " candidates." << endl;
     for (auto idx = 0; idx < key.size(); idx++) {
@@ -270,6 +298,10 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
 
   return freq;
 }
+
+//////////
+// Main //
+//////////
 
 int main(int, char** argv) {
   auto    ntp       = new TFile(argv[1], "read");
