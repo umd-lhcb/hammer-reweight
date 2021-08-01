@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Sun Aug 01, 2021 at 03:27 PM +0200
+// Last Change: Sun Aug 01, 2021 at 04:28 PM +0200
 
 #include <iostream>
 #include <map>
@@ -79,6 +79,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   TTreeReaderValue<Double_t> b_pz(reader, b_meson + "_TRUEP_Z");
   TTreeReaderValue<Double_t> b_pe(reader, b_meson + "_TRUEP_E");
   TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_TRUEID");
+  TTreeReaderValue<Double_t> q2(reader, b_meson + "_True_Q2");
 
   // Muon
   TTreeReaderValue<Double_t> mu_px(reader, b_meson + "_TrueMu_PX");
@@ -233,7 +234,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   unsigned long num_of_evt           = 0l;
   unsigned long num_of_evt_w_b_meson = 0l;
   while (reader.Next()) {
-    if (abs(*b_id) == 511) {
+    if (abs(*b_id) == 511 && *q2 > 50 * 50) {
       auto key = vector<Int_t>{};
       key.push_back(*b_id);
       key.push_back(*d_idx0_id);
