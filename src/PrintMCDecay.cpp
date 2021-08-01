@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Aug 02, 2021 at 01:05 AM +0200
+// Last Change: Mon Aug 02, 2021 at 01:09 AM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -262,7 +262,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   unsigned long num_of_evt           = 0l;
   unsigned long num_of_evt_w_b_meson = 0l;
   while (reader.Next()) {
-    if (abs(*b_id) == 511 && *q2 > 100 * 100) {
+    if (TMath::Abs(*b_id) == 511 && *q2 > 100 * 100) {
       auto key = vector<Int_t>{};
       key.push_back(*b_id);
       key.push_back(*d_idx0_id);
