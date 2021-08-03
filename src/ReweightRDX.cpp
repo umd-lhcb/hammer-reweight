@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Aug 02, 2021 at 11:38 PM +0200
+// Last Change: Tue Aug 03, 2021 at 02:30 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -89,14 +89,24 @@ TString dirname(string s) {
 
 TString basename(string s) { return TString(split(s, '/').back()); }
 
+Int_t digit_is(Int_t num, Int_t digit, Int_t base = 10) {
+  return num / (digit * base);
+}
+
 /////////////////////////
 // Particle ID helpers //
 /////////////////////////
 
-Bool_t is_d_meson(Int_t id) {
-  id = TMath::Abs(id);
+typedef pair<Bool_t, TString> DMesonPack;
+typedef map<TString, Int_t>   PartIdMap;
 
-  return false;
+DMesonPack is_d_meson(const PartIdMap parts) {
+  for (const auto [key, val] : parts) {
+    auto id = TMath::Abs(val);
+    if (digit_is(id, 3) == 4) return DMesonPack{true, key};
+  }
+
+  return DMesonPack{false, "none"};
 }
 
 ////////////////////////////
@@ -318,9 +328,11 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN) {
       // Check if we have a legal D meson
-      auto d_meson_cands = map<TString, Int_t>{
-          {"D0", *d_idx0_id}, {"D1", *d_idx1_id}, {"D2", *d_idx2_id}};
-      if (find_in()) {
+      auto d_meson_cands =
+          PartIdMap{{"D0", *d_idx0_id}, {"D1", *d_idx1_id}, {"D2", *d_idx2_id}};
+      auto [d_meson_ok, d_meson_lbl] = is_d_meson(d_meson_cands);
+
+      if (d_meson_ok) {
         // If so, locate the right D meson and loop over all its daughters and
         // add them if they are hadrons
         num_of_evt_w_b_meson += 1;
