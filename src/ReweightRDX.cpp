@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 03, 2021 at 08:41 PM +0200
+// Last Change: Thu Aug 05, 2021 at 12:20 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -121,6 +121,22 @@ Int_t B_id_fix(const Int_t B_id, const Int_t D_id) {
   return B_id;
 }
 
+int Mu_id(Int_t mu_id, Int_t true_id = 13) {
+  Int_t sign = mu_id / TMath::Abs(mu_id);
+  return sign * true_id;
+}
+
+int Tau_id(Int_t mu_id) { return Mu_id(mu_id, 15); }
+
+int Nu_id(Int_t mu_id, Bool_t is_tau) {
+  if (is_tau) return Mu_id(mu_id, -16);
+  return Mu_id(mu_id, -14);
+}
+
+int Tau_NuMu_id(Int_t mu_id) { return Mu_id(mu_id, -14); }
+
+int Tau_NuTau_id(Int_t mu_id) { return Mu_id(mu_id, 16); }
+
 ////////////////////////////
 // HAMMER-related helpers //
 ////////////////////////////
@@ -152,12 +168,14 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   TTreeReaderValue<Double_t> b_pe(reader, b_meson + "_TRUEP_E");
   TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_TRUEID");
   TTreeReaderValue<Double_t> q2(reader, b_meson + "_True_Q2");
+  TTreeReaderValue<Bool_t>   is_tau(reader, b_meson + "_True_IsTauDecay");
 
   // Muon
   TTreeReaderValue<Double_t> mu_px(reader, b_meson + "_TrueMu_PX");
   TTreeReaderValue<Double_t> mu_py(reader, b_meson + "_TrueMu_PY");
   TTreeReaderValue<Double_t> mu_pz(reader, b_meson + "_TrueMu_PZ");
   TTreeReaderValue<Double_t> mu_pe(reader, b_meson + "_TrueMu_PE");
+  TTreeReaderValue<Int_t>    mu_id(reader, "mu_TRUEID");
 
   // Tau
   TTreeReaderValue<Double_t> tau_px(reader, b_meson + "_TrueTau_PX");
@@ -338,7 +356,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
     ham_ok = false;
 
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
-    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN) {
+    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
+        TMath::Abs(*mu_id) == 13) {
       // Check if we have a legal D meson
       // clang-format off
       auto D_cands =
@@ -427,18 +446,18 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         // clang-format on
 
         // If so, locate the right D meson and loop over all its daughters and
-        // add them if they are hadrons
-        vector<Hammer::Particle> d_daughters{};
+        // add them all
+        vector<Hammer::Particle> part_D_daughters{};
 
         for (auto suffix : vector<TString>{"_GD0", "_GD1", "_GD2"}) {
           auto part_name = D_lbl + suffix;
           auto part_id   = D_daughter_id[part_name];
-          if (is_hadron(part_id)) {
-            d_daughters.push_back(particle(D_daughter_mom[part_name + "PE"],
-                                           D_daughter_mom[part_name + "PX"],
-                                           D_daughter_mom[part_name + "PY"],
-                                           D_daughter_mom[part_name + "PZ"],
-                                           part_id));
+          if (part_id /* && is_hadron(part_id) */) {
+            part_D_daughters.push_back(
+                particle(D_daughter_mom[part_name + "PE"],
+                         D_daughter_mom[part_name + "PX"],
+                         D_daughter_mom[part_name + "PY"],
+                         D_daughter_mom[part_name + "PZ"], part_id));
           }
         }
 
@@ -450,6 +469,43 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         auto part_D = particle(D_mom[D_lbl + "_PX"], D_mom[D_lbl + "_PY"],
                                D_mom[D_lbl + "_PZ"], D_mom[D_lbl + "_PE"],
                                D_cands[D_lbl]);
+        Hammer::Particle part_L, part_NuL, part_TauNuTau, part_TauNuMu, part_Mu;
+        if (*is_tau)
+          part_L = particle(*tau_pe, *tau_px, *tau_py, *tau_pz, Tau_id(*mu_id));
+        else
+          part_L = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
+
+        part_Mu       = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
+        part_NuL      = particle(*anu_pe, *anu_px, *anu_py, *anu_pz,
+                            Nu_id(*mu_id, *is_tau));
+        part_TauNuTau = particle(*nu_tau_pe, *nu_tau_px, *nu_tau_py, *nu_tau_pz,
+                                 Tau_NuTau_id(*mu_id));
+        part_TauNuMu  = particle(*anu_mu_pe, *anu_mu_px, *anu_mu_py, *anu_mu_pz,
+                                Tau_NuMu_id(*mu_id));
+
+        auto part_B_idx = proc.addParticle(part_B);
+        auto part_D_idx = proc.addParticle(part_D);
+
+        vector<size_t> part_D_daughters_idx{};
+        for (const auto part : part_D_daughters) {
+          part_D_daughters_idx.push_back(proc.addParticle(part));
+        }
+
+        // Always add the primary leptons
+        auto part_L_idx   = proc.addParticle(part_L);
+        auto part_NuL_idx = proc.addParticle(part_NuL);
+
+        proc.addVertex(part_B_idx, {part_D_idx, part_L_idx});
+        proc.addVertex(part_D_idx, part_D_daughters_idx);
+
+        if (*is_tau) {
+          auto part_Mu_idx       = proc.addParticle(part_Mu);
+          auto part_TauNuMu_idx  = proc.addParticle(part_TauNuMu);
+          auto part_TauNuTau_idx = proc.addParticle(part_TauNuTau);
+
+          proc.addVertex(part_L_idx,
+                         {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
+        }
 
         num_of_evt_w_b_meson += 1;
       }
