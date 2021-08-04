@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 01:19 AM +0200
+// Last Change: Thu Aug 05, 2021 at 01:27 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -365,8 +365,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   output_tree->Branch("flag_ham_ok", &ham_ok);
 
   // Setup HAMMER //////////////////////////////////////////////////////////////
-  Hammer::Hammer   ham{};
-  Hammer::IOBuffer ham_buf;
+  Hammer::Hammer ham{};
 
   ham.setUnits("MeV");
 
@@ -536,9 +535,15 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         ham.initEvent();
         auto proc_id = ham.addProcess(proc);
 
+        // Print debug info for first possibly legal candidate
+        cout << "B meson ID: " << *b_id << endl;
+        cout << "D meson ID: " << D_cands[D_lbl] << endl;
+        cout << "Is tau decay: " << *is_tau << endl;
+        cout << "HAMMER process ID: " << proc_id << endl;
+
         if (proc_id != 0) {
           ham_ok   = true;
-          w_ff_out = ham.getWeight(FF_SCHEME[D_cands[D_lbl]]);
+          w_ff_out = ham.getWeight(FF_SCHEME[TMath::Abs(D_cands[D_lbl])]);
           num_of_evt_ham_ok += 1;
         }
       }
@@ -562,7 +567,6 @@ int main(int, char** argv) {
   auto    input_ntp  = new TFile(argv[1], "read");
   auto    output_ntp = new TFile(argv[2], "recreate");
   TString tree       = argv[3];
-  TString mc_type    = argv[4];
 
   auto rate = reweight(input_ntp, output_ntp, tree);
 
