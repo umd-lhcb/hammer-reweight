@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Aug 04, 2021 at 04:21 PM +0200
+// Last Change: Wed Aug 04, 2021 at 04:30 PM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -46,6 +46,8 @@ const auto DECAY_NAMES = vector<string_view>{
   "  Third G-daughter ID: "
 };
 // clang-format on
+
+const Double_t Q2_MIN = 100. * 100.;
 
 /////////////
 // Helpers //
@@ -132,7 +134,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   unsigned long num_of_evt           = 0l;
   unsigned long num_of_evt_w_b_meson = 0l;
   while (reader.Next()) {
-    if (TMath::Abs(*b_id) == 511 && *q2 > 100 * 100) {
+    if (TMath::Abs(*b_id) == 511 && *q2 > Q2_MIN) {
       auto key = vector<Int_t>{};
       key.push_back(TMath::Abs(*b_id));
       key.push_back(TMath::Abs(*d_idx0_id));
