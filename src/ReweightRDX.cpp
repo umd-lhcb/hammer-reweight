@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 01:14 AM +0200
+// Last Change: Thu Aug 05, 2021 at 01:19 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -62,7 +62,7 @@ void set_output_ff(Hammer::Hammer& ham) {
 
   ham.includeDecay("BDTauNu");
   ham.includeDecay("BDMuNu");
-  ham.addFFScheme("FF_D", {{"BD", "BCL"}});
+  ham.addFFScheme("FF_D", {{"BD", "BGL"}});
 }
 
 /////////////////////
