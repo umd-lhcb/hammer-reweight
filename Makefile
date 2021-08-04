@@ -8,7 +8,7 @@ LINKFLAGS	:=	$(shell root-config --libs)
 ADDLINKFLAGS	:=	-lHammerTools -lHammerBase -lHammerCore -lFormFactors -lAmplitudes -lRates
 VALLINKFLAGS	:=	-lff_dstaunu
 
-tools: PrintMCDecay
+tools: PrintMCDecay ReweightRDX
 
 .PHONY: clean
 clean:

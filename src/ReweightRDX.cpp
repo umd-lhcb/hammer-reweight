@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 12:20 AM +0200
+// Last Change: Thu Aug 05, 2021 at 01:14 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -37,18 +37,32 @@ auto B_MESON = map<TString, TString>{
 };
 
 const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
+
+auto FF_SCHEME = map<Int_t, string>{
+  {413, "FF_Dst"},
+  {421, "FF_D"}
+};
 // clang-format on
 
 const Double_t Q2_MIN = 100. * 100.;
 
-void set_input_ff(Hammer::Hammer& ham, string decay_mode) {
-  ;
-  ;
+void set_input_ff(Hammer::Hammer& ham) {
+  // clang-format off
+  ham.setFFInputScheme({
+    {"BD*", "ISGW2"},
+    {"BD", "ISGW2"}
+  });
+  // clang-format on
 }
 
-void set_output_ff(Hammer::Hammer& ham, string decay_mode) {
-  ;
-  ;
+void set_output_ff(Hammer::Hammer& ham) {
+  ham.includeDecay("BD*TauNu");
+  ham.includeDecay("BD*MuNu");
+  ham.addFFScheme("FF_Dst", {{"BD*", "BGL"}});
+
+  ham.includeDecay("BDTauNu");
+  ham.includeDecay("BDMuNu");
+  ham.addFFScheme("FF_D", {{"BD", "BCL"}});
 }
 
 /////////////////////
@@ -321,6 +335,10 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   TTreeReaderValue<Int_t>    d_idx2_gd2_id(reader,
                                         b_meson + "_TrueHadron_D2_GD2_ID");
 
+  // Event ID
+  TTreeReaderValue<ULong64_t> eventNumber(reader, "eventNumber");
+  TTreeReaderValue<UInt_t>    runNumber(reader, "runNumber");
+
   // Output ////////////////////////////////////////////////////////////////////
   // Recreate the same folder structure in output
   auto tree_dir  = dirname(string(tree));
@@ -335,25 +353,33 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   // Output branches
   auto output_tree = new TTree(tree_name, tree_name);
 
-  Bool_t ham_ok;
-  output_tree->Branch("flag_ham_ok", &ham_ok);
-
   ULong64_t eventNumber_out;
   output_tree->Branch("eventNumber", &eventNumber_out);
   UInt_t runNumber_out;
   output_tree->Branch("runNumber", &runNumber_out);
+
+  Double_t w_ff_out;
+  output_tree->Branch("w_ff", w_ff_out);
+
+  Bool_t ham_ok;
+  output_tree->Branch("flag_ham_ok", &ham_ok);
 
   // Setup HAMMER //////////////////////////////////////////////////////////////
   Hammer::Hammer   ham{};
   Hammer::IOBuffer ham_buf;
 
   ham.setUnits("MeV");
+
+  set_input_ff(ham);
+  set_output_ff(ham);
+
   ham.initRun();
 
-  unsigned long num_of_evt           = 0l;
-  unsigned long num_of_evt_w_b_meson = 0l;
+  unsigned long num_of_evt        = 0l;
+  unsigned long num_of_evt_ham_ok = 0l;
   while (reader.Next()) {
-    ham_ok = false;
+    ham_ok   = false;
+    w_ff_out = 1.;
 
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
@@ -507,17 +533,25 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
                          {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
         }
 
-        num_of_evt_w_b_meson += 1;
+        ham.initEvent();
+        auto proc_id = ham.addProcess(proc);
+
+        if (proc_id != 0) {
+          ham_ok   = true;
+          w_ff_out = ham.getWeight(FF_SCHEME[D_cands[D_lbl]]);
+          num_of_evt_ham_ok += 1;
+        }
       }
     }
 
+    output_tree->Fill();
     num_of_evt += 1;
   }
 
   // Cleanup ///////////////////////////////////////////////////////////////////
   delete output_tree;
 
-  return RwRate{num_of_evt, num_of_evt_w_b_meson};
+  return RwRate{num_of_evt, num_of_evt_ham_ok};
 }
 
 //////////
@@ -528,12 +562,13 @@ int main(int, char** argv) {
   auto    input_ntp  = new TFile(argv[1], "read");
   auto    output_ntp = new TFile(argv[2], "recreate");
   TString tree       = argv[3];
+  TString mc_type    = argv[4];
 
   auto rate = reweight(input_ntp, output_ntp, tree);
 
   cout << "Total number of candidates: " << get<0>(rate) << endl;
-  cout << "Truth-matched candidates: " << get<1>(rate) << endl;
-  cout << "Truth-matched fraction: "
+  cout << "Hammer reweighted candidates: " << get<1>(rate) << endl;
+  cout << "Reweighted fraction: "
        << static_cast<float>(get<0>(rate)) / static_cast<float>(get<1>(rate))
        << endl;
 
