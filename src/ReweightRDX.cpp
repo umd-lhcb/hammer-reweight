@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 06:01 PM +0200
+// Last Change: Thu Aug 05, 2021 at 07:43 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -519,25 +519,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         auto part_B_idx = proc.addParticle(part_B);
         auto part_D_idx = proc.addParticle(part_D);
 
-        vector<size_t> part_D_daughters_idx{};
+        Hammer::ParticleIndices part_D_daughters_idx{};
         for (const auto part : part_D_daughters) {
           part_D_daughters_idx.push_back(proc.addParticle(part));
-        }
-
-        // Always add the primary leptons
-        auto part_L_idx   = proc.addParticle(part_L);
-        auto part_NuL_idx = proc.addParticle(part_NuL);
-
-        proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
-        proc.addVertex(part_D_idx, part_D_daughters_idx);
-
-        if (*is_tau) {
-          auto part_Mu_idx       = proc.addParticle(part_Mu);
-          auto part_TauNuMu_idx  = proc.addParticle(part_TauNuMu);
-          auto part_TauNuTau_idx = proc.addParticle(part_TauNuTau);
-
-          proc.addVertex(part_L_idx,
-                         {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
         }
 
 #ifdef FORCE_MOMENTUM_CONSERVATION
@@ -557,6 +541,22 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         part_D_daughters[part_D_daughters.size() - 1].setMomentum(part_D.p() -
                                                                   known_mom);
 #endif
+
+        // Always add the primary leptons
+        auto part_L_idx   = proc.addParticle(part_L);
+        auto part_NuL_idx = proc.addParticle(part_NuL);
+
+        proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
+        proc.addVertex(part_D_idx, part_D_daughters_idx);
+
+        if (*is_tau) {
+          auto part_Mu_idx       = proc.addParticle(part_Mu);
+          auto part_TauNuMu_idx  = proc.addParticle(part_TauNuMu);
+          auto part_TauNuTau_idx = proc.addParticle(part_TauNuTau);
+
+          proc.addVertex(part_L_idx,
+                         {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
+        }
 
         ham.initEvent();
         auto proc_id = ham.addProcess(proc);
@@ -588,11 +588,21 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
           cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
           cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
         }
+
+        cout << "B meson HAMMER ID: " << part_B_idx << endl;
+        cout << "D meson HAMMER ID: " << part_D_idx << endl;
+        cout << "D daughter HAMMER IDs:";
+        for (auto idx : part_D_daughters_idx) cout << "  " << idx;
+        cout << endl;
+        cout << "Lepton HAMMER ID: " << part_L_idx << endl;
+        cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
+
+        cout << "Hadronic part known momentum: " << print_p(known_mom) << endl;
 #endif
 
         if (proc_id != 0) {
-          ham_ok   = true;
-          w_ff_out = ham.getWeight("OutputFF");
+          ham_ok = true;
+          // w_ff_out = ham.getWeight("OutputFF");
           num_of_evt_ham_ok += 1;
         }
       }
