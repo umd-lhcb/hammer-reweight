@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 07:45 PM +0200
+// Last Change: Thu Aug 05, 2021 at 08:01 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -28,7 +28,7 @@ using namespace std;
 // Configurables //
 ///////////////////
 
-#define SILENT
+//#define SILENT
 #define FORCE_MOMENTUM_CONSERVATION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
@@ -499,8 +499,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
 
         auto b_id_fixed = B_id_fix(*b_id, D_cands[D_lbl]);
         auto part_B     = particle(*b_pe, *b_px, *b_py, *b_pz, b_id_fixed);
-        auto part_D     = particle(D_mom[D_lbl + "_PX"], D_mom[D_lbl + "_PY"],
-                               D_mom[D_lbl + "_PZ"], D_mom[D_lbl + "_PE"],
+        auto part_D     = particle(D_mom[D_lbl + "_PE"], D_mom[D_lbl + "_PX"],
+                               D_mom[D_lbl + "_PY"], D_mom[D_lbl + "_PZ"],
                                D_cands[D_lbl]);
         Hammer::Particle part_L, part_NuL, part_TauNuTau, part_TauNuMu, part_Mu;
         if (*is_tau)
@@ -541,6 +541,17 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         part_D_daughters[part_D_daughters.size() - 1].setMomentum(part_D.p() -
                                                                   known_mom);
 #endif
+        // Make sure invariant mass is non-negative
+        vector<Hammer::Particle> part_vec{part_B,       part_D,  part_L,
+                                          part_NuL,     part_Mu, part_TauNuMu,
+                                          part_TauNuTau};
+        vector<bool>             part_m2_ok{};
+        for (const auto p : part_vec) {
+          if (p.p().mass2() >= 0)
+            part_m2_ok.push_back(true);
+          else
+            part_m2_ok.push_back(false);
+        }
 
         // Always add the primary leptons
         auto part_L_idx   = proc.addParticle(part_L);
@@ -598,9 +609,15 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
 
         cout << "Hadronic part known momentum: " << print_p(known_mom) << endl;
+
+        cout << "Check if invariant mass2 of each particle is non-negative: "
+             << endl;
+        for (auto v : part_m2_ok) cout << "  " << v;
+        cout << endl;
 #endif
 
-        if (proc_id != 0) {
+        if (proc_id != 0 && find(part_m2_ok.begin(), part_m2_ok.end(), false) ==
+                                part_m2_ok.end()) {
           ham_ok = true;
           ham.processEvent();
           w_ff_out = ham.getWeight("OutputFF");
