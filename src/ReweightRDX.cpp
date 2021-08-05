@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 07:43 PM +0200
+// Last Change: Thu Aug 05, 2021 at 07:45 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -28,7 +28,7 @@ using namespace std;
 // Configurables //
 ///////////////////
 
-//#define SILENT
+#define SILENT
 #define FORCE_MOMENTUM_CONSERVATION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
@@ -602,7 +602,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
 
         if (proc_id != 0) {
           ham_ok = true;
-          // w_ff_out = ham.getWeight("OutputFF");
+          ham.processEvent();
+          w_ff_out = ham.getWeight("OutputFF");
           num_of_evt_ham_ok += 1;
         }
       }
