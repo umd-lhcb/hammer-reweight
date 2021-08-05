@@ -3,6 +3,5 @@ gen
 
 .lvimrc
 .DS_Store
-.virtualenv
 
 *.root
