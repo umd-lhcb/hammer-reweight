@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 04:42 AM +0200
+// Last Change: Thu Aug 05, 2021 at 05:02 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -112,7 +112,7 @@ Int_t digit_is(Int_t num, Int_t digit, Int_t base = 10) {
 
 TString print_p(const Hammer::FourMomentum& p) {
   char tmp[80];
-  sprintf(tmp, "%.3f, %.3f, %.3f, %.3f", p.E(), p.px(), p.py(), p.pz());
+  sprintf(tmp, "%.2f, %.2f, %.2f, %.2f", p.E(), p.px(), p.py(), p.pz());
   return TString(tmp);
 }
 
@@ -367,7 +367,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   output_tree->Branch("runNumber", &runNumber_out);
 
   Double_t w_ff_out;
-  output_tree->Branch("w_ff", w_ff_out);
+  output_tree->Branch("w_ff", &w_ff_out);
 
   Bool_t ham_ok;
   output_tree->Branch("flag_ham_ok", &ham_ok);
@@ -388,6 +388,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
     ham_ok   = false;
     w_ff_out = 1.;
 
+#if 0
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
         TMath::Abs(*mu_id) == 13) {
@@ -487,10 +488,10 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
           auto part_id   = D_daughter_id[part_name];
           if (part_id /* && is_hadron(part_id) */) {
             part_D_daughters.push_back(
-                particle(D_daughter_mom[part_name + "PE"],
-                         D_daughter_mom[part_name + "PX"],
-                         D_daughter_mom[part_name + "PY"],
-                         D_daughter_mom[part_name + "PZ"], part_id));
+                particle(D_daughter_mom[part_name + "_PE"],
+                         D_daughter_mom[part_name + "_PX"],
+                         D_daughter_mom[part_name + "_PY"],
+                         D_daughter_mom[part_name + "_PZ"], part_id));
           }
         }
 
@@ -579,10 +580,16 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         }
       }
     }
+#endif
+
+    eventNumber_out = *eventNumber;
+    runNumber_out   = *runNumber;
 
     output_tree->Fill();
     num_of_evt += 1;
   }
+
+  output_ntp->Write();
 
   // Cleanup ///////////////////////////////////////////////////////////////////
   delete output_tree;
