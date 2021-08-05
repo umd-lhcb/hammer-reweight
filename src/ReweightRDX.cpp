@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 05:06 PM +0200
+// Last Change: Thu Aug 05, 2021 at 05:22 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -32,6 +32,8 @@ using namespace std;
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
+const Double_t Q2_MIN = 100. * 100.;
+
 // clang-format off
 auto B_MESON = map<TString, TString>{
   {"TupleBminus/DecayTree", "b"},
@@ -40,28 +42,20 @@ auto B_MESON = map<TString, TString>{
 
 const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
 
-auto FF_SCHEME = map<Int_t, string>{
-  {413, "FF_Dst"},
-  {421, "FF_D"}
-};
-// clang-format on
-
-const Double_t Q2_MIN = 100. * 100.;
-
 void set_input_ff(Hammer::Hammer& ham) {
-  // clang-format off
   ham.setFFInputScheme({
     {"BD*", "ISGW2"},
     {"BD", "ISGW2"}
   });
-  // clang-format on
 }
 
 void set_output_ff(Hammer::Hammer& ham) {
-  ham.addFFScheme("FF_Dst", {{"BD*", "BGL"}});
-
-  ham.addFFScheme("FF_D", {{"BD", "BGL"}});
+  ham.addFFScheme("OutputFF", {
+      {"BD*", "BGL"},
+      {"BD", "BGL"}
+  });
 }
+// clang-format on
 
 void set_decays(Hammer::Hammer& ham) {
   ham.includeDecay("BD*TauNu");
@@ -580,7 +574,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
 
         if (proc_id != 0) {
           ham_ok   = true;
-          w_ff_out = ham.getWeight(FF_SCHEME[TMath::Abs(D_cands[D_lbl])]);
+          w_ff_out = ham.getWeight("OutputFF");
           num_of_evt_ham_ok += 1;
         }
       }
@@ -617,7 +611,7 @@ int main(int, char** argv) {
   cout << "Total number of candidates: " << get<0>(rate) << endl;
   cout << "Hammer reweighted candidates: " << get<1>(rate) << endl;
   cout << "Reweighted fraction: "
-       << static_cast<float>(get<0>(rate)) / static_cast<float>(get<1>(rate))
+       << static_cast<float>(get<1>(rate)) / static_cast<float>(get<0>(rate))
        << endl;
 
   delete input_ntp;
