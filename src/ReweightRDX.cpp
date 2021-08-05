@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 04:37 AM +0200
+// Last Change: Thu Aug 05, 2021 at 04:42 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -27,6 +27,8 @@ using namespace std;
 ///////////////////
 // Configurables //
 ///////////////////
+
+//#define SILENT
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -541,6 +543,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         ham.initEvent();
         auto proc_id = ham.addProcess(proc);
 
+#ifndef SILENT
         // Print debug info for first possibly legal candidate
         cout << "========" << endl;
         cout << "B meson ID: " << b_id_fixed << endl;
@@ -567,6 +570,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
           cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
           cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
         }
+#endif
 
         if (proc_id != 0) {
           ham_ok   = true;
