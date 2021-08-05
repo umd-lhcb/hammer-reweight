@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 08:24 PM +0200
+// Last Change: Thu Aug 05, 2021 at 08:29 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -372,11 +372,15 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   Bool_t ham_ok;
   output_tree->Branch("flag_ham_ok", &ham_ok);
 
+  Double_t q2_true_out;
+  output_tree->Branch("q2_true", &q2_true_out);
+
   unsigned long num_of_evt        = 0l;
   unsigned long num_of_evt_ham_ok = 0l;
   while (reader.Next()) {
-    ham_ok   = false;
-    w_ff_out = 1.;
+    ham_ok      = false;
+    w_ff_out    = 1.;
+    q2_true_out = *q2 / 1000 / 1000;
 
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
