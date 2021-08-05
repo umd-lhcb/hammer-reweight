@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 01:27 AM +0200
+// Last Change: Thu Aug 05, 2021 at 04:37 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -106,6 +106,12 @@ TString basename(string s) { return TString(split(s, '/').back()); }
 Int_t digit_is(Int_t num, Int_t digit, Int_t base = 10) {
   Int_t fac = num / TMath::Power(base, digit - 1);
   return fac % 10;
+}
+
+TString print_p(const Hammer::FourMomentum& p) {
+  char tmp[80];
+  sprintf(tmp, "%.3f, %.3f, %.3f, %.3f", p.E(), p.px(), p.py(), p.pz());
+  return TString(tmp);
 }
 
 /////////////////////////
@@ -489,9 +495,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         // HAMMER process
         Hammer::Process proc;
 
-        auto part_B = particle(*b_pe, *b_px, *b_py, *b_pz,
-                               B_id_fix(*b_id, D_cands[D_lbl]));
-        auto part_D = particle(D_mom[D_lbl + "_PX"], D_mom[D_lbl + "_PY"],
+        auto b_id_fixed = B_id_fix(*b_id, D_cands[D_lbl]);
+        auto part_B     = particle(*b_pe, *b_px, *b_py, *b_pz, b_id_fixed);
+        auto part_D     = particle(D_mom[D_lbl + "_PX"], D_mom[D_lbl + "_PY"],
                                D_mom[D_lbl + "_PZ"], D_mom[D_lbl + "_PE"],
                                D_cands[D_lbl]);
         Hammer::Particle part_L, part_NuL, part_TauNuTau, part_TauNuMu, part_Mu;
@@ -536,10 +542,31 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         auto proc_id = ham.addProcess(proc);
 
         // Print debug info for first possibly legal candidate
-        cout << "B meson ID: " << *b_id << endl;
+        cout << "========" << endl;
+        cout << "B meson ID: " << b_id_fixed << endl;
         cout << "D meson ID: " << D_cands[D_lbl] << endl;
         cout << "Is tau decay: " << *is_tau << endl;
         cout << "HAMMER process ID: " << proc_id << endl;
+        cout << "Current candidate index: " << num_of_evt << endl;
+
+        // More detailed debug messages
+        cout << "B meson 4-mom: " << print_p(part_B.p()) << endl;
+        cout << "D meson 4-mom: " << print_p(part_D.p()) << endl;
+        for (auto idx = 0; idx < part_D_daughters.size(); idx++) {
+          cout << "D daughter idx "s + idx + " 4-mom: "
+               << print_p(part_D_daughters[idx].p()) << endl;
+        }
+
+        if (*is_tau) {
+          cout << "Tau 4-mom: " << print_p(part_L.p()) << endl;
+          cout << "anti-TauNu 4-mom: " << print_p(part_NuL.p()) << endl;
+          cout << "TauNu 4-mom: " << print_p(part_TauNuTau.p()) << endl;
+          cout << "Mu 4-mom: " << print_p(part_Mu.p()) << endl;
+          cout << "anti-MuNu 4-mom: " << print_p(part_TauNuMu.p()) << endl;
+        } else {
+          cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
+          cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
+        }
 
         if (proc_id != 0) {
           ham_ok   = true;
