@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 08:01 PM +0200
+// Last Change: Thu Aug 05, 2021 at 08:24 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -28,7 +28,7 @@ using namespace std;
 // Configurables //
 ///////////////////
 
-//#define SILENT
+#define SILENT
 #define FORCE_MOMENTUM_CONSERVATION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
@@ -175,7 +175,8 @@ auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
 
 typedef pair<unsigned long, unsigned long> RwRate;
 
-RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
+RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
+                Hammer::Hammer& ham) {
   if (B_MESON.find(tree) == B_MESON.end()) return RwRate{0, 0};
   TString b_meson = B_MESON[tree];
 
@@ -370,16 +371,6 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
 
   Bool_t ham_ok;
   output_tree->Branch("flag_ham_ok", &ham_ok);
-
-  // Setup HAMMER //////////////////////////////////////////////////////////////
-  Hammer::Hammer ham{};
-
-  set_decays(ham);
-  set_input_ff(ham);
-  set_output_ff(ham);
-
-  ham.setUnits("MeV");
-  ham.initRun();
 
   unsigned long num_of_evt        = 0l;
   unsigned long num_of_evt_ham_ok = 0l;
@@ -651,7 +642,16 @@ int main(int, char** argv) {
   auto    output_ntp = new TFile(argv[2], "recreate");
   TString tree       = argv[3];
 
-  auto rate = reweight(input_ntp, output_ntp, tree);
+  Hammer::Hammer ham{};
+
+  set_decays(ham);
+  set_input_ff(ham);
+  set_output_ff(ham);
+
+  ham.setUnits("MeV");
+  ham.initRun();
+
+  auto rate = reweight(input_ntp, output_ntp, tree, ham);
 
   cout << "Total number of candidates: " << get<0>(rate) << endl;
   cout << "Hammer reweighted candidates: " << get<1>(rate) << endl;
