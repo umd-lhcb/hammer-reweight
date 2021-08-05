@@ -15,12 +15,14 @@ clean:
 	@rm -rf ./bin/*
 	@rm -rf ./gen/*
 
+
 #########
 # Tools #
 #########
 
 PrintMCDecay: PrintMCDecay.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) -lEG
+
 
 ###############
 # Sample plot #
