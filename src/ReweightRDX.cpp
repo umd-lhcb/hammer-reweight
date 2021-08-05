@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 05:22 PM +0200
+// Last Change: Thu Aug 05, 2021 at 06:01 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -29,6 +29,7 @@ using namespace std;
 ///////////////////
 
 //#define SILENT
+#define FORCE_MOMENTUM_CONSERVATION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -386,7 +387,6 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
     ham_ok   = false;
     w_ff_out = 1.;
 
-#if 1
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
         TMath::Abs(*mu_id) == 13) {
@@ -540,6 +540,24 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
                          {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
         }
 
+#ifdef FORCE_MOMENTUM_CONSERVATION
+        // Leptonic part
+        part_L.setMomentum(part_B.p() - part_D.p() - part_NuL.p());
+
+        if (*is_tau)
+          part_Mu.setMomentum(part_L.p() - part_TauNuMu.p() -
+                              part_TauNuTau.p());
+
+        // Hadronic part
+        Hammer::FourMomentum known_mom{0, 0, 0, 0};
+        for (auto idx = 0; idx < part_D_daughters.size() - 1; idx++) {
+          known_mom += part_D_daughters[idx].p();
+        }
+
+        part_D_daughters[part_D_daughters.size() - 1].setMomentum(part_D.p() -
+                                                                  known_mom);
+#endif
+
         ham.initEvent();
         auto proc_id = ham.addProcess(proc);
 
@@ -579,7 +597,6 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         }
       }
     }
-#endif
 
     eventNumber_out = *eventNumber;
     runNumber_out   = *runNumber;
