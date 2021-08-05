@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 05:02 AM +0200
+// Last Change: Thu Aug 05, 2021 at 05:06 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -58,13 +58,17 @@ void set_input_ff(Hammer::Hammer& ham) {
 }
 
 void set_output_ff(Hammer::Hammer& ham) {
+  ham.addFFScheme("FF_Dst", {{"BD*", "BGL"}});
+
+  ham.addFFScheme("FF_D", {{"BD", "BGL"}});
+}
+
+void set_decays(Hammer::Hammer& ham) {
   ham.includeDecay("BD*TauNu");
   ham.includeDecay("BD*MuNu");
-  ham.addFFScheme("FF_Dst", {{"BD*", "BGL"}});
 
   ham.includeDecay("BDTauNu");
   ham.includeDecay("BDMuNu");
-  ham.addFFScheme("FF_D", {{"BD", "BGL"}});
 }
 
 /////////////////////
@@ -375,11 +379,11 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   // Setup HAMMER //////////////////////////////////////////////////////////////
   Hammer::Hammer ham{};
 
-  ham.setUnits("MeV");
-
+  set_decays(ham);
   set_input_ff(ham);
   set_output_ff(ham);
 
+  ham.setUnits("MeV");
   ham.initRun();
 
   unsigned long num_of_evt        = 0l;
@@ -388,7 +392,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
     ham_ok   = false;
     w_ff_out = 1.;
 
-#if 0
+#if 1
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
         TMath::Abs(*mu_id) == 13) {
@@ -486,7 +490,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         for (auto suffix : vector<TString>{"_GD0", "_GD1", "_GD2"}) {
           auto part_name = D_lbl + suffix;
           auto part_id   = D_daughter_id[part_name];
-          if (part_id /* && is_hadron(part_id) */) {
+          if (is_hadron(part_id)) {  // Remove photons otherwise HAMMER get
+                                     // stuck for unknown reason
             part_D_daughters.push_back(
                 particle(D_daughter_mom[part_name + "_PE"],
                          D_daughter_mom[part_name + "_PX"],
@@ -529,7 +534,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
         auto part_L_idx   = proc.addParticle(part_L);
         auto part_NuL_idx = proc.addParticle(part_NuL);
 
-        proc.addVertex(part_B_idx, {part_D_idx, part_L_idx});
+        proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
         proc.addVertex(part_D_idx, part_D_daughters_idx);
 
         if (*is_tau) {
@@ -592,6 +597,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree) {
   output_ntp->Write();
 
   // Cleanup ///////////////////////////////////////////////////////////////////
+  cout << "Cleanups" << endl;
   delete output_tree;
 
   return RwRate{num_of_evt, num_of_evt_ham_ok};
