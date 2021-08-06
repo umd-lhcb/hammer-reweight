@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 05, 2021 at 08:29 PM +0200
+// Last Change: Fri Aug 06, 2021 at 07:30 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -29,7 +29,7 @@ using namespace std;
 ///////////////////
 
 #define SILENT
-#define FORCE_MOMENTUM_CONSERVATION
+// #define FORCE_MOMENTUM_CONSERVATION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -479,8 +479,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         for (auto suffix : vector<TString>{"_GD0", "_GD1", "_GD2"}) {
           auto part_name = D_lbl + suffix;
           auto part_id   = D_daughter_id[part_name];
-          if (is_hadron(part_id)) {  // Remove photons otherwise HAMMER get
-                                     // stuck for unknown reason
+          if (part_id != 0) {
             part_D_daughters.push_back(
                 particle(D_daughter_mom[part_name + "_PE"],
                          D_daughter_mom[part_name + "_PX"],
