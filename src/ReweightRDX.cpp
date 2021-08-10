@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 06, 2021 at 07:30 PM +0200
+// Last Change: Tue Aug 10, 2021 at 08:15 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -29,7 +29,8 @@ using namespace std;
 ///////////////////
 
 #define SILENT
-// #define FORCE_MOMENTUM_CONSERVATION
+#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
+// #define FORCE_MOMENTUM_CONSERVATION_HADRONIC
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -518,15 +519,15 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           part_D_daughters_idx.push_back(proc.addParticle(part));
         }
 
-#ifdef FORCE_MOMENTUM_CONSERVATION
-        // Leptonic part
+#ifdef FORCE_MOMENTUM_CONSERVATION_LEPTONIC
         part_L.setMomentum(part_B.p() - part_D.p() - part_NuL.p());
 
         if (*is_tau)
           part_Mu.setMomentum(part_L.p() - part_TauNuMu.p() -
                               part_TauNuTau.p());
+#endif
 
-        // Hadronic part
+#ifdef FORCE_MOMENTUM_CONSERVATION_HADRONIC
         Hammer::FourMomentum known_mom{0, 0, 0, 0};
         for (auto idx = 0; idx < part_D_daughters.size() - 1; idx++) {
           known_mom += part_D_daughters[idx].p();
@@ -535,6 +536,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         part_D_daughters[part_D_daughters.size() - 1].setMomentum(part_D.p() -
                                                                   known_mom);
 #endif
+
         // Make sure invariant mass is non-negative
         vector<Hammer::Particle> part_vec{part_B,       part_D,  part_L,
                                           part_NuL,     part_Mu, part_TauNuMu,
