@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Aug 11, 2021 at 04:30 PM +0200
+// Last Change: Wed Aug 11, 2021 at 04:43 PM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -47,7 +47,7 @@ const auto DECAY_NAMES = vector<string_view>{
 };
 // clang-format on
 
-const Double_t Q2_MIN = 100. * 100.;
+const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
 
 /////////////
 // Helpers //
@@ -64,6 +64,13 @@ multimap<B, A> flip_map(const map<A, B>& src) {
   transform(src.begin(), src.end(), inserter(dst, dst.begin()),
             flip_pair<A, B>);
   return dst;
+}
+
+template <template <typename, typename> class Iterable, typename T,
+          typename Allocator>
+Bool_t find_in(Iterable<T, Allocator> iter, T elem) {
+  if (find(iter.begin(), iter.end(), elem) != iter.end()) return true;
+  return false;
 }
 
 string get_particle_name(Int_t id, TDatabasePDG* db) {
@@ -136,7 +143,10 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   unsigned long num_of_evt           = 0l;
   unsigned long num_of_evt_w_b_meson = 0l;
   while (reader.Next()) {
-    if (TMath::Abs(*b_id) == 511 && *q2 > Q2_MIN) {
+    double q2_min = 100 * 100;
+    if (*is_tau) q2_min = 1700 * 1700;
+
+    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min) {
       auto key = vector<Int_t>{};
       key.push_back(*is_tau);
       key.push_back(TMath::Abs(*b_id));
