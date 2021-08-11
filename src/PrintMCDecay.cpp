@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Aug 04, 2021 at 04:30 PM +0200
+// Last Change: Wed Aug 11, 2021 at 04:30 PM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -88,7 +88,8 @@ void print_decay_freq(DecayFreq freq, TDatabasePDG* db) {
   for (auto const& [val, key] : boost::adaptors::reverse(sorted)) {
     cout << "======" << endl;
     cout << "The following decay has " << val << " candidates." << endl;
-    for (auto idx = 0; idx < key.size(); idx++) {
+    cout << "Is Tau decay: " << key[0] << endl;
+    for (auto idx = 1; idx < key.size(); idx++) {
       if (key[idx]) {
         cout << DECAY_NAMES[idx] << get_particle_name(key[idx], db) << endl;
       }
@@ -106,6 +107,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   // B meson truth info
   TTreeReaderValue<Int_t>    b_id(reader, b_meson + "_TRUEID");
   TTreeReaderValue<Double_t> q2(reader, b_meson + "_True_Q2");
+  TTreeReaderValue<Bool_t>   is_tau(reader, b_meson + "_True_IsTauDecay");
 
   TTreeReaderValue<Int_t> d_idx0_id(reader, b_meson + "_TrueHadron_D0_ID");
   TTreeReaderValue<Int_t> d_idx0_gd0_id(reader,
@@ -136,6 +138,7 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
   while (reader.Next()) {
     if (TMath::Abs(*b_id) == 511 && *q2 > Q2_MIN) {
       auto key = vector<Int_t>{};
+      key.push_back(*is_tau);
       key.push_back(TMath::Abs(*b_id));
       key.push_back(TMath::Abs(*d_idx0_id));
       key.push_back(TMath::Abs(*d_idx0_gd0_id));
