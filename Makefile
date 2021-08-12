@@ -41,9 +41,9 @@ sample-plots: \
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
 # Weight ntuples
-rdx-run1-%-reweighted.root: samples/rdx-run1-%.root
+rdx-run1-%-reweighted.root: samples/rdx-run1-%.root ReweightRDX
 	@./bin/ReweightRDX $< gen/$@ TupleB0/DecayTree
 
 # True q2 plots
 %_q2_true.png: gen/%-reweighted.root
-	@./utils/plot_ratio.py -d $< -t TupleB0/DecayTree
+	@./utils/plot_ratio.py -n $< -t TupleB0/DecayTree
