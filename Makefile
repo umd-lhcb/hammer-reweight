@@ -1,5 +1,5 @@
 BINPATH	:=	bin
-VPATH	:=	utils:src:validation:$(BINPATH)
+VPATH	:=	gen:utils:src:$(BINPATH)
 
 # Compiler settings
 COMPILER	:=	$(shell root-config --cxx)
@@ -28,31 +28,8 @@ PrintMCDecay: PrintMCDecay.cpp
 # Sample plot #
 ###############
 
-sample-plots: gen/el_true.png gen/q2_true.png gen/mm2_true.png
-
-gen/el_true.png gen/q2_true.png gen/mm2_true.png &: \
-	samples/rdst-run1.root \
-	gen/rdst-run1-ff_w.root \
-	plot_ratio.py
-	$(word 3, $^) -d $< -w $(word 2, $^) -t dst_iso -T mc_dst_tau_ff_w
-
-gen/rdst-run1-ff_w.root: \
-	samples/rdst-run1.root \
-	rdx-run1-sample
-	$(word 2, $^) $< $@
-
-
-##############
-# Validation #
-##############
-
-validation-plots: gen/validate_ff.png
-
-gen/validate_ff.png: \
-	samples/rdst-run1.root \
-	gen/rdst-run1-ff_w.root \
-	validate_ff_calc.v
-	$(word 3, $^) $< $(word 2, $^) gen
+sample-plots: \
+	rdx-run1-Bd2DstMuNu_q2_true.png
 
 
 ####################
@@ -63,6 +40,10 @@ gen/validate_ff.png: \
 %: %.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
-# Validation scripts
-%.v: %.cpp
-	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(VALLINKFLAGS)
+# Weight ntuples
+rdx-run1-%-reweighted.root: samples/rdx-run1-%.root
+	@./bin/ReweightRDX $< gen/$@ TupleB0/DecayTree
+
+# True q2 plots
+%_q2_true.png: gen/%-reweighted.root
+	@./utils/plot_ratio.py -d $< -t TupleB0/DecayTree
