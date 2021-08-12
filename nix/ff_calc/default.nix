@@ -4,7 +4,7 @@ stdenv.mkDerivation rec {
   pname = "ff_calc";
   version = "1.2";
 
-  src = builtins.path { path = ./../../validation/ff_calc; name = pname; };
+  src = builtins.path { path = ./.; name = pname; };
 
   postInstall = ''
     cp -r ${src}/inc $out/include
