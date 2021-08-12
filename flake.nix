@@ -17,6 +17,8 @@
           inherit system;
           overlays = [ root-curated.overlay self.overlay ];
         };
+        python = pkgs.python3;
+        pythonPackages = python.pkgs;
       in
       rec {
         packages = flake-utils.lib.flattenTree {
@@ -24,13 +26,20 @@
         };
         devShell = pkgs.mkShell {
           name = "hammer-reweight";
-          buildInputs = with pkgs; [
+          buildInputs = (with pkgs; with pythonPackages; [
+            # Dev tools
+            clang-tools
+
             root
             hammer-phys
-            ff_calc
-            python3
-            clang-tools
-          ];
+            #ff_calc
+
+            # Python stack
+            python
+            jedi
+            flake8
+            pylint
+          ]);
 
           shellHook = ''
             export PATH=$(pwd)/bin:$(pwd)/utils:$PATH
