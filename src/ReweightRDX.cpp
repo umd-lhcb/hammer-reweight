@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 12, 2021 at 08:42 PM +0200
+// Last Change: Fri Aug 13, 2021 at 12:47 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -9,6 +9,8 @@
 #include <tuple>
 #include <utility>
 #include <vector>
+
+#include <math.h>
 
 #include <TFile.h>
 #include <TMath.h>
@@ -626,8 +628,12 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                                 part_m2_ok.end()) {
           ham_ok = true;
           ham.processEvent();
-          w_ff_out = ham.getWeight("OutputFF");
-          num_of_evt_ham_ok += 1;
+          auto ff_out = ham.getWeight("OutputFF");
+
+          if (!isnan(ff_out) && !isinf(ff_out)) {
+            w_ff_out = ff_out;
+            num_of_evt_ham_ok += 1;
+          }
         }
       }
     }
