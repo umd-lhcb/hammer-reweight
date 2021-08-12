@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 12, 2021 at 08:15 PM +0200
+// Last Change: Thu Aug 12, 2021 at 08:42 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -569,8 +569,14 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                          {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
         }
 
-        ham.initEvent();
-        auto proc_id = ham.addProcess(proc);
+        int proc_id;
+        // Prevent illegal kinematics from breaking the loop
+        try {
+          ham.initEvent();
+          proc_id = ham.addProcess(proc);
+        } catch (...) {
+          proc_id = 0;
+        }
 
 #ifndef SILENT
         // Print debug info
