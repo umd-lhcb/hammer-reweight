@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 10, 2021 at 08:15 PM +0200
+// Last Change: Thu Aug 12, 2021 at 08:15 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -33,8 +33,6 @@ using namespace std;
 // #define FORCE_MOMENTUM_CONSERVATION_HADRONIC
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
-
-const Double_t Q2_MIN = 100. * 100.;
 
 // clang-format off
 auto B_MESON = map<TString, TString>{
@@ -378,13 +376,19 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
   unsigned long num_of_evt        = 0l;
   unsigned long num_of_evt_ham_ok = 0l;
+  double        q2_min            = 0;
   while (reader.Next()) {
     ham_ok      = false;
     w_ff_out    = 1.;
     q2_true_out = *q2 / 1000 / 1000;
 
+    if (*is_tau)
+      q2_min = 1700 * 1700;
+    else
+      q2_min = 100 * 100;
+
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
-    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > Q2_MIN &&
+    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min &&
         TMath::Abs(*mu_id) == 13) {
       // Check if we have a legal D meson
       // clang-format off
@@ -569,7 +573,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         auto proc_id = ham.addProcess(proc);
 
 #ifndef SILENT
-        // Print debug info for first possibly legal candidate
+        // Print debug info
         cout << "========" << endl;
         cout << "B meson ID: " << b_id_fixed << endl;
         cout << "D meson ID: " << D_cands[D_lbl] << endl;
