@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 13, 2021 at 03:16 PM +0200
+// Last Change: Fri Aug 13, 2021 at 03:25 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -64,7 +64,7 @@ void set_input_ff(Hammer::Hammer& ham, TString run) {
 
     // 12573001, 12573012
     // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
-    ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38}");  // HQET3
+    ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET3
     // 11574011, 11574021
     // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
     ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
@@ -77,10 +77,10 @@ void set_output_ff(Hammer::Hammer& ham) {
   ham.addFFScheme("OutputFF", {
       {"BD", "BGL"},
       {"BD*", "BGL"},
-      //{"BD**0*", "BLR"},
-      //{"BD**1", "BLR"},
-      //{"BD**1*", "BLR"},
-      //{"BD**2*", "BLR"}
+      {"BD**0*", "BLR"},
+      {"BD**1", "BLR"},
+      {"BD**1*", "BLR"},
+      {"BD**2*", "BLR"}
   });
 }
 // clang-format on
