@@ -5,9 +5,11 @@
     root-curated.url = "github:umd-lhcb/root-curated";
     nixpkgs.follows = "root-curated/nixpkgs";
     flake-utils.follows = "root-curated/flake-utils";
+
+    pyTuplingUtils.url = "github:umd-lhcb/pyTuplingUtils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, root-curated }:
+  outputs = { self, nixpkgs, flake-utils, root-curated, pyTuplingUtils }:
     {
       overlay = import ./nix/overlay.nix;
     } //
@@ -15,7 +17,8 @@
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ root-curated.overlay self.overlay ];
+          config = { allowUnfree = true; };
+          overlays = [ root-curated.overlay self.overlay pyTuplingUtils.overlay ];
         };
         python = pkgs.python3;
         pythonPackages = python.pkgs;
@@ -39,7 +42,14 @@
             jedi
             flake8
             pylint
+            pythonPackages.pyTuplingUtils
           ]);
+
+          FONTCONFIG_FILE = pkgs.makeFontsConf {
+            fontDirectories = with pkgs; [
+              corefonts
+            ];
+          };
 
           shellHook = ''
             export PATH=$(pwd)/bin:$(pwd)/utils:$PATH

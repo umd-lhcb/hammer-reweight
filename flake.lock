@@ -15,6 +15,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1623875721,
+        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1625223284,
@@ -30,6 +45,49 @@
         "type": "indirect"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1625223284,
+        "narHash": "sha256-jjLcDSU1rRiJb+n3uez23XAa7kbnPcGZTa6jIKh1GMQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "357d2c8f6087685fe35cb1889a005a4dd4cce7b8",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixpkgs-unstable",
+        "type": "indirect"
+      }
+    },
+    "pyTuplingUtils": {
+      "inputs": {
+        "flake-utils": [
+          "pyTuplingUtils",
+          "root-curated",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "pyTuplingUtils",
+          "root-curated",
+          "nixpkgs"
+        ],
+        "root-curated": "root-curated"
+      },
+      "locked": {
+        "lastModified": 1628812350,
+        "narHash": "sha256-qLHSXUdD5qV2WGY1c3RVa/C2ltG7QIHZjETcbEDfUAQ=",
+        "owner": "umd-lhcb",
+        "repo": "pyTuplingUtils",
+        "rev": "9ee0d6b2e0a2139a4321f7f6d7c0818946081112",
+        "type": "github"
+      },
+      "original": {
+        "owner": "umd-lhcb",
+        "repo": "pyTuplingUtils",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": [
@@ -40,7 +98,8 @@
           "root-curated",
           "nixpkgs"
         ],
-        "root-curated": "root-curated"
+        "pyTuplingUtils": "pyTuplingUtils",
+        "root-curated": "root-curated_2"
       }
     },
     "root-curated": {
@@ -49,11 +108,30 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1627001006,
-        "narHash": "sha256-NzKHuxsvOUY31zLMVS2eX4yitPeslLTX7lqyeLki42k=",
+        "lastModified": 1627575829,
+        "narHash": "sha256-iOY1PMF4Ybhh7qRgYlzDGKgNvYAaZZ/N0USKTjZj0QI=",
         "owner": "umd-lhcb",
         "repo": "root-curated",
-        "rev": "929af7939fa65222f60e89868b76e668c59a2160",
+        "rev": "9d76d72ae07a7f69c1a50ba18477ce0bdc69084b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "umd-lhcb",
+        "repo": "root-curated",
+        "type": "github"
+      }
+    },
+    "root-curated_2": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1627575829,
+        "narHash": "sha256-iOY1PMF4Ybhh7qRgYlzDGKgNvYAaZZ/N0USKTjZj0QI=",
+        "owner": "umd-lhcb",
+        "repo": "root-curated",
+        "rev": "9d76d72ae07a7f69c1a50ba18477ce0bdc69084b",
         "type": "github"
       },
       "original": {
