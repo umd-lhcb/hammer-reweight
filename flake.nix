@@ -38,10 +38,6 @@
             #ff_calc
 
             # Python stack
-            python
-            jedi
-            flake8
-            pylint
             pythonPackages.pyTuplingUtils
           ]);
 
