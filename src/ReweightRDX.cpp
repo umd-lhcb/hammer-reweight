@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 13, 2021 at 03:50 PM +0200
+// Last Change: Fri Aug 13, 2021 at 03:51 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -47,7 +47,7 @@ const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
 void set_input_ff(Hammer::Hammer& ham, TString run) {
   if (run == "run1") {
     ham.setFFInputScheme({
-      {"BD", "ISGW2"},
+      {"BD", "ISGW2"},  // 12573010
       {"BD*", "ISGW2"}  // 11574010
       // for run 1, B -> D*MuNu is modelled w/ HQET, which is not implemented in HAMMER
     });
