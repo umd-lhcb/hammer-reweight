@@ -53,10 +53,10 @@ sample-plots: \
 
 # Weight ntuples
 gen/rdx-run1-%-reweighted.root: samples/rdx-run1-%.root ReweightRDX
-	./bin/ReweightRDX $< $@ TupleB0/DecayTree
+	./bin/ReweightRDX $< $@ TupleB0/DecayTree run1
 
 gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
-	./bin/ReweightRDX $< $@ TupleB0/DecayTree
+	./bin/ReweightRDX $< $@ TupleB0/DecayTree run2
 
 # True q2 plots
 gen/%_q2_true.png: gen/%-reweighted.root

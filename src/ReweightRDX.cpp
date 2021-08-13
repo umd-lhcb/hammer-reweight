@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 13, 2021 at 02:24 AM +0200
+// Last Change: Fri Aug 13, 2021 at 03:16 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -44,27 +44,63 @@ auto B_MESON = map<TString, TString>{
 
 const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
 
-void set_input_ff(Hammer::Hammer& ham) {
-  ham.setFFInputScheme({
-    {"BD*", "ISGW2"},
-    {"BD", "ISGW2"}
-  });
+void set_input_ff(Hammer::Hammer& ham, TString run) {
+  if (run == "run1") {
+    ham.setFFInputScheme({
+      {"BD", "CLN_1"},
+      {"BD*", "ISGW2"}  // 11574010
+      // for run 1, B -> D*MuNu is modelled w/ HQET, which is not implemented in HAMMER
+    });
+
+  } else if (run == "run2") {
+    ham.setFFInputScheme({
+      {"BD", "CLN_1"},
+      {"BD*", "CLN_2"},
+      {"BD**0*", "ISGW2"},
+      {"BD**1", "ISGW2"},
+      {"BD**1*", "ISGW2"},
+      {"BD**2*", "ISGW2"}
+    });
+
+    // 12573001, 12573012
+    // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
+    ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38}");  // HQET3
+    // 11574011, 11574021
+    // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
+    ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
+    // 11874440
+    // ISGW2, which has no configurable parameter
+  }
 }
 
 void set_output_ff(Hammer::Hammer& ham) {
   ham.addFFScheme("OutputFF", {
+      {"BD", "BGL"},
       {"BD*", "BGL"},
-      {"BD", "BGL"}
+      //{"BD**0*", "BLR"},
+      //{"BD**1", "BLR"},
+      //{"BD**1*", "BLR"},
+      //{"BD**2*", "BLR"}
   });
 }
 // clang-format on
 
 void set_decays(Hammer::Hammer& ham) {
+  ham.includeDecay("BDTauNu");
+  ham.includeDecay("BDMuNu");
+
   ham.includeDecay("BD*TauNu");
   ham.includeDecay("BD*MuNu");
 
-  ham.includeDecay("BDTauNu");
-  ham.includeDecay("BDMuNu");
+  ham.includeDecay("BD**0*TauNu");
+  ham.includeDecay("BD**1TauNu");
+  ham.includeDecay("BD**1*TauNu");
+  ham.includeDecay("BD**2*TauNu");
+
+  ham.includeDecay("BD**0*MuNu");
+  ham.includeDecay("BD**1MuNu");
+  ham.includeDecay("BD**1*MuNu");
+  ham.includeDecay("BD**2*MuNu");
 }
 
 /////////////////////
@@ -662,11 +698,12 @@ int main(int, char** argv) {
   auto    input_ntp  = new TFile(argv[1], "read");
   auto    output_ntp = new TFile(argv[2], "recreate");
   TString tree       = argv[3];
+  TString run        = argv[4];
 
   Hammer::Hammer ham{};
 
   set_decays(ham);
-  set_input_ff(ham);
+  set_input_ff(ham, run);
   set_output_ff(ham);
 
   ham.setUnits("MeV");
