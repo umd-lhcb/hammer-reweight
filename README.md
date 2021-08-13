@@ -37,18 +37,18 @@ Truth-matched fraction: 0.978944
 ======
 The following decay has 23314 candidates.
 Is Tau decay: 0
-First daughter ID: B0 (511)
-  First G-daughter ID: D*+ (413)
-  Second G-daughter ID: D0 (421)
-  Third G-daughter ID: pi+ (211)
+B meson ID: B0 (511)
+First daughter ID: D*+ (413)
+  First G-daughter ID: D0 (421)
+  Second G-daughter ID: pi+ (211)
 ======
 The following decay has 25 candidates.
 Is Tau decay: 0
-First daughter ID: B0 (511)
-  First G-daughter ID: D*+ (413)
-  Second G-daughter ID: D0 (421)
-  Third G-daughter ID: pi+ (211)
-Second daughter meson ID: gamma (22)
+B meson ID: B0 (511)
+First daughter ID: D*+ (413)
+  First G-daughter ID: D0 (421)
+  Second G-daughter ID: pi+ (211)
+  Third G-daughter ID: gamma (22)
 ```
 
 Note that all particle IDs are taken to be absolute value so they may be unphysical.
