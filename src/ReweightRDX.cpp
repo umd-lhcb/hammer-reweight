@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 13, 2021 at 12:47 AM +0200
+// Last Change: Fri Aug 13, 2021 at 02:24 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -626,13 +626,13 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
         if (proc_id != 0 && find(part_m2_ok.begin(), part_m2_ok.end(), false) ==
                                 part_m2_ok.end()) {
-          ham_ok = true;
           ham.processEvent();
           auto ff_out = ham.getWeight("OutputFF");
 
           if (!isnan(ff_out) && !isinf(ff_out)) {
             w_ff_out = ff_out;
             num_of_evt_ham_ok += 1;
+            ham_ok = true;
           }
         }
       }
