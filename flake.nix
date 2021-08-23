@@ -35,7 +35,7 @@
 
             root
             hammer-phys
-            #ff_calc
+            ff_calc
 
             # Python stack
             pythonPackages.pyTuplingUtils
