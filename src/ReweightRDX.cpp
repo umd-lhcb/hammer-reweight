@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 24, 2021 at 03:12 PM +0200
+// Last Change: Tue Aug 24, 2021 at 07:04 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -406,7 +406,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   output_tree->Branch("w_ff", &w_ff_out);
 
   Bool_t ham_ok;
-  output_tree->Branch("flag_ham_ok", &ham_ok);
+  output_tree->Branch("ham_ok", &ham_ok);
 
   Double_t q2_true_out;
   output_tree->Branch("q2_true", &q2_true_out);

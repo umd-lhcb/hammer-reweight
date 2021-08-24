@@ -69,6 +69,6 @@ gen/%_q2_true.png: gen/%-reweighted.root
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
 		-YL "Normalized" \
 		-l Original Reweighted \
-		--cuts "flag_ham_ok" "flag_ham_ok" \
+		--cuts "ham_ok" "ham_ok" \
 		--weights "None" "w_ff" \
 		--normalize --debug
