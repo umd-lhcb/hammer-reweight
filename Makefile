@@ -29,7 +29,7 @@ PrintMCDecay: PrintMCDecay.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) -lEG
 
 ValidateRDX: ValidateRDX.cpp
-	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS) -lff_dstaunu
 
 
 ###############
@@ -60,6 +60,10 @@ gen/rdx-run1-%-reweighted.root: samples/rdx-run1-%.root ReweightRDX
 
 gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
 	./bin/ReweightRDX $< $@ TupleB0/DecayTree run2
+
+# Validation ntuples
+gen/rdx-run2-Bd2DstTauNu-validation.root: samples/rdx-run2-Bd2DstTauNu.root ValidateRDX
+	./bin/ValidateRDX $< $@ TupleB0/DecayTree run2
 
 # True q2 plots
 gen/%_q2_true.png: gen/%-reweighted.root
