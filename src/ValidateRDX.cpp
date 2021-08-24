@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 24, 2021 at 03:11 PM +0200
+// Last Change: Tue Aug 24, 2021 at 03:55 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -152,11 +152,47 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
   Double_t ff_out;
   output_tree->Branch("w_ff", &ff_out);
 
+  Int_t b_id_out;
+  output_tree->Branch("b_id", &b_id_out);
+  Int_t d_id_out;
+  output_tree->Branch("d_id", &d_id_out);
+
+  Double_t b_pe_out;
+  output_tree->Branch("b_pe", &b_pe_out);
+  Double_t b_px_out;
+  output_tree->Branch("b_px", &b_px_out);
+  Double_t b_py_out;
+  output_tree->Branch("b_py", &b_py_out);
+  Double_t b_pz_out;
+  output_tree->Branch("b_pz", &b_pz_out);
+
+  Double_t d_pe_out;
+  output_tree->Branch("d_pe", &d_pe_out);
+  Double_t d_px_out;
+  output_tree->Branch("d_px", &d_px_out);
+  Double_t d_py_out;
+  output_tree->Branch("d_py", &d_py_out);
+  Double_t d_pz_out;
+  output_tree->Branch("d_pz", &d_pz_out);
+
   for (auto& cand : cands) {
     Hammer::Process proc;
 
     auto q2 = cand[-1].E();
     q2_out  = q2;
+
+    b_id_out = B_key;
+    d_id_out = D_key;
+
+    b_pe_out = cand[B_key].E();
+    b_px_out = cand[B_key].px();
+    b_py_out = cand[B_key].py();
+    b_pz_out = cand[B_key].pz();
+
+    d_pe_out = cand[D_key].E();
+    d_px_out = cand[D_key].px();
+    d_py_out = cand[D_key].py();
+    d_pz_out = cand[D_key].pz();
 
     auto part_B     = particle(cand[B_key], B_key);
     auto part_B_idx = proc.addParticle(part_B);
