@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 13, 2021 at 03:51 PM +0200
+// Last Change: Tue Aug 24, 2021 at 03:12 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -22,7 +22,6 @@
 #include <Hammer/Math/FourMomentum.hh>
 #include <Hammer/Particle.hh>
 #include <Hammer/Process.hh>
-#include <Hammer/Tools/HammerRoot.hh>
 
 using namespace std;
 

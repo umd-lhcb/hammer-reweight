@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 24, 2021 at 03:10 PM +0200
+// Last Change: Tue Aug 24, 2021 at 03:11 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -17,13 +17,11 @@
 #include <TRandom.h>
 #include <TString.h>
 #include <TTree.h>
-#include <TTreeReader.h>
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
 #include <Hammer/Particle.hh>
 #include <Hammer/Process.hh>
-#include <Hammer/Tools/HammerRoot.hh>
 
 using namespace std;
 
