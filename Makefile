@@ -28,6 +28,9 @@ clean:
 PrintMCDecay: PrintMCDecay.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) -lEG
 
+ValidateRDX: ValidateRDX.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
+
 
 ###############
 # Sample plot #
