@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 24, 2021 at 03:55 PM +0200
+// Last Change: Tue Aug 24, 2021 at 05:02 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -84,23 +84,31 @@ auto gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 
   auto fact_neg = B_mass * B_mass - D_mass * D_mass;
   auto fact_pos = B_mass * B_mass + D_mass * D_mass;
-  auto pz_rest =
+  auto D_p_mag =
       TMath::Sqrt(1 / (4 * B_mass) *
                   (TMath::Power(fact_neg, 2) + q2 * q2 - 2 * q2 * fact_pos));
+  auto D_theta = rng.Uniform(0.3, 6.2);
+  auto D_phi   = rng.Uniform(0.3, 3.1);
 
-  auto D_p_rest = Hammer::FourMomentum(
-      TMath::Sqrt(pz_rest * pz_rest + D_mass * D_mass), 0, 0, pz_rest);
+  auto D_p_rest =
+      Hammer::FourMomentum(TMath::Sqrt(D_p_mag * D_p_mag + D_mass * D_mass),
+                           D_p_mag * TMath::Cos(D_phi) * TMath::Cos(D_theta),
+                           D_p_mag * TMath::Cos(D_phi) * TMath::Sin(D_theta),
+                           D_p_mag * TMath::Sin(D_phi));
   auto D_p = D_p_rest.boostFromRestFrameOf(B_p);
 
   auto l_sys_p = B_p - D_p;
   auto l_p_mag = (q2 - l_mass * l_mass) / (2 * TMath::Sqrt(q2));
-  auto angle   = rng.Uniform(0.1, 3.13);
+  auto l_theta = rng.Uniform(0.3, 6.2);
+  auto l_phi   = rng.Uniform(0.3, 3.1);
 
-  auto l_p_rest = Hammer::FourMomentum(
-      TMath::Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
-      l_p_mag * TMath::Cos(angle), l_p_mag * TMath::Sin(angle), 0);
-  auto nu_p_rest = Hammer::FourMomentum(l_p_mag, l_p_mag * TMath::Cos(-angle),
-                                        l_p_mag * TMath::Sin(-angle), 0);
+  auto l_p_rest =
+      Hammer::FourMomentum(TMath::Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
+                           l_p_mag * TMath::Cos(l_phi) * TMath::Cos(l_theta),
+                           l_p_mag * TMath::Cos(l_phi) * TMath::Sin(l_theta),
+                           l_p_mag * TMath::Sin(l_phi));
+  auto nu_p_rest = Hammer::FourMomentum(l_p_mag, -l_p_rest.px(), -l_p_rest.py(),
+                                        -l_p_rest.pz());
 
   auto l_p  = l_p_rest.boostFromRestFrameOf(l_sys_p);
   auto nu_p = nu_p_rest.boostFromRestFrameOf(l_sys_p);
@@ -215,7 +223,7 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
 
     if (proc_id != 0) {
       ham.processEvent();
-      // ff_out = ham.getWeight("OutputFF");
+      ff_out = ham.getWeight("OutputFF");
     }
 
     output_tree->Fill();
