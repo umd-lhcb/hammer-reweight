@@ -57,7 +57,7 @@ class BToDstaunu {
   static constexpr double mMu  = 0.10566;
   static constexpr double mE   = 0.000511;
   static constexpr double Vcb  = 0.03928;
-  static constexpr double F1   = 0.914;
+  static constexpr double F1   = 0.908;
   static constexpr double GF   = 0.000011664;
   static constexpr double PI   = 3.14159265;
   static constexpr double hbar = 6.582119e-25;
