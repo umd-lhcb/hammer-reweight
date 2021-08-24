@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Aug 24, 2021 at 02:39 PM +0200
+// Last Change: Tue Aug 24, 2021 at 03:10 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -149,13 +149,16 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
   auto output_tree = new TTree(tree_name, tree_name);
 
   Double_t q2_out;
-  output_tree->Branch("q2_true", q2_out);
+  output_tree->Branch("q2_true", &q2_out);
 
   Double_t ff_out;
-  output_tree->Branch("w_ff", ff_out);
+  output_tree->Branch("w_ff", &ff_out);
 
   for (auto& cand : cands) {
     Hammer::Process proc;
+
+    auto q2 = cand[-1].E();
+    q2_out  = q2;
 
     auto part_B     = particle(cand[B_key], B_key);
     auto part_B_idx = proc.addParticle(part_B);
@@ -169,15 +172,13 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
     auto part_NuL     = particle(cand[16], 16);
     auto part_NuL_idx = proc.addParticle(part_NuL);
 
-    auto q2 = cand[-1].E();
-    q2_out  = q2;
-
     proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
 
     ham.initEvent();
     auto proc_id = ham.addProcess(proc);
 
     ff_out = 0.0;
+
     if (proc_id != 0) {
       ham.processEvent();
       // ff_out = ham.getWeight("OutputFF");
@@ -195,8 +196,7 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
 //////////
 
 int main(int, char** argv) {
-  auto    output_ntp = new TFile(argv[1], "recreate");
-  TString tree       = "tree";
+  auto output_ntp = new TFile(argv[1], "recreate");
 
   Hammer::Hammer ham{};
   auto           rng = TRandom(42);
@@ -209,7 +209,7 @@ int main(int, char** argv) {
   ham.initRun();
 
   auto q2s = vector<Double_t>{};
-  for (auto i = 3.1; i <= 12.0; i += 0.1) {
+  for (auto i = 3.2; i <= 12.0; i += 0.2) {
     q2s.push_back(i);
   }
 
@@ -220,7 +220,7 @@ int main(int, char** argv) {
     cands_BD.push_back(gen_BDTau_decay(q2, rng));
   }
 
-  weight_gen(cands_BDst, 511, -413, output_ntp, tree, ham);
+  weight_gen(cands_BDst, 511, -413, output_ntp, "tree_BDst", ham);
 
   delete output_ntp;
 }
