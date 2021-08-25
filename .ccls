@@ -4,3 +4,4 @@ clang
 %h c++-header
 
 --std=c++17
+-Iinclude
