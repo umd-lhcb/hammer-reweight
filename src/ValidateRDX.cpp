@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Aug 25, 2021 at 02:34 PM +0200
+// Last Change: Wed Aug 25, 2021 at 03:36 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -57,7 +57,7 @@ void set_input_ff(Hammer::Hammer& ham) {
 }
 
 void set_output_ff(Hammer::Hammer& ham) {
-  ham.setFFInputScheme({
+  ham.addFFScheme("OutputFF", {
     {"BD", "CLN_1"},
     {"BD*", "CLN_2"},
   });
