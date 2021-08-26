@@ -32,9 +32,9 @@ ValidateRDX: ValidateRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS) $(VALLINKFLAGS)
 
 
-###############
-# Sample plot #
-###############
+#########
+# Plots #
+#########
 
 sample-plots: \
 	gen/rdx-run1-Bd2DstMuNu_q2_true.png \
@@ -42,6 +42,16 @@ sample-plots: \
 	gen/rdx-run2-Bd2DstMuNu_q2_true.png \
 	gen/rdx-run2-Bd2DstTauNu_q2_true.png \
 	gen/rdx-run2-Bd2DststTauNu_q2_true.png
+
+validation-plots: gen/rdx-run2-validation.root
+	@echo "Generating B -> D* validation plot..."
+	@plotbr -n $</tree_BDst -o gen/rdx-run2-validation-Bd2Dst.png \
+		-b w_ff w_ff_calc \
+		-XD 0.8 1 --bins 8 \
+		-XL "FF weights" \
+		-l HAMMER Theory \
+		--cuts "ham_ok" "ham_ok" \
+		--debug
 
 
 ####################

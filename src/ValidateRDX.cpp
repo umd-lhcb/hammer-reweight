@@ -1,13 +1,8 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 26, 2021 at 04:11 PM +0200
+// Last Change: Thu Aug 26, 2021 at 05:01 PM +0200
 
-#include <algorithm>
 #include <iostream>
 #include <map>
-#include <string>
-#include <string_view>
-#include <tuple>
-#include <utility>
 #include <vector>
 
 #include <math.h>
@@ -22,6 +17,8 @@
 #include <Hammer/Math/FourMomentum.hh>
 #include <Hammer/Particle.hh>
 #include <Hammer/Process.hh>
+
+#include <ff_dstaunu.hpp>
 
 using namespace std;
 
@@ -153,6 +150,7 @@ auto particle(Hammer::FourMomentum four_mom, Int_t pid) {
 void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
                 TFile* output_ntp, TString tree_name, Hammer::Hammer& ham) {
   auto output_tree = new TTree(tree_name, tree_name);
+  auto calc_BDst   = BToDstaunu{};
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
@@ -162,6 +160,8 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
 
   Double_t ff_out;
   output_tree->Branch("w_ff", &ff_out);
+  Double_t ff_calc_out;
+  output_tree->Branch("w_ff_calc", &ff_calc_out);
 
   Int_t b_id_out;
   output_tree->Branch("b_id", &b_id_out);
@@ -223,12 +223,26 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
     ham.initEvent();
     auto proc_id = ham.addProcess(proc);
 
-    ff_out = 0.0;
+    ff_out      = 1.0;
+    ff_calc_out = 1.0;
 
     if (proc_id != 0) {
       ham.processEvent();
       ff_out = ham.getWeight("OutputFF");
-      ham_ok = true;
+
+      if (!isnan(ff_out) && !isinf(ff_out)) {
+        ham_ok = true;
+
+        Double_t calc_isgw2 = 1.;
+        Double_t calc_cln   = 1.;
+
+        if (TMath::Abs(D_key) == 413) {
+          calc_isgw2 = calc_BDst.Compute(q2_out, false, TAU_MASS);
+          calc_cln   = calc_BDst.Compute(q2_out, true, TAU_MASS);
+        }
+
+        ff_calc_out = calc_cln / calc_isgw2;
+      }
     }
 
     output_tree->Fill();
