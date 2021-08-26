@@ -121,4 +121,9 @@ auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
   return Hammer::Particle(four_mom, part_id);
 }
 
+auto particle(Hammer::FourMomentum four_mom, Int_t pid) {
+  auto part_id = static_cast<Hammer::PdgId>(pid);
+  return Hammer::Particle(four_mom, part_id);
+}
+
 #endif

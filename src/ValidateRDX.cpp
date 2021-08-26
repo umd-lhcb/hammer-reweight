@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 26, 2021 at 05:01 PM +0200
+// Last Change: Thu Aug 26, 2021 at 05:05 PM +0200
 
 #include <iostream>
 #include <map>
@@ -19,6 +19,8 @@
 #include <Hammer/Process.hh>
 
 #include <ff_dstaunu.hpp>
+
+#include "utils.h"
 
 using namespace std;
 
@@ -125,22 +127,6 @@ auto gen_BDstTau_decay(Double_t q2, TRandom& rng) {
 
 auto gen_BDTau_decay(Double_t q2, TRandom& rng) {
   return gen_B_decay(521, B_MASS, -421, D0_MASS, -15, TAU_MASS, 16, q2, rng);
-}
-
-////////////////////////////
-// HAMMER-related helpers //
-////////////////////////////
-
-auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
-  auto four_mom = Hammer::FourMomentum(pe, px, py, pz);
-  auto part_id  = static_cast<Hammer::PdgId>(pid);
-
-  return Hammer::Particle(four_mom, part_id);
-}
-
-auto particle(Hammer::FourMomentum four_mom, Int_t pid) {
-  auto part_id = static_cast<Hammer::PdgId>(pid);
-  return Hammer::Particle(four_mom, part_id);
 }
 
 /////////////////
