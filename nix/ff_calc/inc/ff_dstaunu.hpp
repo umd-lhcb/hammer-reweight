@@ -24,9 +24,11 @@
 //      Michael Mazur                             INFN Pisa
 //
 /// Revision History:
+//      21/08/26 yipengsun -- Updated default FF parameters
 //      20/10/27 yipengsun -- Reformatted with clang-format
 //      12/05/10 manuelf   -- Normalization validated with EvtGen, including
-//                            Higgs Added the theta spectrum integrated over q2
+//                            Higgs
+//                            Added the theta spectrum integrated over q2
 //                            *NOT VALIDATED*
 //      12/05/09 manuelf   -- Corrected a missing sin(thetaL)sin(thetaV) and
 //                            added D*->Dgamma
