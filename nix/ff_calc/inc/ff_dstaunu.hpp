@@ -48,8 +48,8 @@ using std::endl;
 
 class BToDstaunu {
  public:
-  BToDstaunu(double rho2 = 1.207, double R1 = 1.401, double R2 = 0.854,
-             double R0 = 1.14, double gSR = 0);
+  BToDstaunu(double rho2 = 1.122, double R1 = 1.270, double R2 = 0.852,
+             double R0 = 1.15, double gSR = 0);
   ~BToDstaunu();
 
   // Primary constants from PDG and PRD 82 112007 (2010)
