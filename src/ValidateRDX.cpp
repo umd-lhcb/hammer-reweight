@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 26, 2021 at 05:05 PM +0200
+// Last Change: Thu Aug 26, 2021 at 05:27 PM +0200
 
 #include <iostream>
 #include <map>
@@ -77,23 +77,23 @@ auto gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   // Neutrino mass is set to 0
   PartEmu result{};
 
-  auto B_pz = rng.Uniform(2, 200);
+  auto B_pz = rng.Uniform(20, 200);
   auto B_p = Hammer::FourMomentum(TMath::Sqrt(B_pz * B_pz + B_mass * B_mass), 0,
                                   0, B_pz);
 
   auto fact_neg = B_mass * B_mass - D_mass * D_mass;
   auto fact_pos = B_mass * B_mass + D_mass * D_mass;
   auto D_p_mag =
-      TMath::Sqrt(1 / (4 * B_mass) *
+      TMath::Sqrt(1 / (4 * B_mass * B_mass) *
                   (TMath::Power(fact_neg, 2) + q2 * q2 - 2 * q2 * fact_pos));
   auto D_theta = rng.Uniform(0.3, 6.2);
   auto D_phi   = rng.Uniform(0.3, 3.1);
 
   auto D_p_rest =
       Hammer::FourMomentum(TMath::Sqrt(D_p_mag * D_p_mag + D_mass * D_mass),
-                           D_p_mag * TMath::Cos(D_phi) * TMath::Cos(D_theta),
-                           D_p_mag * TMath::Cos(D_phi) * TMath::Sin(D_theta),
-                           D_p_mag * TMath::Sin(D_phi));
+                           D_p_mag * TMath::Sin(D_phi) * TMath::Cos(D_theta),
+                           D_p_mag * TMath::Sin(D_phi) * TMath::Sin(D_theta),
+                           D_p_mag * TMath::Cos(D_phi));
   auto D_p = D_p_rest.boostFromRestFrameOf(B_p);
 
   auto l_sys_p = B_p - D_p;
@@ -103,9 +103,9 @@ auto gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 
   auto l_p_rest =
       Hammer::FourMomentum(TMath::Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
-                           l_p_mag * TMath::Cos(l_phi) * TMath::Cos(l_theta),
-                           l_p_mag * TMath::Cos(l_phi) * TMath::Sin(l_theta),
-                           l_p_mag * TMath::Sin(l_phi));
+                           l_p_mag * TMath::Sin(l_phi) * TMath::Cos(l_theta),
+                           l_p_mag * TMath::Sin(l_phi) * TMath::Sin(l_theta),
+                           l_p_mag * TMath::Cos(l_phi));
   auto nu_p_rest = Hammer::FourMomentum(l_p_mag, -l_p_rest.px(), -l_p_rest.py(),
                                         -l_p_rest.pz());
 
