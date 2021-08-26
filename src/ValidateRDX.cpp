@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 26, 2021 at 05:38 PM +0200
+// Last Change: Thu Aug 26, 2021 at 07:36 PM +0200
 
 #include <iostream>
 #include <map>
@@ -138,6 +138,8 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
 
+  if (TMath::Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
+
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
 
@@ -228,7 +230,8 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
         }
 
         ff_calc_out = calc_cln / calc_isgw2;
-      }
+      } else
+        ff_out = 1.0;
     }
 
     output_tree->Fill();
@@ -256,7 +259,7 @@ int main(int, char** argv) {
   ham.initRun();
 
   auto q2s = vector<Double_t>{};
-  for (auto i = 3.2; i <= 12.2; i += 0.1) {
+  for (auto i = 3.2; i <= 12.2; i += 0.001) {
     q2s.push_back(i);
   }
 
