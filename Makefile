@@ -53,13 +53,12 @@ validation-plots: gen/rdx-run2-validation.root
 		--cuts "ham_ok" "ham_ok" \
 		--debug
 	@plotbr -n $</tree_BDst -o gen/rdx-run2-validation-Bd2Dst_q2_true.png \
-		-b q2_true q2_true -XD 3 12 --bins 9 \
+		-b q2_true q2_true q2_true -XD 3 12.1 --bins 9 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
-		-YL "Normalized" \
-		-l HAMMER Theory \
-		--cuts "ham_ok" "ham_ok" \
-		--weights "w_ff" "w_ff_calc" \
-		--normalize --debug
+		-l Generated HAMMER Theory \
+		--cuts "ham_ok" "ham_ok" "ham_ok" \
+		--weights "None" "w_ff" "w_ff_calc" \
+		--debug
 
 
 ####################
