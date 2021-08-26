@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Aug 26, 2021 at 05:27 PM +0200
+// Last Change: Thu Aug 26, 2021 at 05:38 PM +0200
 
 #include <iostream>
 #include <map>
@@ -256,7 +256,7 @@ int main(int, char** argv) {
   ham.initRun();
 
   auto q2s = vector<Double_t>{};
-  for (auto i = 3.2; i <= 12.0; i += 0.2) {
+  for (auto i = 3.2; i <= 12.2; i += 0.1) {
     q2s.push_back(i);
   }
 
