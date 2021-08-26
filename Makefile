@@ -62,8 +62,8 @@ gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
 	./bin/ReweightRDX $< $@ TupleB0/DecayTree run2
 
 # Validation ntuples
-gen/rdx-run2-Bd2DstTauNu-validation.root: samples/rdx-run2-Bd2DstTauNu.root ValidateRDX
-	./bin/ValidateRDX $< $@ TupleB0/DecayTree run2
+gen/rdx-run2-validation.root: ValidateRDX
+	./bin/ValidateRDX $@
 
 # True q2 plots
 gen/%_q2_true.png: gen/%-reweighted.root
