@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 07, 2021 at 10:16 PM +0200
+// Last Change: Tue Sep 07, 2021 at 11:02 PM +0200
 
 #include <any>
 #include <iostream>
@@ -156,7 +156,7 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   auto D_dau_p_rest =
       hp4(Sqrt(D_dau_mass * D_dau_mass + D_dau_mag),
           D_dau_mag * Sin(theta_v) * Cos(chi),
-          D_dau_mag * Sin(theta_v) * Cos(chi), D_dau_mag * Cos(theta_v));
+          D_dau_mag * Sin(theta_v) * Sin(chi), D_dau_mag * Cos(theta_v));
   auto pi_p_rest = hp4(Sqrt(pi_mass * pi_mass + D_dau_mag), -D_dau_p_rest.px(),
                        -D_dau_p_rest.py(), -D_dau_p_rest.pz());
 
@@ -245,6 +245,24 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
   Double_t d_dau_pz_out;
   output_tree->Branch("d_dau_pz", &d_dau_pz_out);
 
+  Double_t l_pe_out;
+  output_tree->Branch("l_pe", &l_pe_out);
+  Double_t l_px_out;
+  output_tree->Branch("l_px", &l_px_out);
+  Double_t l_py_out;
+  output_tree->Branch("l_py", &l_py_out);
+  Double_t l_pz_out;
+  output_tree->Branch("l_pz", &l_pz_out);
+
+  Double_t nu_pe_out;
+  output_tree->Branch("nu_pe", &nu_pe_out);
+  Double_t nu_px_out;
+  output_tree->Branch("nu_px", &nu_px_out);
+  Double_t nu_py_out;
+  output_tree->Branch("nu_py", &nu_py_out);
+  Double_t nu_pz_out;
+  output_tree->Branch("nu_pz", &nu_pz_out);
+
   Double_t pi_pe_out;
   output_tree->Branch("pi_pe", &pi_pe_out);
   Double_t pi_px_out;
@@ -283,16 +301,28 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
     d_py_out = d_p.py();
     d_pz_out = d_p.pz();
 
+    auto l_p = any_cast<hp4>(cand["l_p"]);
+    l_pe_out = l_p.E();
+    l_px_out = l_p.px();
+    l_py_out = l_p.py();
+    l_pz_out = l_p.pz();
+
+    auto nu_p = any_cast<hp4>(cand["nu_p"]);
+    nu_pe_out = nu_p.E();
+    nu_px_out = nu_p.px();
+    nu_py_out = nu_p.py();
+    nu_pz_out = nu_p.pz();
+
     auto part_B     = particle(b_p, b_id_out);
     auto part_B_idx = proc.addParticle(part_B);
 
     auto part_D     = particle(d_p, d_id_out);
     auto part_D_idx = proc.addParticle(part_D);
 
-    auto part_L     = particle(any_cast<hp4>(cand["l_p"]), -15);
+    auto part_L     = particle(l_p, -15);
     auto part_L_idx = proc.addParticle(part_L);
 
-    auto part_NuL     = particle(any_cast<hp4>(cand["nu_p"]), 16);
+    auto part_NuL     = particle(nu_p, 16);
     auto part_NuL_idx = proc.addParticle(part_NuL);
 
     proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
@@ -338,32 +368,28 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
     auto proc_id = ham.addProcess(proc);
 
     // Compute FF weights w/ Manuel's calculator
-    double_t calc_isgw2 = 1.;
-    double_t calc_cln   = 1.;
-    double_t a1, v, a2, a0;
+    double_t calc_isgw2, calc_cln, a1, v, a2, a0;
     if (abs(D_key) == 413) {
       calc_BDst.ComputeISGW2(q2, a1, v, a2, a0);
       calc_isgw2 =
           calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out, chi_out,
-                                    false, false, a1, v, a2, a0, TAU_MASS);
+                                    false, true, a1, v, a2, a0, TAU_MASS);
 
       calc_BDst.ComputeCLN(q2, a1, v, a2, a0);
       calc_cln =
           calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out, chi_out,
-                                    false, false, a1, v, a2, a0, TAU_MASS);
+                                    false, true, a1, v, a2, a0, TAU_MASS);
     }
 
     ff_calc_out = calc_cln / calc_isgw2;
 
-    ff_out = 1.0;
     if (proc_id != 0) {
       ham.processEvent();
       ff_out = ham.getWeight("OutputFF");
 
-      if (!isnan(ff_out) && !isinf(ff_out)) {
+      if (!isnan(ff_out) && !isinf(ff_out))
         ham_ok = true;
-
-      } else
+      else
         ff_out = 1.0;
     }
 
