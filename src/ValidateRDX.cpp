@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 07, 2021 at 06:53 PM +0200
+// Last Change: Tue Sep 07, 2021 at 07:09 PM +0200
 
 #include <any>
 #include <iostream>
@@ -254,6 +254,14 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
   Double_t pi_pz_out;
   output_tree->Branch("pi_pz", &pi_pz_out);
 
+  Double_t theta_l_out;
+  output_tree->Branch("theta_l", &theta_l_out);
+
+  Double_t theta_v_out;
+  output_tree->Branch("theta_v", &theta_v_out);
+  Double_t chi_out;
+  output_tree->Branch("chi", &chi_out);
+
   for (auto& cand : cands) {
     Hammer::Process proc;
     ham_ok = false;
@@ -289,6 +297,9 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
 
     proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
 
+    // Angles
+    theta_l_out = any_cast<Double_t>(cand["theta_l"]);
+
     if (is_Dst) {
       d_dau_id_out = any_cast<Int_t>(cand["D_dau_id"]);
       auto d_dau_p = any_cast<hp4>(cand["D_dau_p"]);
@@ -311,10 +322,16 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
       auto part_Pi_idx = proc.addParticle(part_Pi);
 
       proc.addVertex(part_D_idx, {part_D_dau_idx, part_Pi_idx});
+
+      // Additional angles
+      theta_v_out = any_cast<Double_t>(cand["theta_v"]);
+      chi_out     = any_cast<Double_t>(cand["chi"]);
     } else {
       d_dau_id_out = pi_id_out = 0;
       d_dau_pe_out = d_dau_px_out = d_dau_py_out = d_dau_pz_out = 0.;
       pi_pe_out = pi_px_out = pi_py_out = pi_pz_out = 0.;
+
+      theta_v_out = chi_out = 0.;
     }
 
     ham.initEvent();
@@ -332,10 +349,18 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
 
         Double_t calc_isgw2 = 1.;
         Double_t calc_cln   = 1.;
+        Double_t A1, V, A2, A0;
 
         if (Abs(D_key) == 413) {
-          calc_isgw2 = calc_BDst.Compute(q2_out, false, TAU_MASS);
-          calc_cln   = calc_BDst.Compute(q2_out, true, TAU_MASS);
+          calc_BDst.ComputeISGW2(q2, A1, V, A2, A0);
+          calc_isgw2 = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out,
+                                                 theta_v_out, chi_out, 0, false,
+                                                 A1, V, A2, A0, TAU_MASS);
+
+          calc_BDst.ComputeCLN(q2, A1, V, A2, A0);
+          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
+                                               chi_out, 0, false, A1, V, A2, A0,
+                                               TAU_MASS);
         }
 
         ff_calc_out = calc_cln / calc_isgw2;
