@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 07, 2021 at 06:09 PM +0200
+// Last Change: Tue Sep 07, 2021 at 06:53 PM +0200
 
 #include <any>
 #include <iostream>
@@ -42,6 +42,7 @@ const Double_t Dst_MASS = 2.01026;
 const Double_t D0_MASS  = 1.86483;
 
 const Double_t TAU_MASS = 1.77682;
+const Double_t PI_MASS  = 0.1395706;
 
 // clang-format off
 const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
@@ -176,7 +177,8 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 }
 
 auto gen_BDstTau_decay(Double_t q2, TRandom& rng) {
-  return gen_B_decay(511, B0_MASS, -413, Dst_MASS, -15, TAU_MASS, 16, q2, rng);
+  return gen_B_decay(511, B0_MASS, -413, Dst_MASS, -15, TAU_MASS, 16, -421,
+                     D0_MASS, -211, PI_MASS, q2, rng);
 }
 
 auto gen_BDTau_decay(Double_t q2, TRandom& rng) {
@@ -187,11 +189,13 @@ auto gen_BDTau_decay(Double_t q2, TRandom& rng) {
 // Reweighting //
 /////////////////
 
-void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
-                TFile* output_ntp, TString tree_name, Hammer::Hammer& ham) {
+void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
+                TString tree_name, Hammer::Hammer& ham) {
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
 
+  auto B_key = any_cast<Int_t>(cands[0]["B_key"]);
+  auto D_key = any_cast<Int_t>(cands[0]["D_key"]);
   if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
 
   Bool_t ham_ok;
@@ -209,6 +213,10 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
   output_tree->Branch("b_id", &b_id_out);
   Int_t d_id_out;
   output_tree->Branch("d_id", &d_id_out);
+  Int_t d_dau_id_out;
+  output_tree->Branch("d_dau_id", &d_dau_id_out);
+  Int_t pi_id_out;
+  output_tree->Branch("pi_id", &pi_id_out);
 
   Double_t b_pe_out;
   output_tree->Branch("b_pe", &b_pe_out);
@@ -228,39 +236,86 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
   Double_t d_pz_out;
   output_tree->Branch("d_pz", &d_pz_out);
 
+  Double_t d_dau_pe_out;
+  output_tree->Branch("d_dau_pe", &d_dau_pe_out);
+  Double_t d_dau_px_out;
+  output_tree->Branch("d_dau_px", &d_dau_px_out);
+  Double_t d_dau_py_out;
+  output_tree->Branch("d_dau_py", &d_dau_py_out);
+  Double_t d_dau_pz_out;
+  output_tree->Branch("d_dau_pz", &d_dau_pz_out);
+
+  Double_t pi_pe_out;
+  output_tree->Branch("pi_pe", &pi_pe_out);
+  Double_t pi_px_out;
+  output_tree->Branch("pi_px", &pi_px_out);
+  Double_t pi_py_out;
+  output_tree->Branch("pi_py", &pi_py_out);
+  Double_t pi_pz_out;
+  output_tree->Branch("pi_pz", &pi_pz_out);
+
   for (auto& cand : cands) {
     Hammer::Process proc;
     ham_ok = false;
 
-    auto q2 = cand[-1].E();
+    auto q2 = any_cast<Double_t>(cand["q2"]);
     q2_out  = q2;
 
-    b_id_out = B_key;
-    d_id_out = D_key;
+    b_id_out = any_cast<Int_t>(cand["B_id"]);
+    auto b_p = any_cast<hp4>(cand["B_p"]);
+    b_pe_out = b_p.E();
+    b_px_out = b_p.px();
+    b_py_out = b_p.py();
+    b_pz_out = b_p.pz();
 
-    b_pe_out = cand[B_key].E();
-    b_px_out = cand[B_key].px();
-    b_py_out = cand[B_key].py();
-    b_pz_out = cand[B_key].pz();
+    d_id_out = any_cast<Int_t>(cand["D_id"]);
+    auto d_p = any_cast<hp4>(cand["D_p"]);
+    d_pe_out = d_p.E();
+    d_px_out = d_p.px();
+    d_py_out = d_p.py();
+    d_pz_out = d_p.pz();
 
-    d_pe_out = cand[D_key].E();
-    d_px_out = cand[D_key].px();
-    d_py_out = cand[D_key].py();
-    d_pz_out = cand[D_key].pz();
-
-    auto part_B     = particle(cand[B_key], B_key);
+    auto part_B     = particle(b_p, b_id_out);
     auto part_B_idx = proc.addParticle(part_B);
 
-    auto part_D     = particle(cand[D_key], D_key);
+    auto part_D     = particle(d_p, d_id_out);
     auto part_D_idx = proc.addParticle(part_D);
 
-    auto part_L     = particle(cand[-15], -15);
+    auto part_L     = particle(any_cast<hp4>(cand["l_p"]), -15);
     auto part_L_idx = proc.addParticle(part_L);
 
-    auto part_NuL     = particle(cand[16], 16);
+    auto part_NuL     = particle(any_cast<hp4>(cand["nu_p"]), 16);
     auto part_NuL_idx = proc.addParticle(part_NuL);
 
     proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
+
+    if (is_Dst) {
+      d_dau_id_out = any_cast<Int_t>(cand["D_dau_id"]);
+      auto d_dau_p = any_cast<hp4>(cand["D_dau_p"]);
+      d_dau_pe_out = d_dau_p.E();
+      d_dau_px_out = d_dau_p.px();
+      d_dau_py_out = d_dau_p.py();
+      d_dau_pz_out = d_dau_p.pz();
+
+      pi_id_out = any_cast<Int_t>(cand["pi_id"]);
+      auto pi_p = any_cast<hp4>(cand["pi_p"]);
+      pi_pe_out = pi_p.E();
+      pi_px_out = pi_p.px();
+      pi_py_out = pi_p.py();
+      pi_pz_out = pi_p.pz();
+
+      auto part_D_dau     = particle(d_dau_p, d_dau_id_out);
+      auto part_D_dau_idx = proc.addParticle(part_D_dau);
+
+      auto part_Pi     = particle(pi_p, pi_id_out);
+      auto part_Pi_idx = proc.addParticle(part_Pi);
+
+      proc.addVertex(part_D_idx, {part_D_dau_idx, part_Pi_idx});
+    } else {
+      d_dau_id_out = pi_id_out = 0;
+      d_dau_pe_out = d_dau_px_out = d_dau_py_out = d_dau_pz_out = 0.;
+      pi_pe_out = pi_px_out = pi_py_out = pi_pz_out = 0.;
+    }
 
     ham.initEvent();
     auto proc_id = ham.addProcess(proc);
@@ -324,7 +379,7 @@ int main(int, char** argv) {
     cands_BD.push_back(gen_BDTau_decay(q2, rng));
   }
 
-  weight_gen(cands_BDst, 511, -413, output_ntp, "tree_BDst", ham);
+  weight_gen(cands_BDst, true, output_ntp, "tree_BDst", ham);
 
   delete output_ntp;
 }
