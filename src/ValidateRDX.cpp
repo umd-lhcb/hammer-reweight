@@ -1,8 +1,10 @@
 // Author: Yipeng Sun
-// Last Change: Mon Sep 06, 2021 at 03:55 PM +0200
+// Last Change: Tue Sep 07, 2021 at 04:14 PM +0200
 
+#include <any>
 #include <iostream>
 #include <map>
+#include <string>
 #include <vector>
 
 #include <math.h>
@@ -68,15 +70,25 @@ void set_decays(Hammer::Hammer& ham) {
 // General helpers //
 /////////////////////
 
-typedef map<Int_t, Hammer::FourMomentum> PartEmu;
+typedef Hammer::FourMomentum hp4;
+typedef map<string, any>     PartEmu;
+
+Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2) {
+  auto denom = 2 * TMath::Sqrt(m2_mom);
+  auto nom   = TMath::Sqrt(
+      m2_mom * m2_mom + m2_dau1 * m2_dau1 + m2_dau2 * m2_dau2 -
+      2 * (m2_mom * m2_dau1 + m2_mom * m2_dau2 + m2_dau1 * m2_dau2));
+  return nom / denom;
+}
 
 // Everything's in GeV!
-auto gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
-                 Int_t l_id, Double_t l_mass, Int_t nu_id, Double_t q2,
-                 TRandom& rng) {
+PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
+                    Int_t l_id, Double_t l_mass, Int_t nu_id, Double_t q2,
+                    TRandom& rng) {
   // Neutrino mass is set to 0
   PartEmu result{};
 
+  // Remember that we are in the B rest frame
   // No need to boost back from B rest frame
   auto B_p = Hammer::FourMomentum(B_mass, 0, 0, 0);
 
@@ -85,36 +97,60 @@ auto gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   auto D_p_mag =
       TMath::Sqrt(1 / (4 * B_mass * B_mass) *
                   (TMath::Power(fac_neg, 2) + q2 * q2 - 2 * q2 * fac_pos));
-  auto D_theta = rng.Uniform(0.3, 6.2);
-  auto D_phi   = rng.Uniform(0.3, 3.1);
 
-  auto D_p =
-      Hammer::FourMomentum(TMath::Sqrt(D_p_mag * D_p_mag + D_mass * D_mass),
-                           D_p_mag * TMath::Sin(D_phi) * TMath::Cos(D_theta),
-                           D_p_mag * TMath::Sin(D_phi) * TMath::Sin(D_theta),
-                           D_p_mag * TMath::Cos(D_phi));
+  // Say D is flying in the z direction
+  auto D_p = Hammer::FourMomentum(
+      TMath::Sqrt(D_p_mag * D_p_mag + D_mass * D_mass), 0, 0, D_p_mag);
 
   auto l_sys_p = B_p - D_p;
-  auto l_p_mag = (q2 - l_mass * l_mass) / (2 * TMath::Sqrt(q2));
-  auto l_theta = rng.Uniform(0.3, 6.2);
-  auto l_phi   = rng.Uniform(0.3, 3.1);
+  auto l_p_mag = compute_p(q2, l_mass * l_mass, 0);
 
-  auto l_p_rest =
-      Hammer::FourMomentum(TMath::Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
-                           l_p_mag * TMath::Sin(l_phi) * TMath::Cos(l_theta),
-                           l_p_mag * TMath::Sin(l_phi) * TMath::Sin(l_theta),
-                           l_p_mag * TMath::Cos(l_phi));
+  // Only θ_l is physical
+  auto theta_l = rng.Uniform(0.1, 3.1);
+
+  // Leptons are in the x-z plane
+  // Angles are defined in the rest frame of the lepton pair, so rotate first
+  // before boosting back to the B rest frame
+  auto l_p_rest = Hammer::FourMomentum(
+      TMath::Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
+      l_p_mag * TMath::Sin(theta_l), 0, l_p_mag * TMath::Cos(theta_l));
   auto nu_p_rest = Hammer::FourMomentum(l_p_mag, -l_p_rest.px(), -l_p_rest.py(),
                                         -l_p_rest.pz());
 
   auto l_p  = l_p_rest.boostFromRestFrameOf(l_sys_p);
   auto nu_p = nu_p_rest.boostFromRestFrameOf(l_sys_p);
 
-  result[B_id]  = B_p;
-  result[D_id]  = D_p;
-  result[l_id]  = l_p;
-  result[nu_id] = nu_p;
-  result[-1]    = Hammer::FourMomentum(q2, 0, 0, 0);  // store q2 as a vector
+  result["B_id"] = B_id;
+  result["B_p"]  = B_p;
+
+  result["D_id"] = D_id;
+  result["D_p"]  = D_p;
+
+  result["theta_l"] = theta_l;  // the only physical angle
+  result["l_id"]    = l_id;
+  result["l_p"]     = l_p;
+  result["nu_id"]   = nu_id;
+  result["nu_p"]    = nu_p;
+
+  result["q2"] = q2;
+
+  return result;
+}
+
+PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
+                    Int_t l_id, Double_t l_mass, Int_t nu_id, Int_t D_dau_id,
+                    Double_t D_dau_mass, Int_t pi_id, Double_t pi_mass,
+                    Double_t q2, TRandom& rng) {
+  auto result = gen_B_decay(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id,
+                            D_dau_id, D_dau_mass, pi_id, pi_mass, q2, rng);
+
+  auto D_dau_p_rest =
+      compute_p(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
+
+  // Now we have 2 additional physical angles: θ_v and χ
+  auto theta_v = rng.Uniform(0.1, 3.1);
+  auto chi     = -rng.Uniform(
+      0.1, 6.2);  // From Bernlochner's definition, this is always negative
 
   return result;
 }
