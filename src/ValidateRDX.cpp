@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 07, 2021 at 07:09 PM +0200
+// Last Change: Tue Sep 07, 2021 at 10:16 PM +0200
 
 #include <any>
 #include <iostream>
@@ -38,7 +38,7 @@ using TMath::Sqrt;
 const Double_t B_MASS  = 5.27932;
 const Double_t B0_MASS = 5.27963;
 
-const Double_t Dst_MASS = 2.01026;
+const Double_t DST_MASS = 2.01026;
 const Double_t D0_MASS  = 1.86483;
 
 const Double_t TAU_MASS = 1.77682;
@@ -143,8 +143,8 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
                     Int_t l_id, Double_t l_mass, Int_t nu_id, Int_t D_dau_id,
                     Double_t D_dau_mass, Int_t pi_id, Double_t pi_mass,
                     Double_t q2, TRandom& rng) {
-  auto result = gen_B_decay(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id,
-                            D_dau_id, D_dau_mass, pi_id, pi_mass, q2, rng);
+  auto result =
+      gen_B_decay(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id, q2, rng);
 
   auto D_dau_mag =
       compute_p(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
@@ -177,7 +177,7 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 }
 
 auto gen_BDstTau_decay(Double_t q2, TRandom& rng) {
-  return gen_B_decay(511, B0_MASS, -413, Dst_MASS, -15, TAU_MASS, 16, -421,
+  return gen_B_decay(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421,
                      D0_MASS, -211, PI_MASS, q2, rng);
 }
 
@@ -194,8 +194,8 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
 
-  auto B_key = any_cast<Int_t>(cands[0]["B_key"]);
-  auto D_key = any_cast<Int_t>(cands[0]["D_key"]);
+  auto B_key = any_cast<Int_t>(cands[0]["B_id"]);
+  auto D_key = any_cast<Int_t>(cands[0]["D_id"]);
   if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
 
   Bool_t ham_ok;
@@ -337,9 +337,25 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
     ham.initEvent();
     auto proc_id = ham.addProcess(proc);
 
-    ff_out      = 1.0;
-    ff_calc_out = 1.0;
+    // Compute FF weights w/ Manuel's calculator
+    double_t calc_isgw2 = 1.;
+    double_t calc_cln   = 1.;
+    double_t a1, v, a2, a0;
+    if (abs(D_key) == 413) {
+      calc_BDst.ComputeISGW2(q2, a1, v, a2, a0);
+      calc_isgw2 =
+          calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out, chi_out,
+                                    false, false, a1, v, a2, a0, TAU_MASS);
 
+      calc_BDst.ComputeCLN(q2, a1, v, a2, a0);
+      calc_cln =
+          calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out, chi_out,
+                                    false, false, a1, v, a2, a0, TAU_MASS);
+    }
+
+    ff_calc_out = calc_cln / calc_isgw2;
+
+    ff_out = 1.0;
     if (proc_id != 0) {
       ham.processEvent();
       ff_out = ham.getWeight("OutputFF");
@@ -347,23 +363,6 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
       if (!isnan(ff_out) && !isinf(ff_out)) {
         ham_ok = true;
 
-        Double_t calc_isgw2 = 1.;
-        Double_t calc_cln   = 1.;
-        Double_t A1, V, A2, A0;
-
-        if (Abs(D_key) == 413) {
-          calc_BDst.ComputeISGW2(q2, A1, V, A2, A0);
-          calc_isgw2 = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out,
-                                                 theta_v_out, chi_out, 0, false,
-                                                 A1, V, A2, A0, TAU_MASS);
-
-          calc_BDst.ComputeCLN(q2, A1, V, A2, A0);
-          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
-                                               chi_out, 0, false, A1, V, A2, A0,
-                                               TAU_MASS);
-        }
-
-        ff_calc_out = calc_cln / calc_isgw2;
       } else
         ff_out = 1.0;
     }
@@ -393,15 +392,17 @@ int main(int, char** argv) {
   ham.initRun();
 
   auto q2s = vector<Double_t>{};
-  for (auto i = 3.2; i <= 12.2; i += 0.001) {
+  for (auto i = 3.2; i <= 12.2; i += 0.01) {
     q2s.push_back(i);
   }
 
   auto cands_BDst = vector<PartEmu>{};
   auto cands_BD   = vector<PartEmu>{};
   for (auto& q2 : q2s) {
-    cands_BDst.push_back(gen_BDstTau_decay(q2, rng));
-    cands_BD.push_back(gen_BDTau_decay(q2, rng));
+    if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - DST_MASS, 2))
+      cands_BDst.push_back(gen_BDstTau_decay(q2, rng));
+    // if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - D0_MASS, 2))
+    // cands_BD.push_back(gen_BDTau_decay(q2, rng));
   }
 
   weight_gen(cands_BDst, true, output_ntp, "tree_BDst", ham);
