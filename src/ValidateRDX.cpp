@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 07, 2021 at 04:14 PM +0200
+// Last Change: Tue Sep 07, 2021 at 06:09 PM +0200
 
 #include <any>
 #include <iostream>
@@ -25,6 +25,11 @@
 #include "utils.h"
 
 using namespace std;
+using TMath::Abs;
+using TMath::Cos;
+using TMath::Power;
+using TMath::Sin;
+using TMath::Sqrt;
 
 ///////////////////
 // Configurables //
@@ -74,10 +79,10 @@ typedef Hammer::FourMomentum hp4;
 typedef map<string, any>     PartEmu;
 
 Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2) {
-  auto denom = 2 * TMath::Sqrt(m2_mom);
-  auto nom   = TMath::Sqrt(
-      m2_mom * m2_mom + m2_dau1 * m2_dau1 + m2_dau2 * m2_dau2 -
-      2 * (m2_mom * m2_dau1 + m2_mom * m2_dau2 + m2_dau1 * m2_dau2));
+  auto denom = 2 * Sqrt(m2_mom);
+  auto nom =
+      Sqrt(m2_mom * m2_mom + m2_dau1 * m2_dau1 + m2_dau2 * m2_dau2 -
+           2 * (m2_mom * m2_dau1 + m2_mom * m2_dau2 + m2_dau1 * m2_dau2));
   return nom / denom;
 }
 
@@ -90,17 +95,15 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 
   // Remember that we are in the B rest frame
   // No need to boost back from B rest frame
-  auto B_p = Hammer::FourMomentum(B_mass, 0, 0, 0);
+  auto B_p = hp4(B_mass, 0, 0, 0);
 
   auto fac_neg = B_mass * B_mass - D_mass * D_mass;
   auto fac_pos = B_mass * B_mass + D_mass * D_mass;
-  auto D_p_mag =
-      TMath::Sqrt(1 / (4 * B_mass * B_mass) *
-                  (TMath::Power(fac_neg, 2) + q2 * q2 - 2 * q2 * fac_pos));
+  auto D_p_mag = Sqrt(1 / (4 * B_mass * B_mass) *
+                      (Power(fac_neg, 2) + q2 * q2 - 2 * q2 * fac_pos));
 
   // Say D is flying in the z direction
-  auto D_p = Hammer::FourMomentum(
-      TMath::Sqrt(D_p_mag * D_p_mag + D_mass * D_mass), 0, 0, D_p_mag);
+  auto D_p = hp4(Sqrt(D_p_mag * D_p_mag + D_mass * D_mass), 0, 0, D_p_mag);
 
   auto l_sys_p = B_p - D_p;
   auto l_p_mag = compute_p(q2, l_mass * l_mass, 0);
@@ -111,11 +114,9 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   // Leptons are in the x-z plane
   // Angles are defined in the rest frame of the lepton pair, so rotate first
   // before boosting back to the B rest frame
-  auto l_p_rest = Hammer::FourMomentum(
-      TMath::Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
-      l_p_mag * TMath::Sin(theta_l), 0, l_p_mag * TMath::Cos(theta_l));
-  auto nu_p_rest = Hammer::FourMomentum(l_p_mag, -l_p_rest.px(), -l_p_rest.py(),
-                                        -l_p_rest.pz());
+  auto l_p_rest  = hp4(Sqrt(l_mass * l_mass + l_p_mag * l_p_mag),
+                      l_p_mag * Sin(theta_l), 0, l_p_mag * Cos(theta_l));
+  auto nu_p_rest = hp4(l_p_mag, -l_p_rest.px(), -l_p_rest.py(), -l_p_rest.pz());
 
   auto l_p  = l_p_rest.boostFromRestFrameOf(l_sys_p);
   auto nu_p = nu_p_rest.boostFromRestFrameOf(l_sys_p);
@@ -144,13 +145,32 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   auto result = gen_B_decay(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id,
                             D_dau_id, D_dau_mass, pi_id, pi_mass, q2, rng);
 
-  auto D_dau_p_rest =
+  auto D_dau_mag =
       compute_p(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
 
   // Now we have 2 additional physical angles: θ_v and χ
   auto theta_v = rng.Uniform(0.1, 3.1);
   auto chi     = -rng.Uniform(
       0.1, 6.2);  // From Bernlochner's definition, this is always negative
+  auto D_dau_p_rest =
+      hp4(Sqrt(D_dau_mass * D_dau_mass + D_dau_mag),
+          D_dau_mag * Sin(theta_v) * Cos(chi),
+          D_dau_mag * Sin(theta_v) * Cos(chi), D_dau_mag * Cos(theta_v));
+  auto pi_p_rest = hp4(Sqrt(pi_mass * pi_mass + D_dau_mag), -D_dau_p_rest.px(),
+                       -D_dau_p_rest.py(), -D_dau_p_rest.pz());
+
+  // Boost back to B rest frame from D* rest frame
+  auto D_p     = any_cast<hp4>(result["D_p"]);
+  auto D_dau_p = D_dau_p_rest.boostFromRestFrameOf(D_p);
+  auto pi_p    = pi_p_rest.boostFromRestFrameOf(D_p);
+
+  result["theta_v"] = theta_v;
+  result["chi"]     = chi;
+
+  result["D_dau_id"] = D_dau_id;
+  result["D_dau_p"]  = D_dau_p;
+  result["pi_id"]    = pi_id;
+  result["pi_p"]     = pi_p;
 
   return result;
 }
@@ -172,7 +192,7 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
 
-  if (TMath::Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
+  if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
@@ -258,7 +278,7 @@ void weight_gen(vector<PartEmu> cands, Int_t B_key, Int_t D_key,
         Double_t calc_isgw2 = 1.;
         Double_t calc_cln   = 1.;
 
-        if (TMath::Abs(D_key) == 413) {
+        if (Abs(D_key) == 413) {
           calc_isgw2 = calc_BDst.Compute(q2_out, false, TAU_MASS);
           calc_cln   = calc_BDst.Compute(q2_out, true, TAU_MASS);
         }
