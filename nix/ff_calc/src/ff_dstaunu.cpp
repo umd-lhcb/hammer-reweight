@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // File and Version Information:
-//      $Id: RateCalc.hh,v 1.1 2012/03/04 00:33:02 manuelf Exp $
+//      $Id: RateCalc.hh,v 1.2 2021/09/09 00:44:41 yipengsun Exp $
 //
 // Description:
 //    Calculation of the B->DlNu rates based on CLN FF from hep-ph/1203.2654
@@ -24,6 +24,7 @@
 //      Michael Mazur                             INFN Pisa
 //
 // Revision History:
+//      21/08/26 yipengsun -- Updated default FF parameters
 //      20/10/27 yipengsun -- Reformatted with clang-format
 //      12/05/10 manuelf   -- Normalization validated with EvtGen, including
 //                            Higgs Added the theta spectrum integrated over q2

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // File and Version Information:
-//      $Id: RateCalc.hh,v 1.1 2012/03/04 00:33:02 manuelf Exp $
+//      $Id: RateCalc.hh,v 1.2 2021/09/09 00:44:41 yipengsun Exp $
 //
 // Description:
 //    Calculation of the B->DlNu rates based on CLN FF from hep-ph/1203.2654

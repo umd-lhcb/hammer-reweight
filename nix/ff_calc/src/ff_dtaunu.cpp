@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------
 // File and Version Information:
-//      $Id: RateCalc.hh,v 1.1 2012/03/04 00:33:02 manuelf Exp $
+//      $Id: RateCalc.hh,v 1.2 2021/09/09 00:44:41 yipengsun Exp $
 //
 // Description:
 //    Calculation of the B->DlNu rates for a lepton of mass ml
@@ -24,11 +24,14 @@
 //      Michael Mazur                             INFN Pisa
 //
 // Revision History:
-//      12/05/10 manuelf -- Normalization validated with EvtGen, including Higgs
-//                          Added the theta spectrum integrated over q2
-//      12/05/09 manuelf -- Corrected a missing sin(thetaL)
-//      12/05/03 manuelf -- Added the NP dependence in terms of gSR
-//      12/03/30 manuelf -- Created off XSLBToDtaunu_CLN.cc by M. Mazur
+//      21/08/26 yipengsun -- Updated default FF parameters
+//      21/08/24 yipengsun -- Reformatted with clang-format
+//      12/05/10 manuelf   -- Normalization validated with EvtGen, including
+//                            Higgs
+//                            Added the theta spectrum integrated over q2
+//      12/05/09 manuelf   -- Corrected a missing sin(thetaL)
+//      12/05/03 manuelf   -- Added the NP dependence in terms of gSR
+//      12/03/30 manuelf   -- Created off XSLBToDtaunu_CLN.cc by M. Mazur
 //------------------------------------------------------------------------
 
 #include "ff_dtaunu.hpp"
