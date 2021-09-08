@@ -198,15 +198,16 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
 
-  auto B_key = any_cast<Int_t>(cands[0]["B_id"]);
-  auto D_key = any_cast<Int_t>(cands[0]["D_id"]);
-  if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
+  auto   B_key  = any_cast<Int_t>(cands[0]["B_id"]);
+  auto   D_key  = any_cast<Int_t>(cands[0]["D_id"]);
+  Bool_t is_Dst = (Abs(D_key) == 413);
 
-  Bool_t is_Dst = false;
-  if (Abs(D_key) == 413) is_Dst = true;
+  if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
+  Bool_t ff_calc_ok;
+  output_tree->Branch("ff_calc_ok", &ff_calc_ok);
 
   Double_t q2_out;
   output_tree->Branch("q2_true", &q2_out);
@@ -289,7 +290,8 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
 
   for (auto& cand : cands) {
     Hammer::Process proc;
-    ham_ok = false;
+    ham_ok     = false;
+    ff_calc_ok = false;
 
     auto q2 = any_cast<Double_t>(cand["q2"]);
     q2_out  = q2;
@@ -374,31 +376,33 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
     ham.initEvent();
     auto proc_id = ham.addProcess(proc);
 
-    // Compute FF weights w/ Manuel's calculator
-    ff_calc_out = 1.0;
-    double_t calc_isgw2, calc_cln, a1, v, a2, a0;
-    if (is_Dst) {
-      calc_BDst.ComputeISGW2(q2, a1, v, a2, a0);
-      calc_isgw2 = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
-                                             chi_out, false, LEPTON_POSITIVE,
-                                             a1, v, a2, a0, TAU_MASS);
-
-      calc_BDst.ComputeCLN(q2, a1, v, a2, a0);
-      calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
-                                           chi_out, false, LEPTON_POSITIVE, a1,
-                                           v, a2, a0, TAU_MASS);
-    }
-
-    ff_calc_out = calc_cln / calc_isgw2;
-
     if (proc_id != 0) {
       ham.processEvent();
       ff_out = ham.getWeight("OutputFF");
 
-      if (!isnan(ff_out) && !isinf(ff_out))
+      if (!isnan(ff_out) && !isinf(ff_out)) {
         ham_ok = true;
-      else
-        ff_out = 1.0;
+        // Compute FF weights w/ Manuel's calculator
+        double_t calc_isgw2, calc_cln, a1, v, a2, a0;
+        if (is_Dst) {
+          calc_BDst.ComputeISGW2(q2, a1, v, a2, a0);
+          calc_isgw2 = calc_BDst.Gamma_q2Angular(
+              q2_out, theta_l_out, theta_v_out, chi_out, false, LEPTON_POSITIVE,
+              a1, v, a2, a0, TAU_MASS);
+
+          calc_BDst.ComputeCLN(q2, a1, v, a2, a0);
+          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
+                                               chi_out, false, LEPTON_POSITIVE,
+                                               a1, v, a2, a0, TAU_MASS);
+        }
+        ff_calc_out = calc_cln / calc_isgw2;
+
+        if (!isnan(ff_calc_out) && !isinf(ff_calc_out)) ff_calc_ok = true;
+
+      } else {
+        ff_out      = 1.0;
+        ff_calc_out = 1.0;
+      }
     }
 
     output_tree->Fill();

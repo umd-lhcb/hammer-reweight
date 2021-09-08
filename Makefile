@@ -56,7 +56,7 @@ validation-plots: gen/rdx-run2-validation.root
 		-b q2_true q2_true q2_true q2_true -XD 2.18 12.18 --bins 20 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
 		-l Generated "HAMMER OK" "HAMMER wt" "Theory wt" \
-		--cuts "None" "ham_ok" "ham_ok" "ham_ok" \
+		--cuts "None" "ham_ok" "ham_ok" "ham_ok & ff_calc_ok" \
 		--weights "None" "None" "w_ff" "w_ff_calc" \
 		--debug
 
