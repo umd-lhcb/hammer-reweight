@@ -398,7 +398,7 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
                                                a1, v, a2, a0, TAU_MASS);
 
           // DEBUG
-          cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
+          // cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
         }
         ff_calc_out = calc_cln / calc_isgw2;
 
