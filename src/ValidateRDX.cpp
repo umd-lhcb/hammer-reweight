@@ -384,14 +384,16 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
         ham_ok = true;
         // Compute FF weights w/ Manuel's calculator
         Double_t calc_isgw2, calc_cln, a1, v, a2, a0;
+        auto     cos_theta_l = Cos(theta_l_out);
+        auto     cos_theta_v = Cos(theta_v_out);
         if (is_Dst) {
           calc_BDst.ComputeISGW2(q2_out, a1, v, a2, a0);
           calc_isgw2 = calc_BDst.Gamma_q2Angular(
-              q2_out, theta_l_out, theta_v_out, chi_out, false, LEPTON_POSITIVE,
+              q2_out, cos_theta_l, cos_theta_v, chi_out, false, LEPTON_POSITIVE,
               a1, v, a2, a0, TAU_MASS);
 
           calc_BDst.ComputeCLN(q2_out, a1, v, a2, a0);
-          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
+          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, cos_theta_l, cos_theta_v,
                                                chi_out, false, LEPTON_POSITIVE,
                                                a1, v, a2, a0, TAU_MASS);
 
