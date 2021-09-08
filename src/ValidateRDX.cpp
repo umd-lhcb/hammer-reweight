@@ -1,5 +1,4 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 07, 2021 at 11:02 PM +0200
 
 #include <any>
 #include <iostream>
@@ -34,6 +33,7 @@ using TMath::Sqrt;
 ///////////////////
 // Configurables //
 ///////////////////
+// Masses are defined in GeV!
 
 const Double_t B_MASS  = 5.27932;
 const Double_t B0_MASS = 5.27963;
@@ -42,7 +42,9 @@ const Double_t DST_MASS = 2.01026;
 const Double_t D0_MASS  = 1.86483;
 
 const Double_t TAU_MASS = 1.77682;
-const Double_t PI_MASS  = 0.1395706;
+const Double_t PI_MASS  = 0.13957;
+
+const bool LEPTON_POSITIVE = true;
 
 // clang-format off
 const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
@@ -146,19 +148,20 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   auto result =
       gen_B_decay(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id, q2, rng);
 
-  auto D_dau_mag =
+  auto D_dau_p_mag =
       compute_p(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
 
   // Now we have 2 additional physical angles: θ_v and χ
   auto theta_v = rng.Uniform(0.1, 3.1);
   auto chi     = -rng.Uniform(
       0.1, 6.2);  // From Bernlochner's definition, this is always negative
+
+  // These are defined in the D* rest frame
   auto D_dau_p_rest =
-      hp4(Sqrt(D_dau_mass * D_dau_mass + D_dau_mag),
-          D_dau_mag * Sin(theta_v) * Cos(chi),
-          D_dau_mag * Sin(theta_v) * Sin(chi), D_dau_mag * Cos(theta_v));
-  auto pi_p_rest = hp4(Sqrt(pi_mass * pi_mass + D_dau_mag), -D_dau_p_rest.px(),
-                       -D_dau_p_rest.py(), -D_dau_p_rest.pz());
+      hp4(Sqrt(D_dau_mass * D_dau_mass + D_dau_p_mag * D_dau_p_mag),
+          D_dau_p_mag * Sin(theta_v) * Cos(chi),
+          D_dau_p_mag * Sin(theta_v) * Sin(chi), D_dau_p_mag * Cos(theta_v));
+  auto pi_p_rest = hp4(D_mass, 0, 0, 0) - D_dau_p_rest;
 
   // Boost back to B rest frame from D* rest frame
   auto D_p     = any_cast<hp4>(result["D_p"]);
@@ -178,7 +181,8 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 
 auto gen_BDstTau_decay(Double_t q2, TRandom& rng) {
   return gen_B_decay(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421,
-                     D0_MASS, -211, PI_MASS, q2, rng);
+                     D0_MASS, -211, PI_MASS, q2,
+                     rng);  // Checked the particle IDs are consistent
 }
 
 auto gen_BDTau_decay(Double_t q2, TRandom& rng) {
@@ -189,14 +193,17 @@ auto gen_BDTau_decay(Double_t q2, TRandom& rng) {
 // Reweighting //
 /////////////////
 
-void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
-                TString tree_name, Hammer::Hammer& ham) {
+void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
+                Hammer::Hammer& ham) {
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
 
   auto B_key = any_cast<Int_t>(cands[0]["B_id"]);
   auto D_key = any_cast<Int_t>(cands[0]["D_id"]);
   if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
+
+  Bool_t is_Dst = false;
+  if (Abs(D_key) == 413) is_Dst = true;
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
@@ -368,17 +375,18 @@ void weight_gen(vector<PartEmu> cands, Bool_t is_Dst, TFile* output_ntp,
     auto proc_id = ham.addProcess(proc);
 
     // Compute FF weights w/ Manuel's calculator
+    ff_calc_out = 1.0;
     double_t calc_isgw2, calc_cln, a1, v, a2, a0;
-    if (abs(D_key) == 413) {
+    if (is_Dst) {
       calc_BDst.ComputeISGW2(q2, a1, v, a2, a0);
-      calc_isgw2 =
-          calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out, chi_out,
-                                    false, true, a1, v, a2, a0, TAU_MASS);
+      calc_isgw2 = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
+                                             chi_out, false, LEPTON_POSITIVE,
+                                             a1, v, a2, a0, TAU_MASS);
 
       calc_BDst.ComputeCLN(q2, a1, v, a2, a0);
-      calc_cln =
-          calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out, chi_out,
-                                    false, true, a1, v, a2, a0, TAU_MASS);
+      calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
+                                           chi_out, false, LEPTON_POSITIVE, a1,
+                                           v, a2, a0, TAU_MASS);
     }
 
     ff_calc_out = calc_cln / calc_isgw2;
@@ -431,7 +439,7 @@ int main(int, char** argv) {
     // cands_BD.push_back(gen_BDTau_decay(q2, rng));
   }
 
-  weight_gen(cands_BDst, true, output_ntp, "tree_BDst", ham);
+  weight_gen(cands_BDst, output_ntp, "tree_BDst", ham);
 
   delete output_ntp;
 }
