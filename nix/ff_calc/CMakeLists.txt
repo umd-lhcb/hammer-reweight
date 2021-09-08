@@ -22,16 +22,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED on)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Targets
-add_library(ff_dstaunu SHARED src/ff_dstaunu.cpp inc/ff_dstaunu.hpp)
-add_library(ff_dtaunu SHARED src/ff_dtaunu.cpp inc/ff_dtaunu.hpp)
+add_library(ff_calc SHARED src/ff_dstaunu.cpp inc/ff_dstaunu.hpp src/ff_dtaunu.cpp inc/ff_dtaunu.hpp)
 
 target_include_directories(
-  ff_dstaunu PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
-    $<INSTALL_INTERFACE:inc>
-)
-target_include_directories(
-  ff_dtaunu PUBLIC
+  ff_calc PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
     $<INSTALL_INTERFACE:inc>
 )
@@ -39,6 +33,6 @@ target_include_directories(
 # Define install rules
 include(GNUInstallDirs)
 
-install(TARGETS ff_dstaunu
+install(TARGETS ff_calc
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
