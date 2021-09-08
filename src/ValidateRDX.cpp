@@ -293,8 +293,7 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
     ham_ok     = false;
     ff_calc_ok = false;
 
-    auto q2 = any_cast<Double_t>(cand["q2"]);
-    q2_out  = q2;
+    q2_out = any_cast<Double_t>(cand["q2"]);
 
     b_id_out = any_cast<Int_t>(cand["B_id"]);
     auto b_p = any_cast<hp4>(cand["B_p"]);
@@ -385,15 +384,18 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
         // Compute FF weights w/ Manuel's calculator
         double_t calc_isgw2, calc_cln, a1, v, a2, a0;
         if (is_Dst) {
-          calc_BDst.ComputeISGW2(q2, a1, v, a2, a0);
+          calc_BDst.ComputeISGW2(q2_out, a1, v, a2, a0);
           calc_isgw2 = calc_BDst.Gamma_q2Angular(
               q2_out, theta_l_out, theta_v_out, chi_out, false, LEPTON_POSITIVE,
               a1, v, a2, a0, TAU_MASS);
 
-          calc_BDst.ComputeCLN(q2, a1, v, a2, a0);
+          calc_BDst.ComputeCLN(q2_out, a1, v, a2, a0);
           calc_cln = calc_BDst.Gamma_q2Angular(q2_out, theta_l_out, theta_v_out,
                                                chi_out, false, LEPTON_POSITIVE,
                                                a1, v, a2, a0, TAU_MASS);
+
+          // DEBUG
+          cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
         }
         ff_calc_out = calc_cln / calc_isgw2;
 
