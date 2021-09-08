@@ -382,7 +382,7 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
       if (!isnan(ff_out) && !isinf(ff_out)) {
         ham_ok = true;
         // Compute FF weights w/ Manuel's calculator
-        double_t calc_isgw2, calc_cln, a1, v, a2, a0;
+        Double_t calc_isgw2, calc_cln, a1, v, a2, a0;
         if (is_Dst) {
           calc_BDst.ComputeISGW2(q2_out, a1, v, a2, a0);
           calc_isgw2 = calc_BDst.Gamma_q2Angular(
