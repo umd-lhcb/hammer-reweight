@@ -6,7 +6,7 @@ COMPILER	:=	$(shell root-config --cxx)
 CXXFLAGS	:=	$(shell root-config --cflags) -Iinclude
 LINKFLAGS	:=	$(shell root-config --libs)
 ADDLINKFLAGS	:=	-lHammerTools -lHammerBase -lHammerCore -lFormFactors -lAmplitudes -lRates
-VALLINKFLAGS	:=	-lff_dstaunu
+VALLINKFLAGS	:=	-lff_calc
 
 
 ###########

@@ -20,6 +20,7 @@
 #include <Hammer/Process.hh>
 
 #include <ff_dstaunu.hpp>
+#include <ff_dtaunu.hpp>
 
 #include "utils.h"
 
