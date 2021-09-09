@@ -19,6 +19,11 @@ make sample-plots
 
 to generate sample reweighting plots (which will be put in the `gen` folder).
 
+You can generate some reweighting validation plots with:
+```
+make validation-plots
+```
+
 
 ## Usage
 
