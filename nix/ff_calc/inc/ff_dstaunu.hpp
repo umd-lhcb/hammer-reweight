@@ -24,6 +24,7 @@
 //      Michael Mazur                             INFN Pisa
 //
 /// Revision History:
+//      21/09/09 yipengsun -- Updated primary constants
 //      21/08/26 yipengsun -- Updated default FF parameters
 //      20/10/27 yipengsun -- Reformatted with clang-format
 //      12/05/10 manuelf   -- Normalization validated with EvtGen, including
@@ -54,8 +55,8 @@ class BToDstaunu {
              double R0 = 1.15, double gSR = 0);
   ~BToDstaunu();
 
-  // Primary constants from PDG and PRD 82 112007 (2010)
-  static constexpr double mTau = 1.7768;
+  // Primary constants from HAMMER v1.1, PDG and PRD 82 112007 (2010)
+  static constexpr double mTau = 1.77686;
   static constexpr double mMu  = 0.10566;
   static constexpr double mE   = 0.000511;
   static constexpr double Vcb  = 0.03928;
@@ -64,8 +65,8 @@ class BToDstaunu {
   static constexpr double PI   = 3.14159265;
   static constexpr double hbar = 6.582119e-25;
   static constexpr double mb_quark =
-      4.20;  // [GeV] in the MSbar scheme, evaluated at mb.
-  static constexpr double mc_quark = 0.901;  // From Xing, Zhang, Zhou (2008)
+      4.18;  // [GeV] in the MSbar scheme, evaluated at mb.
+  static constexpr double mc_quark = 1.27;  // from PDG 2020
 
   // Secondary constants
   double _mB, _mBSP8, _BLifeTime;

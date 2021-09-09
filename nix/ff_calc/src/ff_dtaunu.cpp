@@ -24,6 +24,7 @@
 //      Michael Mazur                             INFN Pisa
 //
 // Revision History:
+//      21/09/09 yipengsun -- Updated primary constants
 //      21/08/26 yipengsun -- Updated default FF parameters
 //      21/08/24 yipengsun -- Reformatted with clang-format
 //      12/05/10 manuelf   -- Normalization validated with EvtGen, including
