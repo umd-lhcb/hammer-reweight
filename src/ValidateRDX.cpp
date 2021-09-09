@@ -385,7 +385,7 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
       if (!isnan(ff_out) && !isinf(ff_out)) {
         ham_ok = true;
         // Compute FF weights w/ Manuel's calculator
-        Double_t calc_isgw2, calc_cln, a1, v, a2, a0;
+        Double_t calc_isgw2, calc_cln, a1, v, a2, a0, fplus, fminus;
         auto     cos_theta_l = Cos(theta_l_out);
         auto     cos_theta_v = Cos(theta_v_out);
         if (is_Dst) {
@@ -400,8 +400,13 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
                                                a1, v, a2, a0, TAU_MASS);
 
         } else {
-          calc_isgw2 = calc_BD.Compute(q2_out, false, TAU_MASS);
-          calc_cln   = calc_BD.Compute(q2_out, true, TAU_MASS);
+          calc_BD.ComputeISGW2(q2_out, fplus, fminus);
+          calc_isgw2 =
+              calc_BD.Gamma_q2tL(q2_out, theta_l_out, fplus, fminus, TAU_MASS);
+
+          calc_BD.ComputeCLN(q2_out, fplus, fminus);
+          calc_cln =
+              calc_BD.Gamma_q2tL(q2_out, theta_l_out, fplus, fminus, TAU_MASS);
         }
         ff_calc_out = calc_cln / calc_isgw2;
 
