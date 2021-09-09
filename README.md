@@ -61,3 +61,13 @@ ReweightRDX samples/rdx-run2-Bd2DstMuNu.root output.root TupleB0/DecayTree run2
 ```
 
 The `output.root` contains a `w_ff` branch and some other debugging branches.
+
+### `ValidateRDX`
+
+This is used to generate some toy data to validate HAMMER reweighting for RDX
+with an independently implemented FF calculator.
+
+To use it:
+```
+ValidateRDX test.root
+```
