@@ -46,11 +46,11 @@ sample-plots: \
 validation-plots: gen/rdx-run2-validation.root
 	@echo "Generating B -> D* validation plot..."
 	@plotbr -n $</tree_BDst -o gen/rdx-run2-validation-B02Dst.png \
-		-b w_ff w_ff_calc \
-		-XD 0.7 1.05 --bins 35 \
+		-b "w_ff-w_ff_calc" \
+		--bins 5 \
 		-XL "FF weights" \
-		-l HAMMER Theory \
-		--cuts "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
+		-l "HAMMER - theory" \
+		--cuts "ham_ok & ff_calc_ok" \
 		--debug
 	@plotbr -n $</tree_BDst -o gen/rdx-run2-validation-B02Dst_q2_true.png \
 		-b q2_true q2_true q2_true q2_true -XD 3.2 11.0 --bins 20 \
@@ -61,11 +61,11 @@ validation-plots: gen/rdx-run2-validation.root
 		--debug
 	@echo "Generating B -> D validation plot..."
 	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0.png \
-		-b w_ff w_ff_calc \
-		-XD 0.7 1.1 --bins 30 \
+		-b "w_ff-w_ff_calc" \
+		--bins 5 \
 		-XL "FF weights" \
-		-l HAMMER Theory \
-		--cuts "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
+		-l "HAMMER - theory" \
+		--cuts "ham_ok & ff_calc_ok" \
 		--debug
 	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0_q2_true.png \
 		-b q2_true q2_true q2_true q2_true -XD 3.2 11.0 --bins 20 \
