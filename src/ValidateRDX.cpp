@@ -198,6 +198,7 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
                 Hammer::Hammer& ham) {
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
+  auto calc_BD     = BToDtaunu{};
 
   auto   B_key  = any_cast<Int_t>(cands[0]["B_id"]);
   auto   D_key  = any_cast<Int_t>(cands[0]["D_id"]);
@@ -275,6 +276,7 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
   Double_t pi_pe_out;
   output_tree->Branch("pi_pe", &pi_pe_out);
   Double_t pi_px_out;
+  //      $Id: RateCalc.hh,v 1.2 2021/09/09 00:43:50 yipengsun Exp $
   output_tree->Branch("pi_px", &pi_px_out);
   Double_t pi_py_out;
   output_tree->Branch("pi_py", &pi_py_out);
@@ -397,12 +399,15 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
                                                chi_out, false, LEPTON_POSITIVE,
                                                a1, v, a2, a0, TAU_MASS);
 
-          // DEBUG
-          // cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
+        } else {
+          calc_isgw2 = calc_BD.Compute(q2_out, false, TAU_MASS);
+          calc_cln   = calc_BD.Compute(q2_out, true, TAU_MASS);
         }
         ff_calc_out = calc_cln / calc_isgw2;
 
         if (!isnan(ff_calc_out) && !isinf(ff_calc_out)) ff_calc_ok = true;
+        // DEBUG
+        // cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
 
       } else {
         ff_out      = 1.0;
@@ -444,11 +449,12 @@ int main(int, char** argv) {
   for (auto& q2 : q2s) {
     if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - DST_MASS, 2))
       cands_BDst.push_back(gen_BDstTau_decay(q2, rng));
-    // if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - D0_MASS, 2))
-    // cands_BD.push_back(gen_BDTau_decay(q2, rng));
+    if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - D0_MASS, 2))
+      cands_BD.push_back(gen_BDTau_decay(q2, rng));
   }
 
   weight_gen(cands_BDst, output_ntp, "tree_BDst", ham);
+  weight_gen(cands_BD, output_ntp, "tree_BD", ham);
 
   delete output_ntp;
 }
