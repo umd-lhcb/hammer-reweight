@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Sep 13, 2021 at 11:07 PM +0200
+// Last Change: Tue Sep 14, 2021 at 01:44 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -311,16 +311,13 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
   unsigned long num_of_evt        = 0l;
   unsigned long num_of_evt_ham_ok = 0l;
-  double        q2_min            = 0;
   while (reader.Next()) {
     ham_ok      = false;
     w_ff_out    = 1.;
     q2_true_out = *q2 / 1000 / 1000;
 
-    if (*is_tau)
-      q2_min = 1700 * 1700;
-    else
-      q2_min = 100 * 100;
+    double q2_min = 100 * 100;
+    if (*is_tau) q2_min = 1700 * 1700;
 
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min &&
@@ -436,6 +433,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         auto part_D     = particle(D_mom[D_lbl + "_PE"], D_mom[D_lbl + "_PX"],
                                D_mom[D_lbl + "_PY"], D_mom[D_lbl + "_PZ"],
                                D_cands[D_lbl]);
+
         Hammer::Particle part_L, part_NuL, part_TauNuTau, part_TauNuMu, part_Mu;
         if (*is_tau)
           part_L = particle(*tau_pe, *tau_px, *tau_py, *tau_pz, Tau_id(*mu_id));
@@ -504,22 +502,20 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                          {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
         }
 
-        int proc_id;
-        // Prevent illegal kinematics from breaking the loop
-        try {
-          ham.initEvent();
-          proc_id = ham.addProcess(proc);
-        } catch (...) {
-          proc_id = 0;
-        }
+        bool all_parts_ok = find(part_m2_ok.begin(), part_m2_ok.end(), false) ==
+                            part_m2_ok.end();
 
 #ifndef SILENT
         // Print debug info
         cout << "========" << endl;
+        cout << "True q2 (GeV): " << q2_true_out << endl;
         cout << "B meson ID: " << b_id_fixed << endl;
         cout << "D meson ID: " << D_cands[D_lbl] << endl;
+        cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
+        cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
+        cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
+
         cout << "Is tau decay: " << *is_tau << endl;
-        cout << "HAMMER process ID: " << proc_id << endl;
         cout << "Current candidate index: " << num_of_evt << endl;
 
         // More detailed debug messages
@@ -557,10 +553,24 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
              << endl;
         for (auto v : part_m2_ok) cout << "  " << v;
         cout << endl;
+        cout << "All particles have OK kinematics: " << all_parts_ok << endl;
 #endif
 
-        if (proc_id != 0 && find(part_m2_ok.begin(), part_m2_ok.end(), false) ==
-                                part_m2_ok.end()) {
+        if (TMath::Abs(D_cands["D0"]) == 415 && !*is_tau) {
+          cout << "Skip 415, mu for now!" << endl;
+          continue;
+        }
+
+        int proc_id;
+        // Prevent illegal kinematics from breaking the loop
+        try {
+          ham.initEvent();
+          proc_id = ham.addProcess(proc);
+        } catch (...) {
+          proc_id = 0;
+        }
+
+        if (proc_id != 0 && all_parts_ok) {
           ham.processEvent();
           auto ff_out = ham.getWeight("OutputFF");
 
