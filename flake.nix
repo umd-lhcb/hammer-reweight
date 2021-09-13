@@ -29,7 +29,7 @@
           hammer-reweight = pkgs.hammer-reweight;
         };
         devShell = pkgs.mkShell {
-          name = "hammer-reweight";
+          name = "hammer-reweight-dev";
           buildInputs = (with pkgs; with pythonPackages; [
             # Dev tools
             clang-tools
