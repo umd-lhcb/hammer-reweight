@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Aug 25, 2021 at 02:33 PM +0200
+// Last Change: Mon Sep 13, 2021 at 11:02 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -593,7 +593,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
 int main(int, char** argv) {
   auto    input_ntp  = new TFile(argv[1], "read");
-  auto    output_ntp = new TFile(argv[2], "recreate");
+  auto    output_ntp = new TFile(argv[2], "update");
   TString tree       = argv[3];
   TString run        = argv[4];
 
