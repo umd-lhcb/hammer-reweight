@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Sep 13, 2021 at 11:02 PM +0200
+// Last Change: Mon Sep 13, 2021 at 11:07 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -30,7 +30,7 @@ using namespace std;
 // Configurables //
 ///////////////////
 
-#define SILENT
+//#define SILENT
 #define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
 // #define FORCE_MOMENTUM_CONSERVATION_HADRONIC
 
@@ -549,7 +549,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         cout << "Lepton HAMMER ID: " << part_L_idx << endl;
         cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
 
+#ifdef FORCE_MOMENTUM_CONSERVATION_HADRONIC
         cout << "Hadronic part known momentum: " << print_p(known_mom) << endl;
+#endif
 
         cout << "Check if invariant mass2 of each particle is non-negative: "
              << endl;
