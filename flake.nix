@@ -26,6 +26,7 @@
       rec {
         packages = flake-utils.lib.flattenTree {
           dev-shell = devShell.inputDerivation;
+          hammer-reweight = pkgs.hammer-reweight;
         };
         devShell = pkgs.mkShell {
           name = "hammer-reweight";
