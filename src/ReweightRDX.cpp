@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Sep 15, 2021 at 02:03 PM +0200
+// Last Change: Wed Sep 15, 2021 at 04:54 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -16,6 +16,7 @@
 #include <TString.h>
 #include <TTree.h>
 #include <TTreeReader.h>
+#include <TTreeReaderArray.h>
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -108,6 +109,16 @@ void set_decays(Hammer::Hammer& ham) {
 /////////////////
 
 typedef pair<unsigned long, unsigned long> RwRate;
+
+void photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
+                       vector<Hammer::Particle> photon_p, Hammer::Process& proc,
+                       Hammer::ParticleIndices& idx) {
+  for (auto i = 0; i < photon_p.size(); i++) {
+    if (photon_mom_id[i] == ref_mom_id || photon_mom_id[i] == -ref_mom_id) {
+      idx.push_back(proc.addParticle(photon_p[i]));
+    }
+  }
+}
 
 RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                 Hammer::Hammer& ham) {
@@ -277,6 +288,16 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   TTreeReaderValue<Int_t>    d_idx2_gd2_id(reader,
                                         b_meson + "_TrueHadron_D2_GD2_ID");
 
+  // Radiative photons
+  TTreeReaderValue<Int_t> photon_arr_size(
+      reader, b_meson + "_MCTrue_gamma_ArrayLength");
+  TTreeReaderArray<Float_t> photon_arr_pe(reader, b_meson + "_MCTrue_gamma_E");
+  TTreeReaderArray<Float_t> photon_arr_px(reader, b_meson + "_MCTrue_gamma_PX");
+  TTreeReaderArray<Float_t> photon_arr_py(reader, b_meson + "_MCTrue_gamma_PY");
+  TTreeReaderArray<Float_t> photon_arr_pz(reader, b_meson + "_MCTrue_gamma_PY");
+  TTreeReaderArray<Float_t> photon_arr_mom_id(
+      reader, b_meson + "_MCTrue_gamma_mother_ID");
+
   // Event ID
   TTreeReaderValue<ULong64_t> eventNumber(reader, "eventNumber");
   TTreeReaderValue<UInt_t>    runNumber(reader, "runNumber");
@@ -435,10 +456,14 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                                D_cands[D_lbl]);
 
         Hammer::Particle part_L, part_NuL, part_TauNuTau, part_TauNuMu, part_Mu;
-        if (*is_tau)
-          part_L = particle(*tau_pe, *tau_px, *tau_py, *tau_pz, Tau_id(*mu_id));
-        else
-          part_L = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
+        Int_t            part_L_id = 0;
+        if (*is_tau) {
+          part_L_id = Tau_id(*mu_id);
+          part_L    = particle(*tau_pe, *tau_px, *tau_py, *tau_pz, part_L_id);
+        } else {
+          part_L_id = Mu_id(*mu_id);
+          part_L    = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, part_L_id);
+        }
 
         part_Mu  = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
         part_NuL = particle(*anu_pe, *anu_px, *anu_py, *anu_pz,
@@ -458,11 +483,6 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         auto part_B_idx = proc.addParticle(part_B);
         auto part_D_idx = proc.addParticle(part_D);
 
-        Hammer::ParticleIndices part_D_daughters_idx{};
-        for (const auto part : part_D_daughters) {
-          part_D_daughters_idx.push_back(proc.addParticle(part));
-        }
-
 #ifdef FORCE_MOMENTUM_CONSERVATION_LEPTONIC
         part_L.setMomentum(part_B.p() - part_D.p() - part_NuL.p());
 
@@ -481,6 +501,52 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         part_D_daughters[part_D_daughters.size() - 1].setMomentum(bal_mom);
 #endif
 
+        // Build photons for radiative correction
+        vector<Int_t> vec_photon_mom_id{};
+        for (auto i = 0; i < *photon_arr_size; i++) {
+          vec_photon_mom_id.push_back(static_cast<Int_t>(photon_arr_mom_id[i]));
+        }
+        vector<Hammer::Particle> vec_photon_p{};
+        for (auto i = 0; i < *photon_arr_size; i++) {
+          Float_t g_pe = photon_arr_pe[i];
+          Float_t g_px = photon_arr_px[i];
+          Float_t g_py = photon_arr_py[i];
+          Float_t g_pz = photon_arr_pz[i];
+
+          vec_photon_p.emplace_back(particle(g_pe, g_px, g_py, g_pz, 22));
+        }
+
+        // Always add the primary leptons
+        auto part_L_idx   = proc.addParticle(part_L);
+        auto part_NuL_idx = proc.addParticle(part_NuL);
+
+        // Particle indices, also decay tree definition
+        Hammer::ParticleIndices part_B_daughters_idx{part_D_idx, part_L_idx,
+                                                     part_NuL_idx};
+        photon_correction(b_id_fixed, vec_photon_mom_id, vec_photon_p, proc,
+                          part_B_daughters_idx);
+        proc.addVertex(part_B_idx, part_B_daughters_idx);
+
+        Hammer::ParticleIndices part_D_daughters_idx{};
+        for (const auto part : part_D_daughters) {
+          part_D_daughters_idx.push_back(proc.addParticle(part));
+        }
+        photon_correction(D_cands[D_lbl], vec_photon_mom_id, vec_photon_p, proc,
+                          part_D_daughters_idx);
+        proc.addVertex(part_D_idx, part_D_daughters_idx);
+
+        if (*is_tau) {
+          auto part_Mu_idx       = proc.addParticle(part_Mu);
+          auto part_TauNuMu_idx  = proc.addParticle(part_TauNuMu);
+          auto part_TauNuTau_idx = proc.addParticle(part_TauNuTau);
+
+          Hammer::ParticleIndices part_L_daughters_idx{
+              part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx};
+          photon_correction(part_L_id, vec_photon_mom_id, vec_photon_p, proc,
+                            part_L_daughters_idx);
+          proc.addVertex(part_L_idx, part_L_daughters_idx);
+        }
+
         // Make sure invariant mass is non-negative
         vector<Hammer::Particle> part_vec{part_B,       part_D,  part_L,
                                           part_NuL,     part_Mu, part_TauNuMu,
@@ -492,23 +558,6 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           else
             part_m2_ok.push_back(false);
         }
-
-        // Always add the primary leptons
-        auto part_L_idx   = proc.addParticle(part_L);
-        auto part_NuL_idx = proc.addParticle(part_NuL);
-
-        proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
-        proc.addVertex(part_D_idx, part_D_daughters_idx);
-
-        if (*is_tau) {
-          auto part_Mu_idx       = proc.addParticle(part_Mu);
-          auto part_TauNuMu_idx  = proc.addParticle(part_TauNuMu);
-          auto part_TauNuTau_idx = proc.addParticle(part_TauNuTau);
-
-          proc.addVertex(part_L_idx,
-                         {part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx});
-        }
-
         bool all_parts_ok = find(part_m2_ok.begin(), part_m2_ok.end(), false) ==
                             part_m2_ok.end();
 
@@ -574,13 +623,30 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         cout << "All particles have OK kinematics: " << all_parts_ok << endl;
 #endif
 
-        int proc_id;
-        ham.initEvent();
-        proc_id = ham.addProcess(proc);
+        if (!all_parts_ok) {
+          cout << "Bad kinematics for candidate: " << num_of_evt << endl;
+          continue;
+        }
+        int proc_id = 0;
+        try {
+          ham.initEvent();
+          proc_id = ham.addProcess(proc);
+        } catch (...) {
+          cout << "HAMMER doesn't initialize candidate properly: " << num_of_evt
+               << endl;
+          continue;
+        }
 
-        if (proc_id != 0 && all_parts_ok) {
-          ham.processEvent();
-          auto ff_out = ham.getWeight("OutputFF");
+        if (proc_id != 0) {
+          Double_t ff_out = 1.;
+          try {
+            ham.processEvent();
+            ff_out = ham.getWeight("OutputFF");
+          } catch (...) {
+            cout << "HAMMER doesn't like candidate for reweighting: "
+                 << num_of_evt << endl;
+            continue;
+          }
 
           if (!isnan(ff_out) && !isinf(ff_out)) {
             w_ff_out = ff_out;
