@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue Sep 14, 2021 at 01:44 AM +0200
+// Last Change: Wed Sep 15, 2021 at 02:03 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -31,8 +31,8 @@ using namespace std;
 ///////////////////
 
 //#define SILENT
-#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
-// #define FORCE_MOMENTUM_CONSERVATION_HADRONIC
+//#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
+//#define FORCE_MOMENTUM_CONSERVATION_HADRONIC
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -440,9 +440,16 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         else
           part_L = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
 
-        part_Mu       = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
-        part_NuL      = particle(*anu_pe, *anu_px, *anu_py, *anu_pz,
+        part_Mu  = particle(*mu_pe, *mu_px, *mu_py, *mu_pz, Mu_id(*mu_id));
+        part_NuL = particle(*anu_pe, *anu_px, *anu_py, *anu_pz,
                             Nu_id(*mu_id, *is_tau));
+
+        // FIXME: From Julian: The nu_mu and nu_tau kinematics are exchanged
+        //        below, to correct for the bug in the LHCb EvtGen models
+        // part_TauNuMu  = particle(*nu_tau_pe, *nu_tau_px, *nu_tau_py,
+        // *nu_tau_pz, Tau_NuMu_id(*mu_id));
+        // part_TauNuTau = particle(*anu_mu_pe, *anu_mu_px, *anu_mu_py,
+        // *anu_mu_pz, Tau_NuTau_id(*mu_id));
         part_TauNuTau = particle(*nu_tau_pe, *nu_tau_px, *nu_tau_py, *nu_tau_pz,
                                  Tau_NuTau_id(*mu_id));
         part_TauNuMu  = particle(*anu_mu_pe, *anu_mu_px, *anu_mu_py, *anu_mu_pz,
@@ -470,8 +477,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           known_mom += part_D_daughters[idx].p();
         }
 
-        part_D_daughters[part_D_daughters.size() - 1].setMomentum(part_D.p() -
-                                                                  known_mom);
+        auto bal_mom = part_D.p() - known_mom;
+        part_D_daughters[part_D_daughters.size() - 1].setMomentum(bal_mom);
 #endif
 
         // Make sure invariant mass is non-negative
@@ -520,21 +527,32 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
         // More detailed debug messages
         cout << "B meson 4-mom: " << print_p(part_B.p()) << endl;
+        cout << "B meson inv.m: " << part_B.p().mass() << endl;
         cout << "D meson 4-mom: " << print_p(part_D.p()) << endl;
+        cout << "D meson inv.m: " << part_D.p().mass() << endl;
         for (auto idx = 0; idx < part_D_daughters.size(); idx++) {
           cout << "D daughter idx "s + idx + " 4-mom: "
                << print_p(part_D_daughters[idx].p()) << endl;
+          cout << "D daughter idx "s + idx + " inv.m: "
+               << part_D_daughters[idx].p().mass() << endl;
         }
 
         if (*is_tau) {
           cout << "Tau 4-mom: " << print_p(part_L.p()) << endl;
+          cout << "Tau inv.m: " << part_L.p().mass() << endl;
           cout << "anti-TauNu 4-mom: " << print_p(part_NuL.p()) << endl;
+          cout << "anti-TauNu inv.m: " << part_NuL.p().mass() << endl;
           cout << "TauNu 4-mom: " << print_p(part_TauNuTau.p()) << endl;
+          cout << "TauNu inv.m: " << part_TauNuTau.p().mass() << endl;
           cout << "Mu 4-mom: " << print_p(part_Mu.p()) << endl;
+          cout << "Mu inv.m: " << part_Mu.p().mass() << endl;
           cout << "anti-MuNu 4-mom: " << print_p(part_TauNuMu.p()) << endl;
+          cout << "anti-MuNu inv.mass: " << part_TauNuMu.p().mass() << endl;
         } else {
           cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
+          cout << "Mu inv.m: " << part_L.p().mass() << endl;
           cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
+          cout << "anti-MuNu inv.m: " << part_NuL.p().mass() << endl;
         }
 
         cout << "B meson HAMMER ID: " << part_B_idx << endl;
@@ -556,19 +574,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         cout << "All particles have OK kinematics: " << all_parts_ok << endl;
 #endif
 
-        if (TMath::Abs(D_cands["D0"]) == 415 && !*is_tau) {
-          cout << "Skip 415, mu for now!" << endl;
-          continue;
-        }
-
         int proc_id;
-        // Prevent illegal kinematics from breaking the loop
-        try {
-          ham.initEvent();
-          proc_id = ham.addProcess(proc);
-        } catch (...) {
-          proc_id = 0;
-        }
+        ham.initEvent();
+        proc_id = ham.addProcess(proc);
 
         if (proc_id != 0 && all_parts_ok) {
           ham.processEvent();
@@ -616,6 +624,7 @@ int main(int, char** argv) {
   set_output_ff(ham);
 
   ham.setUnits("MeV");
+  ham.setOptions("ProcessCalc: {CheckForNaNs: true}");
   ham.initRun();
 
   auto rate = reweight(input_ntp, output_ntp, tree, ham);
