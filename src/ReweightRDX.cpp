@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 12:04 AM +0200
+// Last Change: Thu Sep 16, 2021 at 01:35 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -568,7 +568,10 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                                           part_TauNuTau};
         vector<Bool_t>           part_m2_ok{};
         for (const auto p : part_vec) {
-          if (p.p().mass() >= 0)
+          // if (p.p().mass2() >= 0)  // This sometimes gives us negative
+          // numbers for neutrinos due to float-point arithmetics
+          if (p.p().mass() >= 0)  // HAMMER automatically apply fabs for very
+                                  // small negative floats
             part_m2_ok.push_back(true);
           else
             part_m2_ok.push_back(false);
@@ -672,7 +675,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                << endl;
 #endif
 
-          cout << "Check if invariant mass2 of each particle is non-negative: "
+          cout << "Check if invariant mass of each particle is non-negative: "
                << endl;
           for (auto v : part_m2_ok) cout << "  " << v;
           cout << endl;
