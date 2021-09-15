@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Sep 15, 2021 at 11:51 PM +0200
+// Last Change: Thu Sep 16, 2021 at 12:04 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -566,110 +566,119 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         vector<Hammer::Particle> part_vec{part_B,       part_D,  part_L,
                                           part_NuL,     part_Mu, part_TauNuMu,
                                           part_TauNuTau};
-        vector<bool>             part_m2_ok{};
+        vector<Bool_t>           part_m2_ok{};
         for (const auto p : part_vec) {
-          if (p.p().mass2() >= 0)
+          if (p.p().mass() >= 0)
             part_m2_ok.push_back(true);
           else
             part_m2_ok.push_back(false);
         }
-        bool all_parts_ok = find(part_m2_ok.begin(), part_m2_ok.end(), false) ==
-                            part_m2_ok.end();
+        Bool_t all_parts_ok = find(part_m2_ok.begin(), part_m2_ok.end(),
+                                   false) == part_m2_ok.end();
 
-#ifndef SILENT
-        // Print debug info
-        cout << "========" << endl;
-        cout << "True q2 (GeV): " << q2_true_out << endl;
-        cout << "B meson ID: " << b_id_fixed << endl;
-        cout << "D meson ID: " << d_id << endl;
-        cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
-        cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
-        cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
-
-        cout << "Is tau decay: " << *is_tau << endl;
-        cout << "Current candidate index: " << num_of_evt << endl;
-
-        // More detailed debug messages
-        cout << "B meson 4-mom: " << print_p(part_B.p()) << endl;
-        cout << "B meson inv.m: " << part_B.p().mass() << endl;
-        cout << "D meson 4-mom: " << print_p(part_D.p()) << endl;
-        cout << "D meson inv.m: " << part_D.p().mass() << endl;
-        for (auto idx = 0; idx < part_D_daughters.size(); idx++) {
-          cout << "D daughter idx "s + idx + " 4-mom: "
-               << print_p(part_D_daughters[idx].p()) << endl;
-          cout << "D daughter idx "s + idx + " inv.m: "
-               << part_D_daughters[idx].p().mass() << endl;
-        }
-
-        if (*is_tau) {
-          cout << "Tau 4-mom: " << print_p(part_L.p()) << endl;
-          cout << "Tau inv.m: " << part_L.p().mass() << endl;
-          cout << "anti-TauNu 4-mom: " << print_p(part_NuL.p()) << endl;
-          cout << "anti-TauNu inv.m: " << part_NuL.p().mass() << endl;
-          cout << "TauNu 4-mom: " << print_p(part_TauNuTau.p()) << endl;
-          cout << "TauNu inv.m: " << part_TauNuTau.p().mass() << endl;
-          cout << "Mu 4-mom: " << print_p(part_Mu.p()) << endl;
-          cout << "Mu inv.m: " << part_Mu.p().mass() << endl;
-          cout << "anti-MuNu 4-mom: " << print_p(part_TauNuMu.p()) << endl;
-          cout << "anti-MuNu inv.mass: " << part_TauNuMu.p().mass() << endl;
-        } else {
-          cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
-          cout << "Mu inv.m: " << part_L.p().mass() << endl;
-          cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
-          cout << "anti-MuNu inv.m: " << part_NuL.p().mass() << endl;
-        }
-
-        cout << "B meson HAMMER ID: " << part_B_idx << endl;
-        cout << "D meson HAMMER ID: " << part_D_idx << endl;
-        if (is_Dst) {
-          cout << "D daughter HAMMER IDs:";
-          for (auto idx : part_D_daughters_idx) cout << "  " << idx;
-          cout << endl;
-        }
-        cout << "Lepton HAMMER ID: " << part_L_idx << endl;
-        cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
-
-#ifdef FORCE_MOMENTUM_CONSERVATION_HADRONIC
-        cout << "Hadronic part known momentum: " << print_p(known_mom) << endl;
-#endif
-
-        cout << "Check if invariant mass2 of each particle is non-negative: "
-             << endl;
-        for (auto v : part_m2_ok) cout << "  " << v;
-        cout << endl;
-        cout << "All particles have OK kinematics: " << all_parts_ok << endl;
-#endif
+        Bool_t is_bad_cand = false;
 
         if (!all_parts_ok) {
-          cout << "Bad kinematics for candidate: " << num_of_evt << endl;
-          continue;
-        }
-        int proc_id = 0;
-        try {
-          ham.initEvent();
-          proc_id = ham.addProcess(proc);
-        } catch (...) {
-          cout << "WARN: HAMMER doesn't initialize candidate properly: "
-               << num_of_evt << endl;
-          continue;
+          cout << "WARN: Bad kinematics for candidate: " << num_of_evt << endl;
+          is_bad_cand = true;
         }
 
-        if (proc_id != 0) {
-          Double_t ff_out = 1.;
+        if (!is_bad_cand) {
+          int proc_id = 0;
           try {
-            ham.processEvent();
-            ff_out = ham.getWeight("OutputFF");
+            ham.initEvent();
+            proc_id = ham.addProcess(proc);
           } catch (...) {
-            cout << "WARN: HAMMER doesn't like candidate for reweighting: "
+            cout << "WARN: HAMMER doesn't initialize candidate properly: "
                  << num_of_evt << endl;
-            continue;
+            is_bad_cand = true;
           }
 
-          if (!isnan(ff_out) && !isinf(ff_out)) {
-            w_ff_out = ff_out;
-            num_of_evt_ham_ok += 1;
-            ham_ok = true;
+          if (proc_id != 0 && !is_bad_cand) {
+            Double_t ff_out = 1.;
+            try {
+              ham.processEvent();
+              ff_out = ham.getWeight("OutputFF");
+            } catch (...) {
+              cout << "WARN: HAMMER doesn't like candidate for reweighting: "
+                   << num_of_evt << endl;
+              is_bad_cand = true;
+            }
+
+            if (!isnan(ff_out) && !isinf(ff_out) && !is_bad_cand) {
+              w_ff_out = ff_out;
+              num_of_evt_ham_ok += 1;
+              ham_ok = true;
+            }
           }
+        }
+
+        if (is_bad_cand) {
+#ifndef SILENT
+          // Print debug info
+          cout << "========" << endl;
+          cout << "True q2 (GeV): " << q2_true_out << endl;
+          cout << "B meson ID: " << b_id_fixed << endl;
+          cout << "D meson ID: " << d_id << endl;
+          cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
+          cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
+          cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
+
+          cout << "Is tau decay: " << *is_tau << endl;
+          cout << "Current candidate index: " << num_of_evt << endl;
+
+          // More detailed debug messages
+          cout << "B meson 4-mom: " << print_p(part_B.p()) << endl;
+          cout << "B meson inv.m: " << part_B.p().mass() << endl;
+          cout << "D meson 4-mom: " << print_p(part_D.p()) << endl;
+          cout << "D meson inv.m: " << part_D.p().mass() << endl;
+          for (auto idx = 0; idx < part_D_daughters.size(); idx++) {
+            cout << "D daughter idx "s + idx + " 4-mom: "
+                 << print_p(part_D_daughters[idx].p()) << endl;
+            cout << "D daughter idx "s + idx + " inv.m: "
+                 << part_D_daughters[idx].p().mass() << endl;
+          }
+
+          if (*is_tau) {
+            cout << "Tau 4-mom: " << print_p(part_L.p()) << endl;
+            cout << "Tau inv.m: " << part_L.p().mass() << endl;
+            cout << "anti-TauNu 4-mom: " << print_p(part_NuL.p()) << endl;
+            cout << "anti-TauNu inv.m: " << part_NuL.p().mass() << endl;
+            cout << "TauNu 4-mom: " << print_p(part_TauNuTau.p()) << endl;
+            cout << "TauNu inv.m: " << part_TauNuTau.p().mass() << endl;
+            cout << "Mu 4-mom: " << print_p(part_Mu.p()) << endl;
+            cout << "Mu inv.m: " << part_Mu.p().mass() << endl;
+            cout << "anti-MuNu 4-mom: " << print_p(part_TauNuMu.p()) << endl;
+            cout << "anti-MuNu inv.mass: " << part_TauNuMu.p().mass() << endl;
+          } else {
+            cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
+            cout << "Mu inv.m: " << part_L.p().mass() << endl;
+            cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
+            cout << "anti-MuNu inv.m: " << part_NuL.p().mass() << endl;
+          }
+
+          cout << "B meson HAMMER ID: " << part_B_idx << endl;
+          cout << "D meson HAMMER ID: " << part_D_idx << endl;
+          if (is_Dst) {
+            cout << "D daughter HAMMER IDs:";
+            for (auto idx : part_D_daughters_idx) cout << "  " << idx;
+            cout << endl;
+          }
+          cout << "Lepton HAMMER ID: " << part_L_idx << endl;
+          cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
+
+#ifdef FORCE_MOMENTUM_CONSERVATION_HADRONIC
+          cout << "Hadronic part known momentum: " << print_p(known_mom)
+               << endl;
+#endif
+
+          cout << "Check if invariant mass2 of each particle is non-negative: "
+               << endl;
+          for (auto v : part_m2_ok) cout << "  " << v;
+          cout << endl;
+          cout << "All particles have OK kinematics: " << all_parts_ok << endl;
+          cout << "========" << endl;
+#endif
         }
       }
     }
