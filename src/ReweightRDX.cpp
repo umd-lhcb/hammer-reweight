@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Sep 15, 2021 at 11:26 PM +0200
+// Last Change: Wed Sep 15, 2021 at 11:51 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -451,11 +451,14 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         // HAMMER process
         Hammer::Process proc;
 
-        auto b_id_fixed = B_id_fix(*b_id, D_cands[D_lbl]);
+        auto d_id       = D_cands[D_lbl];
+        auto b_id_fixed = B_id_fix(*b_id, d_id);
         auto part_B     = particle(*b_pe, *b_px, *b_py, *b_pz, b_id_fixed);
-        auto part_D     = particle(D_mom[D_lbl + "_PE"], D_mom[D_lbl + "_PX"],
-                               D_mom[D_lbl + "_PY"], D_mom[D_lbl + "_PZ"],
-                               D_cands[D_lbl]);
+        auto part_D =
+            particle(D_mom[D_lbl + "_PE"], D_mom[D_lbl + "_PX"],
+                     D_mom[D_lbl + "_PY"], D_mom[D_lbl + "_PZ"], d_id);
+
+        Bool_t is_Dst = TMath::Abs(d_id) == 413 || TMath::Abs(d_id) == 423;
 
         Hammer::Particle part_L, part_NuL, part_TauNuTau, part_TauNuMu, part_Mu;
         Int_t            part_L_id = 0;
@@ -532,15 +535,18 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 #endif
         proc.addVertex(part_B_idx, part_B_daughters_idx);
 
+        // Only add the D daughters if the D meson is a D* (0/+)
         Hammer::ParticleIndices part_D_daughters_idx{};
-        for (const auto part : part_D_daughters) {
-          part_D_daughters_idx.push_back(proc.addParticle(part));
-        }
+        if (is_Dst) {
+          for (const auto part : part_D_daughters) {
+            part_D_daughters_idx.push_back(proc.addParticle(part));
+          }
 #ifdef RADIATIVE_CORRECTION
-        photon_correction(D_cands[D_lbl], vec_photon_mom_id, vec_photon_p, proc,
-                          part_D_daughters_idx);
+          photon_correction(d_id, vec_photon_mom_id, vec_photon_p, proc,
+                            part_D_daughters_idx);
 #endif
-        proc.addVertex(part_D_idx, part_D_daughters_idx);
+          proc.addVertex(part_D_idx, part_D_daughters_idx);
+        }
 
         if (*is_tau) {
           auto part_Mu_idx       = proc.addParticle(part_Mu);
@@ -575,7 +581,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         cout << "========" << endl;
         cout << "True q2 (GeV): " << q2_true_out << endl;
         cout << "B meson ID: " << b_id_fixed << endl;
-        cout << "D meson ID: " << D_cands[D_lbl] << endl;
+        cout << "D meson ID: " << d_id << endl;
         cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
         cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
         cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
@@ -615,9 +621,11 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
         cout << "B meson HAMMER ID: " << part_B_idx << endl;
         cout << "D meson HAMMER ID: " << part_D_idx << endl;
-        cout << "D daughter HAMMER IDs:";
-        for (auto idx : part_D_daughters_idx) cout << "  " << idx;
-        cout << endl;
+        if (is_Dst) {
+          cout << "D daughter HAMMER IDs:";
+          for (auto idx : part_D_daughters_idx) cout << "  " << idx;
+          cout << endl;
+        }
         cout << "Lepton HAMMER ID: " << part_L_idx << endl;
         cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
 
