@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Sep 15, 2021 at 04:54 PM +0200
+// Last Change: Wed Sep 15, 2021 at 11:26 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -34,6 +34,7 @@ using namespace std;
 //#define SILENT
 //#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
 //#define FORCE_MOMENTUM_CONSERVATION_HADRONIC
+//#define RADIATIVE_CORRECTION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -288,7 +289,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   TTreeReaderValue<Int_t>    d_idx2_gd2_id(reader,
                                         b_meson + "_TrueHadron_D2_GD2_ID");
 
-  // Radiative photons
+#ifdef RADIATIVE_CORRECTION
   TTreeReaderValue<Int_t> photon_arr_size(
       reader, b_meson + "_MCTrue_gamma_ArrayLength");
   TTreeReaderArray<Float_t> photon_arr_pe(reader, b_meson + "_MCTrue_gamma_E");
@@ -297,6 +298,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   TTreeReaderArray<Float_t> photon_arr_pz(reader, b_meson + "_MCTrue_gamma_PY");
   TTreeReaderArray<Float_t> photon_arr_mom_id(
       reader, b_meson + "_MCTrue_gamma_mother_ID");
+#endif
 
   // Event ID
   TTreeReaderValue<ULong64_t> eventNumber(reader, "eventNumber");
@@ -501,7 +503,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         part_D_daughters[part_D_daughters.size() - 1].setMomentum(bal_mom);
 #endif
 
-        // Build photons for radiative correction
+#ifdef RADIATIVE_CORRECTION
         vector<Int_t> vec_photon_mom_id{};
         for (auto i = 0; i < *photon_arr_size; i++) {
           vec_photon_mom_id.push_back(static_cast<Int_t>(photon_arr_mom_id[i]));
@@ -515,6 +517,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
           vec_photon_p.emplace_back(particle(g_pe, g_px, g_py, g_pz, 22));
         }
+#endif
 
         // Always add the primary leptons
         auto part_L_idx   = proc.addParticle(part_L);
@@ -523,16 +526,20 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         // Particle indices, also decay tree definition
         Hammer::ParticleIndices part_B_daughters_idx{part_D_idx, part_L_idx,
                                                      part_NuL_idx};
+#ifdef RADIATIVE_CORRECTION
         photon_correction(b_id_fixed, vec_photon_mom_id, vec_photon_p, proc,
                           part_B_daughters_idx);
+#endif
         proc.addVertex(part_B_idx, part_B_daughters_idx);
 
         Hammer::ParticleIndices part_D_daughters_idx{};
         for (const auto part : part_D_daughters) {
           part_D_daughters_idx.push_back(proc.addParticle(part));
         }
+#ifdef RADIATIVE_CORRECTION
         photon_correction(D_cands[D_lbl], vec_photon_mom_id, vec_photon_p, proc,
                           part_D_daughters_idx);
+#endif
         proc.addVertex(part_D_idx, part_D_daughters_idx);
 
         if (*is_tau) {
@@ -542,8 +549,10 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
           Hammer::ParticleIndices part_L_daughters_idx{
               part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx};
+#ifdef RADIATIVE_CORRECTION
           photon_correction(part_L_id, vec_photon_mom_id, vec_photon_p, proc,
                             part_L_daughters_idx);
+#endif
           proc.addVertex(part_L_idx, part_L_daughters_idx);
         }
 
@@ -632,8 +641,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           ham.initEvent();
           proc_id = ham.addProcess(proc);
         } catch (...) {
-          cout << "HAMMER doesn't initialize candidate properly: " << num_of_evt
-               << endl;
+          cout << "WARN: HAMMER doesn't initialize candidate properly: "
+               << num_of_evt << endl;
           continue;
         }
 
@@ -643,7 +652,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
             ham.processEvent();
             ff_out = ham.getWeight("OutputFF");
           } catch (...) {
-            cout << "HAMMER doesn't like candidate for reweighting: "
+            cout << "WARN: HAMMER doesn't like candidate for reweighting: "
                  << num_of_evt << endl;
             continue;
           }
