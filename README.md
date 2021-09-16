@@ -91,7 +91,7 @@ ValidateRDX test.root
     This includes:
     1. Prune soft photons (the 4-momenta will be modified in this step)
         by adding them to nearest charged particle in the same decay tree level
-        then remove the photons from the tree
+        (polar-angle wise) then remove the photons from the tree
 
         This process may alter the kinematics in a bad way such that HAMMER
         won't process the event further (either a `naN` in the cosine or a
