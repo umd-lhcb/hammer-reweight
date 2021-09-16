@@ -102,6 +102,40 @@ ValidateRDX test.root
 6. Compute the amplitude tensor with `Hammer::processEvent()`, then get the weight
     with `Hammer::getWeight("FF_scheme")`
 
+### Vertex level momentum conservation
+
+HAMMER doesn't require momentum to be conserved in general; it only requires each particle
+has a non-negative invariant mass.
+
+However, for soft photon removal, the vertex-level momentum conservation is enforced. This
+sometimes can lead to undesired effect of negative invariant mass
+
+### Negative invariant mass
+
+The invariant mass squared is computed in `Hammer::FourMomentum.mass2()`. This
+is just `E^2 - p^2`. Due to float-point arithmetic, sometimes this is slightly
+negative, which is quite common for particles with very small invariant masses.
+
+HAMMER provides a more robust way, The `Hammer::FourMomentum.mass()` method:
+```cpp
+double FourMomentum::mass() const {
+    if (fuzzyLess(mass2() , 0.0)) { // less than 'a little bit negative'
+        throw Error("Rosebud! Negative mass^2: " + to_string(mass2()));
+    }
+    return sqrt(fabs(mass2()));
+}
+```
+
+The `fuzzyLess` is defined as:
+```cpp
+static const double precision = 0.001;
+
+inline bool fuzzyLess(const double val1, const double val2) {
+    return (val1-val2 < -1.*std::max(precision, std::numeric_limits<double>::min()));
+}
+```
+
+Only if the invariant mass is strictly negative, HAMMER would complains about it.
 
 ### HAMMER produces a segmentation fault
 
