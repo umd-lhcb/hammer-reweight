@@ -6,11 +6,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 178
 Rosebud! Negative mass^2: -77840.000000
 ========
 True q2 (GeV): 0.294556
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 178
 B meson 4-mom: 225345.43, -7123.45, -11420.35, 224881.13
@@ -41,11 +41,11 @@ WARN: HAMMER doesn't add process properly: 235
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.6405
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 235
 B meson 4-mom: 158877.41, -7122.35, -4052.35, 158578.08
@@ -75,11 +75,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 237
 Rosebud! Negative mass^2: -33554432.000000
 ========
 True q2 (GeV): 6.08241
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 237
 B meson 4-mom: 78987.42, -8406.75, 31.57, 78361.11
@@ -111,11 +111,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 270
 Rosebud! Negative mass^2: -2097152.000000
 ========
 True q2 (GeV): 3.80157
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 270
 B meson 4-mom: 185563.25, 9367.40, -2162.77, 185238.82
@@ -146,11 +146,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 293
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.41847
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 293
 B meson 4-mom: 172795.12, -3279.49, -22.76, 172683.31
@@ -181,11 +181,11 @@ WARN: HAMMER doesn't add process properly: 610
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.76287
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 610
 B meson 4-mom: 356699.88, -12749.67, 1066.26, 356431.25
@@ -216,11 +216,11 @@ WARN: HAMMER doesn't add process properly: 650
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.633691
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 22
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 650
 B meson 4-mom: 128672.33, -2817.64, 7034.74, 128340.44
@@ -252,11 +252,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 657
 Rosebud! Negative mass^2: -4829184.000000
 ========
 True q2 (GeV): 6.86365
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 657
 B meson 4-mom: 132718.81, 6300.29, 3586.54, 132415.45
@@ -287,11 +287,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 952
 Rosebud! Negative mass^2: -780140544.000000
 ========
 True q2 (GeV): 2.18274
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 952
 B meson 4-mom: 83176.32, 3389.09, -3826.03, 82851.08
@@ -322,11 +322,11 @@ WARN: HAMMER doesn't add process properly: 956
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.59883
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 956
 B meson 4-mom: 302235.97, -7091.62, -8851.79, 301976.92
@@ -357,11 +357,11 @@ WARN: HAMMER doesn't add process properly: 1981
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.39857
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 1981
 B meson 4-mom: 270348.20, -8940.87, 4309.51, 270114.35
@@ -391,11 +391,11 @@ WARN: HAMMER doesn't add process properly: 2275
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.70612
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 2275
 B meson 4-mom: 69752.67, -9752.50, 5080.16, 68677.81
@@ -426,11 +426,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 2504
 Rosebud! Negative mass^2: -1015759765504.000000
 ========
 True q2 (GeV): 5.52769
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 2504
 B meson 4-mom: 116019.46, -9156.60, -643.35, 115535.21
@@ -463,11 +463,11 @@ WARN: HAMMER doesn't add process properly: 2807
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.23922
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 2807
 B meson 4-mom: 86171.85, 2932.27, 2454.88, 85924.90
@@ -497,11 +497,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 2986
 Rosebud! Negative mass^2: -102458458112.000000
 ========
 True q2 (GeV): 2.58422
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 2986
 B meson 4-mom: 193642.80, -24850.11, 3102.06, 191944.03
@@ -532,11 +532,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 3297
 Rosebud! Negative mass^2: -14905684000768.000000
 ========
 True q2 (GeV): 1.50054
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 3297
 B meson 4-mom: 265226.35, -18166.00, -4498.28, 264512.58
@@ -567,11 +567,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 3358
 Rosebud! Negative mass^2: -21037056.000000
 ========
 True q2 (GeV): 1.01803
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 3358
 B meson 4-mom: 84199.89, -1485.68, 5110.72, 83865.49
@@ -602,11 +602,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 3603
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.96227
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 3603
 B meson 4-mom: 248064.36, 4123.03, -15930.34, 247461.67
@@ -637,11 +637,11 @@ WARN: HAMMER doesn't add process properly: 3712
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.45285
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 22
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 3712
 B meson 4-mom: 154717.06, -6256.93, 4125.82, 154445.21
@@ -673,11 +673,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 3732
 Rosebud! Negative mass^2: -15872.000000
 ========
 True q2 (GeV): 4.77488
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 3732
 B meson 4-mom: 68531.33, -3368.09, 6959.42, 67888.82
@@ -708,11 +708,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 3944
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.80105
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 3944
 B meson 4-mom: 67407.69, -1396.31, -5213.82, 66983.50
@@ -745,11 +745,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 4291
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.43447
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4291
 B meson 4-mom: 194647.72, -4211.98, 345.01, 194530.21
@@ -780,11 +780,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 4316
 Rosebud! Negative mass^2: -105451520.000000
 ========
 True q2 (GeV): 0.12039
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4316
 B meson 4-mom: 158823.81, 2766.26, 6668.44, 158571.78
@@ -815,11 +815,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 4428
 Rosebud! Negative mass^2: -27262976.000000
 ========
 True q2 (GeV): 1.54412
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4428
 B meson 4-mom: 279633.01, 6531.88, -15638.57, 279069.02
@@ -850,11 +850,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 4464
 Rosebud! Negative mass^2: -34041910788096.000000
 ========
 True q2 (GeV): 7.01654
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4464
 B meson 4-mom: 213025.08, 8486.25, 4232.84, 212748.39
@@ -885,11 +885,11 @@ WARN: HAMMER doesn't add process properly: 4631
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.97135
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4631
 B meson 4-mom: 65366.13, 3985.10, -69.65, 65030.54
@@ -919,11 +919,11 @@ WARN: HAMMER doesn't add process properly: 4657
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.2546
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4657
 B meson 4-mom: 186341.61, 4322.44, -3015.80, 186192.22
@@ -953,11 +953,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 4658
 Rosebud! Negative mass^2: -724041728.000000
 ========
 True q2 (GeV): 2.92212
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4658
 B meson 4-mom: 96467.78, 6808.27, 6387.95, 95869.70
@@ -988,11 +988,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 4736
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.90543
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4736
 B meson 4-mom: 228249.98, -3982.45, -6241.96, 228068.76
@@ -1023,11 +1023,11 @@ WARN: HAMMER doesn't add process properly: 4788
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.33024
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 4788
 B meson 4-mom: 180086.50, 3259.12, -1427.98, 179973.92
@@ -1057,11 +1057,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 5028
 Rosebud! Negative mass^2: -36274176.000000
 ========
 True q2 (GeV): 5.89731
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5028
 B meson 4-mom: 198688.84, -597.32, -6443.10, 198513.25
@@ -1092,11 +1092,11 @@ WARN: HAMMER doesn't add process properly: 5386
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.94553
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5386
 B meson 4-mom: 185185.51, -5694.41, 9826.20, 184761.52
@@ -1126,11 +1126,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 5396
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.24078
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5396
 B meson 4-mom: 243698.41, 6423.28, 2225.51, 243546.36
@@ -1161,11 +1161,11 @@ WARN: HAMMER doesn't add process properly: 5423
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.01419
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5423
 B meson 4-mom: 398463.62, 10156.02, -6280.26, 398249.67
@@ -1195,11 +1195,11 @@ WARN: HAMMER doesn't add process properly: 5450
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.36255
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5450
 B meson 4-mom: 519819.31, -18282.49, 5787.94, 519438.63
@@ -1230,11 +1230,11 @@ WARN: HAMMER doesn't add process properly: 5546
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.44627
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5546
 B meson 4-mom: 191121.52, 7884.76, -4956.05, 190821.46
@@ -1265,11 +1265,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 5690
 Rosebud! Negative mass^2: -1952867942400.000000
 ========
 True q2 (GeV): 4.04487
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5690
 B meson 4-mom: 189325.96, -4539.14, 5073.44, 189129.85
@@ -1300,11 +1300,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 5791
 Rosebud! Negative mass^2: -327155712.000000
 ========
 True q2 (GeV): 2.07526
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5791
 B meson 4-mom: 149281.96, 5941.46, -2770.05, 149044.47
@@ -1335,11 +1335,11 @@ WARN: HAMMER doesn't add process properly: 5935
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.4141
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 5935
 B meson 4-mom: 85466.60, 4148.86, 7831.77, 84841.71
@@ -1371,11 +1371,11 @@ WARN: HAMMER doesn't add process properly: 6198
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.646388
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6198
 B meson 4-mom: 127212.22, 486.84, -8468.76, 126819.23
@@ -1406,11 +1406,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6246
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.71057
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6246
 B meson 4-mom: 173786.37, -6750.55, -1628.90, 173567.29
@@ -1441,11 +1441,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6272
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.40065
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6272
 B meson 4-mom: 273089.27, 3677.64, -9165.67, 272859.56
@@ -1476,11 +1476,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6509
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.13558
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6509
 B meson 4-mom: 179578.27, -9048.44, 383.22, 179272.03
@@ -1511,11 +1511,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6643
 Rosebud! Negative mass^2: -1835008.000000
 ========
 True q2 (GeV): 3.69328
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6643
 B meson 4-mom: 175490.28, 7716.57, 10023.70, 174954.12
@@ -1546,11 +1546,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6662
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.03815
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6662
 B meson 4-mom: 45670.62, -1874.38, -6025.14, 44923.45
@@ -1581,11 +1581,11 @@ WARN: HAMMER doesn't add process properly: 6747
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.83338
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6747
 B meson 4-mom: 149568.78, 1110.44, -2667.42, 149447.64
@@ -1615,11 +1615,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6861
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.71184
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6861
 B meson 4-mom: 111512.63, 1936.35, -4195.66, 111291.69
@@ -1650,11 +1650,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6864
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.12725
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6864
 B meson 4-mom: 218963.98, -5954.83, -866.19, 218817.60
@@ -1685,11 +1685,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 6979
 Rosebud! Negative mass^2: -377353142272.000000
 ========
 True q2 (GeV): 0.0358648
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 6979
 B meson 4-mom: 166094.23, -2162.44, -799.43, 165994.29
@@ -1720,11 +1720,11 @@ WARN: HAMMER doesn't add process properly: 7486
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.68884
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 7486
 B meson 4-mom: 815311.78, 26132.13, 2873.39, 814870.71
@@ -1755,11 +1755,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 7575
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.74623
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 7575
 B meson 4-mom: 112539.09, 7978.16, -464.19, 112130.76
@@ -1789,11 +1789,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 7629
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 0.718781
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 7629
 B meson 4-mom: 159684.14, -7734.58, 4932.99, 159332.96
@@ -1824,11 +1824,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 7670
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.71846
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 7670
 B meson 4-mom: 255892.18, -16385.08, 5168.34, 255260.16
@@ -1859,11 +1859,11 @@ WARN: HAMMER doesn't add process properly: 7709
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.361412
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 7709
 B meson 4-mom: 249978.33, -2038.50, 3074.01, 249895.35
@@ -1893,11 +1893,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 8146
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.72417
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 8146
 B meson 4-mom: 60593.21, 2504.28, -5323.88, 60075.35
@@ -1928,11 +1928,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 8234
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.05839
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 8234
 B meson 4-mom: 244464.57, 1679.83, -18154.50, 243726.58
@@ -1961,11 +1961,11 @@ WARN: HAMMER doesn't add process properly: 8319
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.5459
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 8319
 B meson 4-mom: 92559.26, -6450.92, -509.71, 92181.71
@@ -1995,11 +1995,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 8542
 Rosebud! Negative mass^2: -4145180311552.000000
 ========
 True q2 (GeV): 2.36128
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 8542
 B meson 4-mom: 341952.31, 13711.67, -11944.24, 341427.64
@@ -2030,11 +2030,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 8717
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 0.211587
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 8717
 B meson 4-mom: 149573.05, -134.22, 12249.88, 148977.00
@@ -2065,11 +2065,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 8996
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.38643
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 8996
 B meson 4-mom: 45556.88, -114.39, 1050.30, 45237.59
@@ -2100,11 +2100,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9123
 Rosebud! Negative mass^2: -2097152.000000
 ========
 True q2 (GeV): 7.73661
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9123
 B meson 4-mom: 131058.73, 22419.80, 6079.85, 128875.54
@@ -2135,11 +2135,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9135
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 0.292672
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9135
 B meson 4-mom: 122035.57, 2661.17, -236.18, 121892.04
@@ -2170,11 +2170,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9181
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.7593
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9181
 B meson 4-mom: 148359.51, 4437.77, 317.50, 148198.77
@@ -2205,11 +2205,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9461
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.81223
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9461
 B meson 4-mom: 186997.11, 2422.81, 19062.99, 185932.19
@@ -2240,11 +2240,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9553
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.59258
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9553
 B meson 4-mom: 88638.28, -1954.51, -3973.92, 88370.01
@@ -2275,11 +2275,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9919
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.2066
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9919
 B meson 4-mom: 215856.43, 8380.18, -3421.30, 215601.93
@@ -2310,11 +2310,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 9933
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.07033
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9933
 B meson 4-mom: 163359.12, -15.17, 4060.90, 163223.27
@@ -2345,11 +2345,11 @@ WARN: HAMMER doesn't add process properly: 9953
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.72599
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 9953
 B meson 4-mom: 96978.63, -1301.89, -4125.73, 96738.12
@@ -2381,11 +2381,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 10150
 Rosebud! Negative mass^2: -393216.000000
 ========
 True q2 (GeV): 8.79987
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 10150
 B meson 4-mom: 308883.41, 14400.98, 15650.31, 308105.12
@@ -2416,11 +2416,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 10250
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.31635
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 10250
 B meson 4-mom: 456437.74, 11763.92, 421.53, 456255.38
@@ -2451,11 +2451,11 @@ WARN: HAMMER doesn't add process properly: 10397
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.6149
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 10397
 B meson 4-mom: 79033.69, 11513.75, -5343.62, 77828.85
@@ -2486,11 +2486,11 @@ WARN: HAMMER doesn't add process properly: 10763
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.64231
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 10763
 B meson 4-mom: 58937.17, 878.10, 7757.81, 58178.70
@@ -2522,11 +2522,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 11326
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.97889
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 11326
 B meson 4-mom: 96400.39, 9636.87, -148.93, 95771.97
@@ -2557,11 +2557,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 11338
 Rosebud! Negative mass^2: -60196651008.000000
 ========
 True q2 (GeV): 1.74341
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 11338
 B meson 4-mom: 199514.65, -8260.50, -6381.50, 199171.44
@@ -2592,11 +2592,11 @@ WARN: HAMMER doesn't add process properly: 11742
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.32663
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 11742
 B meson 4-mom: 174341.74, -1567.56, 9972.75, 173969.12
@@ -2626,11 +2626,11 @@ WARN: HAMMER doesn't add process properly: 12182
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.34814
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 22
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 12182
 B meson 4-mom: 87566.99, 1862.20, 4399.18, 87277.05
@@ -2662,11 +2662,11 @@ WARN: HAMMER doesn't add process properly: 12343
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.62287
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12343
 B meson 4-mom: 33388.86, 3746.98, 3293.53, 32589.18
@@ -2697,11 +2697,11 @@ WARN: HAMMER doesn't add process properly: 12413
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.85834
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12413
 B meson 4-mom: 507462.67, -10061.61, 9500.27, 507246.48
@@ -2732,11 +2732,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 12573
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.15335
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12573
 B meson 4-mom: 444071.25, 21709.22, 39499.58, 441746.41
@@ -2767,11 +2767,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 12706
 Rosebud! Negative mass^2: -85161148416.000000
 ========
 True q2 (GeV): 3.87093
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12706
 B meson 4-mom: 200771.27, -8696.39, -12527.23, 200121.64
@@ -2802,11 +2802,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 12738
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.30773
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12738
 B meson 4-mom: 64483.80, -7362.07, -3130.63, 63767.43
@@ -2837,11 +2837,11 @@ WARN: HAMMER doesn't add process properly: 12780
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.7444
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12780
 B meson 4-mom: 126335.53, 3534.57, 5842.68, 126040.32
@@ -2873,11 +2873,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 12856
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.05739
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 12856
 B meson 4-mom: 69563.70, -8787.40, 701.06, 68800.61
@@ -2908,11 +2908,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 13107
 Rosebud! Negative mass^2: -63569920.000000
 ========
 True q2 (GeV): 0.844685
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 13107
 B meson 4-mom: 68826.96, 2117.67, -631.24, 68588.58
@@ -2943,11 +2943,11 @@ WARN: HAMMER doesn't add process properly: 13138
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.03368
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 13138
 B meson 4-mom: 257792.59, 4228.10, 238.75, 257703.73
@@ -2978,11 +2978,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 13198
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.42736
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 13198
 B meson 4-mom: 52507.64, 9334.39, 2885.21, 51319.81
@@ -3013,11 +3013,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 13591
 Rosebud! Negative mass^2: -29360128.000000
 ========
 True q2 (GeV): 7.0632
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 13591
 B meson 4-mom: 167523.64, 3405.90, -3897.47, 167360.41
@@ -3048,11 +3048,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 13621
 Rosebud! Negative mass^2: -41825599488.000000
 ========
 True q2 (GeV): 3.44452
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 13621
 B meson 4-mom: 199475.06, -8354.95, 2679.96, 199212.04
@@ -3083,11 +3083,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 13891
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.57771
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 13891
 B meson 4-mom: 177037.26, 8251.08, -8626.57, 176555.43
@@ -3120,11 +3120,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 14096
 Rosebud! Negative mass^2: -1024458752.000000
 ========
 True q2 (GeV): 3.28444
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 14096
 B meson 4-mom: 223729.19, 2870.64, 6850.18, 223543.53
@@ -3155,11 +3155,11 @@ WARN: HAMMER doesn't add process properly: 14572
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.18909
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 14572
 B meson 4-mom: 289654.25, -6278.66, -11826.25, 289296.44
@@ -3190,11 +3190,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 14643
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.50521
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 14643
 B meson 4-mom: 249619.44, 5594.54, 2818.33, 249484.97
@@ -3225,11 +3225,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 14645
 Rosebud! Negative mass^2: -18615462002688.000000
 ========
 True q2 (GeV): 0.402378
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 14645
 B meson 4-mom: 511140.22, 13241.82, 27595.01, 510195.67
@@ -3260,11 +3260,11 @@ WARN: HAMMER doesn't add process properly: 14715
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.46234
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 14715
 B meson 4-mom: 88876.76, 18043.57, 2266.19, 86836.04
@@ -3295,11 +3295,11 @@ WARN: HAMMER doesn't add process properly: 14786
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.14277
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 14786
 B meson 4-mom: 247227.71, 5198.27, 1459.40, 247112.35
@@ -3330,11 +3330,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 15327
 Rosebud! Negative mass^2: -845545472.000000
 ========
 True q2 (GeV): 5.55665
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 15327
 B meson 4-mom: 168316.61, 4611.91, -414.30, 168170.05
@@ -3365,11 +3365,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 15487
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.99393
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 15487
 B meson 4-mom: 60358.51, -2953.83, -4937.69, 59851.23
@@ -3400,11 +3400,11 @@ WARN: HAMMER doesn't add process properly: 15590
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.17662
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 15590
 B meson 4-mom: 114847.50, 1035.36, -8250.29, 114424.36
@@ -3434,11 +3434,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 15646
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.73538
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 15646
 B meson 4-mom: 174805.59, 12148.15, -3325.63, 174271.29
@@ -3469,11 +3469,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 15891
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 9.02687
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 15891
 B meson 4-mom: 131389.63, -15145.85, 7098.44, 130213.58
@@ -3504,11 +3504,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 16090
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.68482
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16090
 B meson 4-mom: 129900.93, -8178.84, 1009.46, 129531.72
@@ -3539,11 +3539,11 @@ WARN: HAMMER doesn't add process properly: 16164
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.95388
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16164
 B meson 4-mom: 90806.69, -2318.29, 3667.59, 90549.19
@@ -3574,11 +3574,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 16257
 Rosebud! Negative mass^2: -67968.000000
 ========
 True q2 (GeV): 5.54373
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16257
 B meson 4-mom: 123613.13, -2461.11, -3328.27, 123430.94
@@ -3609,11 +3609,11 @@ WARN: HAMMER doesn't add process properly: 16264
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.96756
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16264
 B meson 4-mom: 96500.41, -4838.22, -1638.60, 96220.38
@@ -3643,11 +3643,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 16288
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.96362
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16288
 B meson 4-mom: 395875.03, 647.24, 7747.72, 395763.46
@@ -3678,11 +3678,11 @@ WARN: HAMMER doesn't add process properly: 16382
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.38273
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16382
 B meson 4-mom: 121279.80, 4657.92, 6012.19, 120925.90
@@ -3713,11 +3713,11 @@ WARN: HAMMER doesn't add process properly: 16405
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.11881
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16405
 B meson 4-mom: 394743.62, -6275.27, 6990.05, 394596.52
@@ -3747,11 +3747,11 @@ WARN: HAMMER doesn't add process properly: 16464
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.98882
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16464
 B meson 4-mom: 188002.44, 5110.06, -7254.27, 187718.69
@@ -3781,11 +3781,11 @@ WARN: HAMMER doesn't add process properly: 16726
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.93576
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 16726
 B meson 4-mom: 135613.65, -2552.09, 1315.77, 135480.42
@@ -3815,11 +3815,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 17244
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.05808
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 17244
 B meson 4-mom: 118031.16, 3438.68, -10938.79, 117354.16
@@ -3850,11 +3850,11 @@ WARN: HAMMER doesn't add process properly: 17377
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.87178
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 22
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 17377
 B meson 4-mom: 147161.09, 8563.09, 5189.30, 146725.11
@@ -3886,11 +3886,11 @@ WARN: HAMMER doesn't add process properly: 17421
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.10698
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 17421
 B meson 4-mom: 152982.68, -3333.24, 4229.44, 152796.69
@@ -3920,11 +3920,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 17536
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.48962
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 17536
 B meson 4-mom: 232149.80, -4276.55, -7666.63, 231923.67
@@ -3955,11 +3955,11 @@ WARN: HAMMER doesn't add process properly: 17793
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.32287
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 17793
 B meson 4-mom: 81290.59, 3234.12, 1919.25, 81031.74
@@ -3989,11 +3989,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 17903
 Rosebud! Negative mass^2: -13539213312.000000
 ========
 True q2 (GeV): 7.42829
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 17903
 B meson 4-mom: 148024.27, 2240.98, 11630.57, 147455.14
@@ -4024,11 +4024,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18045
 Rosebud! Negative mass^2: -73924608.000000
 ========
 True q2 (GeV): 9.17329
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18045
 B meson 4-mom: 115768.87, -4165.89, -6177.87, 115408.13
@@ -4059,11 +4059,11 @@ WARN: HAMMER doesn't add process properly: 18108
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.08034
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18108
 B meson 4-mom: 51479.65, -9034.68, -1787.23, 50373.21
@@ -4094,11 +4094,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18208
 Rosebud! Negative mass^2: -24297472.000000
 ========
 True q2 (GeV): 3.99854
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18208
 B meson 4-mom: 158207.15, 5353.74, -412.44, 158027.83
@@ -4129,11 +4129,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18483
 Rosebud! Negative mass^2: -8192.000000
 ========
 True q2 (GeV): 2.05867
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18483
 B meson 4-mom: 60550.91, -6806.32, 2829.83, 59868.23
@@ -4164,11 +4164,11 @@ WARN: HAMMER doesn't add process properly: 18613
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.00033
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 22
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 18613
 B meson 4-mom: 41707.20, 2471.22, -2755.70, 41205.77
@@ -4200,11 +4200,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18645
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.25609
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18645
 B meson 4-mom: 84682.78, 3737.64, 2199.12, 84406.71
@@ -4235,11 +4235,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18646
 Rosebud! Negative mass^2: -10645143552.000000
 ========
 True q2 (GeV): 8.27125
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18646
 B meson 4-mom: 111470.42, 10922.91, 6304.00, 110628.79
@@ -4270,11 +4270,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18753
 Rosebud! Negative mass^2: -14417920.000000
 ========
 True q2 (GeV): 6.7905
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18753
 B meson 4-mom: 72471.50, -16196.85, 9340.24, 69818.81
@@ -4305,11 +4305,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 18800
 Rosebud! Negative mass^2: -17111149707264.000000
 ========
 True q2 (GeV): 3.52264
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18800
 B meson 4-mom: 103727.39, 7137.02, 3762.03, 103278.30
@@ -4340,11 +4340,11 @@ WARN: HAMMER doesn't add process properly: 18811
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.48376
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18811
 B meson 4-mom: 135384.38, 10626.07, 7641.55, 134646.76
@@ -4375,11 +4375,11 @@ WARN: HAMMER doesn't add process properly: 18871
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.21646
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 18871
 B meson 4-mom: 342960.25, 10902.97, -5336.23, 342704.70
@@ -4410,11 +4410,11 @@ WARN: HAMMER doesn't add process properly: 19098
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.00631
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19098
 B meson 4-mom: 144003.32, 20172.76, -8195.71, 142249.68
@@ -4445,11 +4445,11 @@ WARN: HAMMER doesn't add process properly: 19130
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.29188
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19130
 B meson 4-mom: 274494.40, -10402.84, 465.35, 274246.00
@@ -4479,11 +4479,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 19143
 Rosebud! Negative mass^2: -240518168576.000000
 ========
 True q2 (GeV): 6.9774
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19143
 B meson 4-mom: 246026.76, -5777.05, 4837.63, 245854.66
@@ -4514,11 +4514,11 @@ WARN: HAMMER doesn't add process properly: 19558
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.64325
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19558
 B meson 4-mom: 116571.05, 10619.46, -660.98, 115964.33
@@ -4549,11 +4549,11 @@ WARN: HAMMER doesn't add process properly: 19573
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.93476
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19573
 B meson 4-mom: 64699.32, -9395.20, 3833.15, 63680.18
@@ -4584,11 +4584,11 @@ WARN: HAMMER doesn't add process properly: 19681
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.330886
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19681
 B meson 4-mom: 284991.69, -7647.88, -9285.20, 284688.75
@@ -4618,11 +4618,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 19686
 Rosebud! Negative mass^2: -3623878656.000000
 ========
 True q2 (GeV): 4.2202
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19686
 B meson 4-mom: 194862.11, -5919.49, -4657.67, 194644.89
@@ -4653,11 +4653,11 @@ WARN: HAMMER doesn't add process properly: 19791
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.461359
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 22
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 19791
 B meson 4-mom: 157324.79, -8095.00, -4766.46, 156955.30
@@ -4689,11 +4689,11 @@ WARN: HAMMER doesn't add process properly: 19835
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.57885
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19835
 B meson 4-mom: 260011.70, 3125.63, 868.87, 259937.85
@@ -4723,11 +4723,11 @@ WARN: HAMMER doesn't add process properly: 19884
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.67569
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19884
 B meson 4-mom: 51625.55, -1184.97, 5863.11, 51005.33
@@ -4758,11 +4758,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 19917
 Rosebud! Negative mass^2: -10093173145600.000000
 ========
 True q2 (GeV): 3.88852
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 19917
 B meson 4-mom: 99567.65, 2205.03, 31.41, 99403.12
@@ -4793,11 +4793,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 20263
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.65753
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 20263
 B meson 4-mom: 116127.81, -12095.30, 6163.54, 115210.71
@@ -4828,11 +4828,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 20279
 Rosebud! Negative mass^2: -33554432.000000
 ========
 True q2 (GeV): 7.40156
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 20279
 B meson 4-mom: 308848.54, -4943.33, -7474.46, 308673.36
@@ -4863,11 +4863,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 20332
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.02684
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 20332
 B meson 4-mom: 97298.94, 1632.70, 7749.65, 96832.26
@@ -4898,11 +4898,11 @@ WARN: HAMMER doesn't add process properly: 20578
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.5018
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 20578
 B meson 4-mom: 90468.12, 2687.09, -3639.30, 90200.56
@@ -4932,11 +4932,11 @@ WARN: HAMMER doesn't add process properly: 20965
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.47398
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 20965
 B meson 4-mom: 362802.68, -3874.11, -926.68, 362742.39
@@ -4967,11 +4967,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 21056
 Rosebud! Negative mass^2: -15728640.000000
 ========
 True q2 (GeV): 7.18902
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 21056
 B meson 4-mom: 72582.16, -3726.03, -1056.87, 72286.21
@@ -5002,11 +5002,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 21431
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.99042
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 21431
 B meson 4-mom: 181236.58, -9355.37, -135.51, 180917.89
@@ -5037,11 +5037,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 21503
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.49284
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 21503
 B meson 4-mom: 92767.28, 2737.54, 666.87, 92574.05
@@ -5072,11 +5072,11 @@ WARN: HAMMER doesn't add process properly: 21732
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.321
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 21732
 B meson 4-mom: 417554.41, -20768.53, -6854.78, 416947.83
@@ -5109,11 +5109,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 21790
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.00611
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 21790
 B meson 4-mom: 114705.14, 310.48, -8641.20, 114256.85
@@ -5144,11 +5144,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 22033
 Rosebud! Negative mass^2: -23914377904128.000000
 ========
 True q2 (GeV): 1.44091
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22033
 B meson 4-mom: 145423.70, -8656.69, 2774.77, 145043.24
@@ -5180,11 +5180,11 @@ WARN: HAMMER doesn't add process properly: 22424
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.46347
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22424
 B meson 4-mom: 200542.10, 542.32, 6202.58, 200375.88
@@ -5214,11 +5214,11 @@ WARN: HAMMER doesn't add process properly: 22579
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.08505
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22579
 B meson 4-mom: 177988.56, -2947.01, 956.21, 177883.26
@@ -5248,11 +5248,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 22590
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.52875
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22590
 B meson 4-mom: 281553.62, -4666.41, -3481.85, 281443.90
@@ -5283,11 +5283,11 @@ WARN: HAMMER doesn't add process properly: 22605
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.11824
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22605
 B meson 4-mom: 85544.87, 3315.10, 3797.86, 85232.84
@@ -5318,11 +5318,11 @@ WARN: HAMMER doesn't add process properly: 22655
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.77716
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22655
 B meson 4-mom: 112332.60, -532.03, 3455.28, 112153.99
@@ -5353,11 +5353,11 @@ WARN: HAMMER doesn't add process properly: 22718
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.28856
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22718
 B meson 4-mom: 144726.93, 4226.60, -3427.18, 144528.20
@@ -5387,11 +5387,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 22786
 Rosebud! Negative mass^2: -16777216.000000
 ========
 True q2 (GeV): 2.20289
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 22786
 B meson 4-mom: 260728.70, -7638.80, -1293.15, 260560.08
@@ -5422,11 +5422,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 23349
 Rosebud! Negative mass^2: -4390912.000000
 ========
 True q2 (GeV): 10.3984
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 23349
 B meson 4-mom: 174586.05, -6949.30, 3555.95, 174331.52
@@ -5457,11 +5457,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 23595
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.76711
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 23595
 B meson 4-mom: 82726.33, -3473.16, -683.90, 82481.76
@@ -5492,11 +5492,11 @@ WARN: HAMMER doesn't add process properly: 23658
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.265699
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 23658
 B meson 4-mom: 119066.17, -4841.87, 4787.35, 118754.02
@@ -5527,11 +5527,11 @@ WARN: HAMMER doesn't add process properly: 23749
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.38889
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 23749
 B meson 4-mom: 170557.36, 8320.67, 610.82, 170271.35
@@ -5562,11 +5562,11 @@ WARN: HAMMER doesn't add process properly: 23889
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.98745
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 23889
 B meson 4-mom: 137052.81, 2458.40, -496.29, 136928.12
@@ -5596,11 +5596,11 @@ WARN: HAMMER doesn't add process properly: 24173
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.49362
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 22
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 24173
 B meson 4-mom: 80151.91, -3173.28, -3291.74, 79847.04
@@ -5632,11 +5632,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 24248
 Rosebud! Negative mass^2: -916455424.000000
 ========
 True q2 (GeV): 0.105752
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24248
 B meson 4-mom: 130428.32, -3935.12, 6332.83, 130107.97
@@ -5667,11 +5667,11 @@ WARN: HAMMER doesn't add process properly: 24410
 Rosebud! Zero energy: 0.000000
 ========
 True q2 (GeV): 5.2702
-B meson ID: -521
-D meson ID: 423
-D daughter 0 ID: 421
-D daughter 1 ID: 22
-D daughter 2 ID: 0
+B meson ID: B- (-521)
+D meson ID: D*0 (423)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: gamma (22)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24410
 B meson 4-mom: 73659.32, -1235.60, -3537.89, 73374.26
@@ -5701,11 +5701,11 @@ WARN: HAMMER doesn't add process properly: 24553
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.50339
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24553
 B meson 4-mom: 53058.46, 6538.63, -5555.34, 52093.29
@@ -5736,11 +5736,11 @@ WARN: HAMMER doesn't add process properly: 24603
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.24186
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24603
 B meson 4-mom: 119904.15, -10058.84, 1136.20, 119359.37
@@ -5770,11 +5770,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 24706
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.82154
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24706
 B meson 4-mom: 61219.14, -7982.50, 8491.03, 59867.28
@@ -5805,11 +5805,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 24712
 Rosebud! Negative mass^2: -781147176960.000000
 ========
 True q2 (GeV): 2.01164
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24712
 B meson 4-mom: 81994.43, 544.74, -4876.45, 81677.02
@@ -5840,11 +5840,11 @@ WARN: HAMMER doesn't add process properly: 24714
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.06971
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24714
 B meson 4-mom: 143942.37, -8591.43, 2678.84, 143563.72
@@ -5874,11 +5874,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 24785
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.06826
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 24785
 B meson 4-mom: 147043.50, -6623.55, 3151.14, 146765.51
@@ -5909,11 +5909,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 25252
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.83851
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 25252
 B meson 4-mom: 128663.46, 6293.65, -4470.61, 128323.09
@@ -5944,11 +5944,11 @@ WARN: HAMMER doesn't add process properly: 25349
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.88356
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 25349
 B meson 4-mom: 446405.20, 5598.29, -9042.14, 446247.27
@@ -5978,11 +5978,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 25830
 Rosebud! Negative mass^2: -2358473916416.000000
 ========
 True q2 (GeV): 5.42141
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 25830
 B meson 4-mom: 180695.54, -9220.53, 7730.04, 180217.18
@@ -6013,11 +6013,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 25895
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 9.99462
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 25895
 B meson 4-mom: 518725.83, -14380.73, 10638.63, 518390.42
@@ -6048,11 +6048,11 @@ WARN: HAMMER doesn't add process properly: 25987
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.01237
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 25987
 B meson 4-mom: 72943.02, 9953.04, -3949.83, 71959.34
@@ -6083,11 +6083,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 26071
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.09582
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 26071
 B meson 4-mom: 134833.08, -3129.09, 14663.98, 133892.73
@@ -6118,11 +6118,11 @@ WARN: HAMMER doesn't add process properly: 26117
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.25252
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 26117
 B meson 4-mom: 339449.93, -5816.65, -7312.60, 339280.23
@@ -6153,11 +6153,11 @@ WARN: HAMMER doesn't add process properly: 27002
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.74242
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 27002
 B meson 4-mom: 77239.95, 12867.78, 10511.90, 75246.64
@@ -6188,11 +6188,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 27175
 Rosebud! Negative mass^2: -72286208.000000
 ========
 True q2 (GeV): 6.07724
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 27175
 B meson 4-mom: 137952.93, -1206.55, -8520.90, 137582.98
@@ -6223,11 +6223,11 @@ WARN: HAMMER doesn't add process properly: 27411
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.96697
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 27411
 B meson 4-mom: 363647.28, 15848.23, 3532.01, 363246.24
@@ -6259,11 +6259,11 @@ WARN: HAMMER doesn't add process properly: 27575
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 10.5515
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 27575
 B meson 4-mom: 214128.55, 374.07, 10052.64, 213826.95
@@ -6294,11 +6294,11 @@ WARN: HAMMER doesn't add process properly: 27723
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.32273
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 27723
 B meson 4-mom: 211900.72, -7385.37, 5441.90, 211636.20
@@ -6328,11 +6328,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 27996
 Rosebud! Negative mass^2: -1048576.000000
 ========
 True q2 (GeV): 6.5422
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 27996
 B meson 4-mom: 749849.62, 3022.77, -10608.83, 749749.89
@@ -6363,11 +6363,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 28072
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.05657
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28072
 B meson 4-mom: 122123.53, -3815.88, -7256.29, 121733.59
@@ -6398,11 +6398,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 28198
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.20493
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28198
 B meson 4-mom: 119555.09, 13387.00, -12306.71, 118046.09
@@ -6433,11 +6433,11 @@ WARN: HAMMER doesn't add process properly: 28391
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.32996
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28391
 B meson 4-mom: 100893.23, -12.83, 7560.28, 100470.95
@@ -6468,11 +6468,11 @@ WARN: HAMMER doesn't add process properly: 28454
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.70611
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28454
 B meson 4-mom: 148421.45, 4980.99, 2046.56, 148229.73
@@ -6502,11 +6502,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 28471
 Rosebud! Negative mass^2: -51355648.000000
 ========
 True q2 (GeV): 9.14052
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28471
 B meson 4-mom: 313462.52, 3715.28, 17989.08, 312879.32
@@ -6537,11 +6537,11 @@ WARN: HAMMER doesn't add process properly: 28672
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.97868
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28672
 B meson 4-mom: 77692.67, 0.39, 2580.42, 77470.11
@@ -6572,11 +6572,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 28930
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.56913
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 28930
 B meson 4-mom: 58971.49, -7529.11, 4436.96, 58080.88
@@ -6607,11 +6607,11 @@ WARN: HAMMER doesn't add process properly: 29242
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.18362
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 29242
 B meson 4-mom: 349048.37, 8135.07, 2111.20, 348907.23
@@ -6642,11 +6642,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 29299
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.40801
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 29299
 B meson 4-mom: 111740.93, -1320.65, -3256.22, 111560.81
@@ -6677,11 +6677,11 @@ WARN: HAMMER doesn't add process properly: 29319
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.01507
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 29319
 B meson 4-mom: 79682.86, -5346.64, -1216.02, 79318.47
@@ -6712,11 +6712,11 @@ WARN: HAMMER doesn't add process properly: 29645
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.2245
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 22
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 29645
 B meson 4-mom: 104456.55, 4743.22, -3255.05, 104164.31
@@ -6748,11 +6748,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 29871
 Rosebud! Negative mass^2: -5772436045824.000000
 ========
 True q2 (GeV): 5.4692
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 29871
 B meson 4-mom: 386706.41, 6205.82, -6505.99, 386565.82
@@ -6783,11 +6783,11 @@ WARN: HAMMER doesn't add process properly: 29990
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.98627
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 29990
 B meson 4-mom: 279378.77, -10962.59, 5409.51, 279061.25
@@ -6817,11 +6817,11 @@ WARN: HAMMER doesn't add process properly: 30750
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.21023
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 30750
 B meson 4-mom: 238989.78, 18058.37, -8304.64, 238103.27
@@ -6852,11 +6852,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 30814
 Rosebud! Negative mass^2: -5368709120000.000000
 ========
 True q2 (GeV): 5.47802
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 30814
 B meson 4-mom: 195933.97, -3641.58, 3734.38, 195793.36
@@ -6887,11 +6887,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 30932
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.9106
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 30932
 B meson 4-mom: 102862.59, 9429.81, -5442.02, 102148.43
@@ -6922,11 +6922,11 @@ WARN: HAMMER doesn't add process properly: 31076
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.21874
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31076
 B meson 4-mom: 142856.89, 18310.55, -20999.36, 140014.17
@@ -6957,11 +6957,11 @@ WARN: HAMMER doesn't add process properly: 31458
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.80156
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31458
 B meson 4-mom: 186157.52, 4206.95, 10944.19, 185712.88
@@ -6992,11 +6992,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 31502
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.7622
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31502
 B meson 4-mom: 237530.05, 10782.08, -5973.35, 237151.25
@@ -7027,11 +7027,11 @@ WARN: HAMMER doesn't add process properly: 31649
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.71407
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31649
 B meson 4-mom: 189508.02, -3199.27, 7511.31, 189258.45
@@ -7061,11 +7061,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 31731
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.60255
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31731
 B meson 4-mom: 127477.93, -6885.60, 1671.26, 127171.32
@@ -7096,11 +7096,11 @@ WARN: HAMMER doesn't add process properly: 31841
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.04539
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31841
 B meson 4-mom: 134295.13, 3194.03, 2037.83, 134137.81
@@ -7130,11 +7130,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 31923
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.87765
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 31923
 B meson 4-mom: 243204.94, -12280.13, -4317.87, 242798.94
@@ -7166,11 +7166,11 @@ WARN: HAMMER doesn't add process properly: 32505
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.21499
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 32505
 B meson 4-mom: 199230.13, 3971.98, 3916.55, 199082.03
@@ -7200,11 +7200,11 @@ WARN: HAMMER doesn't add process properly: 32524
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.18039
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 32524
 B meson 4-mom: 510376.58, -3973.46, -1813.48, 510330.58
@@ -7234,11 +7234,11 @@ WARN: HAMMER doesn't add process properly: 32578
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.71803
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 22
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 32578
 B meson 4-mom: 44242.83, -5204.45, 2520.40, 43544.41
@@ -7270,11 +7270,11 @@ WARN: HAMMER doesn't add process properly: 32945
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.7472
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 32945
 B meson 4-mom: 248517.47, 750.37, -4859.78, 248412.72
@@ -7304,11 +7304,11 @@ WARN: HAMMER doesn't add process properly: 32951
 Rosebud! Negative mass^2: -32768.000000
 ========
 True q2 (GeV): 2.59307
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 32951
 B meson 4-mom: 123598.26, 16188.29, 16017.15, 121367.40
@@ -7340,11 +7340,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 33018
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.95361
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33018
 B meson 4-mom: 99355.42, 7368.70, -2207.70, 98916.40
@@ -7375,11 +7375,11 @@ WARN: HAMMER doesn't add process properly: 33269
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.09004
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33269
 B meson 4-mom: 567934.06, -12474.08, -3471.30, 567761.90
@@ -7409,11 +7409,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 33297
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.11844
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33297
 B meson 4-mom: 298054.57, -5783.18, -5019.52, 297909.40
@@ -7444,11 +7444,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 33412
 Rosebud! Negative mass^2: -6658457600.000000
 ========
 True q2 (GeV): 0.880764
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33412
 B meson 4-mom: 175471.09, 12377.20, -2820.91, 174931.63
@@ -7479,11 +7479,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 33463
 Rosebud! Negative mass^2: -3370896492331008.000000
 ========
 True q2 (GeV): 7.05907
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33463
 B meson 4-mom: 773277.24, -29375.27, 1559.65, 772699.47
@@ -7514,11 +7514,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 33506
 Rosebud! Negative mass^2: -773094113280.000000
 ========
 True q2 (GeV): 4.83173
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33506
 B meson 4-mom: 148508.60, 4441.14, 5294.28, 148253.76
@@ -7549,11 +7549,11 @@ WARN: HAMMER doesn't add process properly: 33653
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.06894
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33653
 B meson 4-mom: 468839.63, -11007.26, 3089.70, 468670.48
@@ -7584,11 +7584,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 33785
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.75351
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33785
 B meson 4-mom: 189073.76, -7464.58, -501.73, 188851.90
@@ -7619,11 +7619,11 @@ WARN: HAMMER doesn't add process properly: 33912
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.10325
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 33912
 B meson 4-mom: 777765.39, -12167.42, 1430.41, 777650.97
@@ -7654,11 +7654,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 34196
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.00757
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34196
 B meson 4-mom: 61350.81, 1096.39, 5333.36, 60880.22
@@ -7689,11 +7689,11 @@ WARN: HAMMER doesn't add process properly: 34247
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.97136
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34247
 B meson 4-mom: 148728.52, -2597.17, -186.02, 148611.97
@@ -7724,11 +7724,11 @@ WARN: HAMMER doesn't add process properly: 34310
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.16498
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34310
 B meson 4-mom: 80991.70, -13674.15, 3706.07, 79567.98
@@ -7759,11 +7759,11 @@ WARN: HAMMER doesn't add process properly: 34421
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.14204
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34421
 B meson 4-mom: 80818.65, 2555.80, 8917.79, 80110.68
@@ -7793,11 +7793,11 @@ WARN: HAMMER doesn't add process properly: 34461
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.22074
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 22
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 34461
 B meson 4-mom: 133238.24, 8660.51, 10034.14, 132472.13
@@ -7830,11 +7830,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 34485
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.83481
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34485
 B meson 4-mom: 52727.05, -1053.97, 8389.27, 51776.22
@@ -7865,11 +7865,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 34658
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.52889
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34658
 B meson 4-mom: 257533.53, 8815.50, -318.15, 257328.26
@@ -7898,11 +7898,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 34670
 Rosebud! Negative mass^2: -17045651456.000000
 ========
 True q2 (GeV): 2.81362
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34670
 B meson 4-mom: 188043.76, 3479.46, -3805.66, 187898.89
@@ -7933,11 +7933,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 34694
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.73392
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 34694
 B meson 4-mom: 202968.43, -8617.77, -645.54, 202715.63
@@ -7968,11 +7968,11 @@ WARN: HAMMER doesn't add process properly: 35011
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.9897
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 35011
 B meson 4-mom: 100507.05, 2113.28, -13156.43, 99479.82
@@ -8003,11 +8003,11 @@ WARN: HAMMER doesn't add process properly: 35048
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.74898
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 35048
 B meson 4-mom: 248950.07, -4817.74, -12554.92, 248530.53
@@ -8038,11 +8038,11 @@ WARN: HAMMER doesn't add process properly: 35050
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.3329
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 0
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 35050
 B meson 4-mom: 93576.04, 2211.51, 5345.60, 93247.71
@@ -8074,11 +8074,11 @@ WARN: HAMMER doesn't add process properly: 35220
 Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.13081
-B meson ID: 511
-D meson ID: -413
-D daughter 0 ID: -421
-D daughter 1 ID: -211
-D daughter 2 ID: 22
+B meson ID: B0 (511)
+D meson ID: D*- (-413)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: pi- (-211)
+D daughter 2 ID: gamma (22)
 Is tau decay: 0
 Current candidate index: 35220
 B meson 4-mom: 99616.60, -5310.61, -737.33, 99332.00
@@ -8110,11 +8110,11 @@ WARN: HAMMER doesn't like candidate for reweighting: 35360
 NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.89074
-B meson ID: -511
-D meson ID: 413
-D daughter 0 ID: 421
-D daughter 1 ID: 211
-D daughter 2 ID: 0
+B meson ID: B0_bar (-511)
+D meson ID: D*+ (413)
+D daughter 0 ID: D0 (421)
+D daughter 1 ID: pi+ (211)
+D daughter 2 ID: None
 Is tau decay: 0
 Current candidate index: 35360
 B meson 4-mom: 182814.80, -13466.03, 9435.63, 181997.29
