@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 02:49 AM +0200
+// Last Change: Thu Sep 16, 2021 at 04:11 PM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -622,23 +622,15 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         }
 
         if (!is_bad_cand) {
-          try {
-            ham.initEvent();
-          } catch (...) {
-            cout << "WARN: HAMMER doesn't initialize candidate properly: "
-                 << num_of_evt << endl;
-            is_bad_cand = true;
-          }
+          ham.initEvent();
 
           Int_t proc_id = 0;
-          if (!is_bad_cand) {
-            try {
-              proc_id = ham.addProcess(proc);
-            } catch (...) {
-              cout << "WARN: HAMMER doesn't add process properly: "
-                   << num_of_evt << endl;
-              is_bad_cand = true;
-            }
+          try {
+            proc_id = ham.addProcess(proc);
+          } catch (...) {
+            cout << "WARN: HAMMER doesn't add process properly: " << num_of_evt
+                 << endl;
+            is_bad_cand = true;
           }
 
           if (proc_id != 0 && !is_bad_cand) {
