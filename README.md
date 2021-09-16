@@ -76,3 +76,38 @@ To use it:
 ```
 ValidateRDX test.root
 ```
+
+
+## HAMMER tips
+
+### General HAMMER reweighting workflow
+
+1. Configure the allowed decay modes and input/output FF parameterizations
+2. Define `Hammer::Particle` and adding these particles to a newly created
+    `Hammer::Process`, denote `proc.addParticle(p)`
+3. Specify the decay process tree with `proc.addVertex(mother, {list_of_daughters})`
+4. Initialize a new HAMMER event object with `Hammer::initEvent`
+5. Add a `proc` to the newly initialized event with `Hammer::addProcess(proc)`.
+    This includes:
+    1. Prune soft photons (the 4-momenta will be modified in this step)
+        by adding them to nearest charged particle in the same decay tree level
+        then remove the photons from the tree
+
+        This process may alter the kinematics in a bad way such that HAMMER
+        won't process the event further (either a `naN` in the cosine or a
+        negative invariant mass)
+    2. Compute the decay tree hash ID
+    3. Cache particle dependencies so the decay tree only need to be traversed
+        once (a technicality)
+6. Compute the amplitude tensor with `Hammer::processEvent()`, then get the weight
+    with `Hammer::getWeight("FF_scheme")`
+
+
+### HAMMER produces a segmentation fault
+
+This has happened to us on **some of** the `D*_2` candidates. The reason was
+that we also added the daughters of the `D*_2` to the decay tree, and HAMMER
+really doesn't like them.
+
+By removing them from the tree, HAMMER runs fine. So it's probably **a good idea
+to not adding unneeded particles to the tree**.
