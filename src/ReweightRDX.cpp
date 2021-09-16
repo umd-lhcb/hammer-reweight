@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 06:07 PM +0200
+// Last Change: Thu Sep 16, 2021 at 06:16 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -13,6 +13,7 @@
 
 #include <math.h>
 
+#include <TDatabasePDG.h>
 #include <TFile.h>
 #include <TMath.h>
 #include <TString.h>
@@ -142,6 +143,8 @@ typedef pair<unsigned long, unsigned long> RwRate;
 
 RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                 Hammer::Hammer& ham) {
+  auto db = new TDatabasePDG();
+
   if (B_MESON.find(tree) == B_MESON.end()) return RwRate{0, 0};
   TString b_meson = B_MESON[tree];
 
@@ -661,11 +664,14 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           // Print debug info
           cout << "========" << endl;
           cout << "True q2 (GeV): " << q2_true_out << endl;
-          cout << "B meson ID: " << b_id_fixed << endl;
-          cout << "D meson ID: " << d_id << endl;
-          cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
-          cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
-          cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
+          cout << "B meson ID: " << get_particle_name(b_id_fixed, db) << endl;
+          cout << "D meson ID: " << get_particle_name(d_id, db) << endl;
+          cout << "D daughter 0 ID: "
+               << get_particle_name(D_daughter_id[D_lbl + "_GD0"], db) << endl;
+          cout << "D daughter 1 ID: "
+               << get_particle_name(D_daughter_id[D_lbl + "_GD1"], db) << endl;
+          cout << "D daughter 2 ID: "
+               << get_particle_name(D_daughter_id[D_lbl + "_GD2"], db) << endl;
 
           cout << "Is tau decay: " << *is_tau << endl;
           cout << "Current candidate index: " << num_of_evt << endl;
@@ -743,6 +749,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   // Cleanup ///////////////////////////////////////////////////////////////////
   cout << "Cleanups" << endl;
   delete output_tree;
+  delete db;
 
   return RwRate{num_of_evt, num_of_evt_ham_ok};
 }
