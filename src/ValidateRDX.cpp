@@ -22,7 +22,8 @@
 #include <ff_dstaunu.hpp>
 #include <ff_dtaunu.hpp>
 
-#include "utils.h"
+#include "utils_general.h"
+#include "utils_ham.h"
 
 using namespace std;
 using TMath::Abs;
