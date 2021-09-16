@@ -59,10 +59,13 @@ Int_t digit_is(Int_t num, Int_t digit, Int_t base = 10) {
   return fac % 10;
 }
 
-string get_particle_name(Int_t id, TDatabasePDG* db) {
+string get_particle_name(Int_t id, TDatabasePDG* db,
+                         Bool_t use_abs_id = false) {
   if (!id) return string("None");
 
-  auto abs_id = TMath::Abs(id);
+  auto abs_id = id;
+  if (use_abs_id) abs_id = TMath::Abs(id);
+
   char buf[50];
   sprintf(buf, " (%d)", abs_id);
   auto str_id   = string(buf);

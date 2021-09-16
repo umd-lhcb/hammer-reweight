@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 06:06 PM +0200
+// Last Change: Thu Sep 16, 2021 at 06:11 PM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -80,7 +80,8 @@ void print_decay_freq(DecayFreq freq, TDatabasePDG* db) {
     cout << "Is Tau decay: " << key[0] << endl;
     for (auto idx = 1; idx < key.size(); idx++) {
       if (key[idx]) {
-        cout << DECAY_NAMES[idx - 1] << get_particle_name(key[idx], db) << endl;
+        cout << DECAY_NAMES[idx - 1] << get_particle_name(key[idx], db, true)
+             << endl;
       }
     }
   }
