@@ -15,6 +15,7 @@ Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
 Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
 Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
 WARN: HAMMER doesn't add process properly: 487
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.11197
 B meson ID: -511
@@ -57,6 +58,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
 Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
 WARN: HAMMER doesn't add process properly: 799
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.52129
 B meson ID: -511
@@ -95,6 +97,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 1285
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.76998
 B meson ID: 511
@@ -133,6 +136,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 1298
+Rosebud! Zero energy: 0.000000
 ========
 True q2 (GeV): 9.9317
 B meson ID: 521
@@ -166,6 +170,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 1572
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.01421
 B meson ID: -511
@@ -204,6 +209,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 1865
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.79104
 B meson ID: 511
@@ -242,6 +248,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 2246
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.85639
 B meson ID: -511
@@ -282,6 +289,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 2379
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.02641
 B meson ID: 511
@@ -320,6 +328,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 2479
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.29266
 B meson ID: -511
@@ -361,6 +370,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 2863
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.78151
 B meson ID: -511
@@ -399,6 +409,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 2917
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.07155
 B meson ID: -511
@@ -438,6 +449,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 3014
+Rosebud! Negative mass^2: -268435456.000000
 ========
 True q2 (GeV): 5.53117
 B meson ID: 511
@@ -477,6 +489,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 3305
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.09571
 B meson ID: 511
@@ -515,6 +528,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 3396
+Rosebud! Negative mass^2: -524288.000000
 ========
 True q2 (GeV): 6.45172
 B meson ID: -511
@@ -554,6 +568,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 3446
+Rosebud! Negative mass^2: -100663296.000000
 ========
 True q2 (GeV): 5.35856
 B meson ID: 511
@@ -593,6 +608,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 3640
+Rosebud! Negative mass^2: -131072.000000
 ========
 True q2 (GeV): 5.18703
 B meson ID: 511
@@ -636,6 +652,7 @@ Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 WARN: HAMMER doesn't add process properly: 5070
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.89313
 B meson ID: -511
@@ -674,6 +691,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 5288
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.27512
 B meson ID: 511
@@ -716,6 +734,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
 Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
 WARN: HAMMER doesn't add process properly: 6191
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.19768
 B meson ID: -511
@@ -754,6 +773,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 6835
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.99052
 B meson ID: -511
@@ -792,6 +812,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 6922
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.35981
 B meson ID: -511
@@ -832,6 +853,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 7546
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.09371
 B meson ID: -511
@@ -870,6 +892,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 8096
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.18555
 B meson ID: 511
@@ -910,6 +933,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 8183
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.43458
 B meson ID: -511
@@ -950,6 +974,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 WARN: HAMMER doesn't add process properly: 9607
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.18237
 B meson ID: -511
@@ -990,6 +1015,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 10339
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.31865
 B meson ID: 511
@@ -1030,6 +1056,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 10544
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.20369
 B meson ID: 511
@@ -1068,6 +1095,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 10894
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.95235
 B meson ID: -511

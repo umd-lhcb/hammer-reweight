@@ -3,6 +3,7 @@ Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
 Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
 Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 178
+Rosebud! Negative mass^2: -77840.000000
 ========
 True q2 (GeV): 0.294556
 B meson ID: -511
@@ -37,6 +38,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 235
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.6405
 B meson ID: -511
@@ -70,6 +72,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 237
+Rosebud! Negative mass^2: -33554432.000000
 ========
 True q2 (GeV): 6.08241
 B meson ID: 511
@@ -105,6 +108,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 270
+Rosebud! Negative mass^2: -2097152.000000
 ========
 True q2 (GeV): 3.80157
 B meson ID: -511
@@ -139,6 +143,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 293
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.41847
 B meson ID: -511
@@ -173,6 +178,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 610
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.76287
 B meson ID: -511
@@ -207,6 +213,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 650
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.633691
 B meson ID: -511
@@ -242,6 +249,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 657
+Rosebud! Negative mass^2: -4829184.000000
 ========
 True q2 (GeV): 6.86365
 B meson ID: 511
@@ -276,6 +284,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 952
+Rosebud! Negative mass^2: -780140544.000000
 ========
 True q2 (GeV): 2.18274
 B meson ID: 511
@@ -310,6 +319,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 956
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.59883
 B meson ID: 511
@@ -344,6 +354,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 1981
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.39857
 B meson ID: 511
@@ -377,6 +388,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 2275
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.70612
 B meson ID: 511
@@ -411,6 +423,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 2504
+Rosebud! Negative mass^2: -1015759765504.000000
 ========
 True q2 (GeV): 5.52769
 B meson ID: 511
@@ -447,6 +460,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 WARN: HAMMER doesn't add process properly: 2807
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.23922
 B meson ID: 511
@@ -480,6 +494,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 2986
+Rosebud! Negative mass^2: -102458458112.000000
 ========
 True q2 (GeV): 2.58422
 B meson ID: 511
@@ -514,6 +529,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 3297
+Rosebud! Negative mass^2: -14905684000768.000000
 ========
 True q2 (GeV): 1.50054
 B meson ID: 511
@@ -548,6 +564,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 3358
+Rosebud! Negative mass^2: -21037056.000000
 ========
 True q2 (GeV): 1.01803
 B meson ID: -511
@@ -582,6 +599,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 3603
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.96227
 B meson ID: 511
@@ -616,6 +634,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 3712
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.45285
 B meson ID: 511
@@ -651,6 +670,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 3732
+Rosebud! Negative mass^2: -15872.000000
 ========
 True q2 (GeV): 4.77488
 B meson ID: 511
@@ -685,6 +705,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 3944
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.80105
 B meson ID: 511
@@ -721,6 +742,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 4291
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.43447
 B meson ID: 511
@@ -755,6 +777,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 4316
+Rosebud! Negative mass^2: -105451520.000000
 ========
 True q2 (GeV): 0.12039
 B meson ID: 511
@@ -789,6 +812,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 4428
+Rosebud! Negative mass^2: -27262976.000000
 ========
 True q2 (GeV): 1.54412
 B meson ID: 511
@@ -823,6 +847,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 4464
+Rosebud! Negative mass^2: -34041910788096.000000
 ========
 True q2 (GeV): 7.01654
 B meson ID: -511
@@ -857,6 +882,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 4631
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.97135
 B meson ID: 511
@@ -890,6 +916,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 4657
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.2546
 B meson ID: 511
@@ -923,6 +950,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 4658
+Rosebud! Negative mass^2: -724041728.000000
 ========
 True q2 (GeV): 2.92212
 B meson ID: -511
@@ -957,6 +985,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 4736
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.90543
 B meson ID: 511
@@ -991,6 +1020,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 4788
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.33024
 B meson ID: 511
@@ -1024,6 +1054,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 5028
+Rosebud! Negative mass^2: -36274176.000000
 ========
 True q2 (GeV): 5.89731
 B meson ID: -511
@@ -1058,6 +1089,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 5386
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.94553
 B meson ID: -511
@@ -1091,6 +1123,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 5396
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.24078
 B meson ID: 511
@@ -1125,6 +1158,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 5423
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.01419
 B meson ID: 511
@@ -1158,6 +1192,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 5450
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.36255
 B meson ID: -511
@@ -1192,6 +1227,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 5546
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.44627
 B meson ID: 511
@@ -1226,6 +1262,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 5690
+Rosebud! Negative mass^2: -1952867942400.000000
 ========
 True q2 (GeV): 4.04487
 B meson ID: 511
@@ -1260,6 +1297,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 5791
+Rosebud! Negative mass^2: -327155712.000000
 ========
 True q2 (GeV): 2.07526
 B meson ID: -511
@@ -1294,6 +1332,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 5935
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.4141
 B meson ID: 511
@@ -1329,6 +1368,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 6198
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.646388
 B meson ID: -511
@@ -1363,6 +1403,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6246
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.71057
 B meson ID: 511
@@ -1397,6 +1438,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6272
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.40065
 B meson ID: -511
@@ -1431,6 +1473,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6509
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.13558
 B meson ID: -511
@@ -1465,6 +1508,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6643
+Rosebud! Negative mass^2: -1835008.000000
 ========
 True q2 (GeV): 3.69328
 B meson ID: 511
@@ -1499,6 +1543,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6662
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.03815
 B meson ID: -511
@@ -1533,6 +1578,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 6747
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.83338
 B meson ID: 511
@@ -1566,6 +1612,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6861
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.71184
 B meson ID: -511
@@ -1600,6 +1647,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6864
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.12725
 B meson ID: 511
@@ -1634,6 +1682,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 6979
+Rosebud! Negative mass^2: -377353142272.000000
 ========
 True q2 (GeV): 0.0358648
 B meson ID: -511
@@ -1668,6 +1717,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 7486
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.68884
 B meson ID: -511
@@ -1702,6 +1752,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 7575
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.74623
 B meson ID: 511
@@ -1735,6 +1786,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 7629
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 0.718781
 B meson ID: 511
@@ -1769,6 +1821,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 7670
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.71846
 B meson ID: 511
@@ -1803,6 +1856,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 7709
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.361412
 B meson ID: -511
@@ -1836,6 +1890,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 8146
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.72417
 B meson ID: -511
@@ -1870,6 +1925,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 8234
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.05839
 B meson ID: -511
@@ -1902,6 +1958,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 8319
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.5459
 B meson ID: 511
@@ -1935,6 +1992,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 8542
+Rosebud! Negative mass^2: -4145180311552.000000
 ========
 True q2 (GeV): 2.36128
 B meson ID: -511
@@ -1969,6 +2027,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 8717
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 0.211587
 B meson ID: 511
@@ -2003,6 +2062,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 8996
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.38643
 B meson ID: 511
@@ -2037,6 +2097,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9123
+Rosebud! Negative mass^2: -2097152.000000
 ========
 True q2 (GeV): 7.73661
 B meson ID: -511
@@ -2071,6 +2132,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9135
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 0.292672
 B meson ID: -511
@@ -2105,6 +2167,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9181
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.7593
 B meson ID: -511
@@ -2139,6 +2202,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9461
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.81223
 B meson ID: 511
@@ -2173,6 +2237,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9553
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.59258
 B meson ID: 511
@@ -2207,6 +2272,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9919
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.2066
 B meson ID: -511
@@ -2241,6 +2307,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 9933
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.07033
 B meson ID: 511
@@ -2275,6 +2342,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 9953
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.72599
 B meson ID: -511
@@ -2310,6 +2378,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 10150
+Rosebud! Negative mass^2: -393216.000000
 ========
 True q2 (GeV): 8.79987
 B meson ID: 511
@@ -2344,6 +2413,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 10250
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.31635
 B meson ID: 511
@@ -2378,6 +2448,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 10397
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.6149
 B meson ID: -511
@@ -2412,6 +2483,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 10763
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.64231
 B meson ID: 511
@@ -2447,6 +2519,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 11326
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.97889
 B meson ID: -511
@@ -2481,6 +2554,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 11338
+Rosebud! Negative mass^2: -60196651008.000000
 ========
 True q2 (GeV): 1.74341
 B meson ID: 511
@@ -2515,6 +2589,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 11742
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.32663
 B meson ID: -511
@@ -2548,6 +2623,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 12182
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.34814
 B meson ID: 511
@@ -2583,6 +2659,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 12343
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.62287
 B meson ID: -511
@@ -2617,6 +2694,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 12413
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.85834
 B meson ID: 511
@@ -2651,6 +2729,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 12573
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.15335
 B meson ID: 511
@@ -2685,6 +2764,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 12706
+Rosebud! Negative mass^2: -85161148416.000000
 ========
 True q2 (GeV): 3.87093
 B meson ID: -511
@@ -2719,6 +2799,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 12738
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.30773
 B meson ID: -511
@@ -2753,6 +2834,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 12780
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.7444
 B meson ID: 511
@@ -2788,6 +2870,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 12856
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.05739
 B meson ID: -511
@@ -2822,6 +2905,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 13107
+Rosebud! Negative mass^2: -63569920.000000
 ========
 True q2 (GeV): 0.844685
 B meson ID: 511
@@ -2856,6 +2940,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 13138
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.03368
 B meson ID: -511
@@ -2890,6 +2975,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 13198
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.42736
 B meson ID: -511
@@ -2924,6 +3010,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 13591
+Rosebud! Negative mass^2: -29360128.000000
 ========
 True q2 (GeV): 7.0632
 B meson ID: -511
@@ -2958,6 +3045,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 13621
+Rosebud! Negative mass^2: -41825599488.000000
 ========
 True q2 (GeV): 3.44452
 B meson ID: -511
@@ -2992,6 +3080,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 13891
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.57771
 B meson ID: 511
@@ -3028,6 +3117,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 16 -15
 Hammer.RateBase: INFO  Integrating rate 521 -> -423 16 -15
 WARN: HAMMER doesn't like candidate for reweighting: 14096
+Rosebud! Negative mass^2: -1024458752.000000
 ========
 True q2 (GeV): 3.28444
 B meson ID: -511
@@ -3062,6 +3152,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 14572
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.18909
 B meson ID: 511
@@ -3096,6 +3187,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 14643
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.50521
 B meson ID: -511
@@ -3130,6 +3222,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 14645
+Rosebud! Negative mass^2: -18615462002688.000000
 ========
 True q2 (GeV): 0.402378
 B meson ID: 511
@@ -3164,6 +3257,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 14715
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.46234
 B meson ID: 511
@@ -3198,6 +3292,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 14786
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.14277
 B meson ID: -511
@@ -3232,6 +3327,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 15327
+Rosebud! Negative mass^2: -845545472.000000
 ========
 True q2 (GeV): 5.55665
 B meson ID: -511
@@ -3266,6 +3362,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 15487
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.99393
 B meson ID: 511
@@ -3300,6 +3397,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 15590
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.17662
 B meson ID: -511
@@ -3333,6 +3431,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 15646
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.73538
 B meson ID: -511
@@ -3367,6 +3466,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 15891
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 9.02687
 B meson ID: 511
@@ -3401,6 +3501,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 16090
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.68482
 B meson ID: -511
@@ -3435,6 +3536,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 16164
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.95388
 B meson ID: 511
@@ -3469,6 +3571,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 16257
+Rosebud! Negative mass^2: -67968.000000
 ========
 True q2 (GeV): 5.54373
 B meson ID: 511
@@ -3503,6 +3606,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 16264
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.96756
 B meson ID: 511
@@ -3536,6 +3640,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 16288
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.96362
 B meson ID: -511
@@ -3570,6 +3675,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 16382
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.38273
 B meson ID: -511
@@ -3604,6 +3710,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 16405
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.11881
 B meson ID: -511
@@ -3637,6 +3744,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 16464
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.98882
 B meson ID: -511
@@ -3670,6 +3778,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 16726
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.93576
 B meson ID: -511
@@ -3703,6 +3812,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 17244
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.05808
 B meson ID: 511
@@ -3737,6 +3847,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 17377
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.87178
 B meson ID: 511
@@ -3772,6 +3883,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 17421
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.10698
 B meson ID: -511
@@ -3805,6 +3917,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 17536
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.48962
 B meson ID: 511
@@ -3839,6 +3952,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 17793
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.32287
 B meson ID: 511
@@ -3872,6 +3986,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 17903
+Rosebud! Negative mass^2: -13539213312.000000
 ========
 True q2 (GeV): 7.42829
 B meson ID: 511
@@ -3906,6 +4021,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18045
+Rosebud! Negative mass^2: -73924608.000000
 ========
 True q2 (GeV): 9.17329
 B meson ID: 511
@@ -3940,6 +4056,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 18108
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.08034
 B meson ID: 511
@@ -3974,6 +4091,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18208
+Rosebud! Negative mass^2: -24297472.000000
 ========
 True q2 (GeV): 3.99854
 B meson ID: -511
@@ -4008,6 +4126,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18483
+Rosebud! Negative mass^2: -8192.000000
 ========
 True q2 (GeV): 2.05867
 B meson ID: -511
@@ -4042,6 +4161,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 18613
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.00033
 B meson ID: -511
@@ -4077,6 +4197,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18645
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.25609
 B meson ID: 511
@@ -4111,6 +4232,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18646
+Rosebud! Negative mass^2: -10645143552.000000
 ========
 True q2 (GeV): 8.27125
 B meson ID: 511
@@ -4145,6 +4267,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18753
+Rosebud! Negative mass^2: -14417920.000000
 ========
 True q2 (GeV): 6.7905
 B meson ID: -511
@@ -4179,6 +4302,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 18800
+Rosebud! Negative mass^2: -17111149707264.000000
 ========
 True q2 (GeV): 3.52264
 B meson ID: 511
@@ -4213,6 +4337,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 18811
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.48376
 B meson ID: -511
@@ -4247,6 +4372,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 18871
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.21646
 B meson ID: 511
@@ -4281,6 +4407,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19098
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.00631
 B meson ID: -511
@@ -4315,6 +4442,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19130
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.29188
 B meson ID: -511
@@ -4348,6 +4476,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 19143
+Rosebud! Negative mass^2: -240518168576.000000
 ========
 True q2 (GeV): 6.9774
 B meson ID: -511
@@ -4382,6 +4511,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19558
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.64325
 B meson ID: -511
@@ -4416,6 +4546,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19573
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.93476
 B meson ID: 511
@@ -4450,6 +4581,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19681
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.330886
 B meson ID: 511
@@ -4483,6 +4615,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 19686
+Rosebud! Negative mass^2: -3623878656.000000
 ========
 True q2 (GeV): 4.2202
 B meson ID: -511
@@ -4517,6 +4650,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19791
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.461359
 B meson ID: -511
@@ -4552,6 +4686,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19835
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.57885
 B meson ID: 511
@@ -4585,6 +4720,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 19884
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.67569
 B meson ID: 511
@@ -4619,6 +4755,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 19917
+Rosebud! Negative mass^2: -10093173145600.000000
 ========
 True q2 (GeV): 3.88852
 B meson ID: -511
@@ -4653,6 +4790,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 20263
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.65753
 B meson ID: -511
@@ -4687,6 +4825,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 20279
+Rosebud! Negative mass^2: -33554432.000000
 ========
 True q2 (GeV): 7.40156
 B meson ID: 511
@@ -4721,6 +4860,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 20332
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.02684
 B meson ID: -511
@@ -4755,6 +4895,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 20578
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.5018
 B meson ID: -511
@@ -4788,6 +4929,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 20965
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.47398
 B meson ID: 511
@@ -4822,6 +4964,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 21056
+Rosebud! Negative mass^2: -15728640.000000
 ========
 True q2 (GeV): 7.18902
 B meson ID: -511
@@ -4856,6 +4999,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 21431
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.99042
 B meson ID: 511
@@ -4890,6 +5034,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 21503
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.49284
 B meson ID: -511
@@ -4924,6 +5069,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 21732
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.321
 B meson ID: 511
@@ -4960,6 +5106,7 @@ All particles have OK kinematics: 1
 Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
 Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 21790
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.00611
 B meson ID: -511
@@ -4994,6 +5141,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 22033
+Rosebud! Negative mass^2: -23914377904128.000000
 ========
 True q2 (GeV): 1.44091
 B meson ID: -511
@@ -5029,6 +5177,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 22424
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.46347
 B meson ID: 511
@@ -5062,6 +5211,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 22579
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.08505
 B meson ID: 511
@@ -5095,6 +5245,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 22590
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.52875
 B meson ID: -511
@@ -5129,6 +5280,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 22605
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.11824
 B meson ID: -511
@@ -5163,6 +5315,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 22655
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.77716
 B meson ID: -511
@@ -5197,6 +5350,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 22718
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.28856
 B meson ID: 511
@@ -5230,6 +5384,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 22786
+Rosebud! Negative mass^2: -16777216.000000
 ========
 True q2 (GeV): 2.20289
 B meson ID: 511
@@ -5264,6 +5419,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 23349
+Rosebud! Negative mass^2: -4390912.000000
 ========
 True q2 (GeV): 10.3984
 B meson ID: -511
@@ -5298,6 +5454,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 23595
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.76711
 B meson ID: 511
@@ -5332,6 +5489,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 23658
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 0.265699
 B meson ID: 511
@@ -5366,6 +5524,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 23749
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.38889
 B meson ID: -511
@@ -5400,6 +5559,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 23889
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.98745
 B meson ID: 511
@@ -5433,6 +5593,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 24173
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.49362
 B meson ID: -511
@@ -5468,6 +5629,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 24248
+Rosebud! Negative mass^2: -916455424.000000
 ========
 True q2 (GeV): 0.105752
 B meson ID: -511
@@ -5502,6 +5664,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 24410
+Rosebud! Zero energy: 0.000000
 ========
 True q2 (GeV): 5.2702
 B meson ID: -521
@@ -5535,6 +5698,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 24553
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.50339
 B meson ID: 511
@@ -5569,6 +5733,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 24603
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.24186
 B meson ID: -511
@@ -5602,6 +5767,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 24706
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.82154
 B meson ID: 511
@@ -5636,6 +5802,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 24712
+Rosebud! Negative mass^2: -781147176960.000000
 ========
 True q2 (GeV): 2.01164
 B meson ID: -511
@@ -5670,6 +5837,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 24714
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.06971
 B meson ID: -511
@@ -5703,6 +5871,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 24785
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.06826
 B meson ID: -511
@@ -5737,6 +5906,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 25252
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.83851
 B meson ID: 511
@@ -5771,6 +5941,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 25349
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.88356
 B meson ID: 511
@@ -5804,6 +5975,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 25830
+Rosebud! Negative mass^2: -2358473916416.000000
 ========
 True q2 (GeV): 5.42141
 B meson ID: -511
@@ -5838,6 +6010,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 25895
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 9.99462
 B meson ID: -511
@@ -5872,6 +6045,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 25987
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.01237
 B meson ID: -511
@@ -5906,6 +6080,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 26071
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.09582
 B meson ID: 511
@@ -5940,6 +6115,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 26117
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.25252
 B meson ID: -511
@@ -5974,6 +6150,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 27002
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.74242
 B meson ID: -511
@@ -6008,6 +6185,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 27175
+Rosebud! Negative mass^2: -72286208.000000
 ========
 True q2 (GeV): 6.07724
 B meson ID: 511
@@ -6042,6 +6220,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 27411
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.96697
 B meson ID: 511
@@ -6077,6 +6256,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 27575
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 10.5515
 B meson ID: -511
@@ -6111,6 +6291,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 27723
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.32273
 B meson ID: -511
@@ -6144,6 +6325,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 27996
+Rosebud! Negative mass^2: -1048576.000000
 ========
 True q2 (GeV): 6.5422
 B meson ID: 511
@@ -6178,6 +6360,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 28072
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.05657
 B meson ID: -511
@@ -6212,6 +6395,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 28198
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.20493
 B meson ID: 511
@@ -6246,6 +6430,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 28391
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.32996
 B meson ID: 511
@@ -6280,6 +6465,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 28454
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.70611
 B meson ID: 511
@@ -6313,6 +6499,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 28471
+Rosebud! Negative mass^2: -51355648.000000
 ========
 True q2 (GeV): 9.14052
 B meson ID: -511
@@ -6347,6 +6534,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 28672
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.97868
 B meson ID: -511
@@ -6381,6 +6569,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 28930
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.56913
 B meson ID: -511
@@ -6415,6 +6604,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 29242
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.18362
 B meson ID: -511
@@ -6449,6 +6639,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 29299
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.40801
 B meson ID: 511
@@ -6483,6 +6674,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 29319
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.01507
 B meson ID: -511
@@ -6517,6 +6709,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 29645
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.2245
 B meson ID: 511
@@ -6552,6 +6745,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 29871
+Rosebud! Negative mass^2: -5772436045824.000000
 ========
 True q2 (GeV): 5.4692
 B meson ID: -511
@@ -6586,6 +6780,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 29990
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.98627
 B meson ID: -511
@@ -6619,6 +6814,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 30750
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.21023
 B meson ID: 511
@@ -6653,6 +6849,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 30814
+Rosebud! Negative mass^2: -5368709120000.000000
 ========
 True q2 (GeV): 5.47802
 B meson ID: 511
@@ -6687,6 +6884,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 30932
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.9106
 B meson ID: -511
@@ -6721,6 +6919,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 31076
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.21874
 B meson ID: -511
@@ -6755,6 +6954,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 31458
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.80156
 B meson ID: -511
@@ -6789,6 +6989,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 31502
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.7622
 B meson ID: -511
@@ -6823,6 +7024,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 31649
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.71407
 B meson ID: -511
@@ -6856,6 +7058,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 31731
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 5.60255
 B meson ID: -511
@@ -6890,6 +7093,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 31841
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.04539
 B meson ID: -511
@@ -6923,6 +7127,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 31923
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 1.87765
 B meson ID: -511
@@ -6958,6 +7163,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 32505
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.21499
 B meson ID: 511
@@ -6991,6 +7197,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 32524
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.18039
 B meson ID: -511
@@ -7024,6 +7231,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 32578
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.71803
 B meson ID: -511
@@ -7059,6 +7267,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 32945
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 4.7472
 B meson ID: -511
@@ -7092,6 +7301,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 32951
+Rosebud! Negative mass^2: -32768.000000
 ========
 True q2 (GeV): 2.59307
 B meson ID: 511
@@ -7127,6 +7337,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 33018
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.95361
 B meson ID: 511
@@ -7161,6 +7372,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 33269
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.09004
 B meson ID: 511
@@ -7194,6 +7406,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 33297
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.11844
 B meson ID: -511
@@ -7228,6 +7441,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 33412
+Rosebud! Negative mass^2: -6658457600.000000
 ========
 True q2 (GeV): 0.880764
 B meson ID: -511
@@ -7262,6 +7476,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 33463
+Rosebud! Negative mass^2: -3370896492331008.000000
 ========
 True q2 (GeV): 7.05907
 B meson ID: 511
@@ -7296,6 +7511,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 33506
+Rosebud! Negative mass^2: -773094113280.000000
 ========
 True q2 (GeV): 4.83173
 B meson ID: -511
@@ -7330,6 +7546,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 33653
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.06894
 B meson ID: -511
@@ -7364,6 +7581,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 33785
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.75351
 B meson ID: -511
@@ -7398,6 +7616,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 33912
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 3.10325
 B meson ID: -511
@@ -7432,6 +7651,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 34196
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 3.00757
 B meson ID: 511
@@ -7466,6 +7686,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 34247
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 2.97136
 B meson ID: -511
@@ -7500,6 +7721,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 34310
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 6.16498
 B meson ID: 511
@@ -7534,6 +7756,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 34421
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.14204
 B meson ID: 511
@@ -7567,6 +7790,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 34461
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 1.22074
 B meson ID: -511
@@ -7603,6 +7827,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 34485
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.83481
 B meson ID: -511
@@ -7637,6 +7862,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 34658
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.52889
 B meson ID: 511
@@ -7669,6 +7895,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 34670
+Rosebud! Negative mass^2: -17045651456.000000
 ========
 True q2 (GeV): 2.81362
 B meson ID: -511
@@ -7703,6 +7930,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 34694
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 4.73392
 B meson ID: 511
@@ -7737,6 +7965,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 35011
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 7.9897
 B meson ID: 511
@@ -7771,6 +8000,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 35048
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 5.74898
 B meson ID: -511
@@ -7805,6 +8035,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 35050
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 8.3329
 B meson ID: 511
@@ -7840,6 +8071,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't add process properly: 35220
+Nan in Cosine. Cock. In Hungarian.
 ========
 True q2 (GeV): 9.13081
 B meson ID: 511
@@ -7875,6 +8107,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 35360
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 2.89074
 B meson ID: -511
