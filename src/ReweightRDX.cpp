@@ -1,9 +1,10 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 02:11 AM +0200
+// Last Change: Thu Sep 16, 2021 at 02:49 AM +0200
 
 #include <algorithm>
 #include <iostream>
 #include <map>
+#include <sstream>
 #include <string>
 #include <tuple>
 #include <utility>
@@ -34,7 +35,7 @@ using namespace std;
 //#define SILENT
 //#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
 //#define FORCE_MOMENTUM_CONSERVATION_HADRONIC
-//#define RADIATIVE_CORRECTION
+#define RADIATIVE_CORRECTION
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -105,20 +106,25 @@ void set_decays(Hammer::Hammer& ham) {
   ham.includeDecay("BD**2*MuNu");
 }
 
-const Double_t SOFT_PHOTON_THRESH = 0.01;
+const Double_t SOFT_PHOTON_THRESH = 0.1;
 
 /////////////////
 // Corrections //
 /////////////////
 
-void photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
-                       vector<Hammer::Particle> photon_p, Hammer::Process& proc,
-                       Hammer::ParticleIndices& idx) {
+string photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
+                         vector<Hammer::Particle> photon_p,
+                         Hammer::Process& proc, Hammer::ParticleIndices& idx) {
+  stringstream buffer;
   for (auto i = 0; i < photon_p.size(); i++) {
-    if (photon_mom_id[i] == ref_mom_id || photon_mom_id[i] == -ref_mom_id) {
+    if (photon_mom_id[i] == ref_mom_id) {
+      buffer << "  Adding photon with energy " << photon_p[i].p().E()
+             << " to particle " << ref_mom_id << endl;
       idx.push_back(proc.addParticle(photon_p[i]));
     }
   }
+
+  return buffer.str();
 }
 
 Bool_t is_soft_photon(Double_t pe) {
@@ -538,6 +544,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
             vec_photon_p.emplace_back(particle(g_pe, g_px, g_py, g_pz, 22));
           }
         }
+
+        string buf_rad_corr;
 #endif
 
         // Always add the primary leptons
@@ -548,8 +556,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         Hammer::ParticleIndices part_B_daughters_idx{part_D_idx, part_L_idx,
                                                      part_NuL_idx};
 #ifdef RADIATIVE_CORRECTION
-        photon_correction(b_id_fixed, vec_photon_mom_id, vec_photon_p, proc,
-                          part_B_daughters_idx);
+        buf_rad_corr +=
+            photon_correction(b_id_fixed, vec_photon_mom_id, vec_photon_p, proc,
+                              part_B_daughters_idx);
 #endif
         proc.addVertex(part_B_idx, part_B_daughters_idx);
 
@@ -566,8 +575,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
               part_D_daughters_idx.push_back(proc.addParticle(part));
           }
 #ifdef RADIATIVE_CORRECTION
-          photon_correction(d_id, vec_photon_mom_id, vec_photon_p, proc,
-                            part_D_daughters_idx);
+          buf_rad_corr +=
+              photon_correction(d_id, vec_photon_mom_id, vec_photon_p, proc,
+                                part_D_daughters_idx);
 #endif
           proc.addVertex(part_D_idx, part_D_daughters_idx);
         }
@@ -580,8 +590,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           Hammer::ParticleIndices part_L_daughters_idx{
               part_Mu_idx, part_TauNuMu_idx, part_TauNuTau_idx};
 #ifdef RADIATIVE_CORRECTION
-          photon_correction(part_L_id, vec_photon_mom_id, vec_photon_p, proc,
-                            part_L_daughters_idx);
+          buf_rad_corr +=
+              photon_correction(part_L_id, vec_photon_mom_id, vec_photon_p,
+                                proc, part_L_daughters_idx);
 #endif
           proc.addVertex(part_L_idx, part_L_daughters_idx);
         }
@@ -611,14 +622,23 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         }
 
         if (!is_bad_cand) {
-          int proc_id = 0;
           try {
             ham.initEvent();
-            proc_id = ham.addProcess(proc);
           } catch (...) {
             cout << "WARN: HAMMER doesn't initialize candidate properly: "
                  << num_of_evt << endl;
             is_bad_cand = true;
+          }
+
+          Int_t proc_id = 0;
+          if (!is_bad_cand) {
+            try {
+              proc_id = ham.addProcess(proc);
+            } catch (...) {
+              cout << "WARN: HAMMER doesn't add process properly: "
+                   << num_of_evt << endl;
+              is_bad_cand = true;
+            }
           }
 
           if (proc_id != 0 && !is_bad_cand) {
@@ -650,7 +670,6 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
           cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
           cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
-          cout << "test ID:" << part_D_daughters[2].pdgId() << endl;
 
           cout << "Is tau decay: " << *is_tau << endl;
           cout << "Current candidate index: " << num_of_evt << endl;
@@ -698,6 +717,11 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 #ifdef FORCE_MOMENTUM_CONSERVATION_HADRONIC
           cout << "Hadronic part known momentum: " << print_p(known_mom)
                << endl;
+#endif
+
+#ifdef RADIATIVE_CORRECTION
+          cout << "Radiative photon correction info:" << endl;
+          cout << buf_rad_corr;
 #endif
 
           cout << "Check if invariant mass of each particle is non-negative: "
