@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 01:35 AM +0200
+// Last Change: Thu Sep 16, 2021 at 02:11 AM +0200
 
 #include <algorithm>
 #include <iostream>
@@ -105,11 +105,11 @@ void set_decays(Hammer::Hammer& ham) {
   ham.includeDecay("BD**2*MuNu");
 }
 
-/////////////////
-// Reweighting //
-/////////////////
+const Double_t SOFT_PHOTON_THRESH = 0.01;
 
-typedef pair<unsigned long, unsigned long> RwRate;
+/////////////////
+// Corrections //
+/////////////////
 
 void photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
                        vector<Hammer::Particle> photon_p, Hammer::Process& proc,
@@ -120,6 +120,17 @@ void photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
     }
   }
 }
+
+Bool_t is_soft_photon(Double_t pe) {
+  if (TMath::Abs(pe) > SOFT_PHOTON_THRESH) return false;
+  return true;
+}
+
+/////////////////
+// Reweighting //
+/////////////////
+
+typedef pair<unsigned long, unsigned long> RwRate;
 
 RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                 Hammer::Hammer& ham) {
@@ -328,6 +339,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
+  Bool_t ham_tm_ok;
+  output_tree->Branch("ham_tm_ok", &ham_tm_ok);
 
   Double_t q2_true_out;
   output_tree->Branch("q2_true", &q2_true_out);
@@ -336,6 +349,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   unsigned long num_of_evt_ham_ok = 0l;
   while (reader.Next()) {
     ham_ok      = false;
+    ham_tm_ok   = false;
     w_ff_out    = 1.;
     q2_true_out = *q2 / 1000 / 1000;
 
@@ -369,6 +383,8 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
       auto [D_ok, D_lbl] = is_D_meson(D_cands);
 
       if (D_ok) {
+        ham_tm_ok = true;  // now the naive truth-matching is considered OK
+
         // clang-format off
         auto D_daughter_id = PartIdMap{
           {"D0_GD0", *d_idx0_gd0_id},
@@ -507,18 +523,20 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 #endif
 
 #ifdef RADIATIVE_CORRECTION
-        vector<Int_t> vec_photon_mom_id{};
-        for (auto i = 0; i < *photon_arr_size; i++) {
-          vec_photon_mom_id.push_back(static_cast<Int_t>(photon_arr_mom_id[i]));
-        }
+        vector<Int_t>            vec_photon_mom_id{};
         vector<Hammer::Particle> vec_photon_p{};
+
         for (auto i = 0; i < *photon_arr_size; i++) {
           Float_t g_pe = photon_arr_pe[i];
           Float_t g_px = photon_arr_px[i];
           Float_t g_py = photon_arr_py[i];
           Float_t g_pz = photon_arr_pz[i];
 
-          vec_photon_p.emplace_back(particle(g_pe, g_px, g_py, g_pz, 22));
+          if (!is_soft_photon(g_pe)) {
+            vec_photon_mom_id.push_back(
+                static_cast<Int_t>(photon_arr_mom_id[i]));
+            vec_photon_p.emplace_back(particle(g_pe, g_px, g_py, g_pz, 22));
+          }
         }
 #endif
 
@@ -539,7 +557,13 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
         Hammer::ParticleIndices part_D_daughters_idx{};
         if (is_Dst) {
           for (const auto part : part_D_daughters) {
-            part_D_daughters_idx.push_back(proc.addParticle(part));
+            if (part.pdgId() == 22) {
+              // Don't add soft photons
+              if (!is_soft_photon(part.p().E())) {
+                part_D_daughters_idx.push_back(proc.addParticle(part));
+              }
+            } else
+              part_D_daughters_idx.push_back(proc.addParticle(part));
           }
 #ifdef RADIATIVE_CORRECTION
           photon_correction(d_id, vec_photon_mom_id, vec_photon_p, proc,
@@ -626,6 +650,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           cout << "D daughter 0 ID: " << D_daughter_id[D_lbl + "_GD0"] << endl;
           cout << "D daughter 1 ID: " << D_daughter_id[D_lbl + "_GD1"] << endl;
           cout << "D daughter 2 ID: " << D_daughter_id[D_lbl + "_GD2"] << endl;
+          cout << "test ID:" << part_D_daughters[2].pdgId() << endl;
 
           cout << "Is tau decay: " << *is_tau << endl;
           cout << "Current candidate index: " << num_of_evt << endl;
