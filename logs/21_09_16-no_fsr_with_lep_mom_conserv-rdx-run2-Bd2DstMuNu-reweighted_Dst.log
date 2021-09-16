@@ -1,0 +1,70 @@
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+WARN: HAMMER doesn't like candidate for reweighting: 5163
+========
+True q2 (GeV): 7.74623
+B meson ID: 511
+D meson ID: -413
+D daughter 0 ID: -421
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 0
+Current candidate index: 5163
+B meson 4-mom: 112539.09, 7978.16, -464.19, 112130.76
+B meson inv.m: 5279.58
+D meson 4-mom: 43508.76, 3121.74, 810.28, 43342.47
+D meson inv.m: 2010.23
+D daughter idx 0 4-mom: 40133.21, 2878.22, 709.78, 39980.11
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 3375.55, 243.52, 100.50, 3362.36
+D daughter idx 1 inv.m: 139.57
+Mu 4-mom: 59702.75, 3548.08, -391.67, 59595.21
+Mu inv.m: 294.465
+anti-MuNu 4-mom: 9327.58, 1308.34, -882.80, 9193.08
+anti-MuNu inv.m: 0.00012207
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+D daughter HAMMER IDs:  4  5
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't like candidate for reweighting: 23310
+========
+True q2 (GeV): 8.52889
+B meson ID: 511
+D meson ID: -413
+D daughter 0 ID: -421
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 0
+Current candidate index: 23310
+B meson 4-mom: 257533.53, 8815.50, -318.15, 257328.26
+B meson inv.m: 5279.58
+D meson 4-mom: 82920.48, 2510.25, -803.39, 82854.20
+D meson inv.m: 2010.26
+D daughter idx 0 4-mom: 77213.12, 2353.61, -712.83, 77151.41
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 5707.37, 156.64, -90.56, 5702.79
+D daughter idx 1 inv.m: 139.57
+Mu 4-mom: 146282.12, 4208.44, 444.22, 146220.86
+Mu inv.m: 105.39
+anti-MuNu 4-mom: 28330.93, 2096.81, 41.02, 28253.20
+anti-MuNu inv.m: 0.000345267
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+D daughter HAMMER IDs:  4  5
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Cleanups
+Total number of candidates: 23841
+Hammer reweighted candidates: 23337
+Reweighted fraction: 0.97886
