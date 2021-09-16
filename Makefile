@@ -78,7 +78,7 @@ validation-plots: gen/rdx-run2-validation.root
 rdx-run2-ntuples: \
 	gen/rdx-run2-Bd2DstMuNu-reweighted.root \
 	gen/rdx-run2-Bd2DststTauNu-reweighted.root \
-	gen/rdx-run2-Bd2DstTauNu-reweighted.root \
+	gen/rdx-run2-Bd2DstTauNu-reweighted.root
 
 
 ####################
@@ -96,8 +96,8 @@ gen/rdx-run1-%-reweighted.root: samples/rdx-run1-%.root ReweightRDX
 	./bin/ReweightRDX $< $@ TupleB0/DecayTree run1
 
 gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
-	./bin/ReweightRDX $< $@ TupleB0/DecayTree run2
-	./bin/ReweightRDX $< $@ TupleBminus/DecayTree run2
+	./bin/ReweightRDX $< $@ TupleB0/DecayTree run2 | tee gen/$(basename $(notdir $@))_Dst.log
+	./bin/ReweightRDX $< $@ TupleBminus/DecayTree run2 | tee gen/$(basename $(notdir $@))_D0.log
 
 # Validation ntuples
 gen/rdx-run2-validation.root: ValidateRDX
