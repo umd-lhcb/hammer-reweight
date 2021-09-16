@@ -11,13 +11,21 @@ shell prompt you can do:
 make
 ```
 
-to compile programs (which will be put in the `bin` folder) and
+To generate weight ntuples based on sample ntuples from RDX run 2 analysis:
+
+```
+make rdx-run2-ntuples
+```
+
+Note that the `stdout` from the reweighter will also be saved as log files.
+
+To compile programs (which will be put in the `bin` folder) and
 
 ```
 make sample-plots
 ```
 
-to generate sample reweighting plots (which will be put in the `gen` folder).
+To generate sample reweighting plots (which will be put in the `gen` folder).
 
 You can generate some reweighting validation plots with:
 ```
