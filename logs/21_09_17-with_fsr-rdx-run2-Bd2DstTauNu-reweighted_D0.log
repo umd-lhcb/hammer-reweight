@@ -1,0 +1,54 @@
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 16 -15
+Hammer.RateBase: INFO  Integrating rate 521 -> -10421 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -10421 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+WARN: HAMMER doesn't add process properly: 5836
+Rosebud! Zero energy: 0.000000
+========
+True q2 (GeV): 5.47012
+B meson ID: B+ (521)
+D meson ID: D*0_bar (-423)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: gamma (22)
+D daughter 2 ID: None
+Is tau decay: 0
+Current candidate index: 5836
+B meson 4-mom: 112017.54, -7089.73, -3976.01, 111597.43
+B meson inv.m: 5279.26
+D meson 4-mom: 63964.57, -3265.30, -1108.89, 63840.01
+D meson inv.m: 2006.96
+D daughter idx 0 4-mom: 63612.32, -3283.95, -1063.36, 63491.22
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 352.24, 18.67, -45.56, 348.78
+D daughter idx 1 inv.m: 5.3948e-06
+Mu 4-mom: 11031.61, -1345.24, -1510.41, 10844.09
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 37021.37, -2479.18, -1356.73, 36913.34
+anti-MuNu inv.m: 0
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+D daughter HAMMER IDs:  4  5  6
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon: 352.24, 18.67, -45.56, 348.78 to particle D*0_bar (-423)
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Hammer.RateBase: INFO  Integrating rate 521 -> -20423 16 -15
+Hammer.RateBase: INFO  Integrating rate 521 -> -20423 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 14 -13
+Cleanups
+Total number of candidates: 11306
+Hammer reweighted candidates: 11215
+Reweighted fraction: 0.991951

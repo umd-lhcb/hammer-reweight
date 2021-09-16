@@ -1,0 +1,64 @@
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
+WARN: HAMMER doesn't add process properly: 1298
+Rosebud! Zero energy: 0.000000
+========
+True q2 (GeV): 9.9317
+B meson ID: B+ (521)
+D meson ID: D*0_bar (-423)
+D daughter 0 ID: D0_bar (-421)
+D daughter 1 ID: gamma (22)
+D daughter 2 ID: None
+Is tau decay: 0
+Current candidate index: 1298
+B meson 4-mom: 341138.42, 526.34, -5781.15, 341048.17
+B meson inv.m: 5279.26
+D meson 4-mom: 136733.95, 746.86, -2207.33, 136699.36
+D meson inv.m: 2006.96
+D daughter idx 0 4-mom: 127722.60, 829.56, -2099.17, 127689.04
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 9011.37, -82.60, -108.21, 9010.34
+D daughter idx 1 inv.m: 0.000172633
+Mu 4-mom: 84650.27, -1556.63, -1985.68, 84612.59
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 119754.18, 1336.25, -1588.22, 119736.19
+anti-MuNu inv.m: 0.00195312
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+D daughter HAMMER IDs:  4  5  6
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon: 9011.37, -82.60, -108.21, 9010.34 to particle D*0_bar (-423)
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
+Cleanups
+Total number of candidates: 11078
+Hammer reweighted candidates: 10993
+Reweighted fraction: 0.992327
