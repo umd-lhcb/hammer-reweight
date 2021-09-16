@@ -1,7 +1,8 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 04:11 PM +0200
+// Last Change: Thu Sep 16, 2021 at 05:11 PM +0200
 
 #include <algorithm>
+#include <exception>
 #include <iostream>
 #include <map>
 #include <sstream>
@@ -627,9 +628,10 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           Int_t proc_id = 0;
           try {
             proc_id = ham.addProcess(proc);
-          } catch (...) {
+          } catch (const exception& e) {
             cout << "WARN: HAMMER doesn't add process properly: " << num_of_evt
                  << endl;
+            cout << e.what() << endl;
             is_bad_cand = true;
           }
 
@@ -638,9 +640,10 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
             try {
               ham.processEvent();
               ff_out = ham.getWeight("OutputFF");
-            } catch (...) {
+            } catch (const exception& e) {
               cout << "WARN: HAMMER doesn't like candidate for reweighting: "
                    << num_of_evt << endl;
+              cout << e.what() << endl;
               is_bad_cand = true;
             }
 
