@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 06:16 PM +0200
+// Last Change: Thu Sep 16, 2021 at 06:51 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -117,12 +117,13 @@ const Double_t SOFT_PHOTON_THRESH = 0.1;
 
 string photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
                          vector<Hammer::Particle> photon_p,
-                         Hammer::Process& proc, Hammer::ParticleIndices& idx) {
+                         Hammer::Process& proc, Hammer::ParticleIndices& idx,
+                         TDatabasePDG* db) {
   stringstream buffer;
   for (auto i = 0; i < photon_p.size(); i++) {
     if (photon_mom_id[i] == ref_mom_id) {
-      buffer << "  Adding photon with energy " << photon_p[i].p().E()
-             << " to particle " << ref_mom_id << endl;
+      buffer << "  Adding photon: " << print_p(photon_p[i].p())
+             << " to particle " << get_particle_name(ref_mom_id, db) << endl;
       idx.push_back(proc.addParticle(photon_p[i]));
     }
   }
@@ -563,7 +564,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 #ifdef RADIATIVE_CORRECTION
         buf_rad_corr +=
             photon_correction(b_id_fixed, vec_photon_mom_id, vec_photon_p, proc,
-                              part_B_daughters_idx);
+                              part_B_daughters_idx, db);
 #endif
         proc.addVertex(part_B_idx, part_B_daughters_idx);
 
@@ -582,7 +583,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 #ifdef RADIATIVE_CORRECTION
           buf_rad_corr +=
               photon_correction(d_id, vec_photon_mom_id, vec_photon_p, proc,
-                                part_D_daughters_idx);
+                                part_D_daughters_idx, db);
 #endif
           proc.addVertex(part_D_idx, part_D_daughters_idx);
         }
@@ -597,7 +598,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 #ifdef RADIATIVE_CORRECTION
           buf_rad_corr +=
               photon_correction(part_L_id, vec_photon_mom_id, vec_photon_p,
-                                proc, part_L_daughters_idx);
+                                proc, part_L_daughters_idx, db);
 #endif
           proc.addVertex(part_L_idx, part_L_daughters_idx);
         }
