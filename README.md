@@ -110,6 +110,12 @@ ValidateRDX test.root
 6. Compute the amplitude tensor with `Hammer::processEvent()`, then get the weight
     with `Hammer::getWeight("FF_scheme")`
 
+### Soft photons (very)
+
+HAMMER doesn't like very soft photons (for energy on the order of `1e-10`),
+and for these photons, their effect are negligible as well. So don't add these photons
+to the HAMMER's decay tree in the first place!
+
 ### Vertex level momentum conservation
 
 HAMMER doesn't require momentum to be conserved in general; it only requires each particle
