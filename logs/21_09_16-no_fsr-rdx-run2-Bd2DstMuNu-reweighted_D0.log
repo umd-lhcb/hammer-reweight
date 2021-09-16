@@ -7,6 +7,7 @@ Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 7575
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 7.74623
 B meson ID: 511
@@ -38,6 +39,7 @@ Check if invariant mass of each particle is non-negative:
 All particles have OK kinematics: 1
 ========
 WARN: HAMMER doesn't like candidate for reweighting: 8234
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 6.05839
 B meson ID: -511
@@ -77,6 +79,7 @@ Hammer.RateBase: INFO  Integrating rate 521 -> -423 16 -15
 Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
 Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
 WARN: HAMMER doesn't like candidate for reweighting: 34658
+NaNs present in an amplitude. Seagulls! (Stop it now)
 ========
 True q2 (GeV): 8.52889
 B meson ID: 511
