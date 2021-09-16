@@ -31,8 +31,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 999.92 to particle -511
-  Adding photon with energy 33.4664 to particle -511
+  Adding photon: 999.92, -21.88, -73.70, -73.70 to particle B0_bar (-511)
+  Adding photon: 33.47, -0.96, -2.35, -2.35 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -66,7 +66,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle -511
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -100,9 +100,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.06022 to particle 511
-  Adding photon with energy 0.212368 to particle 511
-  Adding photon with energy 1145.33 to particle 511
+  Adding photon: 2.06, -0.27, 0.10, 0.10 to particle B0 (511)
+  Adding photon: 0.21, -0.03, 0.01, 0.01 to particle B0 (511)
+  Adding photon: 1145.33, -239.15, 16.82, 16.82 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -136,8 +136,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 9646.14 to particle -511
-  Adding photon with energy 8.49158 to particle -511
+  Adding photon: 9646.14, 782.26, -31.86, -31.86 to particle B0_bar (-511)
+  Adding photon: 8.49, 0.72, 0.13, 0.13 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -171,8 +171,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 105.972 to particle -511
-  Adding photon with energy 3057.49 to particle -511
+  Adding photon: 105.97, -2.64, 2.48, 2.48 to particle B0_bar (-511)
+  Adding photon: 3057.49, -54.56, 39.00, 39.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -206,8 +206,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 39.9643 to particle -511
-  Adding photon with energy 0.140357 to particle -511
+  Adding photon: 39.96, -0.90, -0.58, -0.58 to particle B0_bar (-511)
+  Adding photon: 0.14, -0.01, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -243,7 +243,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.743572 to particle 413
+  Adding photon: 0.74, -0.07, 0.02, 0.02 to particle D*+ (413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -277,8 +277,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1322.4 to particle 511
-  Adding photon with energy 3.36266 to particle 511
+  Adding photon: 1322.40, 11.02, 32.77, 32.77 to particle B0 (511)
+  Adding photon: 3.36, -0.15, -0.25, -0.25 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -312,8 +312,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 5470.25 to particle 511
-  Adding photon with energy 0.611637 to particle 511
+  Adding photon: 5470.25, 96.61, -231.53, -231.53 to particle B0 (511)
+  Adding photon: 0.61, 0.14, -0.08, -0.08 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -347,8 +347,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 8.75087 to particle 511
-  Adding photon with energy 0.14 to particle 511
+  Adding photon: 8.75, -0.12, -0.03, -0.03 to particle B0 (511)
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -382,7 +382,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -416,8 +416,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.58782 to particle 511
-  Adding photon with energy 71.7012 to particle 511
+  Adding photon: 2.59, -0.20, -0.02, -0.02 to particle B0 (511)
+  Adding photon: 71.70, -8.52, -3.00, -3.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -451,8 +451,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2954.22 to particle 511
-  Adding photon with energy 472.801 to particle 511
+  Adding photon: 2954.22, -228.46, 135.36, 135.36 to particle B0 (511)
+  Adding photon: 472.80, -54.69, -12.17, -12.17 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -488,7 +488,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.3 to particle 511
+  Adding photon: 0.30, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -522,8 +522,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1717.6 to particle 511
-  Adding photon with energy 25.4392 to particle 511
+  Adding photon: 1717.60, -246.55, 47.29, 47.29 to particle B0 (511)
+  Adding photon: 25.44, -3.66, 0.48, 0.48 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -557,8 +557,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4460.98 to particle 511
-  Adding photon with energy 50.1332 to particle 511
+  Adding photon: 4460.98, -309.75, 17.80, 17.80 to particle B0 (511)
+  Adding photon: 50.13, -2.89, 0.99, 0.99 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -592,8 +592,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 6463.12 to particle -511
-  Adding photon with energy 68.6897 to particle -511
+  Adding photon: 6463.12, 478.91, 246.71, 246.71 to particle B0_bar (-511)
+  Adding photon: 68.69, 3.02, -7.52, -7.52 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -627,8 +627,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.24464 to particle 511
-  Adding photon with energy 20152.3 to particle 511
+  Adding photon: 2.24, 0.12, -0.08, -0.08 to particle B0 (511)
+  Adding photon: 20152.26, 651.64, -1266.75, -1266.75 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -664,7 +664,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.721249 to particle -413
+  Adding photon: 0.72, -0.03, 0.03, 0.03 to particle D*- (-413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -698,8 +698,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 5412.46 to particle 511
-  Adding photon with energy 394.45 to particle 511
+  Adding photon: 5412.46, -123.72, 1031.73, 1031.73 to particle B0 (511)
+  Adding photon: 394.45, -49.23, 41.87, 41.87 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -733,8 +733,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 457.393 to particle 511
-  Adding photon with energy 490.841 to particle 511
+  Adding photon: 457.39, -0.10, 1.70, 1.70 to particle B0 (511)
+  Adding photon: 490.84, -13.63, 3.41, 3.41 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -770,8 +770,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 134.115 to particle 511
-  Adding photon with energy 1.09115 to particle 511
+  Adding photon: 134.11, -13.13, 7.13, 7.13 to particle B0 (511)
+  Adding photon: 1.09, -0.25, -0.16, -0.16 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -805,8 +805,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 13266.1 to particle 511
-  Adding photon with energy 356.269 to particle 511
+  Adding photon: 13266.13, 564.78, 407.78, 407.78 to particle B0 (511)
+  Adding photon: 356.27, 9.73, 20.42, 20.42 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -840,8 +840,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.220454 to particle 511
-  Adding photon with energy 94112.2 to particle 511
+  Adding photon: 0.22, 0.01, -0.01, -0.01 to particle B0 (511)
+  Adding photon: 94112.23, 3228.51, -5370.68, -5370.68 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -875,8 +875,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 13371.6 to particle -511
-  Adding photon with energy 241.89 to particle -511
+  Adding photon: 13371.62, 635.09, 0.60, 0.60 to particle B0_bar (-511)
+  Adding photon: 241.89, 10.13, 3.64, 3.64 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -910,7 +910,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle 511
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -944,7 +944,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.16 to particle 511
+  Adding photon: 0.16, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -978,8 +978,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 176.125 to particle -511
-  Adding photon with energy 1740.56 to particle -511
+  Adding photon: 176.13, 3.02, 12.57, 12.57 to particle B0_bar (-511)
+  Adding photon: 1740.56, 63.82, 169.87, 169.87 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1013,8 +1013,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 453.547 to particle 511
-  Adding photon with energy 24.8119 to particle 511
+  Adding photon: 453.55, -6.15, -7.07, -7.07 to particle B0 (511)
+  Adding photon: 24.81, 0.69, -1.61, -1.61 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1048,7 +1048,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1082,8 +1082,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 12.7536 to particle -511
-  Adding photon with energy 460.583 to particle -511
+  Adding photon: 12.75, 0.48, 0.34, 0.34 to particle B0_bar (-511)
+  Adding photon: 460.58, 3.40, -23.12, -23.12 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1117,7 +1117,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.8 to particle -511
+  Adding photon: 0.80, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1151,8 +1151,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 30.0507 to particle 511
-  Adding photon with energy 80.2786 to particle 511
+  Adding photon: 30.05, 4.85, -4.39, -4.39 to particle B0 (511)
+  Adding photon: 80.28, -0.71, -3.48, -3.48 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1186,7 +1186,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle 511
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1220,8 +1220,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 126.673 to particle -511
-  Adding photon with energy 34.7249 to particle -511
+  Adding photon: 126.67, -3.56, 0.83, 0.83 to particle B0_bar (-511)
+  Adding photon: 34.72, -1.49, 0.45, 0.45 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1255,8 +1255,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.220454 to particle 511
-  Adding photon with energy 70.7265 to particle 511
+  Adding photon: 0.22, 0.01, -0.01, -0.01 to particle B0 (511)
+  Adding photon: 70.73, 3.59, -2.53, -2.53 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1290,8 +1290,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3155.64 to particle 511
-  Adding photon with energy 40.8701 to particle 511
+  Adding photon: 3155.64, -170.76, 103.26, 103.26 to particle B0 (511)
+  Adding photon: 40.87, -1.55, 1.30, 1.30 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1325,8 +1325,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 5736.87 to particle -511
-  Adding photon with energy 3027.16 to particle -511
+  Adding photon: 5736.87, 128.61, -171.10, -171.10 to particle B0_bar (-511)
+  Adding photon: 3027.16, 94.14, -22.86, -22.86 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1360,9 +1360,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 99.2858 to particle 511
-  Adding photon with energy 0.143178 to particle 511
-  Adding photon with energy 27.0562 to particle 511
+  Adding photon: 99.29, -17.34, 8.38, 8.38 to particle B0 (511)
+  Adding photon: 0.14, 0.00, 0.03, 0.03 to particle B0 (511)
+  Adding photon: 27.06, -7.27, 3.75, 3.75 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1396,8 +1396,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.570701 to particle -511
-  Adding photon with energy 220.366 to particle -511
+  Adding photon: 0.57, 0.02, -0.02, -0.02 to particle B0_bar (-511)
+  Adding photon: 220.37, 6.03, -14.28, -14.28 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1431,8 +1431,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 609.883 to particle 511
-  Adding photon with energy 96.4444 to particle 511
+  Adding photon: 609.88, -8.00, 0.89, 0.89 to particle B0 (511)
+  Adding photon: 96.44, -1.08, -1.88, -1.88 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1466,8 +1466,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1009.23 to particle -511
-  Adding photon with energy 17839.8 to particle -511
+  Adding photon: 1009.23, 33.74, -79.37, -79.37 to particle B0_bar (-511)
+  Adding photon: 17839.84, 532.44, -1420.72, -1420.72 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1501,8 +1501,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 21026.3 to particle -511
-  Adding photon with energy 1617.55 to particle -511
+  Adding photon: 21026.34, -1506.65, 507.78, 507.78 to particle B0_bar (-511)
+  Adding photon: 1617.55, -110.19, 42.15, 42.15 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1536,8 +1536,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 215.589 to particle 511
-  Adding photon with energy 5890.26 to particle 511
+  Adding photon: 215.59, 12.64, 5.80, 5.80 to particle B0 (511)
+  Adding photon: 5890.26, 273.48, 206.04, 206.04 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1571,8 +1571,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2028.88 to particle -511
-  Adding photon with energy 727.46 to particle -511
+  Adding photon: 2028.88, 53.52, -507.14, -507.14 to particle B0_bar (-511)
+  Adding photon: 727.46, -85.53, -140.55, -140.55 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1606,7 +1606,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1.77 to particle 511
+  Adding photon: 1.77, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1640,8 +1640,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 7.87983 to particle -511
-  Adding photon with energy 452.933 to particle -511
+  Adding photon: 7.88, -0.39, 0.40, 0.40 to particle B0_bar (-511)
+  Adding photon: 452.93, -9.66, 20.40, 20.40 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1675,8 +1675,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 16142.1 to particle 511
-  Adding photon with energy 3117.73 to particle 511
+  Adding photon: 16142.14, -380.94, -268.38, -268.38 to particle B0 (511)
+  Adding photon: 3117.73, -204.40, -15.63, -15.63 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1710,8 +1710,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 25886 to particle -511
-  Adding photon with energy 15.6019 to particle -511
+  Adding photon: 25886.01, 215.42, 230.01, 230.01 to particle B0_bar (-511)
+  Adding photon: 15.60, -2.15, -3.33, -3.33 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1745,8 +1745,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1.50067 to particle -511
-  Adding photon with energy 60.2878 to particle -511
+  Adding photon: 1.50, 0.04, 0.02, 0.02 to particle B0_bar (-511)
+  Adding photon: 60.29, 1.46, 0.13, 0.13 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1780,7 +1780,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2300.69 to particle 511
+  Adding photon: 2300.69, 173.67, 22.46, 22.46 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1814,8 +1814,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 562.905 to particle 511
-  Adding photon with energy 5.7847 to particle 511
+  Adding photon: 562.91, -36.23, 24.35, 24.35 to particle B0 (511)
+  Adding photon: 5.78, -0.12, 0.20, 0.20 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1849,8 +1849,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 74504.3 to particle 511
-  Adding photon with energy 755.578 to particle 511
+  Adding photon: 74504.30, -4695.09, 1553.60, 1553.60 to particle B0 (511)
+  Adding photon: 755.58, -42.99, 10.59, 10.59 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1884,7 +1884,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.21 to particle -511
+  Adding photon: 0.21, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1918,8 +1918,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 80.6101 to particle -511
-  Adding photon with energy 496.488 to particle -511
+  Adding photon: 80.61, -5.48, 3.44, 3.44 to particle B0_bar (-511)
+  Adding photon: 496.49, -0.77, -67.92, -67.92 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1986,7 +1986,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle 511
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2020,8 +2020,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4309.75 to particle -511
-  Adding photon with energy 43.2059 to particle -511
+  Adding photon: 4309.75, -135.48, -403.52, -403.52 to particle B0_bar (-511)
+  Adding photon: 43.21, 1.21, -2.44, -2.44 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2055,8 +2055,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1503.74 to particle 511
-  Adding photon with energy 34.3758 to particle 511
+  Adding photon: 1503.74, 30.48, 231.53, 231.53 to particle B0 (511)
+  Adding photon: 34.38, -0.29, 3.36, 3.36 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2090,8 +2090,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 767.954 to particle 511
-  Adding photon with energy 51.5208 to particle 511
+  Adding photon: 767.95, -94.87, -28.18, -28.18 to particle B0 (511)
+  Adding photon: 51.52, -4.31, 1.76, 1.76 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2125,8 +2125,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.662948 to particle -511
-  Adding photon with energy 11569 to particle -511
+  Adding photon: 0.66, 0.13, 0.01, 0.01 to particle B0_bar (-511)
+  Adding photon: 11569.03, 1939.61, 364.33, 364.33 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2160,8 +2160,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 136.621 to particle -511
-  Adding photon with energy 14.6296 to particle -511
+  Adding photon: 136.62, 4.11, -9.03, -9.03 to particle B0_bar (-511)
+  Adding photon: 14.63, -0.42, 0.63, 0.63 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2195,8 +2195,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1625.66 to particle -511
-  Adding photon with energy 2.14919 to particle -511
+  Adding photon: 1625.66, 97.47, -102.06, -102.06 to particle B0_bar (-511)
+  Adding photon: 2.15, 0.38, -0.15, -0.15 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2230,8 +2230,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 204.181 to particle 511
-  Adding photon with energy 0.232164 to particle 511
+  Adding photon: 204.18, 13.00, 24.57, 24.57 to particle B0 (511)
+  Adding photon: 0.23, 0.01, 0.03, 0.03 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2265,8 +2265,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 449.272 to particle 511
-  Adding photon with energy 161.067 to particle 511
+  Adding photon: 449.27, -42.51, 19.29, 19.29 to particle B0 (511)
+  Adding photon: 161.07, -21.38, 16.66, 16.66 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2300,8 +2300,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1305.21 to particle -511
-  Adding photon with energy 0.140357 to particle -511
+  Adding photon: 1305.21, 38.87, 0.81, 0.81 to particle B0_bar (-511)
+  Adding photon: 0.14, 0.01, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2335,8 +2335,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4.04322 to particle 511
-  Adding photon with energy 774.127 to particle 511
+  Adding photon: 4.04, -0.02, 0.16, 0.16 to particle B0 (511)
+  Adding photon: 774.13, 12.85, -4.02, -4.02 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2370,7 +2370,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.11 to particle -511
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2406,8 +2406,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 92.219 to particle 511
-  Adding photon with energy 1956.64 to particle 511
+  Adding photon: 92.22, 2.43, 4.44, 4.44 to particle B0 (511)
+  Adding photon: 1956.64, 64.16, 95.64, 95.64 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2441,8 +2441,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4.65502 to particle 511
-  Adding photon with energy 62420.6 to particle 511
+  Adding photon: 4.66, 0.48, -0.68, -0.68 to particle B0 (511)
+  Adding photon: 62420.61, 1464.46, 243.20, 243.20 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2476,8 +2476,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 144.822 to particle -511
-  Adding photon with energy 0.230217 to particle -511
+  Adding photon: 144.82, 20.46, 4.45, 4.45 to particle B0_bar (-511)
+  Adding photon: 0.23, 0.01, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2511,7 +2511,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2547,8 +2547,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 346.151 to particle -511
-  Adding photon with energy 5372.05 to particle -511
+  Adding photon: 346.15, 42.62, 2.27, 2.27 to particle B0_bar (-511)
+  Adding photon: 5372.05, 552.83, -7.23, -7.23 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2582,8 +2582,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 7392.05 to particle 511
-  Adding photon with energy 18.0482 to particle 511
+  Adding photon: 7392.05, -830.61, -148.88, -148.88 to particle B0 (511)
+  Adding photon: 18.05, -2.53, 0.03, 0.03 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2617,7 +2617,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.15 to particle -511
+  Adding photon: 0.15, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2653,7 +2653,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.772658 to particle -413
+  Adding photon: 0.77, 0.04, 0.05, 0.05 to particle D*- (-413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2687,8 +2687,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 205.777 to particle -511
-  Adding photon with energy 417.008 to particle -511
+  Adding photon: 205.78, 25.23, 69.18, 69.18 to particle B0_bar (-511)
+  Adding photon: 417.01, 89.23, 61.11, 61.11 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2722,8 +2722,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle 511
-  Adding photon with energy 22.9655 to particle 511
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0 (511)
+  Adding photon: 22.97, -0.29, 0.41, 0.41 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2757,8 +2757,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 130.956 to particle 511
-  Adding photon with energy 0.854985 to particle 511
+  Adding photon: 130.96, 5.73, 12.10, 12.10 to particle B0 (511)
+  Adding photon: 0.85, 0.06, 0.07, 0.07 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2792,8 +2792,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 113.738 to particle -511
-  Adding photon with energy 4100.1 to particle -511
+  Adding photon: 113.74, -0.75, 7.76, 7.76 to particle B0_bar (-511)
+  Adding photon: 4100.10, -115.08, -178.47, -178.47 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2827,8 +2827,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 85.5319 to particle -511
-  Adding photon with energy 354.844 to particle -511
+  Adding photon: 85.53, -5.40, 11.30, 11.30 to particle B0_bar (-511)
+  Adding photon: 354.84, 36.12, -56.25, -56.25 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2862,9 +2862,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 132.024 to particle 511
-  Adding photon with energy 54.9714 to particle 511
-  Adding photon with energy 45.8516 to particle 511
+  Adding photon: 132.02, 3.80, 4.29, 4.29 to particle B0 (511)
+  Adding photon: 54.97, 1.62, 2.03, 2.03 to particle B0 (511)
+  Adding photon: 45.85, 1.29, 1.75, 1.75 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2898,8 +2898,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 9.73019 to particle -511
-  Adding photon with energy 12018.3 to particle -511
+  Adding photon: 9.73, -2.03, 0.34, 0.34 to particle B0_bar (-511)
+  Adding photon: 12018.32, -1235.28, 397.48, 397.48 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2933,8 +2933,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 77.2519 to particle 511
-  Adding photon with energy 3891.82 to particle 511
+  Adding photon: 77.25, 0.89, -7.62, -7.62 to particle B0 (511)
+  Adding photon: 3891.82, -174.91, 217.88, 217.88 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -2968,8 +2968,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3.44023 to particle -511
-  Adding photon with energy 34.3311 to particle -511
+  Adding photon: 3.44, 0.04, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 34.33, 1.21, -0.82, -0.82 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3003,8 +3003,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4.37225 to particle -511
-  Adding photon with energy 1007.31 to particle -511
+  Adding photon: 4.37, 0.94, -0.01, -0.01 to particle B0_bar (-511)
+  Adding photon: 1007.31, 155.57, 16.65, 16.65 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3038,8 +3038,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 530.76 to particle -511
-  Adding photon with energy 0.170294 to particle -511
+  Adding photon: 530.76, 7.65, -3.93, -3.93 to particle B0_bar (-511)
+  Adding photon: 0.17, -0.01, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3073,8 +3073,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 54.9127 to particle -511
-  Adding photon with energy 10704.1 to particle -511
+  Adding photon: 54.91, -0.44, -2.79, -2.79 to particle B0_bar (-511)
+  Adding photon: 10704.12, -234.96, 131.65, 131.65 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3108,8 +3108,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.760855 to particle 511
-  Adding photon with energy 158.241 to particle 511
+  Adding photon: 0.76, 0.02, 0.03, 0.03 to particle B0 (511)
+  Adding photon: 158.24, 3.08, -10.08, -10.08 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3145,8 +3145,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 208.53 to particle -511
-  Adding photon with energy 1009.52 to particle -511
+  Adding photon: 208.53, 8.87, 4.62, 4.62 to particle B0_bar (-511)
+  Adding photon: 1009.52, 38.67, 72.89, 72.89 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3180,8 +3180,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.11 to particle 511
-  Adding photon with energy 27.1916 to particle 511
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle B0 (511)
+  Adding photon: 27.19, -0.88, -1.22, -1.22 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3215,8 +3215,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 6.87714 to particle -511
-  Adding photon with energy 19672.8 to particle -511
+  Adding photon: 6.88, 0.58, 0.19, 0.19 to particle B0_bar (-511)
+  Adding photon: 19672.79, 152.68, 968.06, 968.06 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3250,8 +3250,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1184.41 to particle 511
-  Adding photon with energy 4008.26 to particle 511
+  Adding photon: 1184.41, 29.52, 67.01, 67.01 to particle B0 (511)
+  Adding photon: 4008.26, 107.22, 232.77, 232.77 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3285,8 +3285,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 67.5842 to particle 511
-  Adding photon with energy 130.753 to particle 511
+  Adding photon: 67.58, 15.90, 2.49, 2.49 to particle B0 (511)
+  Adding photon: 130.75, 23.55, -4.39, -4.39 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3320,8 +3320,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.18 to particle -511
-  Adding photon with energy 0.11 to particle -511
+  Adding photon: 0.18, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3355,8 +3355,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.810802 to particle -511
-  Adding photon with energy 815.768 to particle -511
+  Adding photon: 0.81, 0.03, 0.02, 0.02 to particle B0_bar (-511)
+  Adding photon: 815.77, 9.37, 6.30, 6.30 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3390,8 +3390,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.582151 to particle 511
-  Adding photon with energy 7308.03 to particle 511
+  Adding photon: 0.58, 0.05, 0.00, 0.00 to particle B0 (511)
+  Adding photon: 7308.03, 572.80, -978.37, -978.37 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3425,7 +3425,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.28 to particle -511
+  Adding photon: 0.28, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3459,8 +3459,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 7.94669 to particle -511
-  Adding photon with energy 192.5 to particle -511
+  Adding photon: 7.95, 0.51, 0.07, 0.07 to particle B0_bar (-511)
+  Adding photon: 192.50, 13.88, 1.86, 1.86 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3494,8 +3494,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.210476 to particle 511
-  Adding photon with energy 7435.41 to particle 511
+  Adding photon: 0.21, -0.01, 0.01, 0.01 to particle B0 (511)
+  Adding photon: 7435.41, -920.67, 217.90, 217.90 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3529,8 +3529,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 6.59523 to particle -511
-  Adding photon with energy 414.427 to particle -511
+  Adding photon: 6.60, -2.44, 0.97, 0.97 to particle B0_bar (-511)
+  Adding photon: 414.43, -50.38, 41.35, 41.35 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3564,8 +3564,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.462169 to particle 511
-  Adding photon with energy 113.041 to particle 511
+  Adding photon: 0.46, -0.04, 0.02, 0.02 to particle B0 (511)
+  Adding photon: 113.04, 3.38, 0.35, 0.35 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3599,8 +3599,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.180278 to particle 511
-  Adding photon with energy 873.112 to particle 511
+  Adding photon: 0.18, 0.00, -0.01, -0.01 to particle B0 (511)
+  Adding photon: 873.11, 23.15, -91.65, -91.65 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3634,7 +3634,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.15 to particle 511
+  Adding photon: 0.15, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3668,8 +3668,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1738.36 to particle -511
-  Adding photon with energy 44.6378 to particle -511
+  Adding photon: 1738.36, -34.30, 22.66, 22.66 to particle B0_bar (-511)
+  Adding photon: 44.64, -0.69, 0.47, 0.47 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3703,8 +3703,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.29 to particle -511
-  Adding photon with energy 0.530943 to particle -511
+  Adding photon: 0.29, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 0.53, 0.03, 0.01, 0.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3738,7 +3738,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle -511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3772,7 +3772,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.21 to particle -511
+  Adding photon: 0.21, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3806,7 +3806,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle -511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3840,8 +3840,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1.5015 to particle 511
-  Adding photon with energy 326.74 to particle 511
+  Adding photon: 1.50, -0.03, 0.06, 0.06 to particle B0 (511)
+  Adding photon: 326.74, 15.55, 13.99, 13.99 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3877,7 +3877,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.491732 to particle -413
+  Adding photon: 0.49, 0.04, 0.01, 0.01 to particle D*- (-413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3911,7 +3911,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle -511
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3945,8 +3945,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 147.453 to particle 511
-  Adding photon with energy 0.550908 to particle 511
+  Adding photon: 147.45, -4.79, -12.07, -12.07 to particle B0 (511)
+  Adding photon: 0.55, -0.01, -0.03, -0.03 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -3980,7 +3980,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle 511
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4014,8 +4014,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2056.99 to particle 511
-  Adding photon with energy 53.6941 to particle 511
+  Adding photon: 2056.99, 15.53, 202.09, 202.09 to particle B0 (511)
+  Adding photon: 53.69, 3.46, 3.47, 3.47 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4049,8 +4049,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1251.69 to particle 511
-  Adding photon with energy 1.89476 to particle 511
+  Adding photon: 1251.69, -114.66, -5.78, -5.78 to particle B0 (511)
+  Adding photon: 1.89, -0.12, 0.06, 0.06 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4084,8 +4084,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 67.2387 to particle 511
-  Adding photon with energy 163.766 to particle 511
+  Adding photon: 67.24, -14.26, -11.64, -11.64 to particle B0 (511)
+  Adding photon: 163.77, -33.70, -25.12, -25.12 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4119,8 +4119,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 583.391 to particle -511
-  Adding photon with energy 0.350143 to particle -511
+  Adding photon: 583.39, 6.76, -10.91, -10.91 to particle B0_bar (-511)
+  Adding photon: 0.35, 0.00, -0.01, -0.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4154,8 +4154,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3.18184 to particle -511
-  Adding photon with energy 18468.2 to particle -511
+  Adding photon: 3.18, -0.06, 1.14, 1.14 to particle B0_bar (-511)
+  Adding photon: 18468.19, -2066.95, 741.01, 741.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4191,7 +4191,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.617981 to particle 413
+  Adding photon: 0.62, 0.07, -0.07, -0.07 to particle D*+ (413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4225,8 +4225,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 60.3321 to particle 511
-  Adding photon with energy 466.704 to particle 511
+  Adding photon: 60.33, 4.31, 14.52, 14.52 to particle B0 (511)
+  Adding photon: 466.70, 34.39, 47.06, 47.06 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4260,8 +4260,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2207 to particle 511
-  Adding photon with energy 3.87079 to particle 511
+  Adding photon: 2207.00, 310.71, 90.24, 90.24 to particle B0 (511)
+  Adding photon: 3.87, 0.54, 0.15, 0.15 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4295,8 +4295,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.253377 to particle -511
-  Adding photon with energy 2166.32 to particle -511
+  Adding photon: 0.25, -0.08, 0.07, 0.07 to particle B0_bar (-511)
+  Adding photon: 2166.32, -520.55, 357.19, 357.19 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4330,8 +4330,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 8604.18 to particle 511
-  Adding photon with energy 2.47277 to particle 511
+  Adding photon: 8604.18, 69.96, 463.28, 463.28 to particle B0 (511)
+  Adding photon: 2.47, 0.04, -0.11, -0.11 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4365,8 +4365,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 104.775 to particle -511
-  Adding photon with energy 1.85416 to particle -511
+  Adding photon: 104.77, 7.44, 3.24, 3.24 to particle B0_bar (-511)
+  Adding photon: 1.85, 0.29, 0.07, 0.07 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4400,8 +4400,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle 511
-  Adding photon with energy 173.034 to particle 511
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle B0 (511)
+  Adding photon: 173.03, 5.67, 0.58, 0.58 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4435,8 +4435,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 13.6431 to particle -511
-  Adding photon with energy 47.5861 to particle -511
+  Adding photon: 13.64, 2.00, -0.65, -0.65 to particle B0_bar (-511)
+  Adding photon: 47.59, 6.16, -2.49, -2.49 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4470,7 +4470,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle -511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4504,8 +4504,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.170587 to particle -511
-  Adding photon with energy 51438 to particle -511
+  Adding photon: 0.17, -0.01, 0.01, 0.01 to particle B0_bar (-511)
+  Adding photon: 51437.97, -1273.17, 988.55, 988.55 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4539,8 +4539,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 24.3077 to particle -511
-  Adding photon with energy 188.304 to particle -511
+  Adding photon: 24.31, 1.80, -0.73, -0.73 to particle B0_bar (-511)
+  Adding photon: 188.30, 12.74, -7.58, -7.58 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4574,8 +4574,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 268.331 to particle 511
-  Adding photon with energy 271.688 to particle 511
+  Adding photon: 268.33, -45.30, 46.72, 46.72 to particle B0 (511)
+  Adding photon: 271.69, -44.07, 53.88, 53.88 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4609,7 +4609,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1.64 to particle 511
+  Adding photon: 1.64, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4643,8 +4643,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.920923 to particle -511
-  Adding photon with energy 1584.61 to particle -511
+  Adding photon: 0.92, 0.04, 0.01, 0.01 to particle B0_bar (-511)
+  Adding photon: 1584.61, -47.50, -14.76, -14.76 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4680,7 +4680,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.910714 to particle 413
+  Adding photon: 0.91, -0.03, -0.02, -0.02 to particle D*+ (413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4714,7 +4714,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle 511
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4748,8 +4748,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.16 to particle 511
-  Adding photon with energy 2470.97 to particle 511
+  Adding photon: 0.16, 0.00, 0.00, 0.00 to particle B0 (511)
+  Adding photon: 2470.97, -23.07, -245.84, -245.84 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4783,8 +4783,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.372424 to particle -511
-  Adding photon with energy 7140.37 to particle -511
+  Adding photon: 0.37, -0.03, -0.03, -0.03 to particle B0_bar (-511)
+  Adding photon: 7140.37, 289.97, -162.40, -162.40 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4818,8 +4818,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 663.014 to particle -511
-  Adding photon with energy 1.21742 to particle -511
+  Adding photon: 663.01, -53.78, 34.84, 34.84 to particle B0_bar (-511)
+  Adding photon: 1.22, -0.15, 0.14, 0.14 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4853,8 +4853,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 5685.96 to particle 511
-  Adding photon with energy 0.930699 to particle 511
+  Adding photon: 5685.96, -108.57, -48.96, -48.96 to particle B0 (511)
+  Adding photon: 0.93, -0.03, -0.02, -0.02 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4888,8 +4888,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 698.588 to particle -511
-  Adding photon with energy 24683.9 to particle -511
+  Adding photon: 698.59, -14.02, 42.88, 42.88 to particle B0_bar (-511)
+  Adding photon: 24683.89, -581.93, 2482.49, 2482.49 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4923,7 +4923,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle -511
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4957,8 +4957,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.51068 to particle 511
-  Adding photon with energy 61.1169 to particle 511
+  Adding photon: 2.51, -0.03, 0.05, 0.05 to particle B0 (511)
+  Adding photon: 61.12, 1.08, -0.95, -0.95 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -4992,8 +4992,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.62042 to particle -511
-  Adding photon with energy 3518.69 to particle -511
+  Adding photon: 2.62, 0.49, -0.27, -0.27 to particle B0_bar (-511)
+  Adding photon: 3518.69, -328.54, -110.88, -110.88 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5027,8 +5027,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1445.05 to particle 511
-  Adding photon with energy 112.49 to particle 511
+  Adding photon: 1445.05, -91.54, -27.15, -27.15 to particle B0 (511)
+  Adding photon: 112.49, -7.26, -1.85, -1.85 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5062,8 +5062,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 491.714 to particle -511
-  Adding photon with energy 3.08665 to particle -511
+  Adding photon: 491.71, -42.57, 53.66, 53.66 to particle B0_bar (-511)
+  Adding photon: 3.09, -1.47, -1.08, -1.08 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5097,8 +5097,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 23.851 to particle 511
-  Adding photon with energy 0.380657 to particle 511
+  Adding photon: 23.85, -1.31, -0.49, -0.49 to particle B0 (511)
+  Adding photon: 0.38, -0.02, -0.01, -0.01 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5134,8 +5134,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 19.2781 to particle -511
-  Adding photon with energy 224.495 to particle -511
+  Adding photon: 19.28, 4.59, -0.37, -0.37 to particle B0_bar (-511)
+  Adding photon: 224.49, 8.99, -21.52, -21.52 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5169,9 +5169,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 17226 to particle -511
-  Adding photon with energy 1593.81 to particle -511
-  Adding photon with energy 690.192 to particle -511
+  Adding photon: 17225.98, -1282.06, 597.54, 597.54 to particle B0_bar (-511)
+  Adding photon: 1593.81, -96.91, 173.58, 173.58 to particle B0_bar (-511)
+  Adding photon: 690.19, -59.58, 19.47, 19.47 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5205,7 +5205,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.36 to particle 511
+  Adding photon: 0.36, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5239,7 +5239,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.28 to particle 511
+  Adding photon: 0.28, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5273,8 +5273,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 50.3212 to particle -511
-  Adding photon with energy 28703.5 to particle -511
+  Adding photon: 50.32, -1.56, -0.84, -0.84 to particle B0_bar (-511)
+  Adding photon: 28703.51, -624.73, -1049.41, -1049.41 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5308,8 +5308,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 204.627 to particle -511
-  Adding photon with energy 0.250998 to particle -511
+  Adding photon: 204.63, 15.02, 2.49, 2.49 to particle B0_bar (-511)
+  Adding photon: 0.25, 0.02, 0.01, 0.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5343,8 +5343,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.17 to particle -511
-  Adding photon with energy 223.126 to particle -511
+  Adding photon: 0.17, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 223.13, -7.75, -10.99, -10.99 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5378,7 +5378,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.15 to particle 511
+  Adding photon: 0.15, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5412,8 +5412,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 13726.5 to particle 511
-  Adding photon with energy 3656.55 to particle 511
+  Adding photon: 13726.51, -293.48, -548.58, -548.58 to particle B0 (511)
+  Adding photon: 3656.55, -106.73, -113.10, -113.10 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5447,8 +5447,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 620.448 to particle -511
-  Adding photon with energy 42.7629 to particle -511
+  Adding photon: 620.45, -14.92, 34.30, 34.30 to particle B0_bar (-511)
+  Adding photon: 42.76, -0.94, 2.96, 2.96 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5482,8 +5482,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1044.62 to particle 511
-  Adding photon with energy 10.196 to particle 511
+  Adding photon: 1044.62, 38.63, -76.91, -76.91 to particle B0 (511)
+  Adding photon: 10.20, -0.35, 0.02, 0.02 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5517,8 +5517,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.18 to particle 511
-  Adding photon with energy 8393.01 to particle 511
+  Adding photon: 0.18, 0.00, 0.00, 0.00 to particle B0 (511)
+  Adding photon: 8393.01, -338.68, 641.90, 641.90 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5552,8 +5552,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 9.82825 to particle -511
-  Adding photon with energy 4.5309 to particle -511
+  Adding photon: 9.83, 0.39, 0.10, 0.10 to particle B0_bar (-511)
+  Adding photon: 4.53, 0.09, -0.01, -0.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5587,7 +5587,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5623,7 +5623,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.310805 to particle 413
+  Adding photon: 0.31, -0.02, -0.01, -0.01 to particle D*+ (413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5657,8 +5657,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 18.8111 to particle -511
-  Adding photon with energy 3767.75 to particle -511
+  Adding photon: 18.81, -0.61, 0.65, 0.65 to particle B0_bar (-511)
+  Adding photon: 3767.75, -178.77, 258.51, 258.51 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5692,7 +5692,7 @@ D daughter HAMMER IDs:  4  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2252.33 to particle 423
+  Adding photon: 2252.33, -62.64, -17.43, -17.43 to particle D*0 (423)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5726,8 +5726,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 266.74 to particle 511
-  Adding photon with energy 0.242693 to particle 511
+  Adding photon: 266.74, 41.20, -13.36, -13.36 to particle B0 (511)
+  Adding photon: 0.24, 0.02, -0.03, -0.03 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5761,7 +5761,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.11 to particle -511
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5795,8 +5795,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 67.2452 to particle 511
-  Adding photon with energy 1155.55 to particle 511
+  Adding photon: 67.25, -9.53, 6.38, 6.38 to particle B0 (511)
+  Adding photon: 1155.55, -56.76, 139.24, 139.24 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5830,8 +5830,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1.12823 to particle -511
-  Adding photon with energy 7093.31 to particle -511
+  Adding photon: 1.13, -0.11, -0.08, -0.08 to particle B0_bar (-511)
+  Adding photon: 7093.31, -861.82, -324.14, -324.14 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5865,7 +5865,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.15 to particle -511
+  Adding photon: 0.15, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5899,8 +5899,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.251595 to particle -511
-  Adding photon with energy 253.207 to particle -511
+  Adding photon: 0.25, -0.02, 0.02, 0.02 to particle B0_bar (-511)
+  Adding photon: 253.21, -15.23, 10.01, 10.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5934,8 +5934,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 634.703 to particle 511
-  Adding photon with energy 10.1591 to particle 511
+  Adding photon: 634.70, 32.12, -38.32, -38.32 to particle B0 (511)
+  Adding photon: 10.16, 0.45, -0.89, -0.89 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -5969,7 +5969,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.31 to particle 511
+  Adding photon: 0.31, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6003,8 +6003,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2460.88 to particle -511
-  Adding photon with energy 0.723118 to particle -511
+  Adding photon: 2460.88, -172.24, 19.75, 19.75 to particle B0_bar (-511)
+  Adding photon: 0.72, -0.06, 0.03, 0.03 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6038,8 +6038,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 12.9869 to particle -511
-  Adding photon with energy 121.728 to particle -511
+  Adding photon: 12.99, -0.34, 0.25, 0.25 to particle B0_bar (-511)
+  Adding photon: 121.73, -2.96, 2.29, 2.29 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6073,8 +6073,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 13.8706 to particle -511
-  Adding photon with energy 252.687 to particle -511
+  Adding photon: 13.87, 0.60, -0.46, -0.46 to particle B0_bar (-511)
+  Adding photon: 252.69, -8.12, -9.70, -9.70 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6108,8 +6108,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1831.37 to particle 511
-  Adding photon with energy 0.531225 to particle 511
+  Adding photon: 1831.37, 13.05, 129.12, 129.12 to particle B0 (511)
+  Adding photon: 0.53, -0.02, 0.03, 0.03 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6143,8 +6143,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle -511
-  Adding photon with energy 9761.06 to particle -511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 9761.06, -191.50, 13.68, 13.68 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6178,8 +6178,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 9.99544 to particle -511
-  Adding photon with energy 270.034 to particle -511
+  Adding photon: 10.00, 1.24, 0.87, 0.87 to particle B0_bar (-511)
+  Adding photon: 270.03, 28.68, 34.12, 34.12 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6213,8 +6213,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 7.4609 to particle 511
-  Adding photon with energy 675.94 to particle 511
+  Adding photon: 7.46, -0.35, -0.20, -0.20 to particle B0 (511)
+  Adding photon: 675.94, -10.99, -64.25, -64.25 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6248,9 +6248,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 7601.29 to particle 511
-  Adding photon with energy 12.5965 to particle 511
-  Adding photon with energy 74.8964 to particle 511
+  Adding photon: 7601.29, 356.14, 253.20, 253.20 to particle B0 (511)
+  Adding photon: 12.60, 0.61, 0.21, 0.21 to particle B0 (511)
+  Adding photon: 74.90, 2.73, 2.34, 2.34 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6284,8 +6284,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle -511
-  Adding photon with energy 0.2502 to particle -511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 0.25, 0.00, 0.01, 0.01 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6319,7 +6319,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle -511
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6353,8 +6353,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.440227 to particle 511
-  Adding photon with energy 70.1228 to particle 511
+  Adding photon: 0.44, 0.01, -0.01, -0.01 to particle B0 (511)
+  Adding photon: 70.12, -2.32, -0.79, -0.79 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6388,8 +6388,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 261.701 to particle -511
-  Adding photon with energy 0.20025 to particle -511
+  Adding photon: 261.70, -11.79, -1.61, -1.61 to particle B0_bar (-511)
+  Adding photon: 0.20, -0.01, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6423,8 +6423,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 32.6197 to particle 511
-  Adding photon with energy 1220.85 to particle 511
+  Adding photon: 32.62, 3.61, -1.96, -1.96 to particle B0 (511)
+  Adding photon: 1220.85, 93.63, -96.11, -96.11 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6458,8 +6458,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1.0003 to particle 511
-  Adding photon with energy 755.584 to particle 511
+  Adding photon: 1.00, -0.13, -0.06, -0.06 to particle B0 (511)
+  Adding photon: 755.58, 37.88, 77.05, 77.05 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6493,7 +6493,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle 511
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6527,8 +6527,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 6.16079 to particle -511
-  Adding photon with energy 338.003 to particle -511
+  Adding photon: 6.16, 0.21, 0.46, 0.46 to particle B0_bar (-511)
+  Adding photon: 338.00, 3.19, 18.16, 18.16 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6562,8 +6562,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle -511
-  Adding photon with energy 38.685 to particle -511
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 38.68, 1.86, -1.25, -1.25 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6597,8 +6597,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 501.212 to particle -511
-  Adding photon with energy 0.293428 to particle -511
+  Adding photon: 501.21, -54.05, -60.77, -60.77 to particle B0_bar (-511)
+  Adding photon: 0.29, -0.04, -0.02, -0.02 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6632,8 +6632,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle -511
-  Adding photon with energy 11.1256 to particle -511
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 11.13, 0.34, 0.09, 0.09 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6667,8 +6667,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 584.874 to particle 511
-  Adding photon with energy 42.0628 to particle 511
+  Adding photon: 584.87, 10.78, 7.23, 7.23 to particle B0 (511)
+  Adding photon: 42.06, 1.54, -0.62, -0.62 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6702,8 +6702,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 36.7656 to particle -511
-  Adding photon with energy 13.9288 to particle -511
+  Adding photon: 36.77, -2.48, -2.13, -2.13 to particle B0_bar (-511)
+  Adding photon: 13.93, -1.09, -0.85, -0.85 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6739,7 +6739,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4.34997 to particle -413
+  Adding photon: 4.35, 0.29, -0.05, -0.05 to particle D*- (-413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6773,8 +6773,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 48408.8 to particle -511
-  Adding photon with energy 126.979 to particle -511
+  Adding photon: 48408.76, 1041.19, -624.85, -624.85 to particle B0_bar (-511)
+  Adding photon: 126.98, 2.48, -1.96, -1.96 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6808,7 +6808,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle -511
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6842,8 +6842,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 86.0209 to particle 511
-  Adding photon with energy 111.828 to particle 511
+  Adding photon: 86.02, 10.62, -1.48, -1.48 to particle B0 (511)
+  Adding photon: 111.83, 6.94, -4.03, -4.03 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6877,8 +6877,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3885.38 to particle 511
-  Adding photon with energy 3.22262 to particle 511
+  Adding photon: 3885.38, -265.44, 316.72, 316.72 to particle B0 (511)
+  Adding photon: 3.22, -0.05, 0.12, 0.12 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6912,8 +6912,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 735.629 to particle -511
-  Adding photon with energy 7.59897 to particle -511
+  Adding photon: 735.63, 37.24, -66.61, -66.61 to particle B0_bar (-511)
+  Adding photon: 7.60, -0.24, -0.48, -0.48 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6947,8 +6947,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 59.1197 to particle -511
-  Adding photon with energy 2.86944 to particle -511
+  Adding photon: 59.12, 6.35, -9.77, -9.77 to particle B0_bar (-511)
+  Adding photon: 2.87, 0.37, -0.38, -0.38 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -6982,8 +6982,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.771622 to particle -511
-  Adding photon with energy 72.5078 to particle -511
+  Adding photon: 0.77, 0.00, 0.05, 0.05 to particle B0_bar (-511)
+  Adding photon: 72.51, 0.62, 4.74, 4.74 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7017,8 +7017,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.210476 to particle -511
-  Adding photon with energy 353.901 to particle -511
+  Adding photon: 0.21, 0.01, -0.01, -0.01 to particle B0_bar (-511)
+  Adding photon: 353.90, 16.61, -25.08, -25.08 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7052,7 +7052,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle -511
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7086,8 +7086,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 499.027 to particle -511
-  Adding photon with energy 10.5025 to particle -511
+  Adding photon: 499.03, -29.41, 55.84, 55.84 to particle B0_bar (-511)
+  Adding photon: 10.50, -3.36, 4.43, 4.43 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7121,7 +7121,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.17 to particle -511
+  Adding photon: 0.17, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7155,9 +7155,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 27.1278 to particle -511
-  Adding photon with energy 15.5216 to particle -511
-  Adding photon with energy 464.525 to particle -511
+  Adding photon: 27.13, -1.90, -0.25, -0.25 to particle B0_bar (-511)
+  Adding photon: 15.52, -0.96, -0.24, -0.24 to particle B0_bar (-511)
+  Adding photon: 464.52, -32.19, -11.71, -11.71 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7191,7 +7191,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.23 to particle 511
+  Adding photon: 0.23, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7225,7 +7225,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle -511
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7261,7 +7261,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3.56822 to particle 413
+  Adding photon: 3.57, -0.61, -0.20, -0.20 to particle D*+ (413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7295,7 +7295,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.33 to particle -511
+  Adding photon: 0.33, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7329,9 +7329,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3.9586 to particle 511
-  Adding photon with energy 4.66813 to particle 511
-  Adding photon with energy 1913.33 to particle 511
+  Adding photon: 3.96, 0.55, 0.56, 0.56 to particle B0 (511)
+  Adding photon: 4.67, 0.80, 0.67, 0.67 to particle B0 (511)
+  Adding photon: 1913.33, 308.83, 326.76, 326.76 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7365,8 +7365,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.365513 to particle 511
-  Adding photon with energy 280.662 to particle 511
+  Adding photon: 0.37, 0.06, 0.02, 0.02 to particle B0 (511)
+  Adding photon: 280.66, -19.67, -33.50, -33.50 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7400,7 +7400,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle 511
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7434,8 +7434,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 25314.2 to particle -511
-  Adding photon with energy 0.530848 to particle -511
+  Adding photon: 25314.19, -591.04, -365.42, -365.42 to particle B0_bar (-511)
+  Adding photon: 0.53, -0.03, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7469,8 +7469,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.411582 to particle -511
-  Adding photon with energy 2377.09 to particle -511
+  Adding photon: 0.41, 0.03, -0.02, -0.02 to particle B0_bar (-511)
+  Adding photon: 2377.09, 428.17, -284.18, -284.18 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7504,8 +7504,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 22434.9 to particle 511
-  Adding photon with energy 299.149 to particle 511
+  Adding photon: 22434.87, -893.91, 191.27, 191.27 to particle B0 (511)
+  Adding photon: 299.15, -10.92, 4.22, 4.22 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7539,8 +7539,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 5428.12 to particle -511
-  Adding photon with energy 18.4755 to particle -511
+  Adding photon: 5428.12, -115.00, 274.55, 274.55 to particle B0_bar (-511)
+  Adding photon: 18.48, -0.26, 1.27, 1.27 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7574,8 +7574,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 29.9557 to particle -511
-  Adding photon with energy 2.88069 to particle -511
+  Adding photon: 29.96, -0.57, 0.13, 0.13 to particle B0_bar (-511)
+  Adding photon: 2.88, -0.06, 0.02, 0.02 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7609,8 +7609,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 109.614 to particle -511
-  Adding photon with energy 348.31 to particle -511
+  Adding photon: 109.61, -5.88, -1.90, -1.90 to particle B0_bar (-511)
+  Adding photon: 348.31, -12.09, -4.54, -4.54 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7644,8 +7644,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.98029 to particle -511
-  Adding photon with energy 0.34 to particle -511
+  Adding photon: 2.98, -0.04, 0.01, 0.01 to particle B0_bar (-511)
+  Adding photon: 0.34, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7679,8 +7679,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 1214.51 to particle 511
-  Adding photon with energy 2.35786 to particle 511
+  Adding photon: 1214.51, 199.45, 97.27, 97.27 to particle B0 (511)
+  Adding photon: 2.36, 0.09, 0.17, 0.17 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7714,8 +7714,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.11 to particle -511
-  Adding photon with energy 3015.27 to particle -511
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle B0_bar (-511)
+  Adding photon: 3015.27, 21.35, -15.70, -15.70 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7749,8 +7749,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 279.267 to particle 511
-  Adding photon with energy 12.6984 to particle 511
+  Adding photon: 279.27, -49.36, 5.25, 5.25 to particle B0 (511)
+  Adding photon: 12.70, -2.12, 0.06, 0.06 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7784,7 +7784,7 @@ D daughter HAMMER IDs:  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.21 to particle 511
+  Adding photon: 0.21, 0.00, 0.00, 0.00 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7820,8 +7820,8 @@ D daughter HAMMER IDs:  5  6  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 3832.39 to particle -511
-  Adding photon with energy 0.220454 to particle 413
+  Adding photon: 3832.39, 98.88, 331.19, 331.19 to particle B0_bar (-511)
+  Adding photon: 0.22, 0.01, 0.01, 0.01 to particle D*+ (413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7855,8 +7855,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 225.445 to particle -511
-  Adding photon with energy 401.16 to particle -511
+  Adding photon: 225.44, -43.78, 16.85, 16.85 to particle B0_bar (-511)
+  Adding photon: 401.16, -19.01, 22.09, 22.09 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7923,8 +7923,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 10671.9 to particle -511
-  Adding photon with energy 3.52014 to particle -511
+  Adding photon: 10671.93, 24.66, -313.44, -313.44 to particle B0_bar (-511)
+  Adding photon: 3.52, 0.01, -0.03, -0.03 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7958,8 +7958,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 36621.8 to particle 511
-  Adding photon with energy 5.49514 to particle 511
+  Adding photon: 36621.83, -1136.11, 307.56, 307.56 to particle B0 (511)
+  Adding photon: 5.50, -0.23, 0.06, 0.06 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -7993,8 +7993,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.190526 to particle 511
-  Adding photon with energy 113.088 to particle 511
+  Adding photon: 0.19, 0.01, -0.01, -0.01 to particle B0 (511)
+  Adding photon: 113.09, 0.16, -8.06, -8.06 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -8028,8 +8028,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 285.624 to particle -511
-  Adding photon with energy 0.111803 to particle -511
+  Adding photon: 285.62, 1.91, -23.25, -23.25 to particle B0_bar (-511)
+  Adding photon: 0.11, -0.05, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -8063,9 +8063,9 @@ D daughter HAMMER IDs:  7  8
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 126.212 to particle 511
-  Adding photon with energy 13.1299 to particle 511
-  Adding photon with energy 6.66011 to particle 511
+  Adding photon: 126.21, 7.75, 4.00, 4.00 to particle B0 (511)
+  Adding photon: 13.13, 0.21, 0.86, 0.86 to particle B0 (511)
+  Adding photon: 6.66, 0.33, 0.16, 0.16 to particle B0 (511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -8101,7 +8101,7 @@ D daughter HAMMER IDs:  4  5  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.75538 to particle -413
+  Adding photon: 2.76, -0.14, -0.10, -0.10 to particle D*- (-413)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -8135,8 +8135,8 @@ D daughter HAMMER IDs:  6  7
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 11036.7 to particle -511
-  Adding photon with energy 5.10933 to particle -511
+  Adding photon: 11036.65, -1179.98, 497.73, 497.73 to particle B0_bar (-511)
+  Adding photon: 5.11, -0.26, 0.36, 0.36 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1

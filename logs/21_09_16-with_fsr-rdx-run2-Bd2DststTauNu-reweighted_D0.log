@@ -50,7 +50,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.27 to particle 15
+  Adding photon: 0.27, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -91,7 +91,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 15
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -130,7 +130,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle -15
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -164,7 +164,7 @@ D daughter HAMMER IDs:  4  5  6
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 9011.37 to particle -423
+  Adding photon: 9011.37, -82.60, -108.21, -108.21 to particle D*0_bar (-423)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -203,7 +203,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 15
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -242,7 +242,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.19 to particle -15
+  Adding photon: 0.19, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -281,9 +281,9 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 7.0633 to particle -511
-  Adding photon with energy 8.38502 to particle 15
-  Adding photon with energy 28268 to particle 15
+  Adding photon: 7.06, -0.41, 0.14, 0.14 to particle B0_bar (-511)
+  Adding photon: 8.39, -0.20, 0.21, 0.21 to particle tau- (15)
+  Adding photon: 28268.04, -554.90, 759.18, 759.18 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -322,7 +322,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle -15
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -363,8 +363,8 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2.67421 to particle 15
-  Adding photon with energy 3929.6 to particle 15
+  Adding photon: 2.67, 0.09, -0.12, -0.12 to particle tau- (15)
+  Adding photon: 3929.60, 178.70, -198.91, -198.91 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -403,7 +403,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.15 to particle 15
+  Adding photon: 0.15, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -442,8 +442,8 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 21721.7 to particle 15
-  Adding photon with energy 20.3448 to particle 15
+  Adding photon: 21721.74, -292.66, -1470.42, -1470.42 to particle tau- (15)
+  Adding photon: 20.34, -1.31, -1.46, -1.46 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -482,8 +482,8 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 411.597 to particle -15
-  Adding photon with energy 6016.06 to particle -15
+  Adding photon: 411.60, -9.01, 4.85, 4.85 to particle tau+ (-15)
+  Adding photon: 6016.06, -162.58, 66.91, 66.91 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -522,7 +522,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.11 to particle -15
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -561,8 +561,8 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 2638.44 to particle 15
-  Adding photon with energy 4331.49 to particle 15
+  Adding photon: 2638.44, 39.96, 83.36, 83.36 to particle tau- (15)
+  Adding photon: 4331.49, 173.03, 79.81, 79.81 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -601,8 +601,8 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 9149.01 to particle -15
-  Adding photon with energy 0.643817 to particle -15
+  Adding photon: 9149.01, 706.38, -346.73, -346.73 to particle tau+ (-15)
+  Adding photon: 0.64, 0.07, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -641,8 +641,8 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 4.33738 to particle -15
-  Adding photon with energy 3057.05 to particle -15
+  Adding photon: 4.34, -0.38, -0.66, -0.66 to particle tau+ (-15)
+  Adding photon: 3057.05, -337.36, -314.28, -314.28 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -685,7 +685,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.22 to particle 15
+  Adding photon: 0.22, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -724,9 +724,9 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 125.057 to particle 511
-  Adding photon with energy 4021.21 to particle -15
-  Adding photon with energy 12343.2 to particle -15
+  Adding photon: 125.06, -8.01, 0.42, 0.42 to particle B0 (511)
+  Adding photon: 4021.21, 147.87, -184.63, -184.63 to particle tau+ (-15)
+  Adding photon: 12343.21, -453.52, -609.99, -609.99 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -767,7 +767,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.13 to particle 15
+  Adding photon: 0.13, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -806,7 +806,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 15
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -847,7 +847,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.1 to particle 15
+  Adding photon: 0.10, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -886,7 +886,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.19 to particle 15
+  Adding photon: 0.19, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -927,7 +927,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.12 to particle -15
+  Adding photon: 0.12, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -966,7 +966,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.19 to particle -511
+  Adding photon: 0.19, 0.00, 0.00, 0.00 to particle B0_bar (-511)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1009,7 +1009,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.11 to particle 15
+  Adding photon: 0.11, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1050,7 +1050,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.16 to particle -15
+  Adding photon: 0.16, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1089,7 +1089,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.2 to particle -15
+  Adding photon: 0.20, 0.00, 0.00, 0.00 to particle tau+ (-15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
@@ -1130,7 +1130,7 @@ D meson HAMMER ID: 1
 Lepton HAMMER ID: 2
 Lepton neutrino HAMMER ID: 3
 Radiative photon correction info:
-  Adding photon with energy 0.14 to particle 15
+  Adding photon: 0.14, 0.00, 0.00, 0.00 to particle tau- (15)
 Check if invariant mass of each particle is non-negative: 
   1  1  1  1  1  1  1
 All particles have OK kinematics: 1
