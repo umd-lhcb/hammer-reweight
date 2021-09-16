@@ -1,0 +1,1113 @@
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -10411 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+Hammer.RateBase: INFO  Integrating rate 511 -> -415 16 -15
+WARN: HAMMER doesn't add process properly: 487
+========
+True q2 (GeV): 5.11197
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 111
+D daughter 1 ID: 421
+D daughter 2 ID: 211
+Is tau decay: 1
+Current candidate index: 487
+B meson 4-mom: 306249.76, -4375.43, -2898.09, 306159.27
+B meson inv.m: 5279.58
+D meson 4-mom: 197220.05, -2438.33, -2276.60, 197171.99
+D meson inv.m: 2797.54
+D daughter idx 0 4-mom: 58118.38, -441.91, -982.81, 58108.23
+D daughter idx 0 inv.m: 134.977
+D daughter idx 1 4-mom: 132295.60, -1991.06, -1060.51, 132263.22
+D daughter idx 1 inv.m: 1864.84
+D daughter idx 2 4-mom: 6761.80, -3.24, -233.64, 6756.32
+D daughter idx 2 inv.m: 139.57
+Tau 4-mom: 100073.38, -1527.88, -318.61, 100045.43
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 8956.33, -409.22, -302.89, 8941.85
+anti-TauNu inv.m: 0.000172633
+TauNu 4-mom: 25365.63, -350.04, -737.08, 25352.50
+TauNu inv.m: 0.000345267
+Mu 4-mom: 69246.89, -944.56, 535.02, 69238.30
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 5460.59, -233.29, -116.54, 5454.36
+anti-MuNu inv.mass: 0
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.27 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -20413 14 -13
+WARN: HAMMER doesn't add process properly: 799
+========
+True q2 (GeV): 4.52129
+B meson ID: -511
+D meson ID: 10413
+D daughter 0 ID: 423
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 799
+B meson 4-mom: 155103.89, -11.56, 6362.40, 154883.38
+B meson inv.m: 5279.58
+D meson 4-mom: 111133.72, -721.54, 5052.26, 110989.94
+D meson inv.m: 2427
+D daughter idx 0 4-mom: 78207.98, -363.05, 3562.72, 78100.16
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 32925.75, -358.49, 1489.53, 32889.79
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 43016.48, 559.88, 1186.95, 42959.73
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 953.69, 150.10, 123.19, 933.71
+anti-TauNu inv.m: 0
+TauNu 4-mom: 10719.84, 150.93, 714.85, 10694.91
+TauNu inv.m: 0
+Mu 4-mom: 12234.37, -190.50, -336.37, 12227.80
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 20062.18, 599.45, 808.47, 20036.92
+anti-MuNu inv.mass: 0.000244141
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.1 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 1285
+========
+True q2 (GeV): 6.76998
+B meson ID: 511
+D meson ID: -10413
+D daughter 0 ID: -10421
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 1285
+B meson 4-mom: 281070.24, -8016.64, -4139.46, 280875.78
+B meson inv.m: 5279.58
+D meson 4-mom: 108275.24, -3608.22, -1845.15, 108171.86
+D meson inv.m: 2439.74
+D daughter idx 0 4-mom: 99350.31, -3120.87, -1500.50, 99268.01
+D daughter idx 0 inv.m: 2086.97
+D daughter idx 1 4-mom: 8924.93, -487.35, -344.66, 8903.85
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 139924.23, -3745.75, -2499.14, 139840.47
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 32870.77, -662.67, 204.83, 32863.45
+anti-TauNu inv.m: 0.000488281
+TauNu 4-mom: 4690.63, -185.04, -157.55, 4684.33
+TauNu inv.m: 0
+Mu 4-mom: 87345.82, -3045.05, -1234.84, 87283.93
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 47887.65, -515.63, -1106.72, 47872.08
+anti-MuNu inv.mass: 0.000976562
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.13 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 1298
+========
+True q2 (GeV): 9.9317
+B meson ID: 521
+D meson ID: -423
+D daughter 0 ID: -421
+D daughter 1 ID: 22
+D daughter 2 ID: 0
+Is tau decay: 0
+Current candidate index: 1298
+B meson 4-mom: 341138.42, 526.34, -5781.15, 341048.17
+B meson inv.m: 5279.26
+D meson 4-mom: 136733.95, 746.86, -2207.33, 136699.36
+D meson inv.m: 2006.96
+D daughter idx 0 4-mom: 127722.60, 829.56, -2099.17, 127689.04
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 9011.37, -82.60, -108.21, 9010.34
+D daughter idx 1 inv.m: 0.000172633
+Mu 4-mom: 84650.27, -1556.63, -1985.68, 84612.59
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 119754.18, 1336.25, -1588.22, 119736.19
+anti-MuNu inv.m: 0.00195312
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+D daughter HAMMER IDs:  4  5  6
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 9011.37 to particle -423
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 1572
+========
+True q2 (GeV): 4.01421
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 413
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 1572
+B meson 4-mom: 78301.77, 2743.52, 3389.72, 78001.77
+B meson inv.m: 5279.58
+D meson 4-mom: 38856.23, 928.91, 2977.73, 38651.12
+D meson inv.m: 2483.55
+D daughter idx 0 4-mom: 35567.04, 536.54, 2585.59, 35411.85
+D daughter idx 0 inv.m: 2010.41
+D daughter idx 1 4-mom: 3289.19, 392.38, 392.14, 3239.26
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 36463.33, 1487.15, 306.72, 36388.35
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 2982.21, 327.45, 105.28, 2962.31
+anti-TauNu inv.m: 6.10352e-05
+TauNu 4-mom: 12232.07, 320.91, 53.17, 12227.74
+TauNu inv.m: 0.00029901
+Mu 4-mom: 21713.88, 829.42, 596.70, 21689.57
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 2517.29, 336.81, -343.15, 2470.94
+anti-MuNu inv.mass: 4.31584e-05
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.1 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 1865
+========
+True q2 (GeV): 5.79104
+B meson ID: 511
+D meson ID: -20413
+D daughter 0 ID: -413
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 1865
+B meson 4-mom: 320500.21, -5699.37, -12511.83, 320161.65
+B meson inv.m: 5279.58
+D meson 4-mom: 128288.86, -2144.38, -5319.49, 128132.89
+D meson inv.m: 2664.32
+D daughter idx 0 4-mom: 100910.54, -1530.77, -4722.89, 100768.28
+D daughter idx 0 inv.m: 2010.28
+D daughter idx 1 4-mom: 27378.32, -613.61, -596.59, 27364.61
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 116743.61, -1837.65, -4173.56, 116640.98
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 75467.74, -1717.34, -3018.79, 75387.78
+anti-TauNu inv.m: 0
+TauNu 4-mom: 52813.57, -1444.92, -1561.34, 52770.71
+TauNu inv.m: 0.000690534
+Mu 4-mom: 29954.73, 208.69, -1289.93, 29926.03
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 33975.13, -601.42, -1322.27, 33944.06
+anti-MuNu inv.mass: 0.00119604
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.19 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't like candidate for reweighting: 2246
+========
+True q2 (GeV): 3.85639
+B meson ID: -511
+D meson ID: 10411
+D daughter 0 ID: 421
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 2246
+B meson 4-mom: 437951.77, -9454.85, 9365.93, 437717.68
+B meson inv.m: 5279.58
+D meson 4-mom: 155163.35, -4318.01, 2589.38, 155063.96
+D meson inv.m: 2341.51
+D daughter idx 0 4-mom: 137642.96, -3497.38, 2464.95, 137563.80
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 17520.39, -820.63, 124.43, 17500.16
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 249537.45, -4666.42, 6084.52, 249413.28
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 33243.91, -470.01, 691.88, 33233.39
+anti-TauNu inv.m: 0.000690534
+TauNu 4-mom: 19478.37, -270.78, 266.12, 19474.67
+TauNu inv.m: 0.000345267
+Mu 4-mom: 96172.18, -2303.43, 2916.72, 96100.28
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 105610.47, -1537.13, 2142.31, 105577.55
+anti-MuNu inv.mass: 0.00195312
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 7.0633 to particle -511
+  Adding photon with energy 8.38502 to particle 15
+  Adding photon with energy 28268 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 2379
+========
+True q2 (GeV): 5.02641
+B meson ID: 511
+D meson ID: -20413
+D daughter 0 ID: -423
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 2379
+B meson 4-mom: 262146.35, 9320.71, 2443.90, 261915.99
+B meson inv.m: 5279.58
+D meson 4-mom: 160335.42, 5713.03, 2640.42, 160193.89
+D meson inv.m: 2398.48
+D daughter idx 0 4-mom: 142259.02, 5228.85, 2062.59, 142133.76
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 18076.40, 484.18, 577.83, 18060.13
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 69663.52, 2351.18, -408.92, 69599.95
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 32147.43, 1256.50, 212.41, 32122.16
+anti-TauNu inv.m: 0
+TauNu 4-mom: 20909.69, 1344.75, 53.61, 20866.33
+TauNu inv.m: 0.000244141
+Mu 4-mom: 45765.94, 1149.87, -430.89, 45749.34
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 2987.76, -143.42, -31.65, 2984.15
+anti-MuNu inv.mass: 4.31584e-05
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.12 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't like candidate for reweighting: 2479
+========
+True q2 (GeV): 6.29266
+B meson ID: -511
+D meson ID: 10413
+D daughter 0 ID: 423
+D daughter 1 ID: 211
+D daughter 2 ID: 22
+Is tau decay: 1
+Current candidate index: 2479
+B meson 4-mom: 172090.11, 3373.74, -7551.28, 171810.15
+B meson inv.m: 5279.58
+D meson 4-mom: 67383.61, 593.86, -3307.22, 67256.73
+D meson inv.m: 2406.93
+D daughter idx 0 4-mom: 55341.42, 215.79, -2520.54, 55247.13
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 11706.86, 373.90, -768.68, 11674.78
+D daughter idx 1 inv.m: 139.57
+D daughter idx 2 4-mom: 335.33, 4.17, -18.00, 334.82
+D daughter idx 2 inv.m: 5.3948e-06
+Tau 4-mom: 61713.71, 1228.51, -2743.19, 61614.86
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 42992.78, 1551.36, -1500.88, 42938.56
+anti-TauNu inv.m: 0.000690534
+TauNu 4-mom: 16159.80, 19.71, -390.84, 16155.06
+TauNu inv.m: 0.000172633
+Mu 4-mom: 22097.19, 1099.84, -968.98, 22048.27
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 19524.45, -69.82, -1184.34, 19488.37
+anti-MuNu inv.mass: 0.000345267
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 2.67421 to particle 15
+  Adding photon with energy 3929.6 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 2863
+========
+True q2 (GeV): 5.78151
+B meson ID: -511
+D meson ID: 10413
+D daughter 0 ID: 423
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 2863
+B meson 4-mom: 174967.03, 331.90, -2819.35, 174864.32
+B meson inv.m: 5279.58
+D meson 4-mom: 102432.56, 993.62, -2213.93, 102375.26
+D meson inv.m: 2418.08
+D daughter idx 0 4-mom: 89376.81, 712.92, -2241.82, 89323.30
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 13055.75, 280.70, 27.89, 13051.96
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 43623.78, -750.80, -311.14, 43580.00
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 28910.69, 89.07, -294.27, 28909.06
+anti-TauNu inv.m: 0
+TauNu 4-mom: 18526.07, -290.88, -250.53, 18522.09
+TauNu inv.m: 0.000244141
+Mu 4-mom: 23898.38, -430.41, 224.03, 23893.22
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 1199.17, -29.51, -284.62, 1164.53
+anti-MuNu inv.mass: 1.52588e-05
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.15 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't like candidate for reweighting: 2917
+========
+True q2 (GeV): 7.07155
+B meson ID: -511
+D meson ID: 10413
+D daughter 0 ID: 413
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 2917
+B meson 4-mom: 323410.06, -6932.26, -15717.34, 322910.36
+B meson inv.m: 5279.58
+D meson 4-mom: 158376.61, -3787.68, -7106.18, 158153.18
+D meson inv.m: 2424.16
+D daughter idx 0 4-mom: 110803.44, -2637.16, -5061.51, 110638.09
+D daughter idx 0 inv.m: 2010.28
+D daughter idx 1 4-mom: 47573.17, -1150.53, -2044.67, 47515.09
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 115301.46, -1689.62, -5488.29, 115144.66
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 49732.00, -1454.96, -3122.87, 49612.52
+anti-TauNu inv.m: 0
+TauNu 4-mom: 34340.59, -928.28, -1266.02, 34304.69
+TauNu inv.m: 0.00119604
+Mu 4-mom: 4372.66, 28.50, -312.18, 4360.13
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 54846.11, -495.88, -2438.20, 54789.64
+anti-MuNu inv.mass: 0.00119604
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 21721.7 to particle 15
+  Adding photon with energy 20.3448 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 3014
+========
+True q2 (GeV): 5.53117
+B meson ID: 511
+D meson ID: -415
+D daughter 0 ID: -423
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 3014
+B meson 4-mom: 286816.92, -4316.68, 7523.70, 286637.11
+B meson inv.m: 5279.58
+D meson 4-mom: 170967.34, -1698.78, 4630.04, 170877.15
+D meson inv.m: 2550.9
+D daughter idx 0 4-mom: 117634.15, -1521.41, 3136.48, 117565.36
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 53333.18, -177.37, 1493.56, 53311.79
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 115680.22, -2666.92, 2865.47, 115600.32
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 169.36, 49.02, 28.19, 159.64
+anti-TauNu inv.m: 1.90735e-06
+TauNu 4-mom: 28339.98, -700.10, 1232.18, 28304.52
+TauNu inv.m: 0.000690534
+Mu 4-mom: 67099.13, -1582.01, 915.32, 67074.15
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 13813.46, -213.22, 646.22, 13796.69
+anti-MuNu inv.mass: 0
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 411.597 to particle -15
+  Adding photon with energy 6016.06 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 3305
+========
+True q2 (GeV): 6.09571
+B meson ID: 511
+D meson ID: -10411
+D daughter 0 ID: -421
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 3305
+B meson 4-mom: 40815.22, 5103.99, 2355.88, 40080.01
+B meson inv.m: 5279.58
+D meson 4-mom: 27638.95, 3649.56, 1888.03, 27227.61
+D meson inv.m: 2384.25
+D daughter idx 0 4-mom: 22851.90, 2598.14, 1691.80, 22563.67
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 4787.05, 1051.42, 196.23, 4663.94
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 9171.58, 672.40, -136.74, 8971.62
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 4004.68, 782.04, 604.59, 3880.77
+anti-TauNu inv.m: 4.31584e-05
+TauNu 4-mom: 5171.35, 549.41, -348.69, 5130.25
+TauNu inv.m: 6.10352e-05
+Mu 4-mom: 3302.47, 75.89, 577.58, 3248.97
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 697.65, 47.10, -365.62, 592.30
+anti-MuNu inv.mass: 0
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.11 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 3396
+========
+True q2 (GeV): 6.45172
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 423
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 3396
+B meson 4-mom: 166701.39, 2921.73, 3408.80, 166557.27
+B meson inv.m: 5279.58
+D meson 4-mom: 78259.64, 1017.83, 2355.18, 78178.78
+D meson inv.m: 2463
+D daughter idx 0 4-mom: 67204.98, 982.19, 2394.49, 67125.13
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 11054.66, 35.63, -39.30, 11053.65
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 56117.56, 804.20, 1091.85, 56073.03
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 32324.20, 1099.71, -38.24, 32305.47
+anti-TauNu inv.m: 0.000345267
+TauNu 4-mom: 17340.26, -289.27, 364.82, 17334.01
+TauNu inv.m: 0.000244141
+Mu 4-mom: 26895.52, 744.37, 830.42, 26872.18
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 4911.85, 136.11, -266.57, 4902.72
+anti-MuNu inv.mass: 6.10352e-05
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 2638.44 to particle 15
+  Adding photon with energy 4331.49 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 3446
+========
+True q2 (GeV): 5.35856
+B meson ID: 511
+D meson ID: -10411
+D daughter 0 ID: -421
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 3446
+B meson 4-mom: 219216.64, 12827.44, -8958.02, 218593.85
+B meson inv.m: 5279.58
+D meson 4-mom: 99263.40, 4654.95, -4080.43, 99041.18
+D meson inv.m: 2397.57
+D daughter idx 0 4-mom: 79336.12, 3265.25, -3292.86, 79178.52
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 19927.26, 1389.70, -787.57, 19862.65
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 71033.92, 4916.35, -2909.83, 70781.52
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 48919.32, 3256.13, -1967.76, 48771.15
+anti-TauNu inv.m: 0.000690534
+TauNu 4-mom: 24050.07, 1017.61, -1305.94, 23993.02
+TauNu inv.m: 0.000488281
+Mu 4-mom: 35448.06, 2837.10, -1186.63, 35314.25
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 2386.14, 355.19, -70.53, 2358.50
+anti-MuNu inv.mass: 0
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 9149.01 to particle -15
+  Adding photon with energy 0.643817 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 3640
+========
+True q2 (GeV): 5.18703
+B meson ID: 511
+D meson ID: -10413
+D daughter 0 ID: -413
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 3640
+B meson 4-mom: 102209.73, -10293.25, -16649.74, 100178.79
+B meson inv.m: 5279.58
+D meson 4-mom: 35778.91, -3678.61, -6658.01, 34877.35
+D meson inv.m: 2416.58
+D daughter idx 0 4-mom: 27609.41, -3093.44, -4972.76, 26906.15
+D daughter idx 0 inv.m: 2010.24
+D daughter idx 1 4-mom: 8169.49, -585.17, -1685.26, 7971.19
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 61780.19, -5853.35, -9458.16, 60744.68
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 4650.63, -761.30, -533.57, 4556.76
+anti-TauNu inv.m: 0
+TauNu 4-mom: 8083.95, -473.79, -1551.68, 7919.47
+TauNu inv.m: 0.000149505
+Mu 4-mom: 28168.25, -2368.32, -4393.41, 27722.34
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 22466.59, -2673.49, -3198.12, 22076.51
+anti-MuNu inv.mass: 0.000244141
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 4.33738 to particle -15
+  Adding photon with energy 3057.05 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -423 14 -13
+WARN: HAMMER doesn't add process properly: 5070
+========
+True q2 (GeV): 4.89313
+B meson ID: -511
+D meson ID: 10413
+D daughter 0 ID: 10421
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 5070
+B meson 4-mom: 390224.64, 1880.59, -3268.99, 390170.70
+B meson inv.m: 5279.58
+D meson 4-mom: 217981.34, 2091.47, -2501.54, 217943.44
+D meson inv.m: 2426.78
+D daughter idx 0 4-mom: 189088.71, 1995.86, -2278.12, 189052.17
+D daughter idx 0 inv.m: 2155
+D daughter idx 1 4-mom: 28892.64, 95.62, -223.42, 28891.28
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 118787.67, -128.68, -788.47, 118771.69
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 53455.63, -82.21, 21.02, 53455.56
+anti-TauNu inv.m: 0
+TauNu 4-mom: 65931.17, 172.27, -154.06, 65930.76
+TauNu inv.m: 0
+Mu 4-mom: 14792.57, 16.05, 285.31, 14789.43
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 38063.71, -317.01, -919.72, 38051.28
+anti-MuNu inv.mass: 0.000488281
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.22 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't like candidate for reweighting: 5288
+========
+True q2 (GeV): 5.27512
+B meson ID: 511
+D meson ID: -10411
+D daughter 0 ID: -421
+D daughter 1 ID: -211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 5288
+B meson 4-mom: 73585.87, -1137.19, -4557.60, 73245.76
+B meson inv.m: 5279.58
+D meson 4-mom: 49499.14, -1045.35, -3695.62, 49285.36
+D meson inv.m: 2523.48
+D daughter idx 0 4-mom: 41465.51, -1296.32, -3423.68, 41261.47
+D daughter idx 0 inv.m: 1864.84
+D daughter idx 1 4-mom: 8033.62, 250.97, -271.94, 8023.88
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 23717.69, 28.23, -937.82, 23632.42
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 243.99, -112.06, 75.43, 203.19
+anti-TauNu inv.m: 3.8147e-06
+TauNu 4-mom: 444.00, -66.47, 106.71, 425.83
+TauNu inv.m: 5.3948e-06
+Mu 4-mom: 6478.32, 265.35, -291.70, 6465.44
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 430.94, 135.00, 41.77, 407.11
+anti-MuNu inv.mass: 5.3948e-06
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 125.057 to particle 511
+  Adding photon with energy 4021.21 to particle -15
+  Adding photon with energy 12343.2 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+Hammer.RateBase: INFO  Integrating rate 511 -> -413 14 -13
+WARN: HAMMER doesn't add process properly: 6191
+========
+True q2 (GeV): 7.19768
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 423
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 6191
+B meson 4-mom: 202330.16, 3821.83, 3346.35, 202197.47
+B meson inv.m: 5279.58
+D meson 4-mom: 103612.82, 2694.23, 2367.23, 103527.89
+D meson inv.m: 2174.87
+D daughter idx 0 4-mom: 96038.08, 2411.75, 2220.26, 95961.13
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 7574.74, 282.48, 146.97, 7566.76
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 96203.52, 801.97, 856.53, 96179.95
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 2513.83, 325.63, 122.60, 2489.63
+anti-TauNu inv.m: 4.31584e-05
+TauNu 4-mom: 50903.75, 303.42, 977.72, 50893.46
+TauNu inv.m: 0.00169146
+Mu 4-mom: 4912.82, 276.75, 163.35, 4901.16
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 40386.81, 221.80, -284.54, 40385.20
+anti-MuNu inv.mass: 0.00146484
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.13 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 6835
+========
+True q2 (GeV): 4.99052
+B meson ID: -511
+D meson ID: 415
+D daughter 0 ID: 423
+D daughter 1 ID: 211
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 6835
+B meson 4-mom: 238400.43, 3802.28, -3338.42, 238288.25
+B meson inv.m: 5279.58
+D meson 4-mom: 151983.27, 3227.19, -2763.97, 151903.79
+D meson inv.m: 2469.5
+D daughter idx 0 4-mom: 130778.32, 2776.96, -2769.97, 130704.08
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 21204.95, 450.23, 6.00, 21199.71
+D daughter idx 1 inv.m: 139.57
+Tau 4-mom: 62222.25, 714.45, -235.14, 62192.33
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 24194.91, -139.37, -339.32, 24192.13
+anti-TauNu inv.m: 0.000345267
+TauNu 4-mom: 37273.53, 655.26, -657.17, 37261.98
+TauNu inv.m: 0.000488281
+Mu 4-mom: 22428.19, -61.70, 608.12, 22419.61
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 2520.44, 120.89, -186.09, 2510.65
+anti-MuNu inv.mass: 3.05176e-05
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.1 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 6922
+========
+True q2 (GeV): 4.35981
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 111
+D daughter 1 ID: 421
+D daughter 2 ID: 211
+Is tau decay: 1
+Current candidate index: 6922
+B meson 4-mom: 484510.48, -4679.58, -10663.39, 484341.74
+B meson inv.m: 5279.58
+D meson 4-mom: 185158.70, -2698.89, -4330.43, 185070.80
+D meson inv.m: 2550.91
+D daughter idx 0 4-mom: 33587.77, -547.22, -976.99, 33568.83
+D daughter idx 0 inv.m: 134.977
+D daughter idx 1 4-mom: 114042.53, -1406.32, -2645.77, 113987.91
+D daughter idx 1 inv.m: 1864.84
+D daughter idx 2 4-mom: 37528.39, -745.35, -707.67, 37514.05
+D daughter idx 2 inv.m: 139.57
+Tau 4-mom: 294639.97, -2082.56, -6220.99, 294561.57
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 4711.80, 101.86, -111.96, 4709.37
+anti-TauNu inv.m: 0
+TauNu 4-mom: 23501.81, -217.62, -347.91, 23498.23
+TauNu inv.m: 0.000345267
+Mu 4-mom: 246326.77, -1431.29, -5717.27, 246256.23
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 24811.30, -433.64, -155.80, 24807.02
+anti-MuNu inv.mass: 0.000345267
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.1 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 7546
+========
+True q2 (GeV): 4.09371
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 413
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 7546
+B meson 4-mom: 221186.56, 757.90, -7017.79, 221010.85
+B meson inv.m: 5279.58
+D meson 4-mom: 70150.22, -763.38, -2511.54, 70062.97
+D meson inv.m: 2311.36
+D daughter idx 0 4-mom: 60552.80, -746.48, -2401.48, 60467.15
+D daughter idx 0 inv.m: 2010.24
+D daughter idx 1 4-mom: 9597.42, -16.91, -110.06, 9595.82
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 138278.55, 1615.36, -4144.71, 138195.56
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 12757.79, -94.07, -361.54, 12752.32
+anti-TauNu inv.m: 0
+TauNu 4-mom: 29838.36, 570.70, -375.86, 29830.53
+TauNu inv.m: 0
+Mu 4-mom: 6241.84, 259.20, -280.75, 6229.24
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 102198.17, 785.45, -3488.09, 102135.61
+anti-MuNu inv.mass: 0.00138107
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.19 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 8096
+========
+True q2 (GeV): 4.18555
+B meson ID: 511
+D meson ID: -20413
+D daughter 0 ID: 111
+D daughter 1 ID: -421
+D daughter 2 ID: -211
+Is tau decay: 1
+Current candidate index: 8096
+B meson 4-mom: 391463.94, -9618.51, 1500.80, 391307.26
+B meson inv.m: 5279.58
+D meson 4-mom: 285136.06, -6670.77, 2076.93, 285041.50
+D meson inv.m: 2258.43
+D daughter idx 0 4-mom: 26726.67, -689.55, 169.38, 26716.90
+D daughter idx 0 inv.m: 134.977
+D daughter idx 1 4-mom: 214142.37, -5002.09, 1480.71, 214070.70
+D daughter idx 1 inv.m: 1864.84
+D daughter idx 2 4-mom: 44267.01, -979.13, 426.84, 44253.90
+D daughter idx 2 inv.m: 139.57
+Tau 4-mom: 99382.59, -2969.75, -481.27, 99321.15
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 6945.28, 22.01, -94.86, 6944.60
+anti-TauNu inv.m: 8.63167e-05
+TauNu 4-mom: 22538.99, -622.75, -388.21, 22527.04
+TauNu inv.m: 0.000244141
+Mu 4-mom: 42551.42, -1143.71, -748.84, 42529.32
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 34292.07, -1203.29, 655.78, 34264.68
+anti-MuNu inv.mass: 0.000488281
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.12 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 8183
+========
+True q2 (GeV): 4.43458
+B meson ID: -511
+D meson ID: 415
+D daughter 0 ID: 413
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 8183
+B meson 4-mom: 318012.51, 4643.14, -143.76, 317934.75
+B meson inv.m: 5279.58
+D meson 4-mom: 225487.10, 3177.88, -980.56, 225448.70
+D meson inv.m: 2501.52
+D daughter idx 0 4-mom: 221239.93, 3242.83, -1039.93, 221204.58
+D daughter idx 0 inv.m: 2010.42
+D daughter idx 1 4-mom: 4247.19, -64.95, 59.37, 4244.13
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 75877.97, 1212.53, 979.76, 75841.14
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 16647.25, 252.72, -142.96, 16644.72
+anti-TauNu inv.m: 0
+TauNu 4-mom: 21101.19, 80.70, 329.43, 21098.46
+TauNu inv.m: 0.000422864
+Mu 4-mom: 13028.36, 67.51, 719.27, 13007.89
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 41748.42, 1064.32, -68.95, 41734.79
+anti-MuNu inv.mass: 0.00109183
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.19 to particle -511
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
+Hammer.RateBase: INFO  Integrating rate 521 -> -421 14 -13
+WARN: HAMMER doesn't add process properly: 9607
+========
+True q2 (GeV): 6.18237
+B meson ID: -511
+D meson ID: 20413
+D daughter 0 ID: 111
+D daughter 1 ID: 421
+D daughter 2 ID: 211
+Is tau decay: 1
+Current candidate index: 9607
+B meson 4-mom: 370688.04, 9742.69, 5183.33, 370486.12
+B meson inv.m: 5279.58
+D meson 4-mom: 236924.47, 6500.86, 3633.88, 236793.93
+D meson inv.m: 2524.27
+D daughter idx 0 4-mom: 40746.05, 1407.92, 448.09, 40719.03
+D daughter idx 0 inv.m: 134.977
+D daughter idx 1 4-mom: 154246.10, 3991.90, 2525.66, 154162.47
+D daughter idx 1 inv.m: 1864.84
+D daughter idx 2 4-mom: 41932.32, 1101.05, 660.12, 41912.43
+D daughter idx 2 inv.m: 139.57
+Tau 4-mom: 115883.06, 2912.37, 810.30, 115830.00
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 17880.51, 329.45, 739.15, 17862.19
+anti-TauNu inv.m: 0.000345267
+TauNu 4-mom: 15880.57, 511.56, -203.75, 15871.02
+TauNu inv.m: 0
+Mu 4-mom: 32713.23, 714.45, 970.14, 32690.86
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 67289.17, 1686.30, 43.88, 67268.02
+anti-MuNu inv.mass: 0.000976562
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.11 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 10339
+========
+True q2 (GeV): 4.31865
+B meson ID: 511
+D meson ID: -10411
+D daughter 0 ID: -413
+D daughter 1 ID: 111
+D daughter 2 ID: 111
+Is tau decay: 1
+Current candidate index: 10339
+B meson 4-mom: 167711.02, -5951.22, -3112.72, 167493.30
+B meson inv.m: 5279.58
+D meson 4-mom: 56742.11, -1501.44, -1952.21, 56639.20
+D meson inv.m: 2367.1
+D daughter idx 0 4-mom: 52110.92, -1309.53, -1919.76, 52020.25
+D daughter idx 0 inv.m: 2010.24
+D daughter idx 1 4-mom: 2694.58, -117.09, -9.13, 2688.63
+D daughter idx 1 inv.m: 134.977
+D daughter idx 2 4-mom: 1936.62, -74.82, -23.32, 1930.32
+D daughter idx 2 inv.m: 134.977
+Tau 4-mom: 101541.32, -4172.43, -1301.40, 101431.65
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 9427.58, -277.35, 140.89, 9422.45
+anti-TauNu inv.m: 0.000172633
+TauNu 4-mom: 33558.56, -1712.77, -487.02, 33511.28
+TauNu inv.m: 0.000488281
+Mu 4-mom: 22292.36, -190.64, -313.14, 22289.09
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 45690.25, -2269.01, -501.25, 45631.12
+anti-MuNu inv.mass: 0.000488281
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.16 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 10544
+========
+True q2 (GeV): 6.20369
+B meson ID: 511
+D meson ID: -10413
+D daughter 0 ID: -10411
+D daughter 1 ID: 111
+D daughter 2 ID: 0
+Is tau decay: 1
+Current candidate index: 10544
+B meson 4-mom: 222441.13, -7375.50, 4995.69, 222199.97
+B meson inv.m: 5279.58
+D meson 4-mom: 89120.68, -3770.92, 1808.16, 88989.67
+D meson inv.m: 2417.75
+D daughter idx 0 4-mom: 75355.84, -3298.66, 1596.04, 75235.23
+D daughter idx 0 inv.m: 2175.9
+D daughter idx 1 4-mom: 13764.84, -472.26, 212.12, 13754.44
+D daughter idx 1 inv.m: 134.977
+Tau 4-mom: 108340.87, -2783.70, 2014.58, 108271.79
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 24979.57, -820.88, 1172.95, 24938.51
+anti-TauNu inv.m: 0
+TauNu 4-mom: 14424.07, -179.38, 529.41, 14413.24
+TauNu inv.m: 0
+Mu 4-mom: 71529.99, -1411.85, 976.52, 71509.31
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 22386.61, -1192.46, 508.66, 22349.04
+anti-MuNu inv.mass: 0
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.2 to particle -15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+WARN: HAMMER doesn't add process properly: 10894
+========
+True q2 (GeV): 6.95235
+B meson ID: -511
+D meson ID: 10411
+D daughter 0 ID: 423
+D daughter 1 ID: 111
+D daughter 2 ID: 211
+Is tau decay: 1
+Current candidate index: 10894
+B meson 4-mom: 89500.32, -5022.23, -1262.89, 89194.26
+B meson inv.m: 5279.58
+D meson 4-mom: 52358.66, -3472.16, -1051.70, 52179.35
+D meson inv.m: 2362.71
+D daughter idx 0 4-mom: 46618.86, -2953.08, -948.21, 46472.25
+D daughter idx 0 inv.m: 2006.96
+D daughter idx 1 4-mom: 3214.15, -233.94, -90.02, 3201.52
+D daughter idx 1 inv.m: 134.977
+D daughter idx 2 4-mom: 2525.64, -285.15, -13.47, 2505.57
+D daughter idx 2 inv.m: 139.57
+Tau 4-mom: 33893.03, -1260.08, 310.26, 33821.54
+Tau inv.m: 1776.82
+anti-TauNu 4-mom: 3248.64, -289.98, -521.44, 3193.38
+anti-TauNu inv.m: 0
+TauNu 4-mom: 5691.27, -151.26, 531.19, 5664.41
+TauNu inv.m: 8.63167e-05
+Mu 4-mom: 5156.06, 209.48, 35.58, 5150.60
+Mu inv.m: 105.658
+anti-MuNu 4-mom: 23045.56, -1318.31, -256.51, 23006.39
+anti-MuNu inv.mass: 0.000244141
+B meson HAMMER ID: 0
+D meson HAMMER ID: 1
+Lepton HAMMER ID: 2
+Lepton neutrino HAMMER ID: 3
+Radiative photon correction info:
+  Adding photon with energy 0.14 to particle 15
+Check if invariant mass of each particle is non-negative: 
+  1  1  1  1  1  1  1
+All particles have OK kinematics: 1
+========
+Cleanups
+Total number of candidates: 11078
+Hammer reweighted candidates: 10966
+Reweighted fraction: 0.98989
