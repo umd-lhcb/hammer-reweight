@@ -102,7 +102,7 @@ ValidateRDX test.root
         (polar-angle wise) then remove the photons from the tree
 
         This process may alter the kinematics in a bad way such that HAMMER
-        won't process the event further (either a `naN` in the cosine or a
+        won't process the event further (either a `NaN` in the cosine or a
         negative invariant mass)
     2. Compute the decay tree hash ID
     3. Cache particle dependencies so the decay tree only need to be traversed
