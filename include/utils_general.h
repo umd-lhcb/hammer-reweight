@@ -1,5 +1,5 @@
-#ifndef _HAM_RWT_UTILS_
-#define _HAM_RWT_UTILS_
+#ifndef _HAM_RWT_UTILS_GENERAL_
+#define _HAM_RWT_UTILS_GENERAL_
 
 #include <map>
 #include <sstream>
@@ -8,10 +8,8 @@
 #include <vector>
 
 #include <TDataType.h>
+#include <TDatabasePDG.h>
 #include <TMath.h>
-
-#include <Hammer/Math/FourMomentum.hh>
-#include <Hammer/Particle.hh>
 
 using std::map;
 using std::pair;
@@ -61,10 +59,17 @@ Int_t digit_is(Int_t num, Int_t digit, Int_t base = 10) {
   return fac % 10;
 }
 
-TString print_p(const Hammer::FourMomentum& p) {
-  char tmp[80];
-  sprintf(tmp, "%.2f, %.2f, %.2f, %.2f", p.E(), p.px(), p.py(), p.pz());
-  return TString(tmp);
+string get_particle_name(Int_t id, TDatabasePDG* db) {
+  if (!id) return string("None");
+
+  auto abs_id = TMath::Abs(id);
+  char buf[50];
+  sprintf(buf, " (%d)", abs_id);
+  auto str_id   = string(buf);
+  auto particle = db->GetParticle(abs_id);
+
+  if (particle != nullptr) return string(particle->GetName()) + buf;
+  return string("Unknown") + buf;
 }
 
 /////////////////////////
@@ -109,21 +114,5 @@ int Nu_id(Int_t mu_id, Bool_t is_tau) {
 int Tau_NuMu_id(Int_t mu_id) { return Mu_id(mu_id, -14); }
 
 int Tau_NuTau_id(Int_t mu_id) { return Mu_id(mu_id, 16); }
-
-////////////////////////////
-// HAMMER-related helpers //
-////////////////////////////
-
-auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
-  auto four_mom = Hammer::FourMomentum(pe, px, py, pz);
-  auto part_id  = static_cast<Hammer::PdgId>(pid);
-
-  return Hammer::Particle(four_mom, part_id);
-}
-
-auto particle(Hammer::FourMomentum four_mom, Int_t pid) {
-  auto part_id = static_cast<Hammer::PdgId>(pid);
-  return Hammer::Particle(four_mom, part_id);
-}
 
 #endif

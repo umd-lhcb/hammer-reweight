@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Aug 13, 2021 at 07:04 PM +0200
+// Last Change: Thu Sep 16, 2021 at 06:06 PM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -15,6 +15,8 @@
 #include <TString.h>
 #include <TTree.h>
 #include <TTreeReader.h>
+
+#include "utils_general.h"
 
 using namespace std;
 
@@ -64,26 +66,6 @@ multimap<B, A> flip_map(const map<A, B>& src) {
   transform(src.begin(), src.end(), inserter(dst, dst.begin()),
             flip_pair<A, B>);
   return dst;
-}
-
-template <template <typename, typename> class Iterable, typename T,
-          typename Allocator>
-Bool_t find_in(Iterable<T, Allocator> iter, T elem) {
-  if (find(iter.begin(), iter.end(), elem) != iter.end()) return true;
-  return false;
-}
-
-string get_particle_name(Int_t id, TDatabasePDG* db) {
-  if (!id) return "None"s;
-
-  auto abs_id = TMath::Abs(id);
-  char buf[50];
-  sprintf(buf, " (%d)", abs_id);
-  auto str_id   = string(buf);
-  auto particle = db->GetParticle(abs_id);
-
-  if (particle != nullptr) return string(particle->GetName()) + buf;
-  return "Unknown"s + buf;
 }
 
 //////////////
