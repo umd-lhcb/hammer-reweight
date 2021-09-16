@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 06:51 PM +0200
+// Last Change: Thu Sep 16, 2021 at 07:02 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -318,7 +318,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   TTreeReaderArray<Float_t> photon_arr_pe(reader, b_meson + "_MCTrue_gamma_E");
   TTreeReaderArray<Float_t> photon_arr_px(reader, b_meson + "_MCTrue_gamma_PX");
   TTreeReaderArray<Float_t> photon_arr_py(reader, b_meson + "_MCTrue_gamma_PY");
-  TTreeReaderArray<Float_t> photon_arr_pz(reader, b_meson + "_MCTrue_gamma_PY");
+  TTreeReaderArray<Float_t> photon_arr_pz(reader, b_meson + "_MCTrue_gamma_PZ");
   TTreeReaderArray<Float_t> photon_arr_mom_id(
       reader, b_meson + "_MCTrue_gamma_mother_ID");
 #endif
