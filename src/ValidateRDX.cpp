@@ -91,6 +91,44 @@ Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2) {
   return nom / denom;
 }
 
+//////////////////////
+// Event generation //
+//////////////////////
+
+class IKinematicGenerator {
+ public:
+  void get(Double_t& q2){};
+  void get(Double_t& q2, Double_t& theta_l){};
+  void get(Double_t& q2, Double_t& theta_l, Double_t& theta_v, Double_t& chi){};
+};
+
+class BtoDUniformGenerator : IKinematicGenerator {
+  Double_t _q_min = 0.;
+  Double_t _q, _q_max, _q_step, _theta_l_min, _theta_l_max;
+  TRandom* _rng;
+
+ public:
+  BtoDUniformGenerator(Double_t q_min, Double_t q_max, Double_t theta_l_min,
+                       Double_t theta_l_max, TRandom* rng)
+      : _q_min(q_min),
+        _q_max(q_max),
+        _theta_l_min(theta_l_min),
+        _theta_l_max(theta_l_max),
+        _rng(rng) {
+    reset();
+  };
+
+  void setStepInQ(Double_t step) { _q_step = step; }
+
+  void reset() { _q = _q_min; }
+
+  void get(Double_t& q2, Double_t& theta_l) {
+    q2 = _q;
+    if (_q + _q_step <= _q_max) _q += _q_step;
+    theta_l = _rng->Uniform(_theta_l_min, _theta_l_max);
+  }
+};
+
 // Everything's in GeV!
 PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
                     Int_t l_id, Double_t l_mass, Int_t nu_id, Double_t q2,
