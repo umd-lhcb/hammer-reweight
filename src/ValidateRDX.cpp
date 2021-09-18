@@ -91,43 +91,79 @@ Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2) {
   return nom / denom;
 }
 
-//////////////////////
-// Event generation //
-//////////////////////
+//////////////////////////////
+// Random number generation //
+//////////////////////////////
 
-class IKinematicGenerator {
+class IRandGenerator {
  public:
-  void get(Double_t& q2){};
-  void get(Double_t& q2, Double_t& theta_l){};
-  void get(Double_t& q2, Double_t& theta_l, Double_t& theta_v, Double_t& chi){};
+  virtual vector<Double_t> get();
 };
 
-class BtoDUniformGenerator : IKinematicGenerator {
-  Double_t _q_min = 0.;
-  Double_t _q, _q_max, _q_step, _theta_l_min, _theta_l_max;
+class BtoDUniformGenerator : IRandGenerator {
+  Double_t _q2_min  = 0.;
+  Double_t _q2_step = 0.01;
+  Double_t _q2, _q2_max, _theta_l_min, _theta_l_max;
+
+ protected:
   TRandom* _rng;
 
  public:
-  BtoDUniformGenerator(Double_t q_min, Double_t q_max, Double_t theta_l_min,
+  BtoDUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                        Double_t theta_l_max, TRandom* rng)
-      : _q_min(q_min),
-        _q_max(q_max),
+      : _q2_min(q2_min),
+        _q2_max(q2_max),
         _theta_l_min(theta_l_min),
         _theta_l_max(theta_l_max),
         _rng(rng) {
     reset();
-  };
+  }
 
-  void setStepInQ(Double_t step) { _q_step = step; }
+  void setStepInQ(Double_t step) { _q2_step = step; }
 
-  void reset() { _q = _q_min; }
+  void reset() { _q2 = _q2_min; }
 
-  void get(Double_t& q2, Double_t& theta_l) {
-    q2 = _q;
-    if (_q + _q_step <= _q_max) _q += _q_step;
-    theta_l = _rng->Uniform(_theta_l_min, _theta_l_max);
+  vector<Double_t> get() {
+    vector<Double_t> result{};
+    if (_q2 + _q2_step <= _q2_max) {
+      result.emplace_back(_q2);
+      _q2 += _q2_step;
+    } else {
+      // -1 in q2 indicates the generator has been exhausted
+      result.emplace_back(-1);
+    }
+    result.emplace_back(_rng->Uniform(_theta_l_min, _theta_l_max));
+
+    return result;
   }
 };
+
+class BtoDstUniformGenerator : BtoDUniformGenerator {
+  Double_t _theta_v_min, _theta_v_max, _chi_min, _chi_max;
+
+ public:
+  BtoDstUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
+                         Double_t theta_l_max, Double_t theta_v_min,
+                         Double_t theta_v_max, Double_t chi_min,
+                         Double_t chi_max, TRandom* rng)
+      : BtoDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
+        _theta_v_min(theta_v_min),
+        _theta_v_max(theta_v_max),
+        _chi_min(chi_min),
+        _chi_max(chi_max) {}
+
+  vector<Double_t> get() {
+    auto result = BtoDUniformGenerator::get();
+    result.emplace_back(_rng->Uniform(_theta_v_min, _theta_v_max));
+    result.emplace_back(_rng->Uniform(_chi_min, _chi_max));
+
+    return result;
+  }
+};
+
+//////////////////////
+// Event generation //
+//////////////////////
 
 // Everything's in GeV!
 PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
