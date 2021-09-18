@@ -1,8 +1,10 @@
 // Author: Yipeng Sun
 
 #include <any>
+#include <exception>
 #include <iostream>
 #include <map>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -76,14 +78,31 @@ void set_decays(Hammer::Hammer& ham) {
   ham.includeDecay("BD*TauNu");
 }
 
-/////////////////////
-// General helpers //
-/////////////////////
+/////////////////////////////////
+// Event generation: Interface //
+/////////////////////////////////
 
 typedef Hammer::FourMomentum hp4;
 typedef map<string, any>     PartEmu;
 
-Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2) {
+class IRandGenerator {
+ public:
+  virtual vector<Double_t> get() = 0;
+  virtual PartEmu          gen() = 0;
+
+  Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2);
+  PartEmu  genBD(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
+                 Int_t l_id, Double_t l_mass, Int_t nu_id, Double_t q2,
+                 Double_t theta_l);
+  PartEmu  genBDst(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
+                   Int_t l_id, Double_t l_mass, Int_t nu_id, Int_t D_dau_id,
+                   Double_t D_dau_mass, Int_t pi_id, Double_t pi_mass,
+                   Double_t q2, Double_t theta_l, Double_t theta_v,
+                   Double_t chi);
+};
+
+Double_t IRandGenerator::compute_p(Double_t m2_mom, Double_t m2_dau1,
+                                   Double_t m2_dau2) {
   auto denom = 2 * Sqrt(m2_mom);
   auto nom =
       Sqrt(m2_mom * m2_mom + m2_dau1 * m2_dau1 + m2_dau2 * m2_dau2 -
@@ -91,90 +110,15 @@ Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2) {
   return nom / denom;
 }
 
-//////////////////////////////
-// Random number generation //
-//////////////////////////////
-
-class IRandGenerator {
- public:
-  virtual vector<Double_t> get();
-};
-
-class BtoDUniformGenerator : IRandGenerator {
-  Double_t _q2_min  = 0.;
-  Double_t _q2_step = 0.01;
-  Double_t _q2, _q2_max, _theta_l_min, _theta_l_max;
-
- protected:
-  TRandom* _rng;
-
- public:
-  BtoDUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
-                       Double_t theta_l_max, TRandom* rng)
-      : _q2_min(q2_min),
-        _q2_max(q2_max),
-        _theta_l_min(theta_l_min),
-        _theta_l_max(theta_l_max),
-        _rng(rng) {
-    reset();
-  }
-
-  void setStepInQ(Double_t step) { _q2_step = step; }
-
-  void reset() { _q2 = _q2_min; }
-
-  vector<Double_t> get() {
-    vector<Double_t> result{};
-    if (_q2 + _q2_step <= _q2_max) {
-      result.emplace_back(_q2);
-      _q2 += _q2_step;
-    } else {
-      // -1 in q2 indicates the generator has been exhausted
-      result.emplace_back(-1);
-    }
-    result.emplace_back(_rng->Uniform(_theta_l_min, _theta_l_max));
-
-    return result;
-  }
-};
-
-class BtoDstUniformGenerator : BtoDUniformGenerator {
-  Double_t _theta_v_min, _theta_v_max, _chi_min, _chi_max;
-
- public:
-  BtoDstUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
-                         Double_t theta_l_max, Double_t theta_v_min,
-                         Double_t theta_v_max, Double_t chi_min,
-                         Double_t chi_max, TRandom* rng)
-      : BtoDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
-        _theta_v_min(theta_v_min),
-        _theta_v_max(theta_v_max),
-        _chi_min(chi_min),
-        _chi_max(chi_max) {}
-
-  vector<Double_t> get() {
-    auto result = BtoDUniformGenerator::get();
-    result.emplace_back(_rng->Uniform(_theta_v_min, _theta_v_max));
-    result.emplace_back(_rng->Uniform(_chi_min, _chi_max));
-
-    return result;
-  }
-};
-
-//////////////////////
-// Event generation //
-//////////////////////
-
 // Everything's in GeV!
-PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
-                    Int_t l_id, Double_t l_mass, Int_t nu_id, Double_t q2,
-                    TRandom& rng) {
-  // Neutrino mass is set to 0
+PartEmu IRandGenerator::genBD(Int_t B_id, Double_t B_mass, Int_t D_id,
+                              Double_t D_mass, Int_t l_id, Double_t l_mass,
+                              Int_t nu_id, Double_t q2, Double_t theta_l) {
   PartEmu result{};
 
   // Remember that we are in the B rest frame
   // No need to boost back from B rest frame
-  auto B_p = hp4(B_mass, 0, 0, 0);
+  auto B_p = hp4{B_mass, 0, 0, 0};
 
   auto fac_neg = B_mass * B_mass - D_mass * D_mass;
   auto fac_pos = B_mass * B_mass + D_mass * D_mass;
@@ -186,9 +130,6 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
 
   auto l_sys_p = B_p - D_p;
   auto l_p_mag = compute_p(q2, l_mass * l_mass, 0);
-
-  // Only θ_l is physical
-  auto theta_l = rng.Uniform(0.1, 3.1);
 
   // Leptons are in the x-z plane
   // Angles are defined in the rest frame of the lepton pair, so rotate first
@@ -217,20 +158,17 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   return result;
 }
 
-PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
-                    Int_t l_id, Double_t l_mass, Int_t nu_id, Int_t D_dau_id,
-                    Double_t D_dau_mass, Int_t pi_id, Double_t pi_mass,
-                    Double_t q2, TRandom& rng) {
+PartEmu IRandGenerator::genBDst(Int_t B_id, Double_t B_mass, Int_t D_id,
+                                Double_t D_mass, Int_t l_id, Double_t l_mass,
+                                Int_t nu_id, Int_t D_dau_id,
+                                Double_t D_dau_mass, Int_t pi_id,
+                                Double_t pi_mass, Double_t q2, Double_t theta_l,
+                                Double_t theta_v, Double_t chi) {
   auto result =
-      gen_B_decay(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id, q2, rng);
+      genBD(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id, q2, theta_l);
 
   auto D_dau_p_mag =
       compute_p(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
-
-  // Now we have 2 additional physical angles: θ_v and χ
-  auto theta_v = rng.Uniform(0.1, 3.1);
-  auto chi     = -rng.Uniform(
-      0.1, 6.2);  // From Bernlochner's definition, this is always negative
 
   // These are defined in the D* rest frame
   auto D_dau_p_rest =
@@ -255,14 +193,93 @@ PartEmu gen_B_decay(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
   return result;
 }
 
+//////////////////////////
+// Event generation: D0 //
+//////////////////////////
+
+class BtoDUniformGenerator : IRandGenerator {
+  Double_t _q2_min  = 0.;
+  Double_t _q2_step = 0.01;
+  Double_t _q2, _q2_max, _theta_l_min, _theta_l_max;
+
+ protected:
+  TRandom* _rng;
+
+ public:
+  BtoDUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
+                       Double_t theta_l_max, TRandom* rng);
+
+  void setStepInQ(Double_t step) { _q2_step = step; };
+  void reset() { _q2 = _q2_min; };
+
+  vector<Double_t> get() override;
+  PartEmu          gen() override;
+};
+
+BtoDUniformGenerator::BtoDUniformGenerator(Double_t q2_min, Double_t q2_max,
+                                           Double_t theta_l_min,
+                                           Double_t theta_l_max, TRandom* rng)
+    : _q2_min(q2_min),
+      _q2_max(q2_max),
+      _theta_l_min(theta_l_min),
+      _theta_l_max(theta_l_max),
+      _rng(rng) {
+  reset();
+}
+
+vector<Double_t> BtoDUniformGenerator::get() {
+  vector<Double_t> result{};
+  if (_q2 <= _q2_max) {
+    result.push_back(_q2);
+    result.push_back(_rng->Uniform(_theta_l_min, _theta_l_max));
+    _q2 += _q2_step;
+  } else
+    throw(
+        domain_error("The q2 is out of its upper limit. Reset the generator to "
+                     "start over!"));
+
+  return result;
+}
+
+PartEmu BtoDUniformGenerator::gen() {
+  auto tmp     = get();
+  auto q2      = tmp[0];
+  auto theta_l = tmp[1];
+
+  return genBD(521, B_MASS, -421, D0_MASS, -15, TAU_MASS, 16, q2, theta_l);
+}
+
+//////////////////////////
+// Event generation: D* //
+//////////////////////////
+
+class BtoDstUniformGenerator : BtoDUniformGenerator {
+  Double_t _theta_v_min, _theta_v_max, _chi_min, _chi_max;
+
+ public:
+  BtoDstUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
+                         Double_t theta_l_max, Double_t theta_v_min,
+                         Double_t theta_v_max, Double_t chi_min,
+                         Double_t chi_max, TRandom* rng)
+      : BtoDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
+        _theta_v_min(theta_v_min),
+        _theta_v_max(theta_v_max),
+        _chi_min(chi_min),
+        _chi_max(chi_max) {}
+
+  vector<Double_t> get() {
+    auto result = BtoDUniformGenerator::get();
+    result.emplace_back(_rng->Uniform(_theta_v_min, _theta_v_max));
+    result.emplace_back(_rng->Uniform(_chi_min, _chi_max));
+
+    return result;
+  }
+};
+
 auto gen_BDstTau_decay(Double_t q2, TRandom& rng) {
   return gen_B_decay(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421,
                      D0_MASS, -211, PI_MASS, q2,
                      rng);  // Checked the particle IDs are consistent
-}
-
-auto gen_BDTau_decay(Double_t q2, TRandom& rng) {
-  return gen_B_decay(521, B_MASS, -421, D0_MASS, -15, TAU_MASS, 16, q2, rng);
 }
 
 /////////////////
