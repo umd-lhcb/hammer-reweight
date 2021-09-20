@@ -11,6 +11,7 @@
 #include <math.h>
 
 #include <TFile.h>
+#include <TH2D.h>
 #include <TMath.h>
 #include <TRandom.h>
 #include <TString.h>
@@ -106,10 +107,6 @@ IRandGenerator::~IRandGenerator() {
 //////////////////////////
 
 class BToDUniformGenerator : public IRandGenerator {
-  Double_t _q2_min  = 0.;
-  Double_t _q2_step = 0.01;
-  Double_t _q2, _q2_max, _theta_l_min, _theta_l_max;
-
  public:
   BToDUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                        Double_t theta_l_max, TRandom* rng);
@@ -121,6 +118,9 @@ class BToDUniformGenerator : public IRandGenerator {
   void reset() { _q2 = _q2_min; };
 
  protected:
+  Double_t _q2_min  = 0.;
+  Double_t _q2_step = 0.01;
+  Double_t _q2, _q2_max, _theta_l_min, _theta_l_max;
   TRandom* _rng;
 
   Double_t computeP(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2);
@@ -221,6 +221,90 @@ PartEmu BToDUniformGenerator::genBD(Int_t B_id, Double_t B_mass, Int_t D_id,
   return result;
 }
 
+/////////////////////////////////////////////
+// Event generation: D0, real distribution //
+/////////////////////////////////////////////
+
+class BToDRealGenerator : public BToDUniformGenerator {
+ public:
+  BToDRealGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
+                    Double_t theta_l_max, TRandom* rng,
+                    string ff_mode = "ISGW2", Int_t xbins = 100,
+                    Int_t ybins = 100);
+  ~BToDRealGenerator();
+
+  vector<Double_t> get() override;
+  PartEmu          gen() override;
+
+  void setFF(string ff_mode);
+  void setStepInThetaL(Double_t step) { _theta_l_step = step; }
+
+ protected:
+  Double_t _theta_l_step = 0.01;
+  string   _ff_mode;
+  TH2D*    _histo;
+
+  void buildHisto();
+};
+
+BToDRealGenerator::BToDRealGenerator(Double_t q2_min, Double_t q2_max,
+                                     Double_t theta_l_min, Double_t theta_l_max,
+                                     TRandom* rng, string ff_mode, Int_t xbins,
+                                     Int_t ybins)
+    : BToDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
+      _ff_mode(ff_mode) {
+  _histo = new TH2D("histo", "histo", xbins, q2_min, q2_max, ybins, theta_l_min,
+                    theta_l_max);
+  buildHisto();
+}
+
+BToDRealGenerator::~BToDRealGenerator() { delete _histo; }
+
+void BToDRealGenerator::setFF(string ff_mode) { _ff_mode = ff_mode; }
+
+vector<Double_t> BToDRealGenerator::get() {
+  Double_t q2, theta_l;
+  _histo->GetRandom2(q2, theta_l, _rng);
+  return vector<Double_t>{q2, theta_l};
+}
+
+PartEmu BToDRealGenerator::gen() { return BToDUniformGenerator::gen(); }
+
+// Protected methods ///////////////////////////////////////////////////////////
+
+// NOTE: We hard-code to use B0 and Tau
+void BToDRealGenerator::buildHisto() {
+  auto ff_model = BToDtaunu{};
+  ff_model.SetMasses(0);
+  Double_t fplus, fminus;
+
+  if (_ff_mode == "ISGW2") {
+    for (auto q2 = _q2_min; q2 <= _q2_max; q2 += _q2_step) {
+      ff_model.ComputeISGW2(q2, fplus, fminus);
+      for (auto theta_l = _theta_l_min; theta_l <= _theta_l_max;
+           theta_l += _theta_l_step) {
+        auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
+        _histo->Fill(q2, theta_l, ff_val);
+
+        // DEBUG
+        // cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " <<
+        // ff_val
+        //<< endl;
+      }
+    }
+  } else if (_ff_mode == "CLN") {
+    for (auto q2 = _q2_min; q2 <= _q2_max; q2 += _q2_step) {
+      ff_model.ComputeCLN(q2, fplus, fminus);
+      for (auto theta_l = _theta_l_min; theta_l <= _theta_l_max;
+           theta_l += _theta_l_step) {
+        auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
+        _histo->Fill(q2, theta_l, ff_val);
+      }
+    }
+  } else
+    throw(domain_error("Unknown FF parameterization: " + _ff_mode));
+}
+
 //////////////////////////
 // Event generation: D* //
 //////////////////////////
@@ -231,7 +315,7 @@ class BToDstUniformGenerator : public BToDUniformGenerator {
  public:
   BToDstUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                          Double_t theta_l_max, Double_t theta_v_min,
-                         Double_t theta_v_max, Double_t chi_min,
+                         Double_t theta_v_max, Double_t chiE_min,
                          Double_t chi_max, TRandom* rng);
 
   vector<Double_t> get() override;
@@ -335,7 +419,10 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
   auto   D_key  = any_cast<Int_t>(cands[0]["D_id"]);
   Bool_t is_Dst = (Abs(D_key) == 413);
 
-  if (Abs(B_key) == 511) calc_BDst.SetMasses(0);  // neutral B
+  if (Abs(B_key) == 511) {
+    calc_BDst.SetMasses(0);  // neutral B
+    calc_BD.SetMasses(0);    // neutral B
+  }
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);
@@ -578,7 +665,7 @@ int main(int, char** argv) {
   auto q2_min = TAU_MASS * TAU_MASS;
 
   auto gen_B_to_D =
-      new BToDUniformGenerator(q2_min, Power(B0_MASS - D0_MASS, 2), 0, PI, rng);
+      new BToDRealGenerator(q2_min, Power(B0_MASS - D0_MASS, 2), 0, PI, rng);
   auto gen_B_to_Dst = new BToDstUniformGenerator(
       q2_min, Power(B0_MASS - DST_MASS, 2), 0, PI, 0, PI, 0, 2 * PI, rng);
 
