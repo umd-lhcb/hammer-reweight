@@ -229,8 +229,8 @@ class BToDRealGenerator : public BToDUniformGenerator {
  public:
   BToDRealGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                     Double_t theta_l_max, TRandom* rng,
-                    string ff_mode = "ISGW2", Int_t xbins = 100,
-                    Int_t ybins = 100);
+                    string ff_mode = "ISGW2", Int_t xbins = 50,
+                    Int_t ybins = 50);
   ~BToDRealGenerator();
 
   vector<Double_t> get() override;
@@ -253,8 +253,8 @@ BToDRealGenerator::BToDRealGenerator(Double_t q2_min, Double_t q2_max,
                                      Int_t ybins)
     : BToDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
       _ff_mode(ff_mode) {
-  _histo = new TH2D("histo", "histo", xbins, q2_min, q2_max, ybins, theta_l_min,
-                    theta_l_max);
+  _histo = new TH2D("histo_BD", "histo_BD", xbins, q2_min, q2_max, ybins,
+                    theta_l_min, theta_l_max);
   buildHisto();
 }
 
@@ -284,7 +284,10 @@ void BToDRealGenerator::buildHisto() {
       for (auto theta_l = _theta_l_min; theta_l <= _theta_l_max;
            theta_l += _theta_l_step) {
         auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
-        _histo->Fill(q2, theta_l, ff_val);
+        // If the weight is not equal to 1, the storage of the sum of squares of
+        // weights is automatically triggered and the sum of the squares of
+        // weights is incremented by w^2 in the bin corresponding to x,y
+        _histo->Fill(q2, theta_l, TMath::Sqrt(ff_val));
 
         // DEBUG
         // cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " <<
@@ -298,7 +301,7 @@ void BToDRealGenerator::buildHisto() {
       for (auto theta_l = _theta_l_min; theta_l <= _theta_l_max;
            theta_l += _theta_l_step) {
         auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
-        _histo->Fill(q2, theta_l, ff_val);
+        _histo->Fill(q2, theta_l, TMath::Sqrt(ff_val));
       }
     }
   } else
