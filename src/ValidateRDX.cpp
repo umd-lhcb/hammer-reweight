@@ -229,8 +229,8 @@ class BToDRealGenerator : public BToDUniformGenerator {
  public:
   BToDRealGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                     Double_t theta_l_max, TRandom* rng,
-                    string ff_mode = "ISGW2", Int_t xbins = 50,
-                    Int_t ybins = 50);
+                    string ff_mode = "ISGW2", Int_t xbins = 200,
+                    Int_t ybins = 200);
   ~BToDRealGenerator();
 
   vector<Double_t> get() override;
@@ -408,7 +408,7 @@ PartEmu BToDstUniformGenerator::genBDst(Int_t B_id, Double_t B_mass, Int_t D_id,
 /////////////////
 
 void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
-                Hammer::Hammer& ham, Int_t max_entries = 10000) {
+                Hammer::Hammer& ham, Int_t max_entries = 100000) {
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
   auto calc_BD     = BToDtaunu{};
