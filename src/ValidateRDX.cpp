@@ -39,6 +39,8 @@ using TMath::Sqrt;
 ///////////////////
 // Masses are defined in GeV!
 
+const Double_t PI = 3.141592;
+
 const Double_t B_MASS  = 5.27932;
 const Double_t B0_MASS = 5.27963;
 
@@ -223,7 +225,7 @@ PartEmu BToDUniformGenerator::genBD(Int_t B_id, Double_t B_mass, Int_t D_id,
 // Event generation: D* //
 //////////////////////////
 
-class BToDstUniformGenerator : BToDUniformGenerator {
+class BToDstUniformGenerator : public BToDUniformGenerator {
   Double_t _theta_v_min, _theta_v_max, _chi_min, _chi_max;
 
  public:
@@ -575,10 +577,12 @@ int main(int, char** argv) {
 
   auto q2_min = TAU_MASS * TAU_MASS;
 
-  auto gen_B_to_D = new BToDUniformGenerator(
-      q2_min, Power(B0_MASS - DST_MASS, 2), 0, 3.14159, rng);
+  auto gen_B_to_D =
+      new BToDUniformGenerator(q2_min, Power(B0_MASS - D0_MASS, 2), 0, PI, rng);
+  auto gen_B_to_Dst = new BToDstUniformGenerator(
+      q2_min, Power(B0_MASS - DST_MASS, 2), 0, PI, 0, PI, 0, 2 * PI, rng);
 
-  // weight_gen(cands_BDst, output_ntp, "tree_BDst", ham);
+  weight_gen(gen_B_to_Dst, output_ntp, "tree_BDst", ham);
   weight_gen(gen_B_to_D, output_ntp, "tree_BD", ham);
 
   delete gen_B_to_D;
