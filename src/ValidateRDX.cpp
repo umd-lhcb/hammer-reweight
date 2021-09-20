@@ -89,13 +89,21 @@ class IRandGenerator {
  public:
   virtual vector<Double_t> get() = 0;
   virtual PartEmu          gen() = 0;
+
+  virtual ~IRandGenerator() = 0;  // Just in case to avoid potential memory leak
 };
+
+IRandGenerator::~IRandGenerator() {
+  cout << "Generator itself doesn't provide a destructor or it was deleted via "
+          "a base pointer."
+       << endl;
+}
 
 //////////////////////////
 // Event generation: D0 //
 //////////////////////////
 
-class BToDUniformGenerator : IRandGenerator {
+class BToDUniformGenerator : public IRandGenerator {
   Double_t _q2_min  = 0.;
   Double_t _q2_step = 0.01;
   Double_t _q2, _q2_max, _theta_l_min, _theta_l_max;
@@ -305,11 +313,21 @@ PartEmu BToDstUniformGenerator::genBDst(Int_t B_id, Double_t B_mass, Int_t D_id,
 // Reweighting //
 /////////////////
 
-void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
-                Hammer::Hammer& ham) {
+void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
+                Hammer::Hammer& ham, Int_t max_entries = 10000) {
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
   auto calc_BD     = BToDtaunu{};
+
+  vector<PartEmu> cands{};
+
+  for (auto i = 0; i < max_entries; i++) {
+    try {
+      cands.push_back(rng->gen());
+    } catch (const domain_error& e) {
+      break;
+    }
+  }
 
   auto   B_key  = any_cast<Int_t>(cands[0]["B_id"]);
   auto   D_key  = any_cast<Int_t>(cands[0]["D_id"]);
@@ -544,9 +562,9 @@ void weight_gen(vector<PartEmu> cands, TFile* output_ntp, TString tree_name,
 
 int main(int, char** argv) {
   auto output_ntp = new TFile(argv[1], "recreate");
+  auto rng        = new TRandom(42);
 
   Hammer::Hammer ham{};
-  auto           rng = TRandom(42);
 
   set_decays(ham);
   set_input_ff(ham);
@@ -555,22 +573,15 @@ int main(int, char** argv) {
   ham.setUnits("GeV");
   ham.initRun();
 
-  auto q2s = vector<Double_t>{};
-  for (auto i = 3.2; i <= 12.2; i += 0.01) {
-    q2s.push_back(i);
-  }
+  auto q2_min = TAU_MASS * TAU_MASS;
 
-  auto cands_BDst = vector<PartEmu>{};
-  auto cands_BD   = vector<PartEmu>{};
-  for (auto& q2 : q2s) {
-    if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - DST_MASS, 2))
-      cands_BDst.push_back(gen_BDstTau_decay(q2, rng));
-    if (q2 > TAU_MASS * TAU_MASS && q2 < Power(B0_MASS - D0_MASS, 2))
-      cands_BD.push_back(gen_BDTau_decay(q2, rng));
-  }
+  auto gen_B_to_D = new BToDUniformGenerator(
+      q2_min, Power(B0_MASS - DST_MASS, 2), 0, 3.14159, rng);
 
-  weight_gen(cands_BDst, output_ntp, "tree_BDst", ham);
-  weight_gen(cands_BD, output_ntp, "tree_BD", ham);
+  // weight_gen(cands_BDst, output_ntp, "tree_BDst", ham);
+  weight_gen(gen_B_to_D, output_ntp, "tree_BD", ham);
 
+  delete gen_B_to_D;
+  delete rng;
   delete output_ntp;
 }
