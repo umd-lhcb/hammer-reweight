@@ -104,16 +104,16 @@ class BToDUniformGenerator : IRandGenerator {
   BToDUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                        Double_t theta_l_max, TRandom* rng);
 
-  void setStepInQ(Double_t step) { _q2_step = step; };
-  void reset() { _q2 = _q2_min; };
-
   vector<Double_t> get() override;
   PartEmu          gen() override;
+
+  void setStepInQ(Double_t step) { _q2_step = step; };
+  void reset() { _q2 = _q2_min; };
 
  protected:
   TRandom* _rng;
 
-  Double_t compute_p(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2);
+  Double_t computeP(Double_t m2_mom, Double_t m2_dau1, Double_t m2_dau2);
   PartEmu  genBD(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
                  Int_t l_id, Double_t l_mass, Int_t nu_id, Double_t q2,
                  Double_t theta_l);
@@ -145,16 +145,16 @@ vector<Double_t> BToDUniformGenerator::get() {
 }
 
 PartEmu BToDUniformGenerator::gen() {
-  auto tmp     = get();
-  auto q2      = tmp[0];
-  auto theta_l = tmp[1];
+  auto rand_num = get();
+  auto q2       = rand_num[0];
+  auto theta_l  = rand_num[1];
 
   return genBD(521, B_MASS, -421, D0_MASS, -15, TAU_MASS, 16, q2, theta_l);
 }
 
 // Protected methods ///////////////////////////////////////////////////////////
-Double_t BToDUniformGenerator::compute_p(Double_t m2_mom, Double_t m2_dau1,
-                                         Double_t m2_dau2) {
+Double_t BToDUniformGenerator::computeP(Double_t m2_mom, Double_t m2_dau1,
+                                        Double_t m2_dau2) {
   auto denom = 2 * Sqrt(m2_mom);
   auto nom =
       Sqrt(m2_mom * m2_mom + m2_dau1 * m2_dau1 + m2_dau2 * m2_dau2 -
@@ -182,7 +182,7 @@ PartEmu BToDUniformGenerator::genBD(Int_t B_id, Double_t B_mass, Int_t D_id,
   auto D_p = hp4(Sqrt(D_p_mag * D_p_mag + D_mass * D_mass), 0, 0, D_p_mag);
 
   auto l_sys_p = B_p - D_p;
-  auto l_p_mag = compute_p(q2, l_mass * l_mass, 0);
+  auto l_p_mag = computeP(q2, l_mass * l_mass, 0);
 
   // Leptons are in the x-z plane
   // Angles are defined in the rest frame of the lepton pair, so rotate first
@@ -222,20 +222,10 @@ class BToDstUniformGenerator : BToDUniformGenerator {
   BToDstUniformGenerator(Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
                          Double_t theta_l_max, Double_t theta_v_min,
                          Double_t theta_v_max, Double_t chi_min,
-                         Double_t chi_max, TRandom* rng)
-      : BToDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
-        _theta_v_min(theta_v_min),
-        _theta_v_max(theta_v_max),
-        _chi_min(chi_min),
-        _chi_max(chi_max) {}
+                         Double_t chi_max, TRandom* rng);
 
-  vector<Double_t> get() {
-    auto result = BToDUniformGenerator::get();
-    result.emplace_back(_rng->Uniform(_theta_v_min, _theta_v_max));
-    result.emplace_back(_rng->Uniform(_chi_min, _chi_max));
-
-    return result;
-  }
+  vector<Double_t> get() override;
+  PartEmu          gen() override;
 
  protected:
   PartEmu genBDst(Int_t B_id, Double_t B_mass, Int_t D_id, Double_t D_mass,
@@ -244,6 +234,35 @@ class BToDstUniformGenerator : BToDUniformGenerator {
                   Double_t q2, Double_t theta_l, Double_t theta_v,
                   Double_t chi);
 };
+
+BToDstUniformGenerator::BToDstUniformGenerator(
+    Double_t q2_min, Double_t q2_max, Double_t theta_l_min,
+    Double_t theta_l_max, Double_t theta_v_min, Double_t theta_v_max,
+    Double_t chi_min, Double_t chi_max, TRandom* rng)
+    : BToDUniformGenerator(q2_min, q2_max, theta_l_min, theta_l_max, rng),
+      _theta_v_min(theta_v_min),
+      _theta_v_max(theta_v_max),
+      _chi_min(chi_min),
+      _chi_max(chi_max) {}
+
+vector<Double_t> BToDstUniformGenerator::get() {
+  auto result = BToDUniformGenerator::get();
+  result.push_back(_rng->Uniform(_theta_v_min, _theta_v_max));
+  result.push_back(_rng->Uniform(_chi_min, _chi_max));
+
+  return result;
+}
+
+PartEmu BToDstUniformGenerator::gen() {
+  auto rand_num = get();
+  auto q2       = rand_num[0];
+  auto theta_l  = rand_num[1];
+  auto theta_v  = rand_num[2];
+  auto chi      = rand_num[3];
+
+  return genBDst(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421, D0_MASS,
+                 -211, PI_MASS, q2, theta_l, theta_v, chi);
+}
 
 // Protected methods ///////////////////////////////////////////////////////////
 PartEmu BToDstUniformGenerator::genBDst(Int_t B_id, Double_t B_mass, Int_t D_id,
@@ -257,7 +276,7 @@ PartEmu BToDstUniformGenerator::genBDst(Int_t B_id, Double_t B_mass, Int_t D_id,
       genBD(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id, q2, theta_l);
 
   auto D_dau_p_mag =
-      compute_p(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
+      computeP(D_mass * D_mass, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
 
   // These are defined in the D* rest frame
   auto D_dau_p_rest =
@@ -280,12 +299,6 @@ PartEmu BToDstUniformGenerator::genBDst(Int_t B_id, Double_t B_mass, Int_t D_id,
   result["pi_p"]     = pi_p;
 
   return result;
-}
-
-auto gen_BDstTau_decay(Double_t q2, TRandom& rng) {
-  return gen_B_decay(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421,
-                     D0_MASS, -211, PI_MASS, q2,
-                     rng);  // Checked the particle IDs are consistent
 }
 
 /////////////////
