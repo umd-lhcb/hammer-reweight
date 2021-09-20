@@ -237,14 +237,15 @@ class BToDRealGenerator : public BToDUniformGenerator {
   PartEmu          gen() override;
 
   void setFF(string ff_mode);
-  void setStepInThetaL(Double_t step) { _theta_l_step = step; }
 
  protected:
-  Double_t _theta_l_step = 0.01;
+  Double_t _theta_l_step;
   string   _ff_mode;
   TH2D*    _histo;
 
   void buildHisto();
+
+ private:
 };
 
 BToDRealGenerator::BToDRealGenerator(Double_t q2_min, Double_t q2_max,
@@ -255,6 +256,10 @@ BToDRealGenerator::BToDRealGenerator(Double_t q2_min, Double_t q2_max,
       _ff_mode(ff_mode) {
   _histo = new TH2D("histo_BD", "histo_BD", xbins, q2_min, q2_max, ybins,
                     theta_l_min, theta_l_max);
+
+  _q2_step      = (q2_max - q2_min) / xbins;
+  _theta_l_step = (theta_l_max - theta_l_min) / ybins;
+
   buildHisto();
 }
 
@@ -279,9 +284,11 @@ void BToDRealGenerator::buildHisto() {
   Double_t fplus, fminus;
 
   if (_ff_mode == "ISGW2") {
-    for (auto q2 = _q2_min; q2 <= _q2_max; q2 += _q2_step) {
+    for (auto q2 = _q2_min + _q2_step / 2; q2 <= _q2_max - _q2_step / 2;
+         q2 += _q2_step) {
       ff_model.ComputeISGW2(q2, fplus, fminus);
-      for (auto theta_l = _theta_l_min; theta_l <= _theta_l_max;
+      for (auto theta_l = _theta_l_min + _theta_l_step / 2;
+           theta_l <= _theta_l_max - _theta_l_step / 2;
            theta_l += _theta_l_step) {
         auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
         // If the weight is not equal to 1, the storage of the sum of squares of
@@ -290,9 +297,8 @@ void BToDRealGenerator::buildHisto() {
         _histo->Fill(q2, theta_l, TMath::Sqrt(ff_val));
 
         // DEBUG
-        // cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " <<
-        // ff_val
-        //<< endl;
+        cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " << ff_val
+             << endl;
       }
     }
   } else if (_ff_mode == "CLN") {
