@@ -279,8 +279,7 @@ PartEmu BToDRealGenerator::gen() { return BToDUniformGenerator::gen(); }
 
 // NOTE: We hard-code to use B0 and Tau
 void BToDRealGenerator::buildHisto() {
-  auto ff_model = BToDtaunu{};
-  ff_model.SetMasses(0);
+  auto     ff_model = BToDtaunu{};
   Double_t fplus, fminus;
 
   if (_ff_mode == "ISGW2") {
@@ -430,7 +429,6 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
 
   if (Abs(B_key) == 511) {
     calc_BDst.SetMasses(0);  // neutral B
-    calc_BD.SetMasses(0);    // neutral B
   }
 
   Bool_t ham_ok;
