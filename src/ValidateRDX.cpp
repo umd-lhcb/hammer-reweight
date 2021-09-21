@@ -290,10 +290,7 @@ void BToDRealGenerator::buildHisto() {
            theta_l <= _theta_l_max - _theta_l_step / 2;
            theta_l += _theta_l_step) {
         auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
-        // If the weight is not equal to 1, the storage of the sum of squares of
-        // weights is automatically triggered and the sum of the squares of
-        // weights is incremented by w^2 in the bin corresponding to x,y
-        _histo->Fill(q2, theta_l, TMath::Sqrt(ff_val));
+        _histo->Fill(q2, theta_l, ff_val);
 
         // DEBUG
         // cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " <<
@@ -307,7 +304,7 @@ void BToDRealGenerator::buildHisto() {
       for (auto theta_l = _theta_l_min; theta_l <= _theta_l_max;
            theta_l += _theta_l_step) {
         auto ff_val = ff_model.Gamma_q2tL(q2, theta_l, fplus, fminus, TAU_MASS);
-        _histo->Fill(q2, theta_l, TMath::Sqrt(ff_val));
+        _histo->Fill(q2, theta_l, ff_val);
       }
     }
   } else
