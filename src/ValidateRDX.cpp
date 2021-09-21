@@ -296,8 +296,9 @@ void BToDRealGenerator::buildHisto() {
         _histo->Fill(q2, theta_l, TMath::Sqrt(ff_val));
 
         // DEBUG
-        cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " << ff_val
-             << endl;
+        // cout << "q2: " << q2 << " theta_l: " << theta_l << " ff val: " <<
+        // ff_val
+        //<< endl;
       }
     }
   } else if (_ff_mode == "CLN") {
