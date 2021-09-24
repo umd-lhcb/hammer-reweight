@@ -46,7 +46,7 @@ sample-plots: \
 validation-plots: gen/rdx-run2-validation.root
 	@echo "Generating B -> D* validation plot..."
 	@plotbr -n $</tree_BDst -o gen/rdx-run2-validation-B02Dst.png \
-		-b "w_ff-w_ff_calc" \
+		-b "wff-wff_calc" \
 		--bins 5 \
 		-XL "FF weights" \
 		-l "HAMMER - theory" \
@@ -57,11 +57,11 @@ validation-plots: gen/rdx-run2-validation.root
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
 		-l Generated "HAMMER OK" "HAMMER wt" "Theory wt" \
 		--cuts "None" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
-		--weights "None" "None" "w_ff" "w_ff_calc" \
+		--weights "None" "None" "wff" "wff_calc" \
 		--debug
 	@echo "Generating B -> D validation plot..."
 	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0.png \
-		-b "w_ff-w_ff_calc" \
+		-b "wff-wff_calc" \
 		--bins 5 \
 		-XL "FF weights" \
 		-l "HAMMER - theory" \
@@ -72,7 +72,7 @@ validation-plots: gen/rdx-run2-validation.root
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
 		-l Generated "HAMMER OK" "HAMMER wt" "Theory wt" \
 		--cuts "None" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
-		--weights "None" "None" "w_ff" "w_ff_calc" \
+		--weights "None" "None" "wff" "wff_calc" \
 		--debug
 
 rdx-run2-ntuples: \
@@ -112,5 +112,5 @@ gen/%_q2_true.png: gen/%-reweighted.root
 		-YL "Normalized" \
 		-l Original Reweighted \
 		--cuts "ham_ok" "ham_ok" \
-		--weights "None" "w_ff" \
+		--weights "None" "wff" \
 		--normalize --debug

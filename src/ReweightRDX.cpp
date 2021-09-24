@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 07:02 PM +0200
+// Last Change: Fri Sep 24, 2021 at 03:33 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -347,7 +347,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   output_tree->Branch("runNumber", &runNumber_out);
 
   Double_t w_ff_out;
-  output_tree->Branch("w_ff", &w_ff_out);
+  output_tree->Branch("wff", &w_ff_out);
 
   Bool_t ham_ok;
   output_tree->Branch("ham_ok", &ham_ok);

@@ -438,9 +438,9 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
   output_tree->Branch("q2_true", &q2_out);
 
   Double_t ff_out;
-  output_tree->Branch("w_ff", &ff_out);
+  output_tree->Branch("wff", &ff_out);
   Double_t ff_calc_out;
-  output_tree->Branch("w_ff_calc", &ff_calc_out);
+  output_tree->Branch("wff_calc", &ff_calc_out);
 
   Int_t b_id_out;
   output_tree->Branch("b_id", &b_id_out);
