@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Fri Sep 24, 2021 at 03:33 PM +0200
+// Last Change: Mon Sep 27, 2021 at 06:41 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -357,6 +357,11 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   Double_t q2_true_out;
   output_tree->Branch("q2_true", &q2_true_out);
 
+  Int_t d_meson1_true_id_out;
+  output_tree->Branch("d_meson1_true_id", &d_meson1_true_id_out);
+  Int_t d_meson2_true_id_out;
+  output_tree->Branch("d_meson2_true_id", &d_meson2_true_id_out);
+
   unsigned long num_of_evt        = 0l;
   unsigned long num_of_evt_ham_ok = 0l;
   while (reader.Next()) {
@@ -368,9 +373,12 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
     double q2_min = 100 * 100;
     if (*is_tau) q2_min = 1700 * 1700;
 
+    d_meson1_true_id_out = *d_idx0_id;
+    d_meson2_true_id_out = *d_idx1_id;
+
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min &&
-        TMath::Abs(*mu_id) == 13) {
+        TMath::Abs(*mu_id) == 13 && !is_D_meson(d_meson2_true_id_out)) {
       // Check if we have a legal D meson
       // clang-format off
       auto D_cands =

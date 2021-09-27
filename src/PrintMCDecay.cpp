@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 16, 2021 at 06:11 PM +0200
+// Last Change: Mon Sep 27, 2021 at 07:25 PM +0200
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <iostream>
@@ -129,7 +129,8 @@ DecayFreq print_id(TFile* input_file, TString tree, int modulo = 40) {
     double q2_min = 100 * 100;
     if (*is_tau) q2_min = 1700 * 1700;
 
-    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min) {
+    if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min &&
+        !is_D_meson(*d_idx1_id)) {
       auto key = vector<Int_t>{};
       key.push_back(*is_tau);
       key.push_back(TMath::Abs(*b_id));

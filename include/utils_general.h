@@ -92,6 +92,11 @@ DMesonPack is_D_meson(const PartIdMap parts) {
   return DMesonPack{false, "none"};
 }
 
+Bool_t is_D_meson(const Int_t id) {
+  if (digit_is(id, 3) == 4) return true;
+  return false;
+}
+
 Bool_t is_hadron(const Int_t id) {
   if (TMath::Abs(id) > 100) return true;
   return false;
