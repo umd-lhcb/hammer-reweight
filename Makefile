@@ -41,7 +41,11 @@ sample-plots: \
 	gen/rdx-run1-Bd2DstTauNu_q2_true.png \
 	gen/rdx-run2-Bd2DstMuNu_q2_true.png \
 	gen/rdx-run2-Bd2DstTauNu_q2_true.png \
-	gen/rdx-run2-Bd2DststTauNu_q2_true.png
+	gen/rdx-run2-Bd2DststTauNu_q2_true.png \
+	gen/rdx-run2-Bd2DststTauNu_q2_true_D_1.png \
+	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_1.png \
+	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_0.png \
+	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_2.png
 
 validation-plots: gen/rdx-run2-validation.root
 	@echo "Generating B -> D* validation plot..."
@@ -113,5 +117,61 @@ gen/%_q2_true.png: gen/%-reweighted.root
 		-YL "Normalized" \
 		-l Original Reweighted \
 		--cuts "ham_ok" "ham_ok" \
+		--weights "None" "wff" \
+		--normalize --debug
+
+# True q2 plots for D**
+gen/rdx-run2-Bd2DststTauNu_q2_true.png: gen/rdx-run2-Bd2DststTauNu-reweighted.root
+	@echo "Generating $@..."
+	@plotbr -n $</TupleB0/DecayTree -o $@ \
+		-b q2_true q2_true -XD 2.5 8.5 --bins 15 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-YL "Normalized" \
+		-l Original Reweighted \
+		--cuts "ham_ok" "ham_ok" \
+		--weights "None" "wff" \
+		--normalize --debug
+
+gen/rdx-run2-Bd2DststTauNu_q2_true_D_1.png: gen/rdx-run2-Bd2DststTauNu-reweighted.root
+	@echo "Generating $@..."
+	@plotbr -n $</TupleB0/DecayTree -o $@ \
+		-b q2_true q2_true -XD 2.5 8.5 --bins 15 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-YL "Normalized" \
+		-l Original Reweighted \
+		--cuts "ham_ok & abs(d_meson1_true_id) == 10413" "ham_ok & abs(d_meson1_true_id) == 10413" \
+		--weights "None" "wff" \
+		--normalize --debug
+
+gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_1.png: gen/rdx-run2-Bd2DststTauNu-reweighted.root
+	@echo "Generating $@..."
+	@plotbr -n $</TupleB0/DecayTree -o $@ \
+		-b q2_true q2_true -XD 2.5 8.5 --bins 15 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-YL "Normalized" \
+		-l Original Reweighted \
+		--cuts "ham_ok & abs(d_meson1_true_id) == 20413" "ham_ok & abs(d_meson1_true_id) == 20413" \
+		--weights "None" "wff" \
+		--normalize --debug
+
+gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_0.png: gen/rdx-run2-Bd2DststTauNu-reweighted.root
+	@echo "Generating $@..."
+	@plotbr -n $</TupleB0/DecayTree -o $@ \
+		-b q2_true q2_true -XD 2.5 8.5 --bins 15 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-YL "Normalized" \
+		-l Original Reweighted \
+		--cuts "ham_ok & (abs(d_meson1_true_id) == 10421 | abs(d_meson1_true_id) == 10411)" "ham_ok & (abs(d_meson1_true_id) == 10421 | abs(d_meson1_true_id) == 10411)" \
+		--weights "None" "wff" \
+		--normalize --debug
+
+gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_2.png: gen/rdx-run2-Bd2DststTauNu-reweighted.root
+	@echo "Generating $@..."
+	@plotbr -n $</TupleB0/DecayTree -o $@ \
+		-b q2_true q2_true -XD 2.5 8.5 --bins 15 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-YL "Normalized" \
+		-l Original Reweighted \
+		--cuts "ham_ok & abs(d_meson1_true_id) == 415" "ham_ok & abs(d_meson1_true_id) == 415" \
 		--weights "None" "wff" \
 		--normalize --debug
