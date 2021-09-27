@@ -43,9 +43,9 @@ sample-plots: \
 	gen/rdx-run2-Bd2DstTauNu_q2_true.png \
 	gen/rdx-run2-Bd2DststTauNu_q2_true.png \
 	gen/rdx-run2-Bd2DststTauNu_q2_true_D_1.png \
-	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_1.png \
+	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_2.png \
 	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_0.png \
-	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_2.png
+	gen/rdx-run2-Bd2DststTauNu_q2_true_Dst_1.png
 
 validation-plots: gen/rdx-run2-validation.root
 	@echo "Generating B -> D* validation plot..."
