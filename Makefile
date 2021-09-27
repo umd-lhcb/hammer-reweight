@@ -78,7 +78,8 @@ validation-plots: gen/rdx-run2-validation.root
 rdx-run2-ntuples: \
 	gen/rdx-run2-Bd2DstMuNu-reweighted.root \
 	gen/rdx-run2-Bd2DststTauNu-reweighted.root \
-	gen/rdx-run2-Bd2DstTauNu-reweighted.root
+	gen/rdx-run2-Bd2DstTauNu-reweighted.root \
+	gen/rdx-run2-Bd2D0DX_MuNu-reweighted.root
 
 
 ####################
