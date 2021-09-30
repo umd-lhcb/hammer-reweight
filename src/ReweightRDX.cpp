@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Sep 27, 2021 at 06:41 PM +0200
+// Last Change: Thu Sep 30, 2021 at 02:30 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -362,6 +362,11 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
   Int_t d_meson2_true_id_out;
   output_tree->Branch("d_meson2_true_id", &d_meson2_true_id_out);
 
+  Double_t d_meson1_true_m_out;
+  output_tree->Branch("d_meson1_true_m", &d_meson1_true_m_out);
+  Double_t d_meson2_true_m_out;
+  output_tree->Branch("d_meson2_true_m", &d_meson2_true_m_out);
+
   unsigned long num_of_evt        = 0l;
   unsigned long num_of_evt_ham_ok = 0l;
   while (reader.Next()) {
@@ -375,6 +380,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
 
     d_meson1_true_id_out = *d_idx0_id;
     d_meson2_true_id_out = *d_idx1_id;
+
+    d_meson1_true_m_out = inv_m(*d_idx0_pe, *d_idx0_px, *d_idx0_py, *d_idx0_pz);
+    d_meson2_true_m_out = inv_m(*d_idx1_pe, *d_idx1_px, *d_idx1_py, *d_idx1_pz);
 
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min &&
