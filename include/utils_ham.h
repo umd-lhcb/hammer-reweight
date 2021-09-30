@@ -16,10 +16,6 @@ TString print_p(const Hammer::FourMomentum& p) {
   return TString(tmp);
 }
 
-auto inv_m(Double_t pe, Double_t px, Double_t py, Double_t pz) {
-  return pe * pe - px * px - py * py - pz * pz;
-}
-
 auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
   auto four_mom = Hammer::FourMomentum(pe, px, py, pz);
   auto part_id  = static_cast<Hammer::PdgId>(pid);
