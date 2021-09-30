@@ -80,7 +80,7 @@ string get_particle_name(Int_t id, TDatabasePDG* db,
 ////////////////
 
 auto inv_m(Double_t pe, Double_t px, Double_t py, Double_t pz) {
-  return pe * pe - px * px - py * py - pz * pz;
+  return TMath::Sqrt(pe * pe - px * px - py * py - pz * pz);
 }
 
 /////////////////////////
