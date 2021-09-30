@@ -47,6 +47,9 @@
             # Python stack
             #pythonPackages.pyTuplingUtils
             virtualenvwrapper
+            jedi
+            flake8
+            pylint
           ]);
 
           FONTCONFIG_FILE = pkgs.makeFontsConf {
