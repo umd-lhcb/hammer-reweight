@@ -108,7 +108,13 @@ ValidateRDX test.root
     3. Cache particle dependencies so the decay tree only need to be traversed
         once (a technicality)
 6. Compute the amplitude tensor with `Hammer::processEvent()`, then get the weight
-    with `Hammer::getWeight("FF_scheme")`
+    with `Hammer::getWeight("FF_scheme")`:
+    - A bit more details on `processEvent`: it's defined in `src/Core/Hammer.cc`
+    - Then `Event.calc()` is called, which is defined in `src/core/Event.cc`
+    - Inside `Event.calc()`, it calls `p.second.calc()` for each element in `_process`.
+
+        Note: `_process` is of type `ProcIdDict`, which is `std::map<ProcessUID, T>`.
+    - The actual calculation happens `src/core/ProcManager.cc`.
 
 ### Soft photons (very)
 
