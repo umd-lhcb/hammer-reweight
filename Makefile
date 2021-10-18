@@ -13,7 +13,7 @@ VALLINKFLAGS	:=	-lff_calc
 # General #
 ###########
 
-tools: PrintMCDecay ReweightRDX
+tools: PrintMCDecay ReweightRDX ReweightRDXDebug
 
 .PHONY: clean
 clean:
@@ -30,6 +30,9 @@ PrintMCDecay: PrintMCDecay.cpp
 
 ValidateRDX: ValidateRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS) $(VALLINKFLAGS)
+
+ReweightRDXDebug: ReweightRDX.cpp
+	$(COMPILER) $(CXXFLAGS) -DDEBUG_CLI -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS) $(VALLINKFLAGS)
 
 
 #########
@@ -100,9 +103,9 @@ rdx-run2-ntuples: \
 gen/rdx-run1-%-reweighted.root: samples/rdx-run1-%.root ReweightRDX
 	./bin/ReweightRDX $< $@ TupleB0/DecayTree run1
 
-gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
-	./bin/ReweightRDX $< $@ TupleB0/DecayTree run2 | tee gen/$(basename $(notdir $@))_Dst.log
-	./bin/ReweightRDX $< $@ TupleBminus/DecayTree run2 | tee gen/$(basename $(notdir $@))_D0.log
+gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDXDebug
+	./bin/ReweightRDXDebug $< $@ TupleB0/DecayTree run2 | tee gen/$(basename $(notdir $@))_Dst.log
+	./bin/ReweightRDXDebug $< $@ TupleBminus/DecayTree run2 | tee gen/$(basename $(notdir $@))_D0.log
 
 # Validation ntuples
 gen/rdx-run2-validation.root: ValidateRDX

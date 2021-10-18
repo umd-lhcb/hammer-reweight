@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu Sep 30, 2021 at 02:30 PM +0200
+// Last Change: Mon Oct 18, 2021 at 03:51 PM +0200
 
 #include <algorithm>
 #include <exception>
@@ -35,7 +35,10 @@ using namespace std;
 // Configurables //
 ///////////////////
 
-//#define SILENT
+#ifndef DEBUG_CLI
+#define SILENT
+#endif
+
 //#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
 //#define FORCE_MOMENTUM_CONSERVATION_HADRONIC
 #define RADIATIVE_CORRECTION
