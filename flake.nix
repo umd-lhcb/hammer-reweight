@@ -10,7 +10,7 @@
     # FIXME: Can't use the flake above because of a "follows" problem
     #        For more details, see this:
     #          https://github.com/NixOS/nix/issues/3602
-    #        This problem is fixed in a very recent nix release (cira Sep 2021),
+    #        This problem is fixed in a very recent nix release (circa Sep 2021),
     #        but it's a hassle to update so let's use a workaround instead
   };
 
@@ -50,6 +50,9 @@
             jedi
             flake8
             pylint
+
+            # Pinned Python dependencies
+            numpy
           ]);
 
           FONTCONFIG_FILE = pkgs.makeFontsConf {
