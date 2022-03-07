@@ -42,6 +42,8 @@ ReweightRDXDebug: ReweightRDX.cpp
 # Plots #
 #########
 
+.PHONY: sample-plots validation-plots rdx-run2-ntuples
+
 sample-plots: \
 	gen/rdx-run1-Bd2DstMuNu_q2_true.png \
 	gen/rdx-run1-Bd2DstTauNu_q2_true.png \
