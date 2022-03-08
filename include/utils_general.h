@@ -1,5 +1,4 @@
-#ifndef _HAM_RWT_UTILS_GENERAL_
-#define _HAM_RWT_UTILS_GENERAL_
+#pragma once
 
 #include <map>
 #include <sstream>
@@ -22,7 +21,7 @@ using std::vector;
 
 template <template <typename, typename> class Iterable, typename T,
           typename Allocator>
-Bool_t find_in(Iterable<T, Allocator> iter, T elem) {
+Bool_t findIn(Iterable<T, Allocator> iter, T elem) {
   if (find(iter.begin(), iter.end(), elem) != iter.end()) return true;
   return false;
 }
@@ -54,22 +53,21 @@ TString dirname(string s) {
 
 TString basename(string s) { return TString(split(s, '/').back()); }
 
-Int_t digit_is(Int_t num, Int_t digit, Int_t base = 10) {
+Int_t digitIs(Int_t num, Int_t digit, Int_t base = 10) {
   Int_t fac = num / TMath::Power(base, digit - 1);
   return fac % 10;
 }
 
-string get_particle_name(Int_t id, TDatabasePDG* db,
-                         Bool_t use_abs_id = false) {
+string getParticleName(Int_t id, TDatabasePDG* db, Bool_t useAbsId = false) {
   if (!id) return string("None");
 
-  auto abs_id = id;
-  if (use_abs_id) abs_id = TMath::Abs(id);
+  auto absId = id;
+  if (useAbsId) absId = TMath::Abs(id);
 
   char buf[50];
-  sprintf(buf, " (%d)", abs_id);
-  auto str_id   = string(buf);
-  auto particle = db->GetParticle(abs_id);
+  sprintf(buf, " (%d)", absId);
+  auto strId    = string(buf);
+  auto particle = db->GetParticle(absId);
 
   if (particle != nullptr) return string(particle->GetName()) + buf;
   return string("Unknown") + buf;
@@ -79,7 +77,7 @@ string get_particle_name(Int_t id, TDatabasePDG* db,
 // Kinematics //
 ////////////////
 
-auto inv_m(Double_t pe, Double_t px, Double_t py, Double_t pz) {
+auto invM(Double_t pe, Double_t px, Double_t py, Double_t pz) {
   return TMath::Sqrt(pe * pe - px * px - py * py - pz * pz);
 }
 
@@ -87,48 +85,48 @@ auto inv_m(Double_t pe, Double_t px, Double_t py, Double_t pz) {
 // Particle ID helpers //
 /////////////////////////
 
-typedef pair<Bool_t, TString>  DMesonPack;
-typedef map<TString, Int_t>    PartIdMap;
-typedef map<TString, Double_t> PartMomMap;
+typedef pair<Bool_t, TString>  dMesonPack;
+typedef map<TString, Int_t>    partIdMap;
+typedef map<TString, Double_t> partMomMap;
 
-DMesonPack is_D_meson(const PartIdMap parts) {
+dMesonPack isDMeson(const partIdMap parts) {
   for (const auto [key, val] : parts) {
     auto id = TMath::Abs(val);
-    if (digit_is(id, 3) == 4) return DMesonPack{true, key};
+    if (digitIs(id, 3) == 4) return dMesonPack{true, key};
   }
 
-  return DMesonPack{false, "none"};
+  return dMesonPack{false, "none"};
 }
 
-Bool_t is_D_meson(const Int_t id) {
-  if (digit_is(id, 3) == 4) return true;
+Bool_t isDMeson(const Int_t id) {
+  if (digitIs(id, 3) == 4) return true;
   return false;
 }
 
-Bool_t is_hadron(const Int_t id) {
+Bool_t isHadron(const Int_t id) {
   if (TMath::Abs(id) > 100) return true;
   return false;
 }
 
-Int_t B_id_fix(const Int_t B_id, const Int_t D_id) {
-  if (B_id * D_id > 0) return -B_id;
-  return B_id;
+// We fix particle IDs based on Muon's true ID
+
+Int_t bIdFix(const Int_t bId, const Int_t dId) {
+  if (bId * dId > 0) return -bId;
+  return bId;
 }
 
-int Mu_id(Int_t mu_id, Int_t true_id = 13) {
-  Int_t sign = mu_id / TMath::Abs(mu_id);
-  return sign * true_id;
+int muIdFix(Int_t muId, Int_t trueId = 13) {
+  Int_t sign = muId / TMath::Abs(muId);
+  return sign * trueId;
 }
 
-int Tau_id(Int_t mu_id) { return Mu_id(mu_id, 15); }
+int tauIdFix(Int_t muId) { return muIdFix(muId, 15); }
 
-int Nu_id(Int_t mu_id, Bool_t is_tau) {
-  if (is_tau) return Mu_id(mu_id, -16);
-  return Mu_id(mu_id, -14);
+int nuIdFix(Int_t muId, Bool_t isTau) {
+  if (isTau) return muIdFix(muId, -16);
+  return muIdFix(muId, -14);
 }
 
-int Tau_NuMu_id(Int_t mu_id) { return Mu_id(mu_id, -14); }
+int tauNuMuIdFix(Int_t muId) { return muIdFix(muId, -14); }
 
-int Tau_NuTau_id(Int_t mu_id) { return Mu_id(mu_id, 16); }
-
-#endif
+int tauNuTauIdFix(Int_t muId) { return muIdFix(muId, 16); }
