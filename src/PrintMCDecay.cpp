@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Apr 27, 2022 at 02:24 AM -0400
+// Last Change: Wed Apr 27, 2022 at 02:36 AM -0400
 
 #include <iostream>
 #include <map>
@@ -52,7 +52,7 @@ const auto DECAY_NAMES = vector<string_view>{
 const auto LEGAL_B_MESON_IDS = vector<int>{511, 521};
 
 const auto BRANCH_ALIAES = vector<pair<string, string>>{
-    {"q2_true", "TRUE_Q2"},
+    {"q2_true", "True_Q2"},
     {"is_tau", "True_IsTauDecay"},
     {"b_id", "TRUEID"},
     {"dau0_id", "TrueHadron_D0_ID"},
@@ -108,17 +108,17 @@ bool truthMatchOk(double q2True, bool isTauDecay, int bMesonId, int dMesonId) {
 // Printers //
 //////////////
 
-void countDecayFreq(DecayFreq* freq, unsigned long* numOfEvt,
-                    unsigned long* numOfEvtWithB, bool truthMatch,
+void countDecayFreq(DecayFreq& freq, unsigned long& numOfEvt,
+                    unsigned long& numOfEvtWithB, bool truthMatch,
                     vector<int> truthSignature) {
-  *numOfEvt += 1;
+  numOfEvt += 1;
 
   if (truthMatch) {
-    *numOfEvtWithB += 1;
-    if (freq->find(truthSignature) == freq->end())
-      freq->at(truthSignature) = 1l;
+    numOfEvtWithB += 1;
+    if (freq.find(truthSignature) == freq.end())
+      freq[truthSignature] = 1l;
     else
-      freq->at(truthSignature) += 1;
+      freq[truthSignature] += 1;
   }
 }
 
@@ -172,12 +172,9 @@ int main(int argc, char** argv) {
 
   unsigned long numOfEvt      = 0;
   unsigned long numOfEvtWithB = 0;
-  auto          dfInit        = RDataFrame(tree, ntp);
   auto          freq          = DecayFreq{};
-
-  unsigned long* ptrNumOfEvt      = &numOfEvt;
-  unsigned long* ptrNumOfEvtWithB = &numOfEvtWithB;
-  DecayFreq*     ptrFreq          = &freq;
+  auto          db            = make_unique<TDatabasePDG>();
+  auto          dfInit        = RDataFrame(tree, ntp);
 
   // functions to be JIT'ed
   gInterpreter->Declare(
@@ -190,12 +187,14 @@ int main(int argc, char** argv) {
       "signature",
       "makeVecInt(" + boost::algorithm::join(DECAY_SIGNATURE, ",") + ")");
   df.Foreach(
-      [=](bool truthMatch, vector<int> truthSignature) {
-        countDecayFreq(ptrFreq, ptrNumOfEvt, ptrNumOfEvtWithB, truthMatch,
+      [&](bool truthMatch, vector<int> truthSignature) {
+        countDecayFreq(freq, numOfEvt, numOfEvtWithB, truthMatch,
                        truthSignature);
       },
       {"truthmatch", "signature"});
 
+  printDecayFreq(freq, db.get());
+  cout << endl;
   cout << "Total number of candidates: " << numOfEvt << endl;
   cout << "Truth-matched candidates: " << numOfEvtWithB << endl;
   cout << "Truth-matched fraction: "
