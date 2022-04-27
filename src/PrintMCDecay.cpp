@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Apr 27, 2022 at 02:36 AM -0400
+// Last Change: Wed Apr 27, 2022 at 02:42 AM -0400
 
 #include <iostream>
 #include <map>
@@ -115,10 +115,13 @@ void countDecayFreq(DecayFreq& freq, unsigned long& numOfEvt,
 
   if (truthMatch) {
     numOfEvtWithB += 1;
-    if (freq.find(truthSignature) == freq.end())
-      freq[truthSignature] = 1l;
+    vector<int> key = {};
+    for (auto v : truthSignature) key.emplace_back(TMath::Abs(v));
+
+    if (freq.find(key) == freq.end())
+      freq[key] = 1l;
     else
-      freq[truthSignature] += 1;
+      freq[key] += 1;
   }
 }
 
