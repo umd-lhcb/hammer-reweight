@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Apr 27, 2022 at 02:42 AM -0400
+// Last Change: Wed Apr 27, 2022 at 02:56 AM -0400
 
 #include <iostream>
 #include <map>
@@ -70,9 +70,9 @@ const auto BRANCH_ALIAES = vector<pair<string, string>>{
 };
 
 const auto DECAY_SIGNATURE = vector<string>{
-    "b_id",        "dau0_id",     "dau0_gd0_id", "dau0_gd1_id", "dau0_gd2_id",
-    "dau1_id",     "dau1_gd0_id", "dau1_gd1_id", "dau1_gd2_id", "dau2_id",
-    "dau2_gd0_id", "dau2_gd1_id", "dau2_gd2_id"};
+    "is_tau",      "b_id",        "dau0_id",     "dau0_gd0_id", "dau0_gd1_id",
+    "dau0_gd2_id", "dau1_id",     "dau1_gd0_id", "dau1_gd1_id", "dau1_gd2_id",
+    "dau2_id",     "dau2_gd0_id", "dau2_gd1_id", "dau2_gd2_id"};
 
 /////////////
 // Helpers //
@@ -101,7 +101,7 @@ bool truthMatchOk(double q2True, bool isTauDecay, int bMesonId, int dMesonId) {
   if (isTauDecay) q2Min = 1700 * 1700;
 
   return findIn(LEGAL_B_MESON_IDS, TMath::Abs(bMesonId)) && q2True > q2Min &&
-         isDMeson(dMesonId);
+         isDMeson(TMath::Abs(dMesonId));  // NOTE: Taking abs is crucial!
 }
 
 //////////////
@@ -185,10 +185,10 @@ int main(int argc, char** argv) {
 
   auto df = defineBranch(dfInit, BRANCH_ALIAES, bMeson);
   df      = df.Define("truthmatch", truthMatchOk,
-                 {"q2_true", "is_tau", "b_id", "dau0_id"});
-  df      = df.Define(
-      "signature",
-      "makeVecInt(" + boost::algorithm::join(DECAY_SIGNATURE, ",") + ")");
+                 {"q2_true", "is_tau", "b_id", "dau0_id"})
+           .Define("signature",
+                   "makeVecInt(" +
+                       boost::algorithm::join(DECAY_SIGNATURE, ",") + ")");
   df.Foreach(
       [&](bool truthMatch, vector<int> truthSignature) {
         countDecayFreq(freq, numOfEvt, numOfEvtWithB, truthMatch,

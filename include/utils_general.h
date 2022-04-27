@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Apr 27, 2022 at 01:45 AM -0400
+// Last Change: Wed Apr 27, 2022 at 02:54 AM -0400
 
 #pragma once
 
@@ -125,12 +125,12 @@ DMesonPack isDMeson(const PartIdMap parts) {
   return DMesonPack{false, "none"};
 }
 
-bool isDMeson(const Int_t id) {
+bool isDMeson(const int id) {
   if (digitIs(id, 3) == 4) return true;
   return false;
 }
 
-bool isHadron(const Int_t id) {
+bool isHadron(const int id) {
   if (TMath::Abs(id) > 100) return true;
   return false;
 }
