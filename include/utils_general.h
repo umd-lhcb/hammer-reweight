@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue Apr 26, 2022 at 11:44 PM -0400
+// Last Change: Wed Apr 27, 2022 at 12:05 AM -0400
 
 #pragma once
 
@@ -93,17 +93,17 @@ double invM(double pe, double px, double py, double pz) {
 // Particle ID helpers //
 /////////////////////////
 
-typedef pair<bool, TString>    dMesonPack;
-typedef map<TString, Int_t>    partIdMap;
-typedef map<TString, Double_t> partMomMap;
+typedef pair<bool, TString>    DMesonPack;
+typedef map<TString, Int_t>    PartIdMap;
+typedef map<TString, Double_t> PartMomMap;
 
-dMesonPack isDMeson(const partIdMap parts) {
+DMesonPack isDMeson(const PartIdMap parts) {
   for (const auto [key, val] : parts) {
     auto id = TMath::Abs(val);
-    if (digitIs(id, 3) == 4) return dMesonPack{true, key};
+    if (digitIs(id, 3) == 4) return DMesonPack{true, key};
   }
 
-  return dMesonPack{false, "none"};
+  return DMesonPack{false, "none"};
 }
 
 bool isDMeson(const Int_t id) {
