@@ -13,7 +13,7 @@ VALLINKFLAGS	:=	-lff_calc
 # General #
 ###########
 
-tools: PrintMCDecay ReweightRDX ReweightRDXDebug
+exe: PrintMCDecay #ReweightRDX ReweightRDXDebug
 
 .PHONY: clean
 clean:

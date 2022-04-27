@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Apr 27, 2022 at 12:05 AM -0400
+// Last Change: Wed Apr 27, 2022 at 01:45 AM -0400
 
 #pragma once
 
@@ -13,7 +13,9 @@
 #include <TDataType.h>
 #include <TDatabasePDG.h>
 #include <TMath.h>
+#include <ROOT/RDataFrame.hxx>
 
+using ROOT::RDF::RNode;
 using std::map;
 using std::pair;
 using std::string;
@@ -80,6 +82,23 @@ string getParticleName(int id, TDatabasePDG* db, bool useAbsId = false) {
 ////////////////////////
 // RDataframe helpers //
 ////////////////////////
+
+RNode defineBranch(RNode df, const vector<pair<string, string>>& rules,
+                   const string particle, int idx = 0) {
+  if (rules.size() == idx) return df;
+
+  auto inputBrName = rules[idx].second;
+  if (particle != "") inputBrName = particle + "_" + inputBrName;
+
+  return defineBranch(df.Define(rules[idx].first, inputBrName), rules, particle,
+                      idx + 1);
+}
+
+vector<string> setBrPrefix(const string prefix, const vector<string>& vars) {
+  vector<string> result{};
+  for (const auto& v : vars) result.emplace_back(prefix + "_" + v);
+  return result;
+}
 
 ////////////////////////
 // Kinematics helpers //

@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Apr 27, 2022 at 01:19 AM -0400
+// Last Change: Wed Apr 27, 2022 at 02:24 AM -0400
 
 #include <iostream>
 #include <map>
@@ -10,17 +10,22 @@
 
 #include <TDatabasePDG.h>
 #include <TFile.h>
+#include <TInterpreter.h>
 #include <TMath.h>
 #include <TString.h>
 #include <TTree.h>
 #include <TTreeReader.h>
+#include <ROOT/RDataFrame.hxx>
 
+#include <boost/algorithm/string/join.hpp>
 #include <boost/range/adaptor/reversed.hpp>
 #include <cxxopts.hpp>
 
 #include "utils_general.h"
 
 using namespace std;
+
+using ROOT::RDataFrame;
 
 ///////////////////
 // Configurables //
@@ -47,22 +52,27 @@ const auto DECAY_NAMES = vector<string_view>{
 const auto LEGAL_B_MESON_IDS = vector<int>{511, 521};
 
 const auto BRANCH_ALIAES = vector<pair<string, string>>{
-    {"q2_true", "_TRUE_Q2"},
-    {"is_tau", "_True_IsTauDecay"},
-    {"b_id", "_TRUEID"},
-    {"dau0_id", "_TrueHadron_D0_ID"},
-    {"dau1_id", "_TrueHadron_D1_ID"},
-    {"dau2_id", "_TrueHadron_D2_ID"},
-    {"dau0_gd0_id", "_TrueHadron_D0_GD0_ID"},
-    {"dau0_gd1_id", "_TrueHadron_D0_GD1_ID"},
-    {"dau0_gd2_id", "_TrueHadron_D0_GD2_ID"},
-    {"dau1_gd0_id", "_TrueHadron_D1_GD0_ID"},
-    {"dau1_gd1_id", "_TrueHadron_D1_GD1_ID"},
-    {"dau1_gd2_id", "_TrueHadron_D1_GD2_ID"},
-    {"dau2_gd0_id", "_TrueHadron_D2_GD0_ID"},
-    {"dau2_gd1_id", "_TrueHadron_D2_GD1_ID"},
-    {"dau2_gd2_id", "_TrueHadron_D2_GD2_ID"},
+    {"q2_true", "TRUE_Q2"},
+    {"is_tau", "True_IsTauDecay"},
+    {"b_id", "TRUEID"},
+    {"dau0_id", "TrueHadron_D0_ID"},
+    {"dau1_id", "TrueHadron_D1_ID"},
+    {"dau2_id", "TrueHadron_D2_ID"},
+    {"dau0_gd0_id", "TrueHadron_D0_GD0_ID"},
+    {"dau0_gd1_id", "TrueHadron_D0_GD1_ID"},
+    {"dau0_gd2_id", "TrueHadron_D0_GD2_ID"},
+    {"dau1_gd0_id", "TrueHadron_D1_GD0_ID"},
+    {"dau1_gd1_id", "TrueHadron_D1_GD1_ID"},
+    {"dau1_gd2_id", "TrueHadron_D1_GD2_ID"},
+    {"dau2_gd0_id", "TrueHadron_D2_GD0_ID"},
+    {"dau2_gd1_id", "TrueHadron_D2_GD1_ID"},
+    {"dau2_gd2_id", "TrueHadron_D2_GD2_ID"},
 };
+
+const auto DECAY_SIGNATURE = vector<string>{
+    "b_id",        "dau0_id",     "dau0_gd0_id", "dau0_gd1_id", "dau0_gd2_id",
+    "dau1_id",     "dau1_gd0_id", "dau1_gd1_id", "dau1_gd2_id", "dau2_id",
+    "dau2_gd0_id", "dau2_gd1_id", "dau2_gd2_id"};
 
 /////////////
 // Helpers //
@@ -98,17 +108,17 @@ bool truthMatchOk(double q2True, bool isTauDecay, int bMesonId, int dMesonId) {
 // Printers //
 //////////////
 
-void countDecayFreq(DecayFreq& freq, unsigned long& numOfEvt,
-                    unsigned long& numOfEvtWithB, bool truthMatch,
+void countDecayFreq(DecayFreq* freq, unsigned long* numOfEvt,
+                    unsigned long* numOfEvtWithB, bool truthMatch,
                     vector<int> truthSignature) {
-  numOfEvt += 1;
+  *numOfEvt += 1;
 
   if (truthMatch) {
-    numOfEvtWithB += 1;
-    if (freq.find(truthSignature) == freq.end())
-      freq[truthSignature] = 1l;
+    *numOfEvtWithB += 1;
+    if (freq->find(truthSignature) == freq->end())
+      freq->at(truthSignature) = 1l;
     else
-      freq[truthSignature] += 1;
+      freq->at(truthSignature) += 1;
   }
 }
 
@@ -156,21 +166,39 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  cout << parsedArgs["ntp"].as<string>();
+  auto tree   = parsedArgs["tree"].as<string>();
+  auto ntp    = parsedArgs["ntp"].as<string>();
+  auto bMeson = parsedArgs["particle"].as<string>();
 
   unsigned long numOfEvt      = 0;
   unsigned long numOfEvtWithB = 0;
+  auto          dfInit        = RDataFrame(tree, ntp);
+  auto          freq          = DecayFreq{};
 
-  // auto freq = print_id(ntp, tree_name);
-  // print_decay_freq(freq, db);
+  unsigned long* ptrNumOfEvt      = &numOfEvt;
+  unsigned long* ptrNumOfEvtWithB = &numOfEvtWithB;
+  DecayFreq*     ptrFreq          = &freq;
 
-  // cout << "Total number of candidates: " << num_of_evt << endl;
-  // cout << "Truth-matched candidates: " << num_of_evt_w_b_meson << endl;
-  // cout << "Truth-matched fraction: "
-  //      << static_cast<float>(num_of_evt_w_b_meson) /
-  //             static_cast<float>(num_of_evt)
-  //      << endl;
+  // functions to be JIT'ed
+  gInterpreter->Declare(
+      "auto makeVecInt = [](auto...args) { return vector<int>{args...}; };");
 
-  // delete ntp;
-  // delete db;
+  auto df = defineBranch(dfInit, BRANCH_ALIAES, bMeson);
+  df      = df.Define("truthmatch", truthMatchOk,
+                 {"q2_true", "is_tau", "b_id", "dau0_id"});
+  df      = df.Define(
+      "signature",
+      "makeVecInt(" + boost::algorithm::join(DECAY_SIGNATURE, ",") + ")");
+  df.Foreach(
+      [=](bool truthMatch, vector<int> truthSignature) {
+        countDecayFreq(ptrFreq, ptrNumOfEvt, ptrNumOfEvtWithB, truthMatch,
+                       truthSignature);
+      },
+      {"truthmatch", "signature"});
+
+  cout << "Total number of candidates: " << numOfEvt << endl;
+  cout << "Truth-matched candidates: " << numOfEvtWithB << endl;
+  cout << "Truth-matched fraction: "
+       << static_cast<float>(numOfEvtWithB) / static_cast<float>(numOfEvt)
+       << endl;
 }
