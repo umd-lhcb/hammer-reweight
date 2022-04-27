@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Apr 27, 2022 at 12:35 AM -0400
+// Last Change: Wed Apr 27, 2022 at 01:19 AM -0400
 
 #include <iostream>
 #include <map>
@@ -46,7 +46,7 @@ const auto DECAY_NAMES = vector<string_view>{
 
 const auto LEGAL_B_MESON_IDS = vector<int>{511, 521};
 
-const auto BRANCH_ALIAES = map<string, string>{
+const auto BRANCH_ALIAES = vector<pair<string, string>>{
     {"q2_true", "_TRUE_Q2"},
     {"is_tau", "_True_IsTauDecay"},
     {"b_id", "_TRUEID"},
@@ -131,24 +131,46 @@ void printDecayFreq(DecayFreq freq, TDatabasePDG* db) {
 // Main //
 //////////
 
-int main(int, char** argv) {
-  auto    ntp       = new TFile(argv[1], "read");
-  TString tree_name = argv[2];
-  auto    db        = new TDatabasePDG();
+int main(int argc, char** argv) {
+  cxxopts::Options argOpts("PrintMCDecay", "print decays of valid B mesons.");
+
+  // clang-format off
+  argOpts.add_options()
+    // positional
+    ("ntp", "specify input ntuple.", cxxopts::value<string>())
+    ("extra", "unused.", cxxopts::value<vector<string>>())
+    // keyword
+    ("h,help", "print help")
+    ("t,tree", "specify tree name.",
+     cxxopts::value<string>()->default_value("TupleBminus/DecayTree"))
+    ("p,particle", "specify B meson name.",
+     cxxopts::value<string>()->default_value("b"))
+  ;
+  // setup positional argument
+  argOpts.parse_positional({"ntp", "extra"});
+  // clang-format on
+
+  auto parsedArgs = argOpts.parse(argc, argv);
+  if (parsedArgs.count("help")) {
+    cout << argOpts.help() << endl;
+    return 0;
+  }
+
+  cout << parsedArgs["ntp"].as<string>();
 
   unsigned long numOfEvt      = 0;
   unsigned long numOfEvtWithB = 0;
 
-  auto freq = print_id(ntp, tree_name);
-  print_decay_freq(freq, db);
+  // auto freq = print_id(ntp, tree_name);
+  // print_decay_freq(freq, db);
 
-  cout << "Total number of candidates: " << num_of_evt << endl;
-  cout << "Truth-matched candidates: " << num_of_evt_w_b_meson << endl;
-  cout << "Truth-matched fraction: "
-       << static_cast<float>(num_of_evt_w_b_meson) /
-              static_cast<float>(num_of_evt)
-       << endl;
+  // cout << "Total number of candidates: " << num_of_evt << endl;
+  // cout << "Truth-matched candidates: " << num_of_evt_w_b_meson << endl;
+  // cout << "Truth-matched fraction: "
+  //      << static_cast<float>(num_of_evt_w_b_meson) /
+  //             static_cast<float>(num_of_evt)
+  //      << endl;
 
-  delete ntp;
-  delete db;
+  // delete ntp;
+  // delete db;
 }
