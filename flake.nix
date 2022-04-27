@@ -43,6 +43,7 @@
             root
             hammer-phys
             ff_calc
+            cxxopts
 
             # Python stack
             #pythonPackages.pyTuplingUtils
