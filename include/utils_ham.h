@@ -1,5 +1,8 @@
-#ifndef _HAM_RWT_UTILS_HAM_
-#define _HAM_RWT_UTILS_HAM_
+// Author: Yipeng Sun
+// License: BSD 2-clause
+// Last Change: Tue Apr 26, 2022 at 11:43 PM -0400
+
+#pragma once
 
 #include <TString.h>
 
@@ -10,22 +13,20 @@
 // HAMMER-related helpers //
 ////////////////////////////
 
-TString print_p(const Hammer::FourMomentum& p) {
+TString printP(const Hammer::FourMomentum& p) {
   char tmp[80];
   sprintf(tmp, "%.2f, %.2f, %.2f, %.2f", p.E(), p.px(), p.py(), p.pz());
   return TString(tmp);
 }
 
-auto particle(Double_t pe, Double_t px, Double_t py, Double_t pz, Int_t pid) {
-  auto four_mom = Hammer::FourMomentum(pe, px, py, pz);
-  auto part_id  = static_cast<Hammer::PdgId>(pid);
+auto particle(double pe, double px, double py, double pz, int pid) {
+  auto fourMom = Hammer::FourMomentum(pe, px, py, pz);
+  auto partId  = static_cast<Hammer::PdgId>(pid);
 
-  return Hammer::Particle(four_mom, part_id);
+  return Hammer::Particle(fourMom, partId);
 }
 
-auto particle(Hammer::FourMomentum four_mom, Int_t pid) {
-  auto part_id = static_cast<Hammer::PdgId>(pid);
-  return Hammer::Particle(four_mom, part_id);
+auto particle(Hammer::FourMomentum fourMom, int pid) {
+  auto partId = static_cast<Hammer::PdgId>(pid);
+  return Hammer::Particle(fourMom, partId);
 }
-
-#endif

@@ -1,3 +1,7 @@
+// Author: Yipeng Sun
+// License: BSD 2-clause
+// Last Change: Tue Apr 26, 2022 at 11:44 PM -0400
+
 #pragma once
 
 #include <map>
@@ -21,7 +25,7 @@ using std::vector;
 
 template <template <typename, typename> class Iterable, typename T,
           typename Allocator>
-Bool_t findIn(Iterable<T, Allocator> iter, T elem) {
+bool findIn(Iterable<T, Allocator> iter, T elem) {
   if (find(iter.begin(), iter.end(), elem) != iter.end()) return true;
   return false;
 }
@@ -53,12 +57,12 @@ TString dirname(string s) {
 
 TString basename(string s) { return TString(split(s, '/').back()); }
 
-Int_t digitIs(Int_t num, Int_t digit, Int_t base = 10) {
-  Int_t fac = num / TMath::Power(base, digit - 1);
+int digitIs(Int_t num, int digit, int base = 10) {
+  int fac = num / TMath::Power(base, digit - 1);
   return fac % 10;
 }
 
-string getParticleName(Int_t id, TDatabasePDG* db, Bool_t useAbsId = false) {
+string getParticleName(int id, TDatabasePDG* db, bool useAbsId = false) {
   if (!id) return string("None");
 
   auto absId = id;
@@ -73,11 +77,15 @@ string getParticleName(Int_t id, TDatabasePDG* db, Bool_t useAbsId = false) {
   return string("Unknown") + buf;
 }
 
-////////////////
-// Kinematics //
-////////////////
+////////////////////////
+// RDataframe helpers //
+////////////////////////
 
-auto invM(Double_t pe, Double_t px, Double_t py, Double_t pz) {
+////////////////////////
+// Kinematics helpers //
+////////////////////////
+
+double invM(double pe, double px, double py, double pz) {
   return TMath::Sqrt(pe * pe - px * px - py * py - pz * pz);
 }
 
@@ -85,7 +93,7 @@ auto invM(Double_t pe, Double_t px, Double_t py, Double_t pz) {
 // Particle ID helpers //
 /////////////////////////
 
-typedef pair<Bool_t, TString>  dMesonPack;
+typedef pair<bool, TString>    dMesonPack;
 typedef map<TString, Int_t>    partIdMap;
 typedef map<TString, Double_t> partMomMap;
 
@@ -98,35 +106,35 @@ dMesonPack isDMeson(const partIdMap parts) {
   return dMesonPack{false, "none"};
 }
 
-Bool_t isDMeson(const Int_t id) {
+bool isDMeson(const Int_t id) {
   if (digitIs(id, 3) == 4) return true;
   return false;
 }
 
-Bool_t isHadron(const Int_t id) {
+bool isHadron(const Int_t id) {
   if (TMath::Abs(id) > 100) return true;
   return false;
 }
 
 // We fix particle IDs based on Muon's true ID
 
-Int_t bIdFix(const Int_t bId, const Int_t dId) {
+int bIdFix(const int bId, const int dId) {
   if (bId * dId > 0) return -bId;
   return bId;
 }
 
-int muIdFix(Int_t muId, Int_t trueId = 13) {
+int muIdFix(int muId, int trueId = 13) {
   Int_t sign = muId / TMath::Abs(muId);
   return sign * trueId;
 }
 
-int tauIdFix(Int_t muId) { return muIdFix(muId, 15); }
+int tauIdFix(int muId) { return muIdFix(muId, 15); }
 
-int nuIdFix(Int_t muId, Bool_t isTau) {
+int nuIdFix(int muId, bool isTau) {
   if (isTau) return muIdFix(muId, -16);
   return muIdFix(muId, -14);
 }
 
-int tauNuMuIdFix(Int_t muId) { return muIdFix(muId, -14); }
+int tauNuMuIdFix(int muId) { return muIdFix(muId, -14); }
 
-int tauNuTauIdFix(Int_t muId) { return muIdFix(muId, 16); }
+int tauNuTauIdFix(int muId) { return muIdFix(muId, 16); }
