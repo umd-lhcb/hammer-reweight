@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Sun May 01, 2022 at 03:36 AM -0400
+// Last Change: Sun May 01, 2022 at 03:48 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -161,12 +161,36 @@ typedef pair<unsigned long, unsigned long> RwRate;
 pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
   auto outputBrs = vector<string>{};
 
+  // truth variables
+  df = df.Define("q2_true", bMesonName + "_True_Q2 / 1000 / 1000");
+  outputBrs.emplace_back("q2_true");
+
+  auto kinematicSuffix = {"_PE", "_PX", "_PY", "_PZ"};
+  for (int i = 0; i < 2; i++) {
+    auto partName = "d_meson" + to_string(i + 1);
+
+    df = df.Define(partName + "_true_id",
+                   bMesonName + "_TrueHadron_D" + to_string(i) + "_ID");
+    outputBrs.emplace_back(partName + "_true_id");
+
+    auto sIdx         = to_string(i);
+    auto kinematicBrs = vector<string>{};
+    for (const auto& suf : kinematicSuffix) {
+      kinematicBrs.emplace_back("_TrueHadron_D" + sIdx + suf);
+    }
+
+    df = df.Define(partName + "_true_m", invM,
+                   setBrPrefix(bMesonName, kinematicBrs));
+    outputBrs.emplace_back(partName + "_true_m");
+  }
+
   // truth-matching ok
   df = df.Define("ham_tm_ok", truthMatchOk,
                  setBrPrefix(bMesonName,
                              {"True_Q2", "True_IsTauDecay", "TRUEID",
                               "TrueHadron_D0_ID", "TrueHadron_D1_ID"},
                              {"mu_TRUEID"}));
+  outputBrs.emplace_back("ham_tm_ok");
 
   return {df, outputBrs};
 }
