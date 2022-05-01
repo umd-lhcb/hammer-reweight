@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed Apr 27, 2022 at 02:56 AM -0400
+// Last Change: Sat Apr 30, 2022 at 09:05 PM -0400
 
 #include <iostream>
 #include <map>
@@ -21,6 +21,7 @@
 #include <boost/range/adaptor/reversed.hpp>
 #include <cxxopts.hpp>
 
+#include "const.h"
 #include "utils_general.h"
 
 using namespace std;
@@ -48,8 +49,6 @@ const auto DECAY_NAMES = vector<string_view>{
   "  Third G-daughter ID: "
 };
 // clang-format on
-
-const auto LEGAL_B_MESON_IDS = vector<int>{511, 521};
 
 const auto BRANCH_ALIAES = vector<pair<string, string>>{
     {"q2_true", "True_Q2"},
