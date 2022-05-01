@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Apr 27, 2022 at 02:54 AM -0400
+// Last Change: Sun May 01, 2022 at 03:35 AM -0400
 
 #pragma once
 
@@ -94,9 +94,11 @@ RNode defineBranch(RNode df, const vector<pair<string, string>>& rules,
                       idx + 1);
 }
 
-vector<string> setBrPrefix(const string prefix, const vector<string>& vars) {
+vector<string> setBrPrefix(const string prefix, const vector<string>& vars,
+                           const vector<string>& varsAppend = {}) {
   vector<string> result{};
   for (const auto& v : vars) result.emplace_back(prefix + "_" + v);
+  for (const auto& v : varsAppend) result.emplace_back(v);
   return result;
 }
 

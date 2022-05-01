@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon Oct 18, 2021 at 03:51 PM +0200
+// Last Change: Sun May 01, 2022 at 03:36 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -20,16 +20,20 @@
 #include <TTree.h>
 #include <TTreeReader.h>
 #include <TTreeReaderArray.h>
+#include <ROOT/RDataFrame.hxx>
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
 #include <Hammer/Particle.hh>
 #include <Hammer/Process.hh>
 
+#include "const.h"
 #include "utils_general.h"
 #include "utils_ham.h"
 
 using namespace std;
+using ROOT::RDataFrame;
+using ROOT::RDF::RNode;
 
 ///////////////////
 // Configurables //
@@ -46,14 +50,7 @@ using namespace std;
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
 // clang-format off
-auto B_MESON = map<TString, TString>{
-  {"TupleBminus/DecayTree", "b"},
-  {"TupleB0/DecayTree", "b0"}
-};
-
-const auto LEGAL_B_MESON_IDS = vector<Int_t>{511, 521};
-
-void set_input_ff(Hammer::Hammer& ham, TString run) {
+void setInputFf(Hammer::Hammer& ham, TString run) {
   if (run == "run1") {
     ham.setFFInputScheme({
       {"BD", "ISGW2"},  // 12573010
@@ -82,7 +79,7 @@ void set_input_ff(Hammer::Hammer& ham, TString run) {
   }
 }
 
-void set_output_ff(Hammer::Hammer& ham) {
+void setOutputFf(Hammer::Hammer& ham) {
   ham.addFFScheme("OutputFF", {
       {"BD", "BGL"},
       {"BD*", "BGL"},
@@ -94,7 +91,7 @@ void set_output_ff(Hammer::Hammer& ham) {
 }
 // clang-format on
 
-void set_decays(Hammer::Hammer& ham) {
+void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BDTauNu");
   ham.includeDecay("BDMuNu");
 
@@ -114,6 +111,21 @@ void set_decays(Hammer::Hammer& ham) {
 
 const Double_t SOFT_PHOTON_THRESH = 0.1;
 
+/////////////
+// Filters //
+/////////////
+
+bool truthMatchOk(double q2True, bool isTauDecay, int bMesonId, int dau1Id,
+                  int dau2Id, int muID) {
+  double q2Min = 100 * 100;
+  if (isTauDecay) q2Min = 1700 * 1700;
+
+  // we require that there's ONE and ONLY ONE D meson
+  return findIn(LEGAL_B_MESON_IDS, TMath::Abs(bMesonId)) && q2True > q2Min &&
+         isDMeson(TMath::Abs(dau1Id)) && !isDMeson(TMath::Abs(dau2Id)) &&
+         TMath::Abs(muID) == 13;
+}
+
 /////////////////
 // Corrections //
 /////////////////
@@ -125,8 +137,8 @@ string photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
   stringstream buffer;
   for (auto i = 0; i < photon_p.size(); i++) {
     if (photon_mom_id[i] == ref_mom_id) {
-      buffer << "  Adding photon: " << print_p(photon_p[i].p())
-             << " to particle " << get_particle_name(ref_mom_id, db) << endl;
+      buffer << "  Adding photon: " << printP(photon_p[i].p())
+             << " to particle " << getParticleName(ref_mom_id, db) << endl;
       idx.push_back(proc.addParticle(photon_p[i]));
     }
   }
@@ -144,6 +156,20 @@ Bool_t is_soft_photon(Double_t pe) {
 /////////////////
 
 typedef pair<unsigned long, unsigned long> RwRate;
+
+// NOTE: Refine branch names if input ntuples have different tree structrue!
+pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
+  auto outputBrs = vector<string>{};
+
+  // truth-matching ok
+  df = df.Define("ham_tm_ok", truthMatchOk,
+                 setBrPrefix(bMesonName,
+                             {"True_Q2", "True_IsTauDecay", "TRUEID",
+                              "TrueHadron_D0_ID", "TrueHadron_D1_ID"},
+                             {"mu_TRUEID"}));
+
+  return {df, outputBrs};
+}
 
 RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
                 Hammer::Hammer& ham) {
@@ -390,8 +416,9 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
     // Check if we have a legal B meson and q2 is large enough to produce a Mu
     if (find_in(LEGAL_B_MESON_IDS, TMath::Abs(*b_id)) && *q2 > q2_min &&
         TMath::Abs(*mu_id) == 13 && !is_D_meson(d_meson2_true_id_out)) {
-      // Check if we have a legal D meson
-      // clang-format off
+      if (truthMatchOk(*q2, *is_tau, ))
+        // Check if we have a legal D meson
+        // clang-format off
       auto D_cands =
           PartIdMap{{"D0", *d_idx0_id}, {"D1", *d_idx1_id}, {"D2", *d_idx2_id}};
       auto D_mom = PartMomMap{
@@ -684,45 +711,45 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           // Print debug info
           cout << "========" << endl;
           cout << "True q2 (GeV): " << q2_true_out << endl;
-          cout << "B meson ID: " << get_particle_name(b_id_fixed, db) << endl;
-          cout << "D meson ID: " << get_particle_name(d_id, db) << endl;
+          cout << "B meson ID: " << getParticleName(b_id_fixed, db) << endl;
+          cout << "D meson ID: " << getParticleName(d_id, db) << endl;
           cout << "D daughter 0 ID: "
-               << get_particle_name(D_daughter_id[D_lbl + "_GD0"], db) << endl;
+               << getParticleName(D_daughter_id[D_lbl + "_GD0"], db) << endl;
           cout << "D daughter 1 ID: "
-               << get_particle_name(D_daughter_id[D_lbl + "_GD1"], db) << endl;
+               << getParticleName(D_daughter_id[D_lbl + "_GD1"], db) << endl;
           cout << "D daughter 2 ID: "
-               << get_particle_name(D_daughter_id[D_lbl + "_GD2"], db) << endl;
+               << getParticleName(D_daughter_id[D_lbl + "_GD2"], db) << endl;
 
           cout << "Is tau decay: " << *is_tau << endl;
           cout << "Current candidate index: " << num_of_evt << endl;
 
           // More detailed debug messages
-          cout << "B meson 4-mom: " << print_p(part_B.p()) << endl;
+          cout << "B meson 4-mom: " << printP(part_B.p()) << endl;
           cout << "B meson inv.m: " << part_B.p().mass() << endl;
-          cout << "D meson 4-mom: " << print_p(part_D.p()) << endl;
+          cout << "D meson 4-mom: " << printP(part_D.p()) << endl;
           cout << "D meson inv.m: " << part_D.p().mass() << endl;
           for (auto idx = 0; idx < part_D_daughters.size(); idx++) {
             cout << "D daughter idx "s + idx + " 4-mom: "
-                 << print_p(part_D_daughters[idx].p()) << endl;
+                 << printP(part_D_daughters[idx].p()) << endl;
             cout << "D daughter idx "s + idx + " inv.m: "
                  << part_D_daughters[idx].p().mass() << endl;
           }
 
           if (*is_tau) {
-            cout << "Tau 4-mom: " << print_p(part_L.p()) << endl;
+            cout << "Tau 4-mom: " << printP(part_L.p()) << endl;
             cout << "Tau inv.m: " << part_L.p().mass() << endl;
-            cout << "anti-TauNu 4-mom: " << print_p(part_NuL.p()) << endl;
+            cout << "anti-TauNu 4-mom: " << printP(part_NuL.p()) << endl;
             cout << "anti-TauNu inv.m: " << part_NuL.p().mass() << endl;
-            cout << "TauNu 4-mom: " << print_p(part_TauNuTau.p()) << endl;
+            cout << "TauNu 4-mom: " << printP(part_TauNuTau.p()) << endl;
             cout << "TauNu inv.m: " << part_TauNuTau.p().mass() << endl;
-            cout << "Mu 4-mom: " << print_p(part_Mu.p()) << endl;
+            cout << "Mu 4-mom: " << printP(part_Mu.p()) << endl;
             cout << "Mu inv.m: " << part_Mu.p().mass() << endl;
-            cout << "anti-MuNu 4-mom: " << print_p(part_TauNuMu.p()) << endl;
+            cout << "anti-MuNu 4-mom: " << printP(part_TauNuMu.p()) << endl;
             cout << "anti-MuNu inv.mass: " << part_TauNuMu.p().mass() << endl;
           } else {
-            cout << "Mu 4-mom: " << print_p(part_L.p()) << endl;
+            cout << "Mu 4-mom: " << printP(part_L.p()) << endl;
             cout << "Mu inv.m: " << part_L.p().mass() << endl;
-            cout << "anti-MuNu 4-mom: " << print_p(part_NuL.p()) << endl;
+            cout << "anti-MuNu 4-mom: " << printP(part_NuL.p()) << endl;
             cout << "anti-MuNu inv.m: " << part_NuL.p().mass() << endl;
           }
 
@@ -737,8 +764,7 @@ RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
           cout << "Lepton neutrino HAMMER ID: " << part_NuL_idx << endl;
 
 #ifdef FORCE_MOMENTUM_CONSERVATION_HADRONIC
-          cout << "Hadronic part known momentum: " << print_p(known_mom)
-               << endl;
+          cout << "Hadronic part known momentum: " << printP(known_mom) << endl;
 #endif
 
 #ifdef RADIATIVE_CORRECTION
@@ -786,9 +812,9 @@ int main(int, char** argv) {
 
   Hammer::Hammer ham{};
 
-  set_decays(ham);
-  set_input_ff(ham, run);
-  set_output_ff(ham);
+  setDecays(ham);
+  setInputFf(ham, run);
+  setOutputFf(ham);
 
   ham.setUnits("MeV");
   ham.setOptions("ProcessCalc: {CheckForNaNs: true}");
