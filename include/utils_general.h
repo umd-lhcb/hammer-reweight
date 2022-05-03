@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sun May 01, 2022 at 03:35 AM -0400
+// Last Change: Tue May 03, 2022 at 01:41 AM -0400
 
 #pragma once
 
@@ -128,13 +128,17 @@ DMesonPack isDMeson(const PartIdMap parts) {
 }
 
 bool isDMeson(const int id) {
-  if (digitIs(id, 3) == 4) return true;
+  if (digitIs(TMath::Abs(id), 3) == 4) return true;
   return false;
 }
 
 bool isHadron(const int id) {
   if (TMath::Abs(id) > 100) return true;
   return false;
+}
+
+bool isDstMeson(const int id) {
+  return TMath::Abs(id) == 413 || TMath::Abs(id) == 423;
 }
 
 // We fix particle IDs based on Muon's true ID

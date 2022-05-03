@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Mon May 02, 2022 at 08:08 PM -0400
+// Last Change: Tue May 03, 2022 at 02:04 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -169,7 +169,6 @@ vector<string> getDauTrueP(string particle, string dau) {
 // Reweighting //
 /////////////////
 
-typedef pair<unsigned long, unsigned long>         RwRate;
 typedef tuple<double, double, double, double, int> HamPartCtn;
 
 pair<RNode, vector<string>> prepAuxOutput(RNode df, string bMesonName) {
@@ -221,6 +220,14 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
   // D meson (can be a D**, D*, or D)
   df = df.Define("part_D", buildPartVec, getDauTrueP(bMesonName, "D0"));
 
+  // D meson daughters
+  df =
+      df.Define("part_D_dau0", buildPartVec, getDauTrueP(bMesonName, "D0_GD0"));
+  df =
+      df.Define("part_D_dau1", buildPartVec, getDauTrueP(bMesonName, "D0_GD1"));
+  df =
+      df.Define("part_D_dau2", buildPartVec, getDauTrueP(bMesonName, "D0_GD2"));
+
   // Tau/Mu, Nu_Tau/Nu_Mu associated w/ B -> D decay
   df = df.Define("part_Tau_id", tauIdFix, {"mu_TRUEID"});
   df = df.Define(
@@ -265,6 +272,80 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
                              {"part_NuMu_id"}));
 
   return {df, outputBrs};
+}
+
+auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
+                     unsigned long& numOfEvtOk) {
+  return [&](bool isTau, HamPartCtn pB, HamPartCtn pD, HamPartCtn pDDau0,
+             HamPartCtn pDDau1, HamPartCtn pDDau2, HamPartCtn pL,
+             HamPartCtn pNuL, HamPartCtn pMu, HamPartCtn pNuMu,
+             HamPartCtn pNuTau) {
+    // keep me here
+    bool   hamOk = false;
+    double wtFF  = 1.0;
+
+    numOfEvt += 1;
+    Hammer::Process proc;
+
+    auto partB     = buildHamPart(pB);
+    auto partD     = buildHamPart(pD);
+    auto partL     = buildHamPart(pL);
+    auto partNuL   = buildHamPart(pNuL);
+    auto particles = vector<Hammer::Particle>{partB, partD, partL, partNuL};
+
+    // add B meson
+    auto partBIdx = proc.addParticle(partB);
+
+    // add direct B daughters
+    auto                    partDIdx   = proc.addParticle(partD);
+    auto                    partLIdx   = proc.addParticle(partL);
+    auto                    partNuLIdx = proc.addParticle(partNuL);
+    Hammer::ParticleIndices partBDauIdx{partDIdx, partLIdx, partNuLIdx};
+    proc.addVertex(partBIdx, partBDauIdx);
+
+    // in case of a D*, add its daughters as well
+    bool                    isDst = isDstMeson(get<4>(pD));
+    Hammer::ParticleIndices partDDauIdx{};
+    if (isDst) {
+      auto partDDaus = {buildHamPart(pDDau0), buildHamPart(pDDau1),
+                        buildHamPart(pDDau2)};
+      for (const auto& p : partDDaus) {
+        if (p.pdgId() == 22) continue;  // don't add photons!
+        partDDauIdx.emplace_back(proc.addParticle(p));
+        particles.emplace_back(p);
+      }
+      proc.addVertex(partDIdx, partDDauIdx);
+    }
+
+    // in case of a Tau, add its daughters
+    Hammer::ParticleIndices partLDauIdx{};
+    if (isTau) {
+      auto partLDaus = {buildHamPart(pMu), buildHamPart(pNuMu),
+                        buildHamPart(pNuTau)};
+      for (const auto& p : partLDaus) {
+        partLDauIdx.emplace_back(proc.addParticle(p));
+        particles.emplace_back(p);
+      }
+      proc.addVertex(partLIdx, partLDauIdx);
+    }
+
+    // make sure invariant mass is not negative
+    auto partInvMOk = vector<bool>{};
+    for (const auto& p : particles) {
+      if (p.p().mass() >= 0)
+        partInvMOk.emplace_back(true);
+      else
+        partInvMOk.emplace_back(false);
+    }
+    bool allPartsOk =
+        find(partInvMOk.begin(), partInvMOk.end(), false) == partInvMOk.end();
+    if (!allPartsOk) {
+      cout << "WARN: Bad kinematics for candidate: " << numOfEvt << endl;
+      hamOk = false;
+    }
+
+    return tuple<bool, double>{hamOk, wtFF};
+  };
 }
 
 RwRate reweight(TFile* input_ntp, TFile* output_ntp, TString tree,
