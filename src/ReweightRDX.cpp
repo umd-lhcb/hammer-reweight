@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Sun May 01, 2022 at 03:48 AM -0400
+// Last Change: Mon May 02, 2022 at 08:08 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -109,7 +109,7 @@ void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BD**2*MuNu");
 }
 
-const Double_t SOFT_PHOTON_THRESH = 0.1;
+const double SOFT_PHOTON_THRESH = 0.1;
 
 /////////////
 // Filters //
@@ -151,14 +151,28 @@ Bool_t is_soft_photon(Double_t pe) {
   return true;
 }
 
+/////////////////////////
+// Branch name helpers //
+/////////////////////////
+
+vector<string> getTrueP(string particle) {
+  return setBrPrefix(particle,
+                     {"TRUEP_E", "TRUEP_X", "TRUEP_Y", "TRUEP_Z", "TRUEID"});
+}
+
+vector<string> getDauTrueP(string particle, string dau) {
+  return setBrPrefix(particle + "_TrueHadron_" + dau,
+                     {"PE", "PX", "PY", "PZ", "ID"});
+}
+
 /////////////////
 // Reweighting //
 /////////////////
 
-typedef pair<unsigned long, unsigned long> RwRate;
+typedef pair<unsigned long, unsigned long>         RwRate;
+typedef tuple<double, double, double, double, int> HamPartCtn;
 
-// NOTE: Refine branch names if input ntuples have different tree structrue!
-pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
+pair<RNode, vector<string>> prepAuxOutput(RNode df, string bMesonName) {
   auto outputBrs = vector<string>{};
 
   // truth variables
@@ -191,6 +205,64 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
                               "TrueHadron_D0_ID", "TrueHadron_D1_ID"},
                              {"mu_TRUEID"}));
   outputBrs.emplace_back("ham_tm_ok");
+
+  return {df, outputBrs};
+}
+
+// NOTE: Refine branch names if input ntuples have different tree structrue!
+pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
+  auto outputBrs = vector<string>{};
+
+  // B meson
+  df = df.Define("b_id_fixed", bIdFix,
+                 setBrPrefix(bMesonName, {"TRUEID", "TrueHadron_D0_ID"}));
+  df = df.Define("part_B", buildPartVec, getTrueP(bMesonName));
+
+  // D meson (can be a D**, D*, or D)
+  df = df.Define("part_D", buildPartVec, getDauTrueP(bMesonName, "D0"));
+
+  // Tau/Mu, Nu_Tau/Nu_Mu associated w/ B -> D decay
+  df = df.Define("part_Tau_id", tauIdFix, {"mu_TRUEID"});
+  df = df.Define(
+      "part_Tau", buildPartVec,
+      setBrPrefix(bMesonName,
+                  {"TrueTau_PE", "TrueTau_PX", "TrueTau_PY", "TrueTau_PZ"},
+                  {"part_L_id"}));
+  df = df.Define(
+      "part_Mu", buildPartVec,
+      setBrPrefix(bMesonName,
+                  {"TrueMu_PE", "TrueMu_PX", "TrueMu_PY", "TrueMu_PZ"},
+                  {"mu_TRUEID"}));
+  df = df.Define("part_L",
+                 [](HamPartCtn pTau, HamPartCtn pMu, bool isTau) {
+                   if (isTau) return pTau;
+                   return pMu;
+                 },
+                 {"part_Tau", "part_Mu", bMesonName + "_True_IsTauDecay"});
+
+  df = df.Define("part_NuL_id", nuIdFix,
+                 {"mu_TRUEID", bMesonName + "_True_IsTauDecay"});
+  df = df.Define("part_NuL", buildPartVec,
+                 setBrPrefix(bMesonName,
+                             {"TrueNeutrino_PE", "TrueNeutrino_PX",
+                              "TrueNeutrino_PY", "TrueNeutrino_PZ"},
+                             {"part_NuL_id"}));
+  // for leptons produced by primary B -> D decays, ALWAYS use part_L and
+  // part_NuL
+
+  // TauNu, MuNu associated w/ Tau -> Mu decay
+  df = df.Define("part_NuTau_id", tauNuTauIdFix, {"mu_TRUEID"});
+  df = df.Define("part_NuTau", buildPartVec,
+                 setBrPrefix(bMesonName,
+                             {"TrueTauNuTau_PE", "TrueTauNuTau_PX",
+                              "TrueTauNuTau_PY", "TrueTauNuTau_PZ"},
+                             {"part_NuTau_id"}));
+  df = df.Define("part_NuMu_id", tauNuMuIdFix, {"mu_TRUEID"});
+  df = df.Define("part_NuMu", buildPartVec,
+                 setBrPrefix(bMesonName,
+                             {"TrueTauNuMu_PE", "TrueTauNuMu_PX",
+                              "TrueTauNuMu_PY", "TrueTauNuMu_PZ"},
+                             {"part_NuMu_id"}));
 
   return {df, outputBrs};
 }
