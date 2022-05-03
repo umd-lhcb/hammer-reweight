@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue May 03, 2022 at 02:14 AM -0400
+// Last Change: Tue May 03, 2022 at 04:15 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -26,6 +26,8 @@
 #include <Hammer/Math/FourMomentum.hh>
 #include <Hammer/Particle.hh>
 #include <Hammer/Process.hh>
+
+#include <cxxopts.hpp>
 
 #include "const.h"
 #include "utils_general.h"
@@ -124,31 +126,6 @@ bool truthMatchOk(double q2True, bool isTauDecay, int bMesonId, int dau1Id,
   return findIn(LEGAL_B_MESON_IDS, TMath::Abs(bMesonId)) && q2True > q2Min &&
          isDMeson(TMath::Abs(dau1Id)) && !isDMeson(TMath::Abs(dau2Id)) &&
          TMath::Abs(muID) == 13;
-}
-
-/////////////////
-// Corrections //
-/////////////////
-
-string photon_correction(int ref_mom_id, vector<Int_t> photon_mom_id,
-                         vector<Hammer::Particle> photon_p,
-                         Hammer::Process& proc, Hammer::ParticleIndices& idx,
-                         TDatabasePDG* db) {
-  stringstream buffer;
-  for (auto i = 0; i < photon_p.size(); i++) {
-    if (photon_mom_id[i] == ref_mom_id) {
-      buffer << "  Adding photon: " << printP(photon_p[i].p())
-             << " to particle " << getParticleName(ref_mom_id, db) << endl;
-      idx.push_back(proc.addParticle(photon_p[i]));
-    }
-  }
-
-  return buffer.str();
-}
-
-Bool_t is_soft_photon(Double_t pe) {
-  if (TMath::Abs(pe) > SOFT_PHOTON_THRESH) return false;
-  return true;
 }
 
 /////////////////////////
@@ -386,11 +363,39 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
 // Main //
 //////////
 
-int main(int, char** argv) {
-  auto    input_ntp  = new TFile(argv[1], "read");
-  auto    output_ntp = new TFile(argv[2], "update");
-  TString tree       = argv[3];
-  TString run        = argv[4];
+int main(int argc, char** argv) {
+  cxxopts::Options argOpts("ReweightRDX", "Reweight RDX FF w/ HAMMER.");
+
+  // clang-format off
+  argOpts.add_options()
+    // positional
+    ("ntpIn", "specify input ntuple.", cxxopts::value<string>())
+    ("ntpOut", "specify output ntuple.", cxxopts::value<string>())
+    ("extra", "unused.", cxxopts::value<vector<string>>())
+    // keyword
+    ("h,help", "print help.")
+    ("t,trees", "specify tree name.",
+     cxxopts::value<vector<string>>()
+     ->default_value("TupleBminus/DecayTree,TupleB0/DecayTree"))
+    ("b,bMesons", "specify B meson name.",
+     cxxopts::value<vector<string>>()->default_value("b,b0"))
+    ("r,run", "specify run.", cxxopts::value<string>()->default_value("run1"))
+  ;
+  // setup positional argument
+  argOpts.parse_positional({"ntpIn", "ntpOut", "extra"});
+  // clang-format on
+
+  auto parsedArgs = argOpts.parse(argc, argv);
+  if (parsedArgs.count("help")) {
+    cout << argOpts.help() << endl;
+    return 0;
+  }
+
+  auto ntpIn   = parsedArgs["ntpIn"].as<string>();
+  auto ntpOut  = parsedArgs["ntpOut"].as<string>();
+  auto trees   = parsedArgs["trees"].as<vector<string>>();
+  auto bMesons = parsedArgs["bMesons"].as<vector<string>>();
+  auto run     = parsedArgs["run"].as<string>();
 
   Hammer::Hammer ham{};
 
@@ -402,14 +407,26 @@ int main(int, char** argv) {
   ham.setOptions("ProcessCalc: {CheckForNaNs: true}");
   ham.initRun();
 
-  auto rate = reweight(input_ntp, output_ntp, tree, ham);
+  // output option
+  auto writeOpts  = ROOT::RDF::RSnapshotOptions{};
+  writeOpts.fMode = "UPDATE";
 
-  cout << "Total number of candidates: " << get<0>(rate) << endl;
-  cout << "Hammer reweighted candidates: " << get<1>(rate) << endl;
-  cout << "Reweighted fraction: "
-       << static_cast<float>(get<1>(rate)) / static_cast<float>(get<0>(rate))
-       << endl;
+  for (int idx = 0; idx != trees.size(); idx++) {
+    RNode          df     = static_cast<RNode>(RDataFrame(trees[idx], ntpIn));
+    auto           bMeson = bMesons[idx];
+    vector<string> outputBrs{"runNumber", "eventNumber"};
+    unsigned long  numOfEvt      = 0;
+    unsigned long  numOfEvtWithB = 0;
 
-  delete input_ntp;
-  delete output_ntp;
+    auto [rdfOut, outputBrsAux] = prepAuxOutput(df, bMeson);
+    for (const auto& br : outputBrsAux) outputBrs.emplace_back(br);
+
+    rdfOut.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
+
+    cout << "Total number of candidates: " << numOfEvt << endl;
+    cout << "Hammer reweighted candidates: " << numOfEvtWithB << endl;
+    cout << "Reweighted fraction: "
+         << static_cast<float>(numOfEvt) / static_cast<float>(numOfEvtWithB)
+         << endl;
+  }
 }
