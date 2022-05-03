@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue May 03, 2022 at 04:25 AM -0400
+// Last Change: Tue May 03, 2022 at 11:14 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -154,6 +154,9 @@ pair<RNode, vector<string>> prepAuxOutput(RNode df, string bMesonName) {
   // truth variables
   df = df.Define("q2_true", bMesonName + "_True_Q2 / 1000 / 1000");
   outputBrs.emplace_back("q2_true");
+
+  df = df.Define("is_tau", bMesonName + "_True_IsTauDecay");
+  outputBrs.emplace_back("is_tau");
 
   auto kinematicSuffix = {"_PE", "_PX", "_PY", "_PZ"};
   for (int i = 0; i < 2; i++) {
@@ -415,8 +418,8 @@ int main(int argc, char** argv) {
     RNode          df     = static_cast<RNode>(RDataFrame(trees[idx], ntpIn));
     auto           bMeson = bMesons[idx];
     vector<string> outputBrs{"runNumber", "eventNumber"};
-    unsigned long  numOfEvt      = 0;
-    unsigned long  numOfEvtWithB = 0;
+    unsigned long  numOfEvt   = 0;
+    unsigned long  numOfEvtOk = 0;
 
     cout << "Handling " << trees[idx] << " with B meson name " << bMeson
          << endl;
@@ -429,12 +432,23 @@ int main(int argc, char** argv) {
     // prepare HAMMER particles
     tie(df, ignore) = prepHamInput(df, bMeson);
 
+    // reweight FF
+    auto reweight = reweightWrapper(ham, numOfEvt, numOfEvtOk);
+    df            = df.Define("ff_result", reweight,
+                   {"is_tau", "part_B", "part_D", "part_D_dau0", "part_D_dau1",
+                    "part_D_dau2", "part_L", "part_NuL", "part_Mu", "part_NuMu",
+                    "part_NuTau"});
+    df            = df.Define("ham_ok", "get<0>(ff_result)");
+    df            = df.Define("wff", "get<1>(ff_result)");
+    outputBrs.emplace_back("ham_ok");
+    outputBrs.emplace_back("wff");
+
     df.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
 
     cout << "Total number of candidates: " << numOfEvt << endl;
-    cout << "Hammer reweighted candidates: " << numOfEvtWithB << endl;
+    cout << "Hammer reweighted candidates: " << numOfEvtOk << endl;
     cout << "Reweighted fraction: "
-         << static_cast<float>(numOfEvt) / static_cast<float>(numOfEvtWithB)
+         << static_cast<float>(numOfEvtOk) / static_cast<float>(numOfEvt)
          << endl;
   }
 }
