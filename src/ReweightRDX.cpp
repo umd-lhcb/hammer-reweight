@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue May 03, 2022 at 04:15 AM -0400
+// Last Change: Tue May 03, 2022 at 04:19 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -166,7 +166,7 @@ pair<RNode, vector<string>> prepAuxOutput(RNode df, string bMesonName) {
     auto sIdx         = to_string(i);
     auto kinematicBrs = vector<string>{};
     for (const auto& suf : kinematicSuffix) {
-      kinematicBrs.emplace_back("_TrueHadron_D" + sIdx + suf);
+      kinematicBrs.emplace_back("TrueHadron_D" + sIdx + suf);
     }
 
     df = df.Define(partName + "_true_m", invM,
@@ -417,6 +417,9 @@ int main(int argc, char** argv) {
     vector<string> outputBrs{"runNumber", "eventNumber"};
     unsigned long  numOfEvt      = 0;
     unsigned long  numOfEvtWithB = 0;
+
+    cout << "Handling " << trees[idx] << " with B meson name " << bMeson
+         << endl;
 
     auto [rdfOut, outputBrsAux] = prepAuxOutput(df, bMeson);
     for (const auto& br : outputBrsAux) outputBrs.emplace_back(br);
