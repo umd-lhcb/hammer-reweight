@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue May 03, 2022 at 04:19 AM -0400
+// Last Change: Tue May 03, 2022 at 04:25 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -211,7 +211,7 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
       "part_Tau", buildPartVec,
       setBrPrefix(bMesonName,
                   {"TrueTau_PE", "TrueTau_PX", "TrueTau_PY", "TrueTau_PZ"},
-                  {"part_L_id"}));
+                  {"part_Tau_id"}));
   df = df.Define(
       "part_Mu", buildPartVec,
       setBrPrefix(bMesonName,
@@ -421,10 +421,15 @@ int main(int argc, char** argv) {
     cout << "Handling " << trees[idx] << " with B meson name " << bMeson
          << endl;
 
-    auto [rdfOut, outputBrsAux] = prepAuxOutput(df, bMeson);
+    // prepare aux output branches like q2_true
+    auto [dfAux, outputBrsAux] = prepAuxOutput(df, bMeson);
+    df                         = dfAux;
     for (const auto& br : outputBrsAux) outputBrs.emplace_back(br);
 
-    rdfOut.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
+    // prepare HAMMER particles
+    tie(df, ignore) = prepHamInput(df, bMeson);
+
+    df.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
 
     cout << "Total number of candidates: " << numOfEvt << endl;
     cout << "Hammer reweighted candidates: " << numOfEvtWithB << endl;
