@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 03, 2022 at 01:41 AM -0400
+// Last Change: Wed May 04, 2022 at 10:25 AM -0400
 
 #pragma once
 
@@ -142,24 +142,25 @@ bool isDstMeson(const int id) {
 }
 
 // We fix particle IDs based on Muon's true ID
-
 int bIdFix(const int bId, const int dId) {
   if (bId * dId > 0) return -bId;
   return bId;
 }
 
-int muIdFix(int muId, int trueId = 13) {
+int idFix(const int muId, const int trueId) {
   Int_t sign = muId / TMath::Abs(muId);
   return sign * trueId;
 }
 
-int tauIdFix(int muId) { return muIdFix(muId, 15); }
+int muIdFix(const int muId) { return idFix(muId, 13); }
 
-int nuIdFix(int muId, bool isTau) {
-  if (isTau) return muIdFix(muId, -16);
-  return muIdFix(muId, -14);
+int tauIdFix(const int muId) { return idFix(muId, 15); }
+
+int nuIdFix(const int muId, bool isTau) {
+  if (isTau) return idFix(muId, -16);
+  return idFix(muId, -14);
 }
 
-int tauNuMuIdFix(int muId) { return muIdFix(muId, -14); }
+int tauNuMuIdFix(const int muId) { return idFix(muId, -14); }
 
-int tauNuTauIdFix(int muId) { return muIdFix(muId, 16); }
+int tauNuTauIdFix(const int muId) { return idFix(muId, 16); }

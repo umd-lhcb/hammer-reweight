@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Tue May 03, 2022 at 11:14 AM -0400
+// Last Change: Wed May 04, 2022 at 10:20 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -215,11 +215,12 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
       setBrPrefix(bMesonName,
                   {"TrueTau_PE", "TrueTau_PX", "TrueTau_PY", "TrueTau_PZ"},
                   {"part_Tau_id"}));
+  df = df.Define("part_Mu_id", muIdFix, {"mu_TRUEID"});
   df = df.Define(
       "part_Mu", buildPartVec,
       setBrPrefix(bMesonName,
                   {"TrueMu_PE", "TrueMu_PX", "TrueMu_PY", "TrueMu_PZ"},
-                  {"mu_TRUEID"}));
+                  {"part_Mu_id"}));
   df = df.Define("part_L",
                  [](HamPartCtn pTau, HamPartCtn pMu, bool isTau) {
                    if (isTau) return pTau;
