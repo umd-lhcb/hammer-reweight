@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed May 04, 2022 at 10:20 AM -0400
+// Last Change: Wed May 04, 2022 at 01:07 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -132,9 +132,9 @@ bool truthMatchOk(double q2True, bool isTauDecay, int bMesonId, int dau1Id,
 // Branch name helpers //
 /////////////////////////
 
-vector<string> getTrueP(string particle) {
-  return setBrPrefix(particle,
-                     {"TRUEP_E", "TRUEP_X", "TRUEP_Y", "TRUEP_Z", "TRUEID"});
+vector<string> getBTrueP(string particle, string bId) {
+  return setBrPrefix(particle, {"TRUEP_E", "TRUEP_X", "TRUEP_Y", "TRUEP_Z"},
+                     {bId});
 }
 
 vector<string> getDauTrueP(string particle, string dau) {
@@ -195,7 +195,7 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
   // B meson
   df = df.Define("b_id_fixed", bIdFix,
                  setBrPrefix(bMesonName, {"TRUEID", "TrueHadron_D0_ID"}));
-  df = df.Define("part_B", buildPartVec, getTrueP(bMesonName));
+  df = df.Define("part_B", buildPartVec, getBTrueP(bMesonName, "b_id_fixed"));
 
   // D meson (can be a D**, D*, or D)
   df = df.Define("part_D", buildPartVec, getDauTrueP(bMesonName, "D0"));
