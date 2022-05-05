@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu May 05, 2022 at 04:55 PM -0400
+// Last Change: Thu May 05, 2022 at 05:13 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -36,6 +36,7 @@
 using namespace std;
 using ROOT::RDataFrame;
 using ROOT::RDF::RNode;
+using ROOT::VecOps::RVec;
 
 ///////////////////
 // Configurables //
@@ -146,10 +147,11 @@ vector<string> getDauTrueP(string particle, string dau) {
 
 typedef tuple<double, double, double, double, int> HamPartCtn;
 
-vector<HamPartCtn> buildPhotonVec(size_t size, float* arrPe, float* arrPx,
-                                  float* arrPy, float* arrPz, float* arrId) {
+vector<HamPartCtn> buildPhotonVec(RVec<float>& arrPe, RVec<float>& arrPx,
+                                  RVec<float>& arrPy, RVec<float>& arrPz,
+                                  RVec<float>& arrId, int size) {
   vector<HamPartCtn> result{};
-  for (size_t idx = 0; idx != size; idx++) {
+  for (auto idx = 0; idx != size; idx++) {
     result.emplace_back(buildPartVec(arrPe[idx], arrPx[idx], arrPy[idx],
                                      arrPz[idx], static_cast<int>(arrId[idx])));
   }
@@ -241,12 +243,14 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
       df.Define("part_D_dau2", buildPartVec, getDauTrueP(bMesonName, "D0_GD2"));
 
 #ifdef RADIATIVE_CORRECTION
-  // Tau/Mu, Nu_Tau/Nu_Mu associated w/ B -> D decay
-  df = df.Define("part_photon_arr", buildPartVec,
+  // the radiative photons container
+  df = df.Define("part_photon_arr", buildPhotonVec,
                  setBrPrefix(bMesonName, {"MCTrue_gamma_E", "MCTrue_gamma_PX",
                                           "MCTrue_gamma_PY", "MCTrue_gamma_PZ",
-                                          "MCTrue_gamma_mother_ID"}));
+                                          "MCTrue_gamma_mother_ID",
+                                          "MCTrue_gamma_ArrayLength"}));
 
+  // Tau/Mu, Nu_Tau/Nu_Mu associated w/ B -> D decay
   df = df.Define("part_Tau_id", tauIdFix, {"mu_TRUEID"});
   df = df.Define(
       "part_Tau", buildPartVec,
@@ -289,6 +293,9 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
                              {"TrueTauNuMu_PE", "TrueTauNuMu_PX",
                               "TrueTauNuMu_PY", "TrueTauNuMu_PZ"},
                              {"part_NuMu_id"}));
+#else
+  // this is just a place holder in case we don't add radiative photons back!
+  df = df.Define("part_photon_arr", []() { return vector<HamPartCtn>{}; }, {});
 #endif
 
   return {df, outputBrs};
@@ -324,9 +331,13 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     proc.addVertex(partBIdx, partBDauIdx);
 
     // in case of a D*, add its daughters as well
+    Hammer::ParticleIndices partDDauIdx{};
+#ifdef RADIATIVE_CORRECTION
+    addRadiativePhotons(proc, partDDauIdx, partD.pdgId(), pPhotons);
+#endif
+
     bool isDst = isDstMeson(get<4>(pD));
     if (isDst) {
-      Hammer::ParticleIndices partDDauIdx{};
       auto partDDaus = {buildHamPart(pDDau0), buildHamPart(pDDau1),
                         buildHamPart(pDDau2)};
       for (const auto& p : partDDaus) {
@@ -335,13 +346,8 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         partDDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
       }
-
-#ifdef RADIATIVE_CORRECTION
-      addRadiativePhotons(proc, partDDauIdx, partD.pdgId(), pPhotons);
-#endif
-
-      proc.addVertex(partDIdx, partDDauIdx);
     }
+    if (partDDauIdx.size()) proc.addVertex(partDIdx, partDDauIdx);
 
     // in case of a Tau, add its daughters
     Hammer::ParticleIndices partLDauIdx{};
@@ -483,7 +489,7 @@ int main(int argc, char** argv) {
     df            = df.Define("ff_result", reweight,
                    {"is_tau", "part_B", "part_D", "part_D_dau0", "part_D_dau1",
                     "part_D_dau2", "part_L", "part_NuL", "part_Mu", "part_NuMu",
-                    "part_NuTau"});
+                    "part_NuTau", "part_photon_arr"});
     df            = df.Define("ham_ok", "get<0>(ff_result)");
     df            = df.Define("wff", "get<1>(ff_result)");
     outputBrs.emplace_back("ham_ok");
