@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu May 05, 2022 at 05:13 PM -0400
+// Last Change: Thu May 05, 2022 at 06:58 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -329,6 +329,10 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     auto                    partNuLIdx = proc.addParticle(partNuL);
     Hammer::ParticleIndices partBDauIdx{partDIdx, partLIdx, partNuLIdx};
     proc.addVertex(partBIdx, partBDauIdx);
+#ifdef RADIATIVE_CORRECTION
+    // FIXME: can't do this, as HAMMER gets stuck if we try to add photons to B
+    // addRadiativePhotons(proc, partBDauIdx, partB.pdgId(), pPhotons);
+#endif
 
     // in case of a D*, add its daughters as well
     Hammer::ParticleIndices partDDauIdx{};
@@ -351,6 +355,10 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
 
     // in case of a Tau, add its daughters
     Hammer::ParticleIndices partLDauIdx{};
+#ifdef RADIATIVE_CORRECTION
+    addRadiativePhotons(proc, partLDauIdx, partL.pdgId(), pPhotons);
+#endif
+
     if (isTau) {
       auto partLDaus = {buildHamPart(pMu), buildHamPart(pNuMu),
                         buildHamPart(pNuTau)};
@@ -358,8 +366,8 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         partLDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
       }
-      proc.addVertex(partLIdx, partLDauIdx);
     }
+    if (partLDauIdx.size()) proc.addVertex(partLIdx, partLDauIdx);
 
     // make sure invariant mass is not negative
     auto partInvMOk = vector<bool>{};
