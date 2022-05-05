@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Wed May 04, 2022 at 01:07 PM -0400
+// Last Change: Thu May 05, 2022 at 03:50 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -46,8 +46,8 @@ using ROOT::RDF::RNode;
 #endif
 
 //#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
-//#define FORCE_MOMENTUM_CONSERVATION_HADRONIC
 #define RADIATIVE_CORRECTION
+#define SOFT_PHOTON_THRESH 0.1
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
@@ -111,8 +111,6 @@ void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BD**2*MuNu");
 }
 
-const double SOFT_PHOTON_THRESH = 0.1;
-
 /////////////
 // Filters //
 /////////////
@@ -142,11 +140,30 @@ vector<string> getDauTrueP(string particle, string dau) {
                      {"PE", "PX", "PY", "PZ", "ID"});
 }
 
+////////////////////
+// FSR correction //
+////////////////////
+
+typedef tuple<double, double, double, double, int> HamPartCtn;
+
+vector<HamPartCtn> buildPhotonVec(size_t size, float* arrPe, float* arrPx,
+                                  float* arrPy, float* arrPz, float* arrId) {
+  vector<HamPartCtn> result{};
+  for (size_t idx = 0; idx != size; idx++) {
+    result.emplace_back(buildPartVec(arrPe[idx], arrPx[idx], arrPy[idx],
+                                     arrPz[idx], static_cast<int>(arrId[idx])));
+  }
+  return result;
+}
+
+bool isSoftPhoton(Hammer::Particle part) {
+  if (part.p().E() < SOFT_PHOTON_THRESH) return true;
+  return false;
+}
+
 /////////////////
 // Reweighting //
 /////////////////
-
-typedef tuple<double, double, double, double, int> HamPartCtn;
 
 pair<RNode, vector<string>> prepAuxOutput(RNode df, string bMesonName) {
   auto outputBrs = vector<string>{};
@@ -208,7 +225,13 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
   df =
       df.Define("part_D_dau2", buildPartVec, getDauTrueP(bMesonName, "D0_GD2"));
 
+#ifdef RADIATIVE_CORRECTION
   // Tau/Mu, Nu_Tau/Nu_Mu associated w/ B -> D decay
+  df = df.Define("part_photon_arr", buildPartVec,
+                 setBrPrefix(bMesonName, {"MCTrue_gamma_E", "MCTrue_gamma_PX",
+                                          "MCTrue_gamma_PY", "MCTrue_gamma_PZ",
+                                          "MCTrue_gamma_mother_ID"}));
+
   df = df.Define("part_Tau_id", tauIdFix, {"mu_TRUEID"});
   df = df.Define(
       "part_Tau", buildPartVec,
@@ -251,6 +274,7 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
                              {"TrueTauNuMu_PE", "TrueTauNuMu_PX",
                               "TrueTauNuMu_PY", "TrueTauNuMu_PZ"},
                              {"part_NuMu_id"}));
+#endif
 
   return {df, outputBrs};
 }
@@ -291,7 +315,8 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
       auto partDDaus = {buildHamPart(pDDau0), buildHamPart(pDDau1),
                         buildHamPart(pDDau2)};
       for (const auto& p : partDDaus) {
-        if (p.pdgId() == 22) continue;  // don't add photons!
+        // don't add soft photons
+        if (p.pdgId() == 22 && isSoftPhoton(p)) continue;
         partDDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
       }
