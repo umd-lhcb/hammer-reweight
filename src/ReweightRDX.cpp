@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu May 05, 2022 at 03:50 AM -0400
+// Last Change: Thu May 05, 2022 at 04:55 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -161,6 +161,21 @@ bool isSoftPhoton(Hammer::Particle part) {
   return false;
 }
 
+void addRadiativePhotons(Hammer::Process& proc, Hammer::ParticleIndices& idx,
+                         int momId, vector<HamPartCtn>& photons,
+                         bool useAbsId = false) {
+  if (useAbsId) momId = TMath::Abs(momId);
+
+  for (const auto& p : photons) {
+    auto [pe, px, py, pz, photonMomId] = p;
+    if (photonMomId == momId) {
+      auto partPhoton    = buildHamPart(pe, px, py, pz, 22);
+      auto partPhotonIdx = proc.addParticle(partPhoton);
+      idx.emplace_back(partPhotonIdx);
+    }
+  }
+}
+
 /////////////////
 // Reweighting //
 /////////////////
@@ -284,7 +299,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
   return [&](bool isTau, HamPartCtn pB, HamPartCtn pD, HamPartCtn pDDau0,
              HamPartCtn pDDau1, HamPartCtn pDDau2, HamPartCtn pL,
              HamPartCtn pNuL, HamPartCtn pMu, HamPartCtn pNuMu,
-             HamPartCtn pNuTau) {
+             HamPartCtn pNuTau, vector<HamPartCtn> pPhotons) {
     // keep me here
     bool   hamOk = true;
     double wtFF  = 1.0;
@@ -309,9 +324,9 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     proc.addVertex(partBIdx, partBDauIdx);
 
     // in case of a D*, add its daughters as well
-    bool                    isDst = isDstMeson(get<4>(pD));
-    Hammer::ParticleIndices partDDauIdx{};
+    bool isDst = isDstMeson(get<4>(pD));
     if (isDst) {
+      Hammer::ParticleIndices partDDauIdx{};
       auto partDDaus = {buildHamPart(pDDau0), buildHamPart(pDDau1),
                         buildHamPart(pDDau2)};
       for (const auto& p : partDDaus) {
@@ -320,6 +335,11 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         partDDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
       }
+
+#ifdef RADIATIVE_CORRECTION
+      addRadiativePhotons(proc, partDDauIdx, partD.pdgId(), pPhotons);
+#endif
+
       proc.addVertex(partDIdx, partDDauIdx);
     }
 
