@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri May 06, 2022 at 03:38 AM -0400
+// Last Change: Fri May 06, 2022 at 03:55 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -357,10 +357,10 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     auto                    partLIdx   = proc.addParticle(partL);
     auto                    partNuLIdx = proc.addParticle(partNuL);
     Hammer::ParticleIndices partBDauIdx{partDIdx, partLIdx, partNuLIdx};
-    proc.addVertex(partBIdx, partBDauIdx);
 #ifdef RADIATIVE_CORRECTION
     debugMsg += addRadiativePhotons(proc, partBDauIdx, partB.pdgId(), pPhotons);
 #endif
+    proc.addVertex(partBIdx, partBDauIdx);
 
     // in case of a D*, add its daughters as well
     Hammer::ParticleIndices partDDauIdx{};
@@ -374,9 +374,8 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
                         buildHamPart(pDDau2)};
       for (const auto& p : partDDaus) {
         // don't add placeholder particle
-        if (p.pdgId() == 0) continue;
-        // don't add soft photons
-        if (p.pdgId() == 22 && isSoftPhoton(p)) continue;
+        // don't add photons as it will be a duplicate
+        if (p.pdgId() == 0 || p.pdgId() == 22) continue;
         partDDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
         debugMsg += "  D daughters: " + printP(p) + "\n";
