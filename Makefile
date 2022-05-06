@@ -13,7 +13,7 @@ VALLINKFLAGS	:=	-lff_calc
 # General #
 ###########
 
-exe: PrintMCDecay #ReweightRDX ReweightRDXDebug
+exe: PrintMCDecay ReweightRDX ReweightRDXDebug
 
 .PHONY: clean
 clean:
@@ -33,6 +33,9 @@ PrintMCDecay: PrintMCDecay.cpp
 
 ValidateRDX: ValidateRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS) $(VALLINKFLAGS)
+
+ReweightRDX: ReweightRDX.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
 ReweightRDXDebug: ReweightRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -DDEBUG_CLI -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
@@ -88,7 +91,7 @@ validation-plots: gen/rdx-run2-validation.root
 		--debug
 
 rdx-run2-ntuples: \
-	gen/rdx-run2-Bd2DstMuNu-sim09k-reweighted.root \
+	gen/rdx-run2-Bd2Dst0MuNu-sim09k-reweighted.root \
 	gen/rdx-run2-Bd2DstMuNu-reweighted.root \
 	gen/rdx-run2-Bd2DststTauNu-reweighted.root \
 	gen/rdx-run2-Bd2DstTauNu-reweighted.root \
@@ -107,14 +110,14 @@ rdx-run2-ntuples: \
 
 # Weight ntuples
 gen/rdx-run1-%-reweighted.root: samples/rdx-run1-%.root ReweightRDX
-	./bin/ReweightRDX $< $@ -r run1
+	$(word 2, $^) $< $@ -r run1
 
-gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDXDebug
-	./bin/ReweightRDXDebug $< $@ -r run2 | tee gen/$(basename $(notdir $@)).log
+gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
+	$(word 2, $^) $< $@ | tee gen/$(basename $(notdir $@)).log
 
 # Validation ntuples
 gen/rdx-run2-validation.root: ValidateRDX
-	./bin/ValidateRDX $@
+	$(word 2, $^) $@
 
 # True q2 plots
 gen/%_q2_true.png: gen/%-reweighted.root
