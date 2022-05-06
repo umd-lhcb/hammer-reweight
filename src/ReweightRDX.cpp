@@ -1,5 +1,5 @@
 // Author: Yipeng Sun
-// Last Change: Thu May 05, 2022 at 06:58 PM -0400
+// Last Change: Thu May 05, 2022 at 10:23 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -147,35 +147,52 @@ vector<string> getDauTrueP(string particle, string dau) {
 
 typedef tuple<double, double, double, double, int> HamPartCtn;
 
-vector<HamPartCtn> buildPhotonVec(RVec<float>& arrPe, RVec<float>& arrPx,
-                                  RVec<float>& arrPy, RVec<float>& arrPz,
-                                  RVec<float>& arrId, int size) {
-  vector<HamPartCtn> result{};
-  for (auto idx = 0; idx != size; idx++) {
-    result.emplace_back(buildPartVec(arrPe[idx], arrPx[idx], arrPy[idx],
-                                     arrPz[idx], static_cast<int>(arrId[idx])));
-  }
-  return result;
-}
-
 bool isSoftPhoton(Hammer::Particle part) {
   if (part.p().E() < SOFT_PHOTON_THRESH) return true;
   return false;
 }
 
-void addRadiativePhotons(Hammer::Process& proc, Hammer::ParticleIndices& idx,
-                         int momId, vector<HamPartCtn>& photons,
-                         bool useAbsId = false) {
-  if (useAbsId) momId = TMath::Abs(momId);
+bool isSoftPhoton(HamPartCtn part) {
+  auto pe = get<0>(part);
+  if (pe < SOFT_PHOTON_THRESH) return true;
+  return false;
+}
+
+vector<HamPartCtn> buildPhotonVec(RVec<float>& arrPe, RVec<float>& arrPx,
+                                  RVec<float>& arrPy, RVec<float>& arrPz,
+                                  RVec<float>& arrId, int size) {
+  vector<HamPartCtn> result{};
+  for (auto idx = 0; idx != size; idx++) {
+    auto part = buildPartVec(arrPe[idx], arrPx[idx], arrPy[idx], arrPz[idx],
+                             static_cast<int>(arrId[idx]));
+    if (!isSoftPhoton(part)) result.emplace_back(part);
+  }
+  return result;
+}
+
+string printP(double pe, double px, double py, double pz) {
+  stringstream buffer;
+  buffer << pe << "," << px << "," << py << "," << pz;
+  return buffer.str();
+}
+
+string addRadiativePhotons(Hammer::Process& proc, Hammer::ParticleIndices& idx,
+                           int refMomId, vector<HamPartCtn>& photons,
+                           bool useAbsId = false) {
+  stringstream buffer;
+  if (useAbsId) refMomId = TMath::Abs(refMomId);
 
   for (const auto& p : photons) {
     auto [pe, px, py, pz, photonMomId] = p;
-    if (photonMomId == momId) {
-      auto partPhoton    = buildHamPart(pe, px, py, pz, 22);
-      auto partPhotonIdx = proc.addParticle(partPhoton);
-      idx.emplace_back(partPhotonIdx);
+    if (photonMomId == refMomId) {
+      auto partPhoton = buildHamPart(pe, px, py, pz, 22);
+      idx.emplace_back(proc.addParticle(partPhoton));
+      buffer << "  Adding photon: " << printP(pe, px, py, pz) << " to "
+             << refMomId << endl;
     }
   }
+
+  return buffer.str();
 }
 
 /////////////////
@@ -307,9 +324,9 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
              HamPartCtn pDDau1, HamPartCtn pDDau2, HamPartCtn pL,
              HamPartCtn pNuL, HamPartCtn pMu, HamPartCtn pNuMu,
              HamPartCtn pNuTau, vector<HamPartCtn> pPhotons) {
-    // keep me here
-    bool   hamOk = true;
-    double wtFF  = 1.0;
+    bool   hamOk    = true;
+    double wtFF     = 1.0;
+    string debugMsg = "====\n";
 
     numOfEvt += 1;
     Hammer::Process proc;
@@ -331,13 +348,13 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     proc.addVertex(partBIdx, partBDauIdx);
 #ifdef RADIATIVE_CORRECTION
     // FIXME: can't do this, as HAMMER gets stuck if we try to add photons to B
-    // addRadiativePhotons(proc, partBDauIdx, partB.pdgId(), pPhotons);
+    debugMsg += addRadiativePhotons(proc, partBDauIdx, partB.pdgId(), pPhotons);
 #endif
 
     // in case of a D*, add its daughters as well
     Hammer::ParticleIndices partDDauIdx{};
 #ifdef RADIATIVE_CORRECTION
-    addRadiativePhotons(proc, partDDauIdx, partD.pdgId(), pPhotons);
+    debugMsg += addRadiativePhotons(proc, partDDauIdx, partD.pdgId(), pPhotons);
 #endif
 
     bool isDst = isDstMeson(get<4>(pD));
@@ -356,7 +373,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     // in case of a Tau, add its daughters
     Hammer::ParticleIndices partLDauIdx{};
 #ifdef RADIATIVE_CORRECTION
-    addRadiativePhotons(proc, partLDauIdx, partL.pdgId(), pPhotons);
+    debugMsg += addRadiativePhotons(proc, partLDauIdx, partL.pdgId(), pPhotons);
 #endif
 
     if (isTau) {
@@ -383,6 +400,10 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
       cout << "WARN: Bad kinematics for candidate: " << numOfEvt << endl;
       hamOk = false;
     }
+
+#ifdef DEBUG_CLI
+    cout << debugMsg << endl;
+#endif
 
     // add the whole decay chain to hammer and see if it likes it
     if (hamOk) {
