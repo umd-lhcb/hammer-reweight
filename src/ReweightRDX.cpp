@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri May 06, 2022 at 06:10 PM -0400
+// Last Change: Fri May 06, 2022 at 07:10 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -325,21 +325,21 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
 
 auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
                      unsigned long& numOfEvtOk) {
-  return [&](bool isTau, HamPartCtn pB, HamPartCtn pD, HamPartCtn pDDau0,
-             HamPartCtn pDDau1, HamPartCtn pDDau2, HamPartCtn pL,
-             HamPartCtn pNuL, HamPartCtn pMu, HamPartCtn pNuMu,
+  return [&](bool truthMatchOk, bool isTau, HamPartCtn pB, HamPartCtn pD,
+             HamPartCtn pDDau0, HamPartCtn pDDau1, HamPartCtn pDDau2,
+             HamPartCtn pL, HamPartCtn pNuL, HamPartCtn pMu, HamPartCtn pNuMu,
              HamPartCtn pNuTau, vector<HamPartCtn> pPhotons) {
     bool   hamOk    = true;
     double wtFF     = 1.0;
     string debugMsg = "====\n";
-
     numOfEvt += 1;
-    Hammer::Process proc;
+    if (!truthMatchOk) return tuple<bool, double>{false, wtFF};
 
-    auto partB     = buildHamPart(pB);
-    auto partD     = buildHamPart(pD);
-    auto partL     = buildHamPart(pL);
-    auto partNuL   = buildHamPart(pNuL);
+    Hammer::Process proc;
+    auto            partB   = buildHamPart(pB);
+    auto            partD   = buildHamPart(pD);
+    auto            partL   = buildHamPart(pL);
+    auto            partNuL = buildHamPart(pNuL);
     auto particles = vector<Hammer::Particle>{partB, partD, partL, partNuL};
 
     // add B meson
@@ -535,9 +535,9 @@ int main(int argc, char** argv) {
     // reweight FF
     auto reweight = reweightWrapper(ham, numOfEvt, numOfEvtOk);
     df            = df.Define("ff_result", reweight,
-                   {"is_tau", "part_B", "part_D", "part_D_dau0", "part_D_dau1",
-                    "part_D_dau2", "part_L", "part_NuL", "part_Mu", "part_NuMu",
-                    "part_NuTau", "part_photon_arr"});
+                   {"ham_tm_ok", "is_tau", "part_B", "part_D", "part_D_dau0",
+                    "part_D_dau1", "part_D_dau2", "part_L", "part_NuL",
+                    "part_Mu", "part_NuMu", "part_NuTau", "part_photon_arr"});
     df            = df.Define("ham_ok", "get<0>(ff_result)");
     df            = df.Define("wff", "get<1>(ff_result)");
     outputBrs.emplace_back("ham_ok");
