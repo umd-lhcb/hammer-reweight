@@ -1,5 +1,6 @@
 // Author: Yipeng Sun
-// Last Change: Thu May 05, 2022 at 10:23 PM -0400
+// License: BSD 2-clause
+// Last Change: Fri May 06, 2022 at 03:38 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -38,14 +39,13 @@ using ROOT::RDataFrame;
 using ROOT::RDF::RNode;
 using ROOT::VecOps::RVec;
 
+#define DEBUG_OUT cout << __LINE__ << endl;
+
 ///////////////////
 // Configurables //
 ///////////////////
 
-#ifndef DEBUG_CLI
-#define SILENT
-#endif
-
+//#define DEBUG_CLI
 //#define FORCE_MOMENTUM_CONSERVATION_LEPTONIC
 #define RADIATIVE_CORRECTION
 #define SOFT_PHOTON_THRESH 0.1
@@ -176,15 +176,20 @@ string printP(double pe, double px, double py, double pz) {
   return buffer.str();
 }
 
-string addRadiativePhotons(Hammer::Process& proc, Hammer::ParticleIndices& idx,
-                           int refMomId, vector<HamPartCtn>& photons,
-                           bool useAbsId = false) {
+string printP(Hammer::Particle part) {
   stringstream buffer;
-  if (useAbsId) refMomId = TMath::Abs(refMomId);
+  auto         p = part.p();
+  buffer << p.E() << "," << p.px() << "," << p.py() << "," << p.pz();
+  return buffer.str();
+}
+
+string addRadiativePhotons(Hammer::Process& proc, Hammer::ParticleIndices& idx,
+                           int refMomId, vector<HamPartCtn>& photons) {
+  stringstream buffer;
 
   for (const auto& p : photons) {
     auto [pe, px, py, pz, photonMomId] = p;
-    if (photonMomId == refMomId) {
+    if (photonMomId == refMomId || photonMomId == -refMomId) {
       auto partPhoton = buildHamPart(pe, px, py, pz, 22);
       idx.emplace_back(proc.addParticle(partPhoton));
       buffer << "  Adding photon: " << printP(pe, px, py, pz) << " to "
@@ -340,6 +345,13 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     // add B meson
     auto partBIdx = proc.addParticle(partB);
 
+#ifdef DEBUG_CLI
+    debugMsg += "  B meson 4-mom: " + printP(partB) + '\n';
+    debugMsg += "  D meson 4-mom: " + printP(partD) + '\n';
+    debugMsg += "  primary charged lepton 4-mom: " + printP(partL) + '\n';
+    debugMsg += "  primary neutrino 4-mom: " + printP(partNuL) + '\n';
+#endif
+
     // add direct B daughters
     auto                    partDIdx   = proc.addParticle(partD);
     auto                    partLIdx   = proc.addParticle(partL);
@@ -347,7 +359,6 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     Hammer::ParticleIndices partBDauIdx{partDIdx, partLIdx, partNuLIdx};
     proc.addVertex(partBIdx, partBDauIdx);
 #ifdef RADIATIVE_CORRECTION
-    // FIXME: can't do this, as HAMMER gets stuck if we try to add photons to B
     debugMsg += addRadiativePhotons(proc, partBDauIdx, partB.pdgId(), pPhotons);
 #endif
 
@@ -362,10 +373,13 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
       auto partDDaus = {buildHamPart(pDDau0), buildHamPart(pDDau1),
                         buildHamPart(pDDau2)};
       for (const auto& p : partDDaus) {
+        // don't add placeholder particle
+        if (p.pdgId() == 0) continue;
         // don't add soft photons
         if (p.pdgId() == 22 && isSoftPhoton(p)) continue;
         partDDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
+        debugMsg += "  D daughters: " + printP(p) + "\n";
       }
     }
     if (partDDauIdx.size()) proc.addVertex(partDIdx, partDDauIdx);
@@ -382,6 +396,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
       for (const auto& p : partLDaus) {
         partLDauIdx.emplace_back(proc.addParticle(p));
         particles.emplace_back(p);
+        debugMsg += "  secondary leptons: " + printP(p) + "\n";
       }
     }
     if (partLDauIdx.size()) proc.addVertex(partLIdx, partLDauIdx);
@@ -402,7 +417,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     }
 
 #ifdef DEBUG_CLI
-    cout << debugMsg << endl;
+    cout << debugMsg;
 #endif
 
     // add the whole decay chain to hammer and see if it likes it
@@ -438,6 +453,10 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         hamOk = false;
       }
     }
+
+#ifdef DEBUG_CLI
+    if (hamOk) cout << "  FF weight: " << wtFF << endl;
+#endif
 
     return tuple<bool, double>{hamOk, wtFF};
   };
