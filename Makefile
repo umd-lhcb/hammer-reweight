@@ -88,6 +88,7 @@ validation-plots: gen/rdx-run2-validation.root
 		--debug
 
 rdx-run2-ntuples: \
+	gen/rdx-run2-Bd2DstMuNu-sim09k-reweighted.root \
 	gen/rdx-run2-Bd2DstMuNu-reweighted.root \
 	gen/rdx-run2-Bd2DststTauNu-reweighted.root \
 	gen/rdx-run2-Bd2DstTauNu-reweighted.root \
