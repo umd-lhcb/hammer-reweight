@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri May 06, 2022 at 03:55 AM -0400
+// Last Change: Fri May 06, 2022 at 06:10 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -345,12 +345,10 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     // add B meson
     auto partBIdx = proc.addParticle(partB);
 
-#ifdef DEBUG_CLI
     debugMsg += "  B meson 4-mom: " + printP(partB) + '\n';
     debugMsg += "  D meson 4-mom: " + printP(partD) + '\n';
     debugMsg += "  primary charged lepton 4-mom: " + printP(partL) + '\n';
     debugMsg += "  primary neutrino 4-mom: " + printP(partNuL) + '\n';
-#endif
 
     // add direct B daughters
     auto                    partDIdx   = proc.addParticle(partD);
@@ -411,7 +409,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     bool allPartsOk =
         find(partInvMOk.begin(), partInvMOk.end(), false) == partInvMOk.end();
     if (!allPartsOk) {
-      cout << "WARN: Bad kinematics for candidate: " << numOfEvt << endl;
+      cout << "  WARN: Bad kinematics for candidate: " << numOfEvt << endl;
       hamOk = false;
     }
 
@@ -426,7 +424,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
       try {
         procId = ham.addProcess(proc);
       } catch (const exception& e) {
-        cout << "WARN: HAMMER doesn't add process properly: " << numOfEvt
+        cout << "  WARN: HAMMER doesn't add process properly: " << numOfEvt
              << endl;
         cout << e.what() << endl;
         hamOk = false;
@@ -440,7 +438,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         ham.processEvent();
         wtFF = ham.getWeight("OutputFF");
       } catch (const exception& e) {
-        cout << "WARN: HAMMER doesn't like candidate for reweighting: "
+        cout << "  WARN: HAMMER doesn't like candidate for reweighting: "
              << numOfEvt << endl;
         cout << e.what() << endl;
         hamOk = false;
@@ -450,6 +448,9 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         numOfEvtOk += 1;
       } else {
         hamOk = false;
+#ifndef DEBUG_CLI
+        cout << debugMsg;
+#endif
       }
     }
 
@@ -481,7 +482,7 @@ int main(int argc, char** argv) {
      ->default_value("TupleBminus/DecayTree,TupleB0/DecayTree"))
     ("b,bMesons", "specify B meson name.",
      cxxopts::value<vector<string>>()->default_value("b,b0"))
-    ("r,run", "specify run.", cxxopts::value<string>()->default_value("run1"))
+    ("r,run", "specify run.", cxxopts::value<string>()->default_value("run2"))
   ;
   // setup positional argument
   argOpts.parse_positional({"ntpIn", "ntpOut", "extra"});
