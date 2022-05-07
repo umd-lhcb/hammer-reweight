@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri May 06, 2022 at 07:10 PM -0400
+// Last Change: Fri May 06, 2022 at 11:10 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -14,13 +14,8 @@
 
 #include <math.h>
 
-#include <TDatabasePDG.h>
-#include <TFile.h>
 #include <TMath.h>
 #include <TString.h>
-#include <TTree.h>
-#include <TTreeReader.h>
-#include <TTreeReaderArray.h>
 #include <ROOT/RDataFrame.hxx>
 
 #include <Hammer/Hammer.hh>
