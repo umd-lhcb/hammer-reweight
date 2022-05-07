@@ -90,8 +90,8 @@ typedef map<string, any>     PartEmu;
 
 class IRandGenerator {
  public:
-  virtual vector<double> get() = 0;
-  virtual PartEmu        gen() = 0;
+  virtual pair<double, double> get() = 0;
+  virtual PartEmu              gen() = 0;
 
   virtual ~IRandGenerator() = 0;  // Just in case to avoid potential memory leak
 };
@@ -111,22 +111,16 @@ class BToDUniformGenerator : public IRandGenerator {
   BToDUniformGenerator(double q2Min, double q2Max, double thetaLMin,
                        double thetaLMax, TRandom* rng);
 
-  vector<double> get() override;
-  PartEmu        gen() override;
-
-  void setStepInQ(double step) { q2Step = step; };
-  void reset() { _q2 = _q2Min; };
+  pair<double, double> get() override;
+  PartEmu              gen() override;
 
  protected:
-  double   q2Min  = 0.;
-  double   q2Step = 0.01;
-  double   q2, q2Max, thetaLMin, thetaLMax;
+  double   q2Min, q2Max, thetaLMin, thetaLMax;
   TRandom* rng;
 
   double  computeP(double m2_mom, double m2_dau1, double m2_dau2);
-  PartEmu genBD(Int_t B_id, double B_mass, Int_t D_id, double D_mass,
-                Int_t l_id, double l_mass, Int_t nu_id, double q2,
-                double theta_l);
+  PartEmu genBD(int bId, double mB, int dId, double mD, int lId, double mL,
+                int nuId, double q2, double thetaL);
 };
 
 BToDUniformGenerator::BToDUniformGenerator(double q2Min, double q2Max,
@@ -136,22 +130,11 @@ BToDUniformGenerator::BToDUniformGenerator(double q2Min, double q2Max,
       q2Max(q2Max),
       thetaLMin(thetaLMin),
       thetaLMax(thetaLMax),
-      rng(rng) {
-  reset();
-}
+      rng(rng) {}
 
-vector<double> BToDUniformGenerator::get() {
-  vector<double> result{};
-  if (q2 <= q2Max) {
-    result.push_back(q2);
-    result.push_back(rng->Uniform(thetaLMin, thetaLMax));
-    q2 += q2Step;
-  } else
-    throw(
-        domain_error("The q2 is out of its upper limit. Reset the generator to "
-                     "start over!"));
-
-  return result;
+pair<double, double> BToDUniformGenerator::get() {
+  return pair<double, double>{rng->Uniform(q2Min, q2Max),
+                              rng->Uniform(thetaLMin, thetaLMax)};
 }
 
 PartEmu BToDUniformGenerator::gen() {
@@ -170,9 +153,9 @@ double BToDUniformGenerator::computeP(double m2_mom, double m2_dau1,
 }
 
 // Everything's in GeV!
-PartEmu BToDUniformGenerator::genBD(Int_t B_id, double B_mass, Int_t D_id,
-                                    double D_mass, Int_t l_id, double l_mass,
-                                    Int_t nu_id, double q2, double theta_l) {
+PartEmu BToDUniformGenerator::genBD(int B_id, double B_mass, int D_id,
+                                    double D_mass, int l_id, double l_mass,
+                                    int nu_id, double q2, double theta_l) {
   PartEmu result{};
 
   // Remember that we are in the B rest frame
@@ -225,7 +208,7 @@ class BToDRealGenerator : public BToDUniformGenerator {
  public:
   BToDRealGenerator(double q2Min, double q2Max, double thetaLMin,
                     double thetaLMax, TRandom* rng, string ff_mode = "ISGW2",
-                    Int_t xbins = 200, Int_t ybins = 200);
+                    int xbins = 200, int ybins = 200);
   ~BToDRealGenerator();
 
   vector<double> get() override;
@@ -245,8 +228,8 @@ class BToDRealGenerator : public BToDUniformGenerator {
 
 BToDRealGenerator::BToDRealGenerator(double q2Min, double q2Max,
                                      double thetaLMin, double thetaLMax,
-                                     TRandom* rng, string ff_mode, Int_t xbins,
-                                     Int_t ybins)
+                                     TRandom* rng, string ff_mode, int xbins,
+                                     int ybins)
     : BToDUniformGenerator(q2Min, q2Max, thetaLMin, thetaLMax, rng),
       _ff_mode(ff_mode) {
   _histo = new TH2D("histo_BD", "histo_BD", xbins, q2Min, q2Max, ybins,
@@ -323,10 +306,10 @@ class BToDstUniformGenerator : public BToDUniformGenerator {
   PartEmu        gen() override;
 
  protected:
-  PartEmu genBDst(Int_t B_id, double B_mass, Int_t D_id, double D_mass,
-                  Int_t l_id, double l_mass, Int_t nu_id, Int_t D_dau_id,
-                  double D_dau_mass, Int_t pi_id, double pi_mass, double q2,
-                  double theta_l, double theta_v, double chi);
+  PartEmu genBDst(int B_id, double B_mass, int D_id, double D_mass, int l_id,
+                  double l_mass, int nu_id, int D_dau_id, double D_dau_mass,
+                  int pi_id, double pi_mass, double q2, double theta_l,
+                  double theta_v, double chi);
 };
 
 BToDstUniformGenerator::BToDstUniformGenerator(
@@ -360,9 +343,9 @@ PartEmu BToDstUniformGenerator::gen() {
 
 // Protected methods ///////////////////////////////////////////////////////////
 PartEmu BToDstUniformGenerator::genBDst(
-    Int_t B_id, double B_mass, Int_t D_id, double D_mass, Int_t l_id,
-    double l_mass, Int_t nu_id, Int_t D_dau_id, double D_dau_mass, Int_t pi_id,
-    double pi_mass, double q2, double theta_l, double theta_v, double chi) {
+    int B_id, double B_mass, int D_id, double D_mass, int l_id, double l_mass,
+    int nu_id, int D_dau_id, double D_dau_mass, int pi_id, double pi_mass,
+    double q2, double theta_l, double theta_v, double chi) {
   auto result =
       genBD(B_id, B_mass, D_id, D_mass, l_id, l_mass, nu_id, q2, theta_l);
 
@@ -397,7 +380,7 @@ PartEmu BToDstUniformGenerator::genBDst(
 /////////////////
 
 void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
-                Hammer::Hammer& ham, Int_t max_entries = 100000) {
+                Hammer::Hammer& ham, int max_entries = 100000) {
   auto output_tree = new TTree(tree_name, tree_name);
   auto calc_BDst   = BToDstaunu{};
   auto calc_BD     = BToDtaunu{};
@@ -412,8 +395,8 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
     }
   }
 
-  auto   B_key  = any_cast<Int_t>(cands[0]["B_id"]);
-  auto   D_key  = any_cast<Int_t>(cands[0]["D_id"]);
+  auto   B_key  = any_cast<int>(cands[0]["B_id"]);
+  auto   D_key  = any_cast<int>(cands[0]["D_id"]);
   Bool_t is_Dst = (Abs(D_key) == 413);
 
   if (Abs(B_key) == 511) {
@@ -433,13 +416,13 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
   double ff_calc_out;
   output_tree->Branch("wff_calc", &ff_calc_out);
 
-  Int_t b_id_out;
+  int b_id_out;
   output_tree->Branch("b_id", &b_id_out);
-  Int_t d_id_out;
+  int d_id_out;
   output_tree->Branch("d_id", &d_id_out);
-  Int_t d_dau_id_out;
+  int d_dau_id_out;
   output_tree->Branch("d_dau_id", &d_dau_id_out);
-  Int_t pi_id_out;
+  int pi_id_out;
   output_tree->Branch("pi_id", &pi_id_out);
 
   double b_pe_out;
@@ -512,14 +495,14 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
 
     q2_out = any_cast<double>(cand["q2"]);
 
-    b_id_out = any_cast<Int_t>(cand["B_id"]);
+    b_id_out = any_cast<int>(cand["B_id"]);
     auto b_p = any_cast<HFM>(cand["B_p"]);
     b_pe_out = b_p.E();
     b_px_out = b_p.px();
     b_py_out = b_p.py();
     b_pz_out = b_p.pz();
 
-    d_id_out = any_cast<Int_t>(cand["D_id"]);
+    d_id_out = any_cast<int>(cand["D_id"]);
     auto d_p = any_cast<HFM>(cand["D_p"]);
     d_pe_out = d_p.E();
     d_px_out = d_p.px();
@@ -556,14 +539,14 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
     theta_l_out = any_cast<double>(cand["theta_l"]);
 
     if (is_Dst) {
-      d_dau_id_out = any_cast<Int_t>(cand["D_dau_id"]);
+      d_dau_id_out = any_cast<int>(cand["D_dau_id"]);
       auto d_dau_p = any_cast<HFM>(cand["D_dau_p"]);
       d_dau_pe_out = d_dau_p.E();
       d_dau_px_out = d_dau_p.px();
       d_dau_py_out = d_dau_p.py();
       d_dau_pz_out = d_dau_p.pz();
 
-      pi_id_out = any_cast<Int_t>(cand["pi_id"]);
+      pi_id_out = any_cast<int>(cand["pi_id"]);
       auto pi_p = any_cast<HFM>(cand["pi_p"]);
       pi_pe_out = pi_p.E();
       pi_px_out = pi_p.px();
