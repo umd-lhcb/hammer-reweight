@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sun May 08, 2022 at 01:35 AM -0400
+// Last Change: Sun May 08, 2022 at 04:16 AM -0400
 
 #include <any>
 #include <exception>
@@ -12,12 +12,10 @@
 
 #include <math.h>
 
-#include <TFile.h>
 #include <TH2D.h>
 #include <TMath.h>
 #include <TRandom.h>
-#include <TString.h>
-#include <TTree.h>
+#include <ROOT/RDataFrame.hxx>
 
 #include <Hammer/Hammer.hh>
 #include <Hammer/Math/FourMomentum.hh>
@@ -32,6 +30,8 @@
 #include "utils_ham.h"
 
 using namespace std;
+using ROOT::RDataFrame;
+using ROOT::RDF::RNode;
 using TMath::Abs;
 using TMath::Cos;
 using TMath::Power;
@@ -92,8 +92,9 @@ typedef map<string, any>     PartEmu;
 
 class IRandGenerator {
  public:
-  virtual vector<double> get() = 0;
-  virtual PartEmu        gen() = 0;
+  virtual vector<double> get()         = 0;
+  virtual PartEmu        gen()         = 0;
+  virtual RNode          gen(RNode df) = 0;
 
   virtual ~IRandGenerator() = 0;  // Just in case to avoid potential memory leak
 };
@@ -115,10 +116,21 @@ class BToDUniformGenerator : public IRandGenerator {
 
   vector<double> get() override;
   PartEmu        gen() override;
+  RNode          gen(RNode df) override;
 
  protected:
   double   q2Min, q2Max, thetaLMin, thetaLMax;
   TRandom* rng;
+  // variable name, output branch name
+  map<string, string> outputBrsInt = {
+      {"bId", "B_id"},
+      {"dId", "D_id"},
+      {"lId", "l_id"},
+      {"nuId", "nu_id"},
+  };
+  map<string, string> outputBrsDouble = {{"pB", "B_p"}, {"pD", "D_p"},
+                                         {"pL", "l_p"}, {"pNu", "nu_p"},
+                                         {"q2", "q2"},  {"thetaL", "theta_l"}};
 
   double  computeP(double m2Mom, double m2Dau1, double m2Dau2);
   PartEmu genBD(int bId, double mB, int dId, double mD, int lId, double mL,
@@ -143,6 +155,17 @@ PartEmu BToDUniformGenerator::gen() {
   auto q2     = inputs[0];
   auto thetaL = inputs[1];
   return genBD(521, B_MASS, -421, D0_MASS, -15, TAU_MASS, 16, q2, thetaL);
+}
+
+RNode BToDUniformGenerator::gen(RNode df) {
+  auto result = gen();
+
+  for (auto [var, br] : outputBrsInt)
+    df = df.Define(br, any_cast<int>(result[var]));
+  for (auto [var, br] : outputBrsDouble)
+    df = df.Define(br, any_cast<double>(result[var]));
+
+  return df;
 }
 
 // Protected methods ///////////////////////////////////////////////////////////
@@ -215,6 +238,7 @@ class BToDRealGenerator : public BToDUniformGenerator {
 
   vector<double> get() override;
   PartEmu        gen() override;
+  RNode          gen(RNode df) override;
 
   void setFF(string ff_mode);
 
@@ -225,8 +249,6 @@ class BToDRealGenerator : public BToDUniformGenerator {
   double q2Step, thetaLStep;
 
   void buildHisto();
-
- private:
 };
 
 BToDRealGenerator::BToDRealGenerator(double q2Min, double q2Max,
@@ -257,6 +279,8 @@ vector<double> BToDRealGenerator::get() {
 }
 
 PartEmu BToDRealGenerator::gen() { return BToDUniformGenerator::gen(); }
+
+RNode BToDRealGenerator::gen(RNode df) { return BToDUniformGenerator::gen(df); }
 
 // Protected methods ///////////////////////////////////////////////////////////
 
@@ -305,8 +329,19 @@ class BToDstUniformGenerator : public BToDUniformGenerator {
 
   vector<double> get() override;
   PartEmu        gen() override;
+  RNode          gen(RNode df) override;
 
  protected:
+  // variable name, output branch name
+  map<string, string> outputBrsInt = {
+      {"bId", "B_id"},   {"dId", "D_id"},        {"lId", "l_id"},
+      {"nuId", "nu_id"}, {"dDauId", "D_dau_id"}, {"piId", "pi_id"},
+  };
+  map<string, string> outputBrsDouble = {
+      {"pB", "B_p"},   {"pD", "D_p"},         {"pL", "l_p"},
+      {"pNu", "nu_p"}, {"q2", "q2"},          {"pDDau", "D_dau_p"},
+      {"pPi", "pi_p"}, {"thetaV", "theta_v"}, {"chi", "chi"}};
+
   PartEmu genBDst(int bId, double mB, int dId, double mD, int lId, double mL,
                   int nuId, int dDauId, double mDDau, int piId, double mPi,
                   double q2, double thetaL, double thetaV, double chi);
@@ -343,7 +378,19 @@ PartEmu BToDstUniformGenerator::gen() {
                  -211, mPi, q2, thetaL, thetaV, chi);
 }
 
-// Protected methods ///////////////////////////////////////////////////////////
+RNode BToDstUniformGenerator::gen(RNode df) {
+  auto result = gen();
+
+  for (auto [var, br] : outputBrsInt)
+    df = df.Define(br, any_cast<int>(result[var]));
+  for (auto [var, br] : outputBrsDouble)
+    df = df.Define(br, any_cast<double>(result[var]));
+
+  return df;
+}
+
+// Protected methods
+// ///////////////////////////////////////////////////////////
 PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
                                         int lId, double mL, int nuId,
                                         int dDauId, double mDDau, int piId,
@@ -378,6 +425,11 @@ PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
 /////////////////
 // Reweighting //
 /////////////////
+
+RNode treeGen(IRandGenerator& rng, Hammer::Hammer& ham, vector<string> brsInt,
+              vector<string> brsDouble, int maxEntries = 1e6) {
+  auto df = static_cast<RNode>(RDataFrame(maxEntries));
+}
 
 void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
                 Hammer::Hammer& ham, int max_entries = 100000) {
