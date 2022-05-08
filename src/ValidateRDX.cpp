@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sat May 07, 2022 at 05:55 PM -0400
+// Last Change: Sun May 08, 2022 at 01:35 AM -0400
 
 #include <any>
 #include <exception>
@@ -52,7 +52,7 @@ const double DST_MASS = 2.01026;
 const double D0_MASS  = 1.86483;
 
 const double TAU_MASS = 1.77682;
-const double PI_MASS  = 0.13957;
+const double mPi      = 0.13957;
 
 const bool LEPTON_POSITIVE = true;
 
@@ -92,8 +92,8 @@ typedef map<string, any>     PartEmu;
 
 class IRandGenerator {
  public:
-  virtual pair<double, double> get() = 0;
-  virtual PartEmu              gen() = 0;
+  virtual vector<double> get() = 0;
+  virtual PartEmu        gen() = 0;
 
   virtual ~IRandGenerator() = 0;  // Just in case to avoid potential memory leak
 };
@@ -113,8 +113,8 @@ class BToDUniformGenerator : public IRandGenerator {
   BToDUniformGenerator(double q2Min, double q2Max, double thetaLMin,
                        double thetaLMax, TRandom* rng);
 
-  pair<double, double> get() override;
-  PartEmu              gen() override;
+  vector<double> get() override;
+  PartEmu        gen() override;
 
  protected:
   double   q2Min, q2Max, thetaLMin, thetaLMax;
@@ -134,13 +134,14 @@ BToDUniformGenerator::BToDUniformGenerator(double q2Min, double q2Max,
       thetaLMax(thetaLMax),
       rng(rng) {}
 
-pair<double, double> BToDUniformGenerator::get() {
-  return pair<double, double>{rng->Uniform(q2Min, q2Max),
-                              rng->Uniform(thetaLMin, thetaLMax)};
+vector<double> BToDUniformGenerator::get() {
+  return {rng->Uniform(q2Min, q2Max), rng->Uniform(thetaLMin, thetaLMax)};
 }
 
 PartEmu BToDUniformGenerator::gen() {
-  auto [q2, thetaL] = get();
+  auto inputs = get();
+  auto q2     = inputs[0];
+  auto thetaL = inputs[1];
   return genBD(521, B_MASS, -421, D0_MASS, -15, TAU_MASS, 16, q2, thetaL);
 }
 
@@ -212,8 +213,8 @@ class BToDRealGenerator : public BToDUniformGenerator {
                     int xBins = 200, int yBins = 200);
   ~BToDRealGenerator();
 
-  pair<double, double> get() override;
-  PartEmu              gen() override;
+  vector<double> get() override;
+  PartEmu        gen() override;
 
   void setFF(string ff_mode);
 
@@ -249,10 +250,10 @@ BToDRealGenerator::~BToDRealGenerator() { delete histo; }
 
 void BToDRealGenerator::setFF(string ffMode) { ffMode = ffMode; }
 
-pair<double, double> BToDRealGenerator::get() {
+vector<double> BToDRealGenerator::get() {
   double q2, thetaL;
   histo->GetRandom2(q2, thetaL, rng);
-  return pair<double, double>{q2, thetaL};
+  return {q2, thetaL};
 }
 
 PartEmu BToDRealGenerator::gen() { return BToDUniformGenerator::gen(); }
@@ -295,84 +296,81 @@ void BToDRealGenerator::buildHisto() {
 //////////////////////////
 
 class BToDstUniformGenerator : public BToDUniformGenerator {
-  double _theta_v_min, _theta_v_max, _chi_min, _chi_max;
+  double thetaVMin, thetaVMax, chiMin, chiMax;
 
  public:
   BToDstUniformGenerator(double q2Min, double q2Max, double thetaLMin,
-                         double thetaLMax, double theta_v_min,
-                         double theta_v_max, double chiE_min, double chi_max,
-                         TRandom* rng);
+                         double thetaLMax, double thetaVMin, double thetaVMax,
+                         double chiMin, double chiMax, TRandom* rng);
 
   vector<double> get() override;
   PartEmu        gen() override;
 
  protected:
   PartEmu genBDst(int bId, double mB, int dId, double mD, int lId, double mL,
-                  int nuId, int D_dau_id, double D_dau_mass, int pi_id,
-                  double pi_mass, double q2, double thetaL, double theta_v,
-                  double chi);
+                  int nuId, int dDauId, double mDDau, int piId, double mPi,
+                  double q2, double thetaL, double thetaV, double chi);
 };
 
-BToDstUniformGenerator::BToDstUniformGenerator(
-    double q2Min, double q2Max, double thetaLMin, double thetaLMax,
-    double theta_v_min, double theta_v_max, double chi_min, double chi_max,
-    TRandom* rng)
+BToDstUniformGenerator::BToDstUniformGenerator(double q2Min, double q2Max,
+                                               double thetaLMin,
+                                               double thetaLMax,
+                                               double thetaVMin,
+                                               double thetaVMax, double chiMin,
+                                               double chiMax, TRandom* rng)
     : BToDUniformGenerator(q2Min, q2Max, thetaLMin, thetaLMax, rng),
-      _theta_v_min(theta_v_min),
-      _theta_v_max(theta_v_max),
-      _chi_min(chi_min),
-      _chi_max(chi_max) {}
+      thetaVMin(thetaVMin),
+      thetaVMax(thetaVMax),
+      chiMin(chiMin),
+      chiMax(chiMax) {}
 
 vector<double> BToDstUniformGenerator::get() {
   auto result = BToDUniformGenerator::get();
-  result.push_back(_rng->Uniform(_theta_v_min, _theta_v_max));
-  result.push_back(_rng->Uniform(_chi_min, _chi_max));
+  result.emplace_back(rng->Uniform(thetaVMin, thetaVMax));
+  result.emplace_back(rng->Uniform(chiMin, chiMax));
 
   return result;
 }
 
 PartEmu BToDstUniformGenerator::gen() {
-  auto rand_num = get();
-  auto q2       = rand_num[0];
-  auto thetaL   = rand_num[1];
-  auto theta_v  = rand_num[2];
-  auto chi      = rand_num[3];
+  auto inputs = get();
+  auto q2     = inputs[0];
+  auto thetaL = inputs[1];
+  auto thetaV = inputs[2];
+  auto chi    = inputs[3];
 
   return genBDst(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421, D0_MASS,
-                 -211, PI_MASS, q2, thetaL, theta_v, chi);
+                 -211, mPi, q2, thetaL, thetaV, chi);
 }
 
 // Protected methods ///////////////////////////////////////////////////////////
 PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
                                         int lId, double mL, int nuId,
-                                        int D_dau_id, double D_dau_mass,
-                                        int pi_id, double pi_mass, double q2,
-                                        double thetaL, double theta_v,
-                                        double chi) {
-  auto result = genBD(bId, mB, dId, mD, lId, mL, nuId, q2, thetaL);
-
-  auto D_dau_p_mag =
-      computeP(mD * mD, D_dau_mass * D_dau_mass, pi_mass * pi_mass);
+                                        int dDauId, double mDDau, int piId,
+                                        double mPi, double q2, double thetaL,
+                                        double thetaV, double chi) {
+  auto result   = genBD(bId, mB, dId, mD, lId, mL, nuId, q2, thetaL);
+  auto pDDauMag = computeP(mD * mD, mDDau * mDDau, mPi * mPi);
 
   // These are defined in the D* rest frame
-  auto D_dau_p_rest =
-      HFM(Sqrt(D_dau_mass * D_dau_mass + D_dau_p_mag * D_dau_p_mag),
-          D_dau_p_mag * Sin(theta_v) * Cos(chi),
-          D_dau_p_mag * Sin(theta_v) * Sin(chi), D_dau_p_mag * Cos(theta_v));
-  auto pi_p_rest = HFM(mD, 0, 0, 0) - D_dau_p_rest;
+  auto pDDau_rest =
+      HFM(Sqrt(mDDau * mDDau + pDDauMag * pDDauMag),
+          pDDauMag * Sin(thetaV) * Cos(chi), pDDauMag * Sin(thetaV) * Sin(chi),
+          pDDauMag * Cos(thetaV));
+  auto pPiRest = HFM(mD, 0, 0, 0) - pDDau_rest;
 
   // Boost back to B rest frame from D* rest frame
-  auto pD      = any_cast<HFM>(result["pD"]);
-  auto D_dau_p = D_dau_p_rest.boostFromRestFrameOf(pD);
-  auto pi_p    = pi_p_rest.boostFromRestFrameOf(pD);
+  auto pD    = any_cast<HFM>(result["pD"]);
+  auto pDDau = pDDau_rest.boostFromRestFrameOf(pD);
+  auto pPi   = pPiRest.boostFromRestFrameOf(pD);
 
-  result["theta_v"] = theta_v;
-  result["chi"]     = chi;
+  result["thetaV"] = thetaV;
+  result["chi"]    = chi;
 
-  result["D_dau_id"] = D_dau_id;
-  result["D_dau_p"]  = D_dau_p;
-  result["pi_id"]    = pi_id;
-  result["pi_p"]     = pi_p;
+  result["dDauId"] = dDauId;
+  result["pDDau"]  = pDDau;
+  result["piId"]   = piId;
+  result["pPi"]    = pPi;
 
   return result;
 }
@@ -424,8 +422,8 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
   output_tree->Branch("d_id", &d_id_out);
   int d_dau_id_out;
   output_tree->Branch("d_dau_id", &d_dau_id_out);
-  int pi_id_out;
-  output_tree->Branch("pi_id", &pi_id_out);
+  int piId_out;
+  output_tree->Branch("piId", &piId_out);
 
   double b_pe_out;
   output_tree->Branch("b_pe", &b_pe_out);
@@ -472,21 +470,21 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
   double pNuz_out;
   output_tree->Branch("pNuz", &pNuz_out);
 
-  double pi_pe_out;
-  output_tree->Branch("pi_pe", &pi_pe_out);
-  double pi_px_out;
+  double pPie_out;
+  output_tree->Branch("pPie", &pPie_out);
+  double pPix_out;
   //      $Id: RateCalc.hh,v 1.2 2021/09/09 00:43:50 yipengsun Exp $
-  output_tree->Branch("pi_px", &pi_px_out);
-  double pi_py_out;
-  output_tree->Branch("pi_py", &pi_py_out);
-  double pi_pz_out;
-  output_tree->Branch("pi_pz", &pi_pz_out);
+  output_tree->Branch("pPix", &pPix_out);
+  double pPiy_out;
+  output_tree->Branch("pPiy", &pPiy_out);
+  double pPiz_out;
+  output_tree->Branch("pPiz", &pPiz_out);
 
   double thetaL_out;
   output_tree->Branch("thetaL", &thetaL_out);
 
-  double theta_v_out;
-  output_tree->Branch("theta_v", &theta_v_out);
+  double thetaV_out;
+  output_tree->Branch("thetaV", &thetaV_out);
   double chi_out;
   output_tree->Branch("chi", &chi_out);
 
@@ -541,37 +539,37 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
     thetaL_out = any_cast<double>(cand["thetaL"]);
 
     if (is_Dst) {
-      d_dau_id_out = any_cast<int>(cand["D_dau_id"]);
-      auto d_dau_p = any_cast<HFM>(cand["D_dau_p"]);
+      d_dau_id_out = any_cast<int>(cand["dDauId"]);
+      auto d_dau_p = any_cast<HFM>(cand["pDDau"]);
       d_dau_pe_out = d_dau_p.E();
       d_dau_px_out = d_dau_p.px();
       d_dau_py_out = d_dau_p.py();
       d_dau_pz_out = d_dau_p.pz();
 
-      pi_id_out = any_cast<int>(cand["pi_id"]);
-      auto pi_p = any_cast<HFM>(cand["pi_p"]);
-      pi_pe_out = pi_p.E();
-      pi_px_out = pi_p.px();
-      pi_py_out = pi_p.py();
-      pi_pz_out = pi_p.pz();
+      piId_out = any_cast<int>(cand["piId"]);
+      auto pPi = any_cast<HFM>(cand["pPi"]);
+      pPie_out = pPi.E();
+      pPix_out = pPi.px();
+      pPiy_out = pPi.py();
+      pPiz_out = pPi.pz();
 
-      auto part_D_dau     = particle(d_dau_p, d_dau_id_out);
-      auto part_D_dau_idx = proc.addParticle(part_D_dau);
+      auto part_D_dau   = particle(d_dau_p, d_dau_id_out);
+      auto part_dDauIdx = proc.addParticle(part_D_dau);
 
-      auto part_Pi     = particle(pi_p, pi_id_out);
-      auto part_Pi_idx = proc.addParticle(part_Pi);
+      auto part_Pi    = particle(pPi, piId_out);
+      auto part_piIdx = proc.addParticle(part_Pi);
 
-      proc.addVertex(part_dIdx, {part_D_dau_idx, part_Pi_idx});
+      proc.addVertex(part_dIdx, {part_dDauIdx, part_piIdx});
 
       // Additional angles
-      theta_v_out = any_cast<double>(cand["theta_v"]);
-      chi_out     = any_cast<double>(cand["chi"]);
+      thetaV_out = any_cast<double>(cand["thetaV"]);
+      chi_out    = any_cast<double>(cand["chi"]);
     } else {
-      d_dau_id_out = pi_id_out = 0;
+      d_dau_id_out = piId_out = 0;
       d_dau_pe_out = d_dau_px_out = d_dau_py_out = d_dau_pz_out = 0.;
-      pi_pe_out = pi_px_out = pi_py_out = pi_pz_out = 0.;
+      pPie_out = pPix_out = pPiy_out = pPiz_out = 0.;
 
-      theta_v_out = chi_out = 0.;
+      thetaV_out = chi_out = 0.;
     }
 
     ham.initEvent();
@@ -585,16 +583,16 @@ void weight_gen(IRandGenerator* rng, TFile* output_ntp, TString tree_name,
         ham_ok = true;
         // Compute FF weights w/ Manuel's calculator
         double calc_isgw2, calc_cln, a1, v, a2, a0, fPlus, fMinus;
-        auto   cos_thetaL  = Cos(thetaL_out);
-        auto   cos_theta_v = Cos(theta_v_out);
+        auto   cos_thetaL = Cos(thetaL_out);
+        auto   cos_thetaV = Cos(thetaV_out);
         if (is_Dst) {
           calc_BDst.ComputeISGW2(q2_out, a1, v, a2, a0);
           calc_isgw2 = calc_BDst.Gamma_q2Angular(
-              q2_out, cos_thetaL, cos_theta_v, chi_out, false, LEPTON_POSITIVE,
+              q2_out, cos_thetaL, cos_thetaV, chi_out, false, LEPTON_POSITIVE,
               a1, v, a2, a0, TAU_MASS);
 
           calc_BDst.ComputeCLN(q2_out, a1, v, a2, a0);
-          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, cos_thetaL, cos_theta_v,
+          calc_cln = calc_BDst.Gamma_q2Angular(q2_out, cos_thetaL, cos_thetaV,
                                                chi_out, false, LEPTON_POSITIVE,
                                                a1, v, a2, a0, TAU_MASS);
 
