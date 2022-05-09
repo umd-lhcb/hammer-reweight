@@ -117,7 +117,7 @@ gen/rdx-run2-%-reweighted.root: samples/rdx-run2-%.root ReweightRDX
 
 # Validation ntuples
 gen/rdx-run2-validation.root: ValidateRDX
-	$(word 2, $^) $@
+	$< $@
 
 # True q2 plots
 gen/%_q2_true.png: gen/%-reweighted.root
