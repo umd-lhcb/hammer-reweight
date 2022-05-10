@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri May 06, 2022 at 11:10 PM -0400
+// Last Change: Mon May 09, 2022 at 11:56 PM -0400
 
 #include <algorithm>
 #include <exception>
@@ -86,6 +86,18 @@ void setOutputFf(Hammer::Hammer& ham) {
       {"BD**1*", "BLR"},
       {"BD**2*", "BLR"}
   });
+
+  ham.addFFScheme("OutputFFVar0", {
+      {"BD", "BGLVar_BD_0"},
+      {"BD*", "BGLVar_BDst_0"},
+      {"BD**0*", "BLR"},
+      {"BD**1", "BLR"},
+      {"BD**1*", "BLR"},
+      {"BD**2*", "BLR"}
+  });
+
+  ham.setFFEigenvectors("BtoD", "BGLVar_BD_0", {{"delta_ap0", 1.0}});
+  ham.setFFEigenvectors("BtoD*", "BGLVar_BDst_0", {{"delta_a0", 1.0}});
 }
 // clang-format on
 
@@ -326,9 +338,12 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
              HamPartCtn pNuTau, vector<HamPartCtn> pPhotons) {
     bool   hamOk    = true;
     double wtFF     = 1.0;
+    double wtFFVar0 = 1.0;
+
     string debugMsg = "====\n";
     numOfEvt += 1;
-    if (!truthMatchOk) return tuple<bool, double>{false, wtFF};
+    if (!truthMatchOk)
+      return tuple<bool, double, double>{false, wtFF, wtFFVar0};
 
     Hammer::Process proc;
     auto            partB   = buildHamPart(pB);
@@ -431,7 +446,8 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     if (hamOk) {
       try {
         ham.processEvent();
-        wtFF = ham.getWeight("OutputFF");
+        wtFF     = ham.getWeight("OutputFF");
+        wtFFVar0 = ham.getWeight("OutputFFVar0");
       } catch (const exception& e) {
         cout << "  WARN: HAMMER doesn't like candidate for reweighting: "
              << numOfEvt << endl;
@@ -453,7 +469,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     if (hamOk) cout << "  FF weight: " << wtFF << endl;
 #endif
 
-    return tuple<bool, double>{hamOk, wtFF};
+    return tuple<bool, double, double>{hamOk, wtFF, wtFFVar0};
   };
 }
 
@@ -535,6 +551,7 @@ int main(int argc, char** argv) {
                     "part_Mu", "part_NuMu", "part_NuTau", "part_photon_arr"});
     df            = df.Define("ham_ok", "get<0>(ff_result)");
     df            = df.Define("wff", "get<1>(ff_result)");
+    df            = df.Define("wff_var0", "get<2>(ff_result)");
     outputBrs.emplace_back("ham_ok");
     outputBrs.emplace_back("wff");
 
