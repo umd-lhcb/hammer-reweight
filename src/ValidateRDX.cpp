@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Mon May 09, 2022 at 08:31 PM -0400
+// Last Change: Mon May 09, 2022 at 08:46 PM -0400
 
 #include <any>
 #include <exception>
@@ -91,8 +91,8 @@ void setOutputFF(Hammer::Hammer& ham) {
   // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
-  ham.setFFEigenvectors("BtoD", "BGLVar_1", {{"delta_a1", 1.0}});  // HQET2
-  ham.setFFEigenvectors("BtoD*", "BGLVar_1", {{"delta_a1", 1.0}});  // HQET2
+  ham.setFFEigenvectors("BtoD", "BGLVar_1", {{"delta_ap1", 1.0}});  // HQET2
+  ham.setFFEigenvectors("BtoD*", "BGLVar_2", {{"delta_a1", 1.0}});  // HQET2
 }
 // clang-format on
 
