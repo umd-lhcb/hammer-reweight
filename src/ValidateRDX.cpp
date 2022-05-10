@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 10, 2022 at 04:56 AM -0400
+// Last Change: Tue May 10, 2022 at 05:05 AM -0400
 
 #include <any>
 #include <exception>
@@ -220,17 +220,17 @@ PartEmu BToDUniformGenerator::genBD(int bId, double mB, int dId, double mD,
   auto pL  = pLRest.boostFromRestFrameOf(pLSys);
   auto pNu = pNuRest.boostFromRestFrameOf(pLSys);
 
-  result["B_id"] = bId;
-  result["pB"]   = pB;
+  result["bId"] = bId;
+  result["pB"]  = pB;
 
-  result["D_id"] = dId;
-  result["pD"]   = pD;
+  result["dId"] = dId;
+  result["pD"]  = pD;
 
-  result["theta_l"] = thetaL;  // the only physical angle
-  result["l_id"]    = lId;
-  result["pL"]      = pL;
-  result["nu_id"]   = nuId;
-  result["nu_p"]    = pNu;
+  result["thetaL"] = thetaL;  // the only physical angle
+  result["lId"]    = lId;
+  result["pL"]     = pL;
+  result["nuId"]   = nuId;
+  result["pNu"]    = pNu;
 
   result["q2"] = q2;
 
@@ -396,13 +396,13 @@ PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
   auto pDDau = pDDauRest.boostFromRestFrameOf(pD);
   auto pPi   = pPiRest.boostFromRestFrameOf(pD);
 
-  result["theta_v"] = thetaV;
-  result["chi"]     = chi;
+  result["thetaV"] = thetaV;
+  result["chi"]    = chi;
 
-  result["D_dau_id"] = dDauId;
-  result["pDDau"]    = pDDau;
-  result["pi_id"]    = piId;
-  result["pPi"]      = pPi;
+  result["dDauId"] = dDauId;
+  result["pDDau"]  = pDDau;
+  result["piId"]   = piId;
+  result["pPi"]    = pPi;
 
   return result;
 }
@@ -424,8 +424,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
       break;
     };
 
-  auto bKey  = any_cast<int>(cands[0]["B_id"]);
-  auto dKey  = any_cast<int>(cands[0]["D_id"]);
+  auto bKey  = any_cast<int>(cands[0]["bId"]);
+  auto dKey  = any_cast<int>(cands[0]["dId"]);
   bool isDst = (Abs(dKey) == 413);
 
   if (Abs(bKey) == 511) calcBDst.SetMasses(0);  // neutral B
@@ -459,40 +459,40 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("pi_id", &piId);
 
   double bPE;
-  outputTree->Branch("pBe", &bPE);
+  outputTree->Branch("b_pe", &bPE);
   double bPX;
-  outputTree->Branch("pBx", &bPX);
+  outputTree->Branch("b_px", &bPX);
   double bPY;
-  outputTree->Branch("pBy", &bPY);
+  outputTree->Branch("b_py", &bPY);
   double bPZ;
-  outputTree->Branch("pBz", &bPZ);
+  outputTree->Branch("b_pz", &bPZ);
 
   double dPE;
-  outputTree->Branch("pDe", &dPE);
+  outputTree->Branch("d_pe", &dPE);
   double dPX;
-  outputTree->Branch("pDx", &dPX);
+  outputTree->Branch("d_px", &dPX);
   double dPY;
-  outputTree->Branch("pDy", &dPY);
+  outputTree->Branch("d_py", &dPY);
   double dPZ;
-  outputTree->Branch("pDz", &dPZ);
+  outputTree->Branch("d_pz", &dPZ);
 
   double dDauPE;
-  outputTree->Branch("pDDaue", &dDauPE);
+  outputTree->Branch("d_dau_pe", &dDauPE);
   double dDauPX;
-  outputTree->Branch("pDDaux", &dDauPX);
+  outputTree->Branch("d_dau_px", &dDauPX);
   double dDauPY;
-  outputTree->Branch("pDDauy", &dDauPY);
+  outputTree->Branch("d_dau_py", &dDauPY);
   double dDauPZ;
-  outputTree->Branch("pDDauz", &dDauPZ);
+  outputTree->Branch("d_dau_pz", &dDauPZ);
 
   double lPE;
-  outputTree->Branch("pLe", &lPE);
+  outputTree->Branch("l_pe", &lPE);
   double lPX;
-  outputTree->Branch("pLx", &lPX);
+  outputTree->Branch("l_px", &lPX);
   double lPY;
-  outputTree->Branch("pLy", &lPY);
+  outputTree->Branch("l_py", &lPY);
   double lPZ;
-  outputTree->Branch("pLz", &lPZ);
+  outputTree->Branch("l_pz", &lPZ);
 
   double nuPE;
   outputTree->Branch("nu_pe", &nuPE);
@@ -504,14 +504,14 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("nu_pz", &nuPZ);
 
   double piPE;
-  outputTree->Branch("pPie", &piPE);
+  outputTree->Branch("pi_pe", &piPE);
   double piPX;
   //      $Id: RateCalc.hh,v 1.2 2021/09/09 00:43:50 yipengsun Exp $
-  outputTree->Branch("pPix", &piPX);
+  outputTree->Branch("pi_px", &piPX);
   double piPY;
-  outputTree->Branch("pPiy", &piPY);
+  outputTree->Branch("pi_py", &piPY);
   double piPZ;
-  outputTree->Branch("pPiz", &piPZ);
+  outputTree->Branch("pi_pz", &piPZ);
 
   double thetaL;
   outputTree->Branch("theta_l", &thetaL);
@@ -528,14 +528,14 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
     q2 = any_cast<double>(cand["q2"]);
 
-    bId     = any_cast<int>(cand["B_id"]);
+    bId     = bKey;
     auto pB = any_cast<HFM>(cand["pB"]);
     bPE     = pB.E();
     bPX     = pB.px();
     bPY     = pB.py();
     bPZ     = pB.pz();
 
-    dId     = any_cast<int>(cand["D_id"]);
+    dId     = dKey;
     auto pD = any_cast<HFM>(cand["pD"]);
     dPE     = pD.E();
     dPX     = pD.px();
@@ -548,11 +548,11 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     lPY     = pL.py();
     lPZ     = pL.pz();
 
-    auto nu_p = any_cast<HFM>(cand["nu_p"]);
-    nuPE      = nu_p.E();
-    nuPX      = nu_p.px();
-    nuPY      = nu_p.py();
-    nuPZ      = nu_p.pz();
+    auto pNu = any_cast<HFM>(cand["pNu"]);
+    nuPE     = pNu.E();
+    nuPX     = pNu.px();
+    nuPY     = pNu.py();
+    nuPZ     = pNu.pz();
 
     auto partB    = buildHamPart(pB, bId);
     auto partBIdx = proc.addParticle(partB);
@@ -563,23 +563,23 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     auto partL    = buildHamPart(pL, -15);
     auto partLIdx = proc.addParticle(partL);
 
-    auto partNuL    = buildHamPart(nu_p, 16);
+    auto partNuL    = buildHamPart(pNu, 16);
     auto partNuLIdx = proc.addParticle(partNuL);
 
     proc.addVertex(partBIdx, {partDIdx, partLIdx, partNuLIdx});
 
     // Angles
-    thetaL = any_cast<double>(cand["theta_l"]);
+    thetaL = any_cast<double>(cand["thetaL"]);
 
     if (isDst) {
-      dDauId     = any_cast<int>(cand["D_dau_id"]);
+      dDauId     = any_cast<int>(cand["dDauId"]);
       auto pDDau = any_cast<HFM>(cand["pDDau"]);
       dDauPE     = pDDau.E();
       dDauPX     = pDDau.px();
       dDauPY     = pDDau.py();
       dDauPZ     = pDDau.pz();
 
-      piId     = any_cast<int>(cand["pi_id"]);
+      piId     = any_cast<int>(cand["piId"]);
       auto pPi = any_cast<HFM>(cand["pPi"]);
       piPE     = pPi.E();
       piPX     = pPi.px();
@@ -595,7 +595,7 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
       proc.addVertex(partDIdx, {partDDauIdx, partPiIdx});
 
       // Additional angles
-      thetaV = any_cast<double>(cand["theta_v"]);
+      thetaV = any_cast<double>(cand["thetaV"]);
       chi    = any_cast<double>(cand["chi"]);
     } else {
       dDauId = piId = 0;
