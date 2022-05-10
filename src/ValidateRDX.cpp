@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Mon May 09, 2022 at 11:35 PM -0400
+// Last Change: Tue May 10, 2022 at 03:55 AM -0400
 
 #include <any>
 #include <exception>
@@ -83,7 +83,7 @@ void setOutputFF(Hammer::Hammer& ham) {
 
   ham.addFFScheme("OutputFFBGLVar", {
     {"BD", "BGLVar_1"},
-    {"BD*", "BGLVar_2"},
+    // {"BD*", "BGLVar_2"},
   });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
@@ -91,8 +91,8 @@ void setOutputFF(Hammer::Hammer& ham) {
   // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
-  ham.setFFEigenvectors("BtoD", "BGLVar_1", {{"delta_ap2", 10.0}});
-  ham.setFFEigenvectors("BtoD*", "BGLVar_2", {{"delta_a2", 10.0}});
+  ham.setFFEigenvectors("BtoD", "BGLVar_1", {{"delta_ap2", 0.1}});
+  // ham.setFFEigenvectors("BtoD*", "BGLVar_2", {{"delta_a2", 10.0}});
 }
 // clang-format on
 
@@ -615,13 +615,31 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
     if (procId != 0) {
       ham.processEvent();
-      ff_out             = ham.getWeight("OutputFF");
-      ff_bgl_out         = ham.getWeight("OutputFFBGL");
-      ff_bgl_var_ref_out = ham.getWeight("OutputFFBGLVarRef");
-      ff_bgl_var_out     = ham.getWeight("OutputFFBGLVar");
+      try {
+        ff_out     = ham.getWeight("OutputFF");
+        ff_bgl_out = ham.getWeight("OutputFFBGL");
+      } catch (const domain_error& e) {
+        ham_ok = false;
+      }
 
-      if (!isnan(ff_out) && !isinf(ff_out)) {
-        ham_ok = true;
+      if (isnan(ff_out) || isinf(ff_out) || isnan(ff_bgl_out) ||
+          isinf(ff_bgl_out))
+        ham_ok = false;
+
+      if (ham_ok) {
+        // Compute FF variations
+        auto mapFFOut = map<string, double*>{
+            {"OutputFFBGLVarRef", &ff_bgl_var_ref_out},
+            {"OutputFFBGLVar", &ff_bgl_var_out},
+        };
+
+        for (auto [ffScheme, outBrPtr] : mapFFOut) {
+          try {
+            *outBrPtr = ham.getWeight(ffScheme);
+          } catch (const domain_error& e) {
+            *outBrPtr = 1.0;
+          }
+        }
         // Compute FF weights w/ Manuel's calculator
         double calc_isgw2, calc_cln, a1, v, a2, a0, fPlus, fMinus;
         auto   cos_theta_l = Cos(theta_l_out);
