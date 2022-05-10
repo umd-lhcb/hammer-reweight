@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 10, 2022 at 04:32 AM -0400
+// Last Change: Tue May 10, 2022 at 04:56 AM -0400
 
 #include <any>
 #include <exception>
@@ -221,14 +221,14 @@ PartEmu BToDUniformGenerator::genBD(int bId, double mB, int dId, double mD,
   auto pNu = pNuRest.boostFromRestFrameOf(pLSys);
 
   result["B_id"] = bId;
-  result["B_p"]  = pB;
+  result["pB"]   = pB;
 
   result["D_id"] = dId;
-  result["D_p"]  = pD;
+  result["pD"]   = pD;
 
   result["theta_l"] = thetaL;  // the only physical angle
   result["l_id"]    = lId;
-  result["l_p"]     = pL;
+  result["pL"]      = pL;
   result["nu_id"]   = nuId;
   result["nu_p"]    = pNu;
 
@@ -392,7 +392,7 @@ PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
   auto pPiRest = HFM(mD, 0, 0, 0) - pDDauRest;
 
   // Boost back to B rest frame from D* rest frame
-  auto pD    = any_cast<HFM>(result["D_p"]);
+  auto pD    = any_cast<HFM>(result["pD"]);
   auto pDDau = pDDauRest.boostFromRestFrameOf(pD);
   auto pPi   = pPiRest.boostFromRestFrameOf(pD);
 
@@ -400,9 +400,9 @@ PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
   result["chi"]     = chi;
 
   result["D_dau_id"] = dDauId;
-  result["D_dau_p"]  = pDDau;
+  result["pDDau"]    = pDDau;
   result["pi_id"]    = piId;
-  result["pi_p"]     = pPi;
+  result["pPi"]      = pPi;
 
   return result;
 }
@@ -418,220 +418,212 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   auto calcBD     = BToDtaunu{};
 
   vector<PartEmu> cands{};
-
-  for (auto i = 0; i < maxEntries; i++) {
-    try {
+  for (auto i = 0; i < maxEntries; i++) try {
       cands.push_back(rng->gen());
     } catch (const domain_error& e) {
       break;
-    }
-  }
+    };
 
-  auto   bKey  = any_cast<int>(cands[0]["B_id"]);
-  auto   dKey  = any_cast<int>(cands[0]["D_id"]);
-  Bool_t isDst = (Abs(dKey) == 413);
+  auto bKey  = any_cast<int>(cands[0]["B_id"]);
+  auto dKey  = any_cast<int>(cands[0]["D_id"]);
+  bool isDst = (Abs(dKey) == 413);
 
-  if (Abs(bKey) == 511) {
-    calcBDst.SetMasses(0);  // neutral B
-  }
+  if (Abs(bKey) == 511) calcBDst.SetMasses(0);  // neutral B
 
-  Bool_t hamOk;
+  bool hamOk;
   outputTree->Branch("ham_ok", &hamOk);
-  Bool_t ffCalcOk;
+  bool ffCalcOk;
   outputTree->Branch("ff_calc_ok", &ffCalcOk);
 
-  double q2_out;
-  outputTree->Branch("q2_true", &q2_out);
+  double q2;
+  outputTree->Branch("q2_true", &q2);
 
-  double ff_out;
-  outputTree->Branch("wff", &ff_out);
-  double ff_bgl_out;
-  outputTree->Branch("wff_bgl", &ff_bgl_out);
-  double ff_bgl_var_ref_out;
-  outputTree->Branch("wff_bgl_var_ref", &ff_bgl_var_ref_out);
-  double ff_bgl_var_out;
-  outputTree->Branch("wff_bgl_var", &ff_bgl_var_out);
-  double ff_calc_out;
-  outputTree->Branch("wff_calc", &ff_calc_out);
+  double ff;
+  outputTree->Branch("wff", &ff);
+  double ffBgl;
+  outputTree->Branch("wff_bgl", &ffBgl);
+  double ffBglVarRef;
+  outputTree->Branch("wff_bgl_var_ref", &ffBglVarRef);
+  double ffBglVar;
+  outputTree->Branch("wff_bgl_var", &ffBglVar);
+  double ffCalc;
+  outputTree->Branch("wff_calc", &ffCalc);
 
-  int b_id_out;
-  outputTree->Branch("b_id", &b_id_out);
-  int d_id_out;
-  outputTree->Branch("d_id", &d_id_out);
-  int d_dau_id_out;
-  outputTree->Branch("d_dau_id", &d_dau_id_out);
-  int pi_id_out;
-  outputTree->Branch("pi_id", &pi_id_out);
+  int bId;
+  outputTree->Branch("b_id", &bId);
+  int dId;
+  outputTree->Branch("d_id", &dId);
+  int dDauId;
+  outputTree->Branch("d_dau_id", &dDauId);
+  int piId;
+  outputTree->Branch("pi_id", &piId);
 
-  double b_pe_out;
-  outputTree->Branch("b_pe", &b_pe_out);
-  double b_px_out;
-  outputTree->Branch("b_px", &b_px_out);
-  double b_py_out;
-  outputTree->Branch("b_py", &b_py_out);
-  double b_pz_out;
-  outputTree->Branch("b_pz", &b_pz_out);
+  double bPE;
+  outputTree->Branch("pBe", &bPE);
+  double bPX;
+  outputTree->Branch("pBx", &bPX);
+  double bPY;
+  outputTree->Branch("pBy", &bPY);
+  double bPZ;
+  outputTree->Branch("pBz", &bPZ);
 
-  double d_pe_out;
-  outputTree->Branch("d_pe", &d_pe_out);
-  double d_px_out;
-  outputTree->Branch("d_px", &d_px_out);
-  double d_py_out;
-  outputTree->Branch("d_py", &d_py_out);
-  double d_pz_out;
-  outputTree->Branch("d_pz", &d_pz_out);
+  double dPE;
+  outputTree->Branch("pDe", &dPE);
+  double dPX;
+  outputTree->Branch("pDx", &dPX);
+  double dPY;
+  outputTree->Branch("pDy", &dPY);
+  double dPZ;
+  outputTree->Branch("pDz", &dPZ);
 
-  double d_dau_pe_out;
-  outputTree->Branch("d_dau_pe", &d_dau_pe_out);
-  double d_dau_px_out;
-  outputTree->Branch("d_dau_px", &d_dau_px_out);
-  double d_dau_py_out;
-  outputTree->Branch("d_dau_py", &d_dau_py_out);
-  double d_dau_pz_out;
-  outputTree->Branch("d_dau_pz", &d_dau_pz_out);
+  double dDauPE;
+  outputTree->Branch("pDDaue", &dDauPE);
+  double dDauPX;
+  outputTree->Branch("pDDaux", &dDauPX);
+  double dDauPY;
+  outputTree->Branch("pDDauy", &dDauPY);
+  double dDauPZ;
+  outputTree->Branch("pDDauz", &dDauPZ);
 
-  double l_pe_out;
-  outputTree->Branch("l_pe", &l_pe_out);
-  double l_px_out;
-  outputTree->Branch("l_px", &l_px_out);
-  double l_py_out;
-  outputTree->Branch("l_py", &l_py_out);
-  double l_pz_out;
-  outputTree->Branch("l_pz", &l_pz_out);
+  double lPE;
+  outputTree->Branch("pLe", &lPE);
+  double lPX;
+  outputTree->Branch("pLx", &lPX);
+  double lPY;
+  outputTree->Branch("pLy", &lPY);
+  double lPZ;
+  outputTree->Branch("pLz", &lPZ);
 
-  double nu_pe_out;
-  outputTree->Branch("nu_pe", &nu_pe_out);
-  double nu_px_out;
-  outputTree->Branch("nu_px", &nu_px_out);
-  double nu_py_out;
-  outputTree->Branch("nu_py", &nu_py_out);
-  double nu_pz_out;
-  outputTree->Branch("nu_pz", &nu_pz_out);
+  double nuPE;
+  outputTree->Branch("nu_pe", &nuPE);
+  double nuPX;
+  outputTree->Branch("nu_px", &nuPX);
+  double nuPY;
+  outputTree->Branch("nu_py", &nuPY);
+  double nuPZ;
+  outputTree->Branch("nu_pz", &nuPZ);
 
-  double pi_pe_out;
-  outputTree->Branch("pi_pe", &pi_pe_out);
-  double pi_px_out;
+  double piPE;
+  outputTree->Branch("pPie", &piPE);
+  double piPX;
   //      $Id: RateCalc.hh,v 1.2 2021/09/09 00:43:50 yipengsun Exp $
-  outputTree->Branch("pi_px", &pi_px_out);
-  double pi_py_out;
-  outputTree->Branch("pi_py", &pi_py_out);
-  double pi_pz_out;
-  outputTree->Branch("pi_pz", &pi_pz_out);
+  outputTree->Branch("pPix", &piPX);
+  double piPY;
+  outputTree->Branch("pPiy", &piPY);
+  double piPZ;
+  outputTree->Branch("pPiz", &piPZ);
 
-  double theta_l_out;
-  outputTree->Branch("theta_l", &theta_l_out);
+  double thetaL;
+  outputTree->Branch("theta_l", &thetaL);
 
-  double theta_v_out;
-  outputTree->Branch("theta_v", &theta_v_out);
-  double chi_out;
-  outputTree->Branch("chi", &chi_out);
+  double thetaV;
+  outputTree->Branch("theta_v", &thetaV);
+  double chi;
+  outputTree->Branch("chi", &chi);
 
   for (auto& cand : cands) {
     Hammer::Process proc;
     hamOk    = true;
     ffCalcOk = true;
 
-    q2_out = any_cast<double>(cand["q2"]);
+    q2 = any_cast<double>(cand["q2"]);
 
-    b_id_out = any_cast<int>(cand["B_id"]);
-    auto b_p = any_cast<HFM>(cand["B_p"]);
-    b_pe_out = b_p.E();
-    b_px_out = b_p.px();
-    b_py_out = b_p.py();
-    b_pz_out = b_p.pz();
+    bId     = any_cast<int>(cand["B_id"]);
+    auto pB = any_cast<HFM>(cand["pB"]);
+    bPE     = pB.E();
+    bPX     = pB.px();
+    bPY     = pB.py();
+    bPZ     = pB.pz();
 
-    d_id_out = any_cast<int>(cand["D_id"]);
-    auto d_p = any_cast<HFM>(cand["D_p"]);
-    d_pe_out = d_p.E();
-    d_px_out = d_p.px();
-    d_py_out = d_p.py();
-    d_pz_out = d_p.pz();
+    dId     = any_cast<int>(cand["D_id"]);
+    auto pD = any_cast<HFM>(cand["pD"]);
+    dPE     = pD.E();
+    dPX     = pD.px();
+    dPY     = pD.py();
+    dPZ     = pD.pz();
 
-    auto l_p = any_cast<HFM>(cand["l_p"]);
-    l_pe_out = l_p.E();
-    l_px_out = l_p.px();
-    l_py_out = l_p.py();
-    l_pz_out = l_p.pz();
+    auto pL = any_cast<HFM>(cand["pL"]);
+    lPE     = pL.E();
+    lPX     = pL.px();
+    lPY     = pL.py();
+    lPZ     = pL.pz();
 
     auto nu_p = any_cast<HFM>(cand["nu_p"]);
-    nu_pe_out = nu_p.E();
-    nu_px_out = nu_p.px();
-    nu_py_out = nu_p.py();
-    nu_pz_out = nu_p.pz();
+    nuPE      = nu_p.E();
+    nuPX      = nu_p.px();
+    nuPY      = nu_p.py();
+    nuPZ      = nu_p.pz();
 
-    auto part_B     = buildHamPart(b_p, b_id_out);
-    auto part_B_idx = proc.addParticle(part_B);
+    auto partB    = buildHamPart(pB, bId);
+    auto partBIdx = proc.addParticle(partB);
 
-    auto part_D     = buildHamPart(d_p, d_id_out);
-    auto part_D_idx = proc.addParticle(part_D);
+    auto partD    = buildHamPart(pD, dId);
+    auto partDIdx = proc.addParticle(partD);
 
-    auto part_L     = buildHamPart(l_p, -15);
-    auto part_L_idx = proc.addParticle(part_L);
+    auto partL    = buildHamPart(pL, -15);
+    auto partLIdx = proc.addParticle(partL);
 
-    auto part_NuL     = buildHamPart(nu_p, 16);
-    auto part_NuL_idx = proc.addParticle(part_NuL);
+    auto partNuL    = buildHamPart(nu_p, 16);
+    auto partNuLIdx = proc.addParticle(partNuL);
 
-    proc.addVertex(part_B_idx, {part_D_idx, part_L_idx, part_NuL_idx});
+    proc.addVertex(partBIdx, {partDIdx, partLIdx, partNuLIdx});
 
     // Angles
-    theta_l_out = any_cast<double>(cand["theta_l"]);
+    thetaL = any_cast<double>(cand["theta_l"]);
 
     if (isDst) {
-      d_dau_id_out = any_cast<int>(cand["D_dau_id"]);
-      auto d_dau_p = any_cast<HFM>(cand["D_dau_p"]);
-      d_dau_pe_out = d_dau_p.E();
-      d_dau_px_out = d_dau_p.px();
-      d_dau_py_out = d_dau_p.py();
-      d_dau_pz_out = d_dau_p.pz();
+      dDauId     = any_cast<int>(cand["D_dau_id"]);
+      auto pDDau = any_cast<HFM>(cand["pDDau"]);
+      dDauPE     = pDDau.E();
+      dDauPX     = pDDau.px();
+      dDauPY     = pDDau.py();
+      dDauPZ     = pDDau.pz();
 
-      pi_id_out = any_cast<int>(cand["pi_id"]);
-      auto pi_p = any_cast<HFM>(cand["pi_p"]);
-      pi_pe_out = pi_p.E();
-      pi_px_out = pi_p.px();
-      pi_py_out = pi_p.py();
-      pi_pz_out = pi_p.pz();
+      piId     = any_cast<int>(cand["pi_id"]);
+      auto pPi = any_cast<HFM>(cand["pPi"]);
+      piPE     = pPi.E();
+      piPX     = pPi.px();
+      piPY     = pPi.py();
+      piPZ     = pPi.pz();
 
-      auto part_D_dau     = buildHamPart(d_dau_p, d_dau_id_out);
-      auto part_D_dau_idx = proc.addParticle(part_D_dau);
+      auto partDDau    = buildHamPart(pDDau, dDauId);
+      auto partDDauIdx = proc.addParticle(partDDau);
 
-      auto part_Pi     = buildHamPart(pi_p, pi_id_out);
-      auto part_Pi_idx = proc.addParticle(part_Pi);
+      auto partPi    = buildHamPart(pPi, piId);
+      auto partPiIdx = proc.addParticle(partPi);
 
-      proc.addVertex(part_D_idx, {part_D_dau_idx, part_Pi_idx});
+      proc.addVertex(partDIdx, {partDDauIdx, partPiIdx});
 
       // Additional angles
-      theta_v_out = any_cast<double>(cand["theta_v"]);
-      chi_out     = any_cast<double>(cand["chi"]);
+      thetaV = any_cast<double>(cand["theta_v"]);
+      chi    = any_cast<double>(cand["chi"]);
     } else {
-      d_dau_id_out = pi_id_out = 0;
-      d_dau_pe_out = d_dau_px_out = d_dau_py_out = d_dau_pz_out = 0.;
-      pi_pe_out = pi_px_out = pi_py_out = pi_pz_out = 0.;
-
-      theta_v_out = chi_out = 0.;
+      dDauId = piId = 0;
+      dDauPE = dDauPX = dDauPY = dDauPZ = 0.;
+      piPE = piPX = piPY = piPZ = 0.;
+      thetaV = chi = 0.;
     }
 
     ham.initEvent();
     auto procId = ham.addProcess(proc);
-
     if (procId != 0) {
       try {
         ham.processEvent();
-        ff_out     = ham.getWeight("OutputFF");
-        ff_bgl_out = ham.getWeight("OutputFFBGL");
+        ff    = ham.getWeight("OutputFF");
+        ffBgl = ham.getWeight("OutputFFBGL");
       } catch (const std::exception& e) {
         hamOk = false;
       }
 
       if (hamOk)
-        if (isnan(ff_out) || isinf(ff_out) || isnan(ff_bgl_out) ||
-            isinf(ff_bgl_out))
+        if (isnan(ff) || isinf(ff) || isnan(ffBgl) || isinf(ffBgl))
           hamOk = false;
 
       if (hamOk) {
         // Compute FF variations
         auto mapFFOut = map<string, double*>{
-            {"OutputFFBGLVarRef", &ff_bgl_var_ref_out},
-            {"OutputFFBGLVar", &ff_bgl_var_out},
+            {"OutputFFBGLVarRef", &ffBglVarRef},
+            {"OutputFFBGLVar", &ffBglVar},
         };
 
         for (auto [ffScheme, outBrPtr] : mapFFOut) {
@@ -642,41 +634,36 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
           }
         }
         // Compute FF weights w/ Manuel's calculator
-        double calc_isgw2, calc_cln, a1, v, a2, a0, fPlus, fMinus;
-        auto   cos_theta_l = Cos(theta_l_out);
-        auto   cos_theta_v = Cos(theta_v_out);
+        double calcIsgw2, calcCln, a1, v, a2, a0, fPlus, fMinus;
+        auto   cosThetaL = Cos(thetaL);
+        auto   cosThetaV = Cos(thetaV);
         if (isDst) {
-          calcBDst.ComputeISGW2(q2_out, a1, v, a2, a0);
-          calc_isgw2 = calcBDst.Gamma_q2Angular(
-              q2_out, cos_theta_l, cos_theta_v, chi_out, false, LEPTON_POSITIVE,
-              a1, v, a2, a0, TAU_MASS);
+          calcBDst.ComputeISGW2(q2, a1, v, a2, a0);
+          calcIsgw2 = calcBDst.Gamma_q2Angular(q2, cosThetaL, cosThetaV, chi,
+                                               false, LEPTON_POSITIVE, a1, v,
+                                               a2, a0, TAU_MASS);
 
-          calcBDst.ComputeCLN(q2_out, a1, v, a2, a0);
-          calc_cln = calcBDst.Gamma_q2Angular(q2_out, cos_theta_l, cos_theta_v,
-                                              chi_out, false, LEPTON_POSITIVE,
-                                              a1, v, a2, a0, TAU_MASS);
-
+          calcBDst.ComputeCLN(q2, a1, v, a2, a0);
+          calcCln = calcBDst.Gamma_q2Angular(q2, cosThetaL, cosThetaV, chi,
+                                             false, LEPTON_POSITIVE, a1, v, a2,
+                                             a0, TAU_MASS);
         } else {
-          calcBD.ComputeISGW2(q2_out, fPlus, fMinus);
-          calc_isgw2 =
-              calcBD.Gamma_q2tL(q2_out, theta_l_out, fPlus, fMinus, TAU_MASS);
+          calcBD.ComputeISGW2(q2, fPlus, fMinus);
+          calcIsgw2 = calcBD.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
 
-          calcBD.ComputeCLN(q2_out, fPlus, fMinus);
-          calc_cln =
-              calcBD.Gamma_q2tL(q2_out, theta_l_out, fPlus, fMinus, TAU_MASS);
+          calcBD.ComputeCLN(q2, fPlus, fMinus);
+          calcCln = calcBD.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
         }
-        ff_calc_out = calc_cln / calc_isgw2;
-
-        if (isnan(ff_calc_out) || isinf(ff_calc_out)) ffCalcOk = false;
+        ffCalc = calcCln / calcIsgw2;
+        if (isnan(ffCalc) || isinf(ffCalc)) ffCalcOk = false;
       } else {
-        ff_out             = 1.0;
-        ff_bgl_out         = 1.0;
-        ff_bgl_var_ref_out = 1.0;
-        ff_bgl_var_out     = 1.0;
-        ff_calc_out        = 1.0;
+        ff          = 1.0;
+        ffBgl       = 1.0;
+        ffBglVarRef = 1.0;
+        ffBglVar    = 1.0;
+        ffCalc      = 1.0;
       }
     }
-
     outputTree->Fill();
   }
 
