@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 10, 2022 at 03:55 AM -0400
+// Last Change: Tue May 10, 2022 at 04:32 AM -0400
 
 #include <any>
 #include <exception>
@@ -435,10 +435,10 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     calcBDst.SetMasses(0);  // neutral B
   }
 
-  Bool_t ham_ok;
-  outputTree->Branch("ham_ok", &ham_ok);
-  Bool_t ff_calc_ok;
-  outputTree->Branch("ff_calc_ok", &ff_calc_ok);
+  Bool_t hamOk;
+  outputTree->Branch("ham_ok", &hamOk);
+  Bool_t ffCalcOk;
+  outputTree->Branch("ff_calc_ok", &ffCalcOk);
 
   double q2_out;
   outputTree->Branch("q2_true", &q2_out);
@@ -528,8 +528,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
   for (auto& cand : cands) {
     Hammer::Process proc;
-    ham_ok     = false;
-    ff_calc_ok = false;
+    hamOk    = true;
+    ffCalcOk = true;
 
     q2_out = any_cast<double>(cand["q2"]);
 
@@ -614,19 +614,20 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     auto procId = ham.addProcess(proc);
 
     if (procId != 0) {
-      ham.processEvent();
       try {
+        ham.processEvent();
         ff_out     = ham.getWeight("OutputFF");
         ff_bgl_out = ham.getWeight("OutputFFBGL");
-      } catch (const domain_error& e) {
-        ham_ok = false;
+      } catch (const std::exception& e) {
+        hamOk = false;
       }
 
-      if (isnan(ff_out) || isinf(ff_out) || isnan(ff_bgl_out) ||
-          isinf(ff_bgl_out))
-        ham_ok = false;
+      if (hamOk)
+        if (isnan(ff_out) || isinf(ff_out) || isnan(ff_bgl_out) ||
+            isinf(ff_bgl_out))
+          hamOk = false;
 
-      if (ham_ok) {
+      if (hamOk) {
         // Compute FF variations
         auto mapFFOut = map<string, double*>{
             {"OutputFFBGLVarRef", &ff_bgl_var_ref_out},
@@ -636,7 +637,7 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         for (auto [ffScheme, outBrPtr] : mapFFOut) {
           try {
             *outBrPtr = ham.getWeight(ffScheme);
-          } catch (const domain_error& e) {
+          } catch (const std::exception& e) {
             *outBrPtr = 1.0;
           }
         }
@@ -666,10 +667,7 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         }
         ff_calc_out = calc_cln / calc_isgw2;
 
-        if (!isnan(ff_calc_out) && !isinf(ff_calc_out)) ff_calc_ok = true;
-        // DEBUG
-        // cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
-
+        if (isnan(ff_calc_out) || isinf(ff_calc_out)) ffCalcOk = false;
       } else {
         ff_out             = 1.0;
         ff_bgl_out         = 1.0;
