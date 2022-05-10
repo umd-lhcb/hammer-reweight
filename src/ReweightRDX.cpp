@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Mon May 09, 2022 at 11:56 PM -0400
+// Last Change: Tue May 10, 2022 at 02:02 AM -0400
 
 #include <algorithm>
 #include <exception>
@@ -446,8 +446,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     if (hamOk) {
       try {
         ham.processEvent();
-        wtFF     = ham.getWeight("OutputFF");
-        wtFFVar0 = ham.getWeight("OutputFFVar0");
+        wtFF = ham.getWeight("OutputFF");
       } catch (const exception& e) {
         cout << "  WARN: HAMMER doesn't like candidate for reweighting: "
              << numOfEvt << endl;
@@ -457,6 +456,8 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
 
       if (!isnan(wtFF) && !isinf(wtFF) && hamOk) {
         numOfEvtOk += 1;
+        // compute various FF variation weights here
+        wtFFVar0 = ham.getWeight("OutputFFVar0");
       } else {
         hamOk = false;
 #ifndef DEBUG_CLI
@@ -553,7 +554,9 @@ int main(int argc, char** argv) {
     df            = df.Define("wff", "get<1>(ff_result)");
     df            = df.Define("wff_var0", "get<2>(ff_result)");
     outputBrs.emplace_back("ham_ok");
+    // all FF branches
     outputBrs.emplace_back("wff");
+    outputBrs.emplace_back("wff_var0");
 
     df.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
 
