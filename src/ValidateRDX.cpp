@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Mon May 09, 2022 at 06:25 PM -0400
+// Last Change: Mon May 09, 2022 at 08:31 PM -0400
 
 #include <any>
 #include <exception>
@@ -71,10 +71,28 @@ void setOutputFF(Hammer::Hammer& ham) {
     {"BD*", "CLN_2"},
   });
 
+  ham.addFFScheme("OutputFFBGL", {
+    {"BD", "BGL_1"},
+    {"BD*", "BGL_2"},
+  });
+
+  ham.addFFScheme("OutputFFBGLVarRef", {
+    {"BD", "BGLVar_Ref1"},
+    {"BD*", "BGLVar_Ref2"},
+  });
+
+  ham.addFFScheme("OutputFFBGLVar", {
+    {"BD", "BGLVar_1"},
+    {"BD*", "BGLVar_2"},
+  });
+
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
   ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET2
   // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
+
+  ham.setFFEigenvectors("BtoD", "BGLVar_1", {{"delta_a1", 1.0}});  // HQET2
+  ham.setFFEigenvectors("BtoD*", "BGLVar_1", {{"delta_a1", 1.0}});  // HQET2
 }
 // clang-format on
 
@@ -427,6 +445,12 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
   double ff_out;
   outputTree->Branch("wff", &ff_out);
+  double ff_bgl_out;
+  outputTree->Branch("wff_bgl", &ff_bgl_out);
+  double ff_bgl_var_ref_out;
+  outputTree->Branch("wff_bgl_var_ref", &ff_bgl_var_ref_out);
+  double ff_bgl_var_out;
+  outputTree->Branch("wff_bgl_var", &ff_bgl_var_out);
   double ff_calc_out;
   outputTree->Branch("wff_calc", &ff_calc_out);
 
@@ -591,7 +615,10 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
     if (proc_id != 0) {
       ham.processEvent();
-      ff_out = ham.getWeight("OutputFF");
+      ff_out             = ham.getWeight("OutputFF");
+      ff_bgl_out         = ham.getWeight("OutputFFBGL");
+      ff_bgl_var_ref_out = ham.getWeight("OutputFFBGLVarRef");
+      ff_bgl_var_out     = ham.getWeight("OutputFFBGLVar");
 
       if (!isnan(ff_out) && !isinf(ff_out)) {
         ham_ok = true;
@@ -626,8 +653,11 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         // cout << "CLN: " << calc_cln << "; ISGW2: " << calc_isgw2 << endl;
 
       } else {
-        ff_out      = 1.0;
-        ff_calc_out = 1.0;
+        ff_out             = 1.0;
+        ff_bgl_out         = 1.0;
+        ff_bgl_var_ref_out = 1.0;
+        ff_bgl_var_out     = 1.0;
+        ff_calc_out        = 1.0;
       }
     }
 
