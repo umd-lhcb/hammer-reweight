@@ -116,6 +116,21 @@ ValidateRDX test.root
         Note: `_process` is of type `ProcIdDict`, which is `std::map<ProcessUID, T>`.
     - The actual calculation happens `src/core/ProcManager.cc`.
 
+### Weight computation
+
+1. The amplitude tensor is computed
+2. `Hammer::getWeight("FF_scheme")` is called.
+3. In that method, find the base weights of the event: `double result = _event->getEventBaseWeight()`.
+
+    This is by default set to 1 and we typically don't change it
+
+4. For each _process_, multiply the base weight by `result *= _event->getWeight(scheme, elem)`.
+
+    Here _process_ means decay processes added by user, like `B -> D* l nu`.
+    Also, the amplitude tensor is contracted with the external eigenvectors.
+
+    This is the step where the FF variation is effected.
+
 ### Form factor variation
 
 HAMMER uses _covariance_ (not _correlation_) matrix to compute FF variations.
