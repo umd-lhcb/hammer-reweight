@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Fri May 13, 2022 at 01:43 PM -0400
+# Last Change: Fri May 13, 2022 at 01:54 PM -0400
 
 import yaml
 
@@ -24,14 +24,6 @@ def parse_input():
 
     return parser.parse_args()
 
-#################
-# Model helpers #
-#################
-
-def gen_cov_mat_BtoDBGL(m_cov, v_err):
-    pass
-
-
 ###########
 # Helpers #
 ###########
@@ -47,6 +39,29 @@ def print_param_ff_var(process, model, shifts, params, comments):
         eigen_vector_str = '{' + ', '.join(eigen_vector_spec) + '}'
 
         print(f'    ham.setFFEigenvectors{{"{process}", "{model}", {eigen_vector_str}}}; // {c};')
+
+
+#################
+# Model helpers #
+#################
+
+def gen_cov_mat_BtoDBGL(process, model, m_cov, v_err):
+    print(process)
+    print(model)
+    print(m_cov)
+    print(v_err)
+
+
+################
+# Eval helpers #
+################
+
+def eval_fake_sandbox(code, add_vars):
+    loc = dict()
+    sandbox = {k: v for k, v in globals().items()}
+    sandbox.update(add_vars)
+    exec(f'__result = {code}', sandbox, loc)
+    return loc['__result']
 
 
 ########
@@ -68,4 +83,4 @@ if __name__ == '__main__':
             if not isinstance(val, str):
                 print_param_general(ff_model, param, val)
             else:
-                pass
+                eval_fake_sandbox(val, cfg[ff_model])
