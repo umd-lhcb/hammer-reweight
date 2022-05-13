@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 10, 2022 at 05:05 AM -0400
+// Last Change: Fri May 13, 2022 at 07:22 PM -0400
 
 #include <any>
 #include <exception>
@@ -76,11 +76,6 @@ void setOutputFF(Hammer::Hammer& ham) {
     {"BD*", "BGL_2"},
   });
 
-  ham.addFFScheme("OutputFFBGLVarRef", {
-    {"BD", "BGLVar_Ref1"},
-    {"BD*", "BGLVar_Ref2"},
-  });
-
   ham.addFFScheme("OutputFFBGLVar", {
     {"BD", "BGLVar_1"},
     // {"BD*", "BGLVar_2"},
@@ -91,8 +86,12 @@ void setOutputFF(Hammer::Hammer& ham) {
   // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
-  ham.setFFEigenvectors("BtoD", "BGLVar_1", {{"delta_ap2", 0.1}});
-  // ham.setFFEigenvectors("BtoD*", "BGLVar_2", {{"delta_a2", 10.0}});
+  // BGL settings
+  // ham.setOptions("BtoDBGLVar_1: {ChiT: 6.486e-4, ChiL: 6.204e-3}");
+  // ham.setOptions("BtoDBGLVar_1: {ap: [0.01566,-0.0342,-0.090,0.]}");
+  // ham.setOptions("BtoDBGLVar_1: {a0: [0.07935,-0.205,-0.23,0.]}");
+  // ham.setOptions("BtoDBGLVar_1: {BcStatesp: [6.329,6.920,7.020,7.280]}");
+  // ham.setOptions("BtoDBGLVar_1: {BcStates0: [6.716,7.121]}");
 }
 // clang-format on
 
@@ -609,8 +608,9 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     if (procId != 0) {
       try {
         ham.processEvent();
-        ff    = ham.getWeight("OutputFF");
-        ffBgl = ham.getWeight("OutputFFBGL");
+        ff          = ham.getWeight("OutputFF");
+        ffBgl       = ham.getWeight("OutputFFBGL");
+        ffBglVarRef = ham.getWeight("OutputFFBGLVar");
       } catch (const std::exception& e) {
         hamOk = false;
       }
@@ -621,16 +621,16 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
       if (hamOk) {
         // Compute FF variations
-        auto mapFFOut = map<string, double*>{
-            {"OutputFFBGLVarRef", &ffBglVarRef},
-            {"OutputFFBGLVar", &ffBglVar},
-        };
+        vector<double*> wtFFVar{&ffBglVar};
 
-        for (auto [ffScheme, outBrPtr] : mapFFOut) {
+        for (auto idx = 0; idx != wtFFVar.size(); idx++) {
           try {
-            *outBrPtr = ham.getWeight(ffScheme);
+            ham.setFFEigenvectors("BtoD", "BGLVar_1",
+                                  {{"delta_ap1", 0.1}, {"delta_ap2", 0.03}});
+            *wtFFVar[idx] = ham.getWeight("OutputFFBGLVar");
+            ham.resetFFEigenvectors("BtoD", "BGLVar_1");
           } catch (const std::exception& e) {
-            *outBrPtr = 1.0;
+            *wtFFVar[idx] = 1.0;
           }
         }
         // Compute FF weights w/ Manuel's calculator
