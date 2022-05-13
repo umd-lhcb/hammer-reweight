@@ -116,6 +116,15 @@ ValidateRDX test.root
         Note: `_process` is of type `ProcIdDict`, which is `std::map<ProcessUID, T>`.
     - The actual calculation happens `src/core/ProcManager.cc`.
 
+### Form factor variation
+
+HAMMER uses _covariance_ (not _correlation_) matrix to compute FF variations.
+Therefore, a `delta_ap0 = 1` means 1 std change.
+
+Also note that the _covariance_ matrix has fixed dimension, so if one wants to use
+a covariance matrix of a lower dimension, one needs to pad it with 0s s.t. the
+padded matrix is consistent w/ the expected dimension.
+
 ### Soft photons (very)
 
 HAMMER doesn't like very soft photons (for energy on the order of `1e-10`),
