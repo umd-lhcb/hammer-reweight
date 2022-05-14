@@ -10,6 +10,7 @@ BtoDBGLVar:
     # temp vars
     _process: BtoD
     _model: BGLVar
+    # rows/columns: [ap0,ap1,ap2,a01,a02], Tab.5
     _cor: >-
         [
             [1,0.304,-0.294,0.212,0.161],

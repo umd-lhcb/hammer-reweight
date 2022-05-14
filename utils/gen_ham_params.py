@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Fri May 13, 2022 at 01:54 PM -0400
+# Last Change: Fri May 13, 2022 at 03:15 PM -0400
 
 import yaml
 
@@ -41,27 +41,24 @@ def print_param_ff_var(process, model, shifts, params, comments):
         print(f'    ham.setFFEigenvectors{{"{process}", "{model}", {eigen_vector_str}}}; // {c};')
 
 
-#################
-# Model helpers #
-#################
-
-def gen_cov_mat_BtoDBGL(process, model, m_cov, v_err):
-    print(process)
-    print(model)
-    print(m_cov)
-    print(v_err)
-
-
-################
-# Eval helpers #
-################
-
 def eval_fake_sandbox(code, add_vars):
     loc = dict()
     sandbox = {k: v for k, v in globals().items()}
     sandbox.update(add_vars)
     exec(f'__result = {code}', sandbox, loc)
     return loc['__result']
+
+
+#################
+# Model helpers #
+#################
+
+def gen_cov_mat_BtoDBGL(process, model, m_cov, v_err):
+    deltas = ['delta_ap0', 'delta_ap1', 'delta_ap2', 'delta_a01', 'delta_a02']
+    print(process)
+    print(model)
+    print(m_cov)
+    print(v_err)
 
 
 ########
