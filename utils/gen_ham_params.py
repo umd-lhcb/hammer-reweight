@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Fri May 13, 2022 at 03:15 PM -0400
+# Last Change: Tue May 24, 2022 at 12:51 AM -0400
 
 import yaml
+import numpy as np
 
 from argparse import ArgumentParser
 
@@ -53,12 +54,36 @@ def eval_fake_sandbox(code, add_vars):
 # Model helpers #
 #################
 
-def gen_cov_mat_BtoDBGL(process, model, m_cov, v_err):
-    deltas = ['delta_ap0', 'delta_ap1', 'delta_ap2', 'delta_a01', 'delta_a02']
-    print(process)
-    print(model)
-    print(m_cov)
-    print(v_err)
+def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
+    m_corr = np.matrix(m_corr)
+    v_err = np.array(v_err)
+
+    # make the covariance matrix based on the correlation and errors
+    m_cov = np.einsum('ij,i,j->ij', m_corr, v_err, v_err)
+    v_eigen, m_eigen = np.linalg.eig(m_cov)
+    # m_eigen is the matrix formed by eigen vectors; v_eigen is the vector
+    #   formed by eigenvalues
+    # m_eigen is essentially M in the ANA
+    # now we need to find C in the ANA to construct A
+    m_c = np.einsum('ij,i->ij', np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
+    m_a = np.einsum('ik,kj', m_c, m_eigen)
+    # now find the inverse of A, A^-1 tells us how to transform from
+    #  an ERROR eigenbasis to our NORMAL FF paramterization basis (HAMMER basis)
+    m_a_inv = np.linalg.inv(m_a)
+
+    # define variations in the ERROR eigenbasis:
+    ndim = len(param_names)
+    #m_variation_ham = m_a_inv * np.eye(ndim)
+    #                           ^^^^variations in the ERROR eigenbasis
+    m_variation_ham = m_a_inv  # well, multiply by ID -> nothing
+    print()
+    print('FF variations:')
+    for i in range(ndim):
+        var_values = m_variation_ham[:,i]
+        var = {'delta_'+k: v for k, v in zip(param_names, var_values)}
+        for name, coeff in add_params.items():
+            var['delta_'+name] = np.dot(var_values, np.array(coeff))
+        print(f'  {var}'.replace("'", '"'))
 
 
 ########
