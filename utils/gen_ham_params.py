@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Tue May 24, 2022 at 02:58 AM -0400
+# Last Change: Tue May 24, 2022 at 03:25 AM -0400
 
 import yaml
 import numpy as np
@@ -30,7 +30,7 @@ def parse_input():
 ###########
 
 def print_param_general(ff_alias, param, val):
-    print(f'  ham.setOptions("{ff_alias}", "{{{param}, {val}}}")')
+    print(f'  ham.setOptions("{ff_alias}, {{{param}, {val}}}")')
 
 
 def print_param_ff_var(process, model, shifts, params, comments):
@@ -90,6 +90,9 @@ def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
     for i in range(len(param_names)):
         var_values = m_a_inv[:,i]
         var_pos = {'delta_'+k: v for k, v in zip(param_names, var_values)}
+        for name, coeff in add_params.items():
+            var_pos[name] = np.dot(np.array(coeff), var_values)
+
         var_neg = {k: -v for k, v in var_pos.items()}
         print(f'  {fmt_dict_as_cpp_map(var_pos)}')
         print(f'  {fmt_dict_as_cpp_map(var_neg)}')
