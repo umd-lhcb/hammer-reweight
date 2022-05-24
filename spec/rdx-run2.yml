@@ -4,13 +4,13 @@ BtoDBGLVar:
     ChiL: 6.204e-3  # p.5, eq.2.8
     BcStatesp: [6.329,6.920,7.020]   # Tab.1, 1-. pole at 7.280 omitted for it's above BD thresh
     BcStates0: [6.716,7.121]         # Tab.1, 0+
-    ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N = 2
-    a0: [0.07935,-0.205,-0.23,0.]
-    apa0matrix: gen_param_var(_process, _model,_cor, _err, _param_names, _add_params)
+    ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
+    a0: [0.07935,-0.205,-0.23,0.]    #   so we need to kill N=3 terms with a coefficient of 0
+    apa0matrix: gen_param_var(_corr, _err, _param_names, _add_params)
     # temp vars
     _process: BtoD
     _model: BGLVar
-    _cor: # this is how you define a 2D array in YAML
+    _corr: # this is how you define a 2D array in YAML
         - [1,0.304,-0.294,0.212,0.161]
         - [0.304,1,-0.422,0.747,0.190]
         - [-0.294,-0.422,1,-0.034,0.148]
@@ -19,4 +19,4 @@ BtoDBGLVar:
     _err: [0.00011, 0.0031, 0.022, 0.014, 0.10]
     _param_names: ['ap0', 'ap1', 'ap2', 'a01', 'a02']  # Tab.5
     _add_params:
-        a00: [4.99, 0.32, 0.021, -0.065, -0.004]  # a00 constrained in caption of Tab.5
+        a00: [4.99,0.32,0.021,-0.065,-0.004]  # a00 constrained in caption of Tab.5
