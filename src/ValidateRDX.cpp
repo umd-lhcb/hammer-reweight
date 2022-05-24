@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri May 13, 2022 at 07:22 PM -0400
+// Last Change: Tue May 24, 2022 at 03:34 AM -0400
 
 #include <any>
 #include <exception>
@@ -57,7 +57,6 @@ const double PI_MASS  = 0.13957;
 const bool LEPTON_POSITIVE = true;
 
 // clang-format off
-
 void setInputFF(Hammer::Hammer& ham) {
   ham.setFFInputScheme({
     {"BD", "ISGW2"},
@@ -71,14 +70,9 @@ void setOutputFF(Hammer::Hammer& ham) {
     {"BD*", "CLN_2"},
   });
 
-  ham.addFFScheme("OutputFFBGL", {
-    {"BD", "BGL_1"},
-    {"BD*", "BGL_2"},
-  });
-
   ham.addFFScheme("OutputFFBGLVar", {
-    {"BD", "BGLVar_1"},
-    // {"BD*", "BGLVar_2"},
+    {"BD", "BGLVar_1"}, // only vary B -> D, not B -> D* for demo
+    {"BD*", "BGL_2"},
   });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
@@ -87,12 +81,27 @@ void setOutputFF(Hammer::Hammer& ham) {
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
   // BGL settings
-  // ham.setOptions("BtoDBGLVar_1: {ChiT: 6.486e-4, ChiL: 6.204e-3}");
-  // ham.setOptions("BtoDBGLVar_1: {ap: [0.01566,-0.0342,-0.090,0.]}");
-  // ham.setOptions("BtoDBGLVar_1: {a0: [0.07935,-0.205,-0.23,0.]}");
-  // ham.setOptions("BtoDBGLVar_1: {BcStatesp: [6.329,6.920,7.020,7.280]}");
-  // ham.setOptions("BtoDBGLVar_1: {BcStates0: [6.716,7.121]}");
+  ham.setOptions("BtoDBGLVar_1, {ChiT, 0.0006486}");
+  ham.setOptions("BtoDBGLVar_1, {ChiL, 0.006204}");
+  ham.setOptions("BtoDBGLVar_1, {BcStatesp, [6.329, 6.92, 7.02]}");
+  ham.setOptions("BtoDBGLVar_1, {BcStates0, [6.716, 7.121]}");
+  ham.setOptions("BtoDBGLVar_1, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions("BtoDBGLVar_1, {a0, [0.07935, -0.205, -0.23, 0.0]}");
 }
+
+// FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
+auto VAR_PARMS_B2DBGL = vector<map<string, double>> {
+  {{"delta_ap0", -1.7339387402949836e-05}, {"delta_ap1", 0.0001643147650026172}, {"delta_ap2", 0.0001929728348481839}, {"delta_a01", -0.10007023344043088}, {"delta_a02", 0.0024788701962137416}, {"a00", 0.006464759304035082}},
+  {{"delta_ap0", 1.7339387402949836e-05}, {"delta_ap1", -0.0001643147650026172}, {"delta_ap2", -0.0001929728348481839}, {"delta_a01", 0.10007023344043088}, {"delta_a02", -0.0024788701962137416}, {"a00", -0.006464759304035082}},
+  {{"delta_ap0", -0.0001238406964858629}, {"delta_ap1", 0.0014520126238037846}, {"delta_ap2", 0.003897645034731049}, {"delta_a01", -0.0005198293137311275}, {"delta_a02", -0.02138567598323755}, {"a00", 4.7861119207580826e-05}},
+  {{"delta_ap0", 0.0001238406964858629}, {"delta_ap1", -0.0014520126238037846}, {"delta_ap2", -0.003897645034731049}, {"delta_a01", 0.0005198293137311275}, {"delta_a02", 0.02138567598323755}, {"a00", -4.7861119207580826e-05}},
+  {{"delta_ap0", -0.0004745338176480161}, {"delta_ap1", -0.013866861740418688}, {"delta_ap2", 0.0003080116100249672}, {"delta_a01", -4.393049104058412e-05}, {"delta_a02", -0.0008815590134471655}, {"a00", -0.006792469545215629}},
+  {{"delta_ap0", 0.0004745338176480161}, {"delta_ap1", 0.013866861740418688}, {"delta_ap2", -0.0003080116100249672}, {"delta_a01", 4.393049104058412e-05}, {"delta_a02", 0.0008815590134471655}, {"a00", 0.006792469545215629}},
+  {{"delta_ap0", 2.865149761619912e-06}, {"delta_ap1", 8.988500416478102e-07}, {"delta_ap2", 9.41795313532076e-05}, {"delta_a01", 6.085188006960159e-07}, {"delta_a02", 1.7194330288888333e-05}, {"a00", 1.6454168439027227e-05}},
+  {{"delta_ap0", -2.865149761619912e-06}, {"delta_ap1", -8.988500416478102e-07}, {"delta_ap2", -9.41795313532076e-05}, {"delta_a01", -6.085188006960159e-07}, {"delta_a02", -1.7194330288888333e-05}, {"a00", -1.6454168439027227e-05}},
+  {{"delta_ap0", -0.0010139800624278266}, {"delta_ap1", 3.447442492334894e-05}, {"delta_ap2", 2.808344227692626e-05}, {"delta_a01", 6.163074193685879e-07}, {"delta_a02", 1.3315838706715554e-05}, {"a00", -0.005048232266588653}},
+  {{"delta_ap0", 0.0010139800624278266}, {"delta_ap1", -3.447442492334894e-05}, {"delta_ap2", -2.808344227692626e-05}, {"delta_a01", -6.163074193685879e-07}, {"delta_a02", -1.3315838706715554e-05}, {"a00", 0.005048232266588653}},
+};
 // clang-format on
 
 void setDecays(Hammer::Hammer& ham) {
@@ -441,8 +450,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("wff", &ff);
   double ffBgl;
   outputTree->Branch("wff_bgl", &ffBgl);
-  double ffBglVarRef;
-  outputTree->Branch("wff_bgl_var_ref", &ffBglVarRef);
+  // I checked that ffBgl and ffBglVar are the same when there's no variation
+  outputTree->Branch("wff_bgl_var_ref", &ffBgl);
   double ffBglVar;
   outputTree->Branch("wff_bgl_var", &ffBglVar);
   double ffCalc;
@@ -608,9 +617,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     if (procId != 0) {
       try {
         ham.processEvent();
-        ff          = ham.getWeight("OutputFF");
-        ffBgl       = ham.getWeight("OutputFFBGL");
-        ffBglVarRef = ham.getWeight("OutputFFBGLVar");
+        ff    = ham.getWeight("OutputFF");
+        ffBgl = ham.getWeight("OutputFFBGLVar");
       } catch (const std::exception& e) {
         hamOk = false;
       }
@@ -620,18 +628,14 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
           hamOk = false;
 
       if (hamOk) {
-        // Compute FF variations
-        vector<double*> wtFFVar{&ffBglVar};
-
-        for (auto idx = 0; idx != wtFFVar.size(); idx++) {
-          try {
-            ham.setFFEigenvectors("BtoD", "BGLVar_1",
-                                  {{"delta_ap1", 0.1}, {"delta_ap2", 0.03}});
-            *wtFFVar[idx] = ham.getWeight("OutputFFBGLVar");
-            ham.resetFFEigenvectors("BtoD", "BGLVar_1");
-          } catch (const std::exception& e) {
-            *wtFFVar[idx] = 1.0;
-          }
+        // Compute FF variations, only compute u1p
+        try {
+          auto varParams = VAR_PARMS_B2DBGL[0];
+          ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
+          ffBglVar = ham.getWeight("OutputFFBGLVar");
+          ham.resetFFEigenvectors("BtoD", "BGLVar_1");
+        } catch (const std::exception& e) {
+          ffBglVar = 1.0;
         }
         // Compute FF weights w/ Manuel's calculator
         double calcIsgw2, calcCln, a1, v, a2, a0, fPlus, fMinus;
@@ -657,11 +661,10 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         ffCalc = calcCln / calcIsgw2;
         if (isnan(ffCalc) || isinf(ffCalc)) ffCalcOk = false;
       } else {
-        ff          = 1.0;
-        ffBgl       = 1.0;
-        ffBglVarRef = 1.0;
-        ffBglVar    = 1.0;
-        ffCalc      = 1.0;
+        ff       = 1.0;
+        ffBgl    = 1.0;
+        ffBglVar = 1.0;
+        ffCalc   = 1.0;
       }
     }
     outputTree->Fill();
