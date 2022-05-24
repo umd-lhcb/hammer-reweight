@@ -6,7 +6,7 @@ BtoDBGLVar:
     BcStates0: [6.716,7.121]         # Tab.1, 0+
     ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
     a0: [0.07935,-0.205,-0.23,0.]    #   so we need to kill N=3 terms with a coefficient of 0
-    apa0matrix: gen_param_var(_corr, _err, _param_names, _add_params)
+    apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
     # temp vars
     _process: BtoD
     _model: BGLVar

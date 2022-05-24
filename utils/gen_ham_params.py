@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Tue May 24, 2022 at 01:30 AM -0400
+# Last Change: Tue May 24, 2022 at 01:54 AM -0400
 
 import yaml
 import numpy as np
@@ -30,7 +30,7 @@ def parse_input():
 ###########
 
 def print_param_general(ff_alias, param, val):
-    print(f'  ham.setOptions("{ff_alias}", {{{param}, {val}}})')
+    print(f'  ham.setOptions("{ff_alias}", "{{{param}, {val}}}")')
 
 
 def print_param_ff_var(process, model, shifts, params, comments):
@@ -40,6 +40,14 @@ def print_param_ff_var(process, model, shifts, params, comments):
         eigen_vector_str = '{' + ', '.join(eigen_vector_spec) + '}'
 
         print(f'    ham.setFFEigenvectors{{"{process}", "{model}", {eigen_vector_str}}}; // {c};')
+
+
+def fmt_dict_as_cpp_map(dct):
+    output = '{'
+    for key, value in dct.items():
+        elem = f'{{"{key}", {value}}}, '
+        output += elem
+    return output[:-2] + '},'
 
 
 def eval_fake_sandbox(code, add_vars):
@@ -54,13 +62,12 @@ def eval_fake_sandbox(code, add_vars):
 # Model helpers #
 #################
 
-def gen_param_var(m_corr, v_err, param_names, add_params):
+def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
     m_corr = np.matrix(m_corr)
     v_err = np.array(v_err)
 
     # make the covariance matrix based on the correlation and errors
     m_cov = np.einsum('ij,i,j->ij', m_corr, v_err, v_err)
-    print(m_cov)
     v_eigen, m_eigen = np.linalg.eig(m_cov)
     # m_eigen is the matrix formed by eigen vectors; v_eigen is the vector
     #   formed by eigenvalues
@@ -78,13 +85,11 @@ def gen_param_var(m_corr, v_err, param_names, add_params):
     # m_variation_ham: each column represents a variation of +1sigma for a
     # ERROR eigen vector
     print()
-    print('FF variations:')
+    print(f'{process}{model} FF variations:')
     for i in range(len(param_names)):
         var_values = m_a_inv[:,i]
         var = {'delta_'+k: v for k, v in zip(param_names, var_values)}
-        for name, coeff in add_params.items():
-            var['delta_'+name] = np.dot(var_values, np.array(coeff))
-        print(f'  {var}'.replace("'", '"'))
+        print(f'  {fmt_dict_as_cpp_map(var)}')
 
 
 ########
