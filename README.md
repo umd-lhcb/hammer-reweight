@@ -85,6 +85,15 @@ To use it:
 ValidateRDX test.root
 ```
 
+### Compute FF variation parameters
+
+```
+make ff-params-RDX
+```
+
+See [`utils/gen_ham_params.py`](./utils/gen_ham_params.py) and [`spec/rdx-run2.yml`](./spec/rdx-run2.yml)
+for how these are computed.
+
 
 ## HAMMER tips
 
@@ -133,12 +142,14 @@ ValidateRDX test.root
 
 ### Form factor variation
 
-HAMMER uses _covariance_ (not _correlation_) matrix to compute FF variations.
-Therefore, a `delta_ap0 = 1` means 1 std change.
-
-Also note that the _covariance_ matrix has fixed dimension, so if one wants to use
-a covariance matrix of a lower dimension, one needs to pad it with 0s s.t. the
-padded matrix is consistent w/ the expected dimension.
+1. Find/compute the covariance matrix $U$ of a FF parameterization from some reference paper
+2. Find the eigenvectors and eigenvalues of $U$
+3. Define a matrix $M$, with each _row_ being one of the eigenvectors
+4. Define a matrix $C$, with $C_{ij} \equiv \delta_{ij} \frac{1}{\lambda_i}$
+5. The transformation $A \equiv CM$ maps the parameterization basis to an
+   _orthonormal_ error eigen basis.
+6. We can either define $A^{-1}$ in HAMMER, or define variations in terms of $A^{-1} \delta$,
+    where $\delta$ is some variation in the error eigen basis.
 
 ### Soft photons (very)
 
