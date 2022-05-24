@@ -74,10 +74,10 @@ validation-plots: gen/rdx-run2-validation.root
 		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
 		-XD 3.2 11.0 --bins 20 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
-		-l Generated "HAMMER OK" "HAMMER wt" "Theory wt" "HAMMER BGL" "HAMMER BGL var (ref)" "HAMMER BGL var" \
+		-l Generated "HAMMER OK" "HAMMER CLN" "Theory wt" "HAMMER BGL" "HAMMER BGL var" \
 		--cuts "None" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
-		--weights "None" "None" "wff" "wff_calc" "wff_bgl" "wff_bgl_var_ref" "wff_bgl_var" \
-		--colors cornflowerblue black darkgoldenrod crimson limegreen gray purple \
+		--weights "None" "None" "wff" "wff_calc" "wff_bgl" "wff_bgl_var" \
+		--colors cornflowerblue black darkgoldenrod crimson limegreen purple \
 		--debug
 	@echo "Generating B -> D validation plot..."
 	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0.png \
@@ -91,10 +91,10 @@ validation-plots: gen/rdx-run2-validation.root
 		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
 		-XD 3.2 11.0 --bins 20 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
-		-l Generated "HAMMER OK" "HAMMER wt" "Theory wt" "HAMMER BGL" "HAMMER BGL var (ref)" "HAMMER BGL var" \
+		-l Generated "HAMMER OK" "HAMMER CLN" "Theory wt" "HAMMER BGL" "HAMMER BGL var" \
 		--cuts "None" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
-		--weights "None" "None" "wff" "wff_calc" "wff_bgl" "wff_bgl_var_ref" "wff_bgl_var" \
-		--colors cornflowerblue black darkgoldenrod crimson limegreen gray purple \
+		--weights "None" "None" "wff" "wff_calc" "wff_bgl" "wff_bgl_var" \
+		--colors cornflowerblue black darkgoldenrod crimson limegreen purple \
 		--debug
 
 # rdx-run2-ntuples: \
