@@ -40,6 +40,9 @@ ReweightRDX: ReweightRDX.cpp
 ReweightRDXDebug: ReweightRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -DDEBUG_CLI -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
+RDXFFParams:
+	./utils/gen_ham_params.py ./spec/rdx-run2.yml
+
 
 #########
 # Plots #
