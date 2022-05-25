@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed May 25, 2022 at 04:09 PM -0400
+// Last Change: Wed May 25, 2022 at 04:19 PM -0400
 
 #include <any>
 #include <chrono>
@@ -78,8 +78,8 @@ void setOutputFF(Hammer::Hammer& ham) {
   });
 
   ham.addFFScheme("OutputFFBGLVar", {
-    {"BD", "BGLVar"}, // only vary B -> D, not B -> D* for demo
-    {"BD*", "BGL"},
+    {"BD", "BGLVar_1"}, // only vary B -> D, not B -> D* for demo
+    {"BD*", "BGLVar_2"},
   });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
