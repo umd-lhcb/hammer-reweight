@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed May 25, 2022 at 04:19 PM -0400
+// Last Change: Wed May 25, 2022 at 04:26 PM -0400
 
 #include <any>
 #include <chrono>
@@ -73,13 +73,18 @@ void setOutputFF(Hammer::Hammer& ham) {
   });
 
   ham.addFFScheme("OutputFFBGL", {
-    {"BD", "BGL"}, // only vary B -> D, not B -> D* for demo
+    {"BD", "BGL_1"},
     {"BD*", "BGL"},
   });
 
+  ham.addFFScheme("OutputFFBGLVarRef", {
+    {"BD", "BGLVar_1"},
+    {"BD*", "BGLVar"},
+  });
+
   ham.addFFScheme("OutputFFBGLVar", {
-    {"BD", "BGLVar_1"}, // only vary B -> D, not B -> D* for demo
-    {"BD*", "BGLVar_2"},
+    {"BD", "BGLVar_2"},
+    {"BD*", "BGLVar"},
   });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
@@ -88,12 +93,26 @@ void setOutputFF(Hammer::Hammer& ham) {
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
   // BGL settings
+  ham.setOptions("BtoDBGL_1, {ChiT, 0.0006486}");
+  ham.setOptions("BtoDBGL_1, {ChiL, 0.006204}");
+  ham.setOptions("BtoDBGL_1, {BcStatesp, [6.329, 6.92, 7.02]}");
+  ham.setOptions("BtoDBGL_1, {BcStates0, [6.716, 7.121]}");
+  ham.setOptions("BtoDBGL_1, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions("BtoDBGL_1, {a0, [0.07935, -0.205, -0.23, 0.0]}");
+
   ham.setOptions("BtoDBGLVar_1, {ChiT, 0.0006486}");
   ham.setOptions("BtoDBGLVar_1, {ChiL, 0.006204}");
   ham.setOptions("BtoDBGLVar_1, {BcStatesp, [6.329, 6.92, 7.02]}");
   ham.setOptions("BtoDBGLVar_1, {BcStates0, [6.716, 7.121]}");
   ham.setOptions("BtoDBGLVar_1, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
   ham.setOptions("BtoDBGLVar_1, {a0, [0.07935, -0.205, -0.23, 0.0]}");
+
+  ham.setOptions("BtoDBGLVar_2, {ChiT, 0.0006486}");
+  ham.setOptions("BtoDBGLVar_2, {ChiL, 0.006204}");
+  ham.setOptions("BtoDBGLVar_2, {BcStatesp, [6.329, 6.92, 7.02]}");
+  ham.setOptions("BtoDBGLVar_2, {BcStates0, [6.716, 7.121]}");
+  ham.setOptions("BtoDBGLVar_2, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions("BtoDBGLVar_2, {a0, [0.07935, -0.205, -0.23, 0.0]}");
 }
 
 // FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
@@ -460,8 +479,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("wff", &ff);
   double ffBgl;
   outputTree->Branch("wff_bgl", &ffBgl);
-  // I checked that ffBgl and ffBglVar are the same when there's no variation
-  outputTree->Branch("wff_bgl_var_ref", &ffBgl);
+  double ffBglVarRef;
+  outputTree->Branch("wff_bgl_var_ref", &ffBglVarRef);
   double ffBglVar;
   outputTree->Branch("wff_bgl_var", &ffBglVar);
   double ffCalc;
@@ -630,9 +649,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         ff = ham.getWeight("OutputFF");
 
         auto startNoVar = high_resolution_clock::now();
-        // just for timing purpose
-        ham.getWeight("OutputFFBGL");
-        auto stopNovar = high_resolution_clock::now();
+        ffBglVarRef     = ham.getWeight("OutputFFBGL");
+        auto stopNovar  = high_resolution_clock::now();
         timeNoVar += duration_cast<microseconds>(stopNovar - startNoVar);
 
         ffBgl = ham.getWeight("OutputFFBGLVar");
