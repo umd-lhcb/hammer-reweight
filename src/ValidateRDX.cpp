@@ -1,8 +1,9 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 24, 2022 at 03:59 AM -0400
+// Last Change: Wed May 25, 2022 at 04:09 PM -0400
 
 #include <any>
+#include <chrono>
 #include <exception>
 #include <iostream>
 #include <map>
@@ -32,6 +33,7 @@
 #include "utils_ham.h"
 
 using namespace std;
+using namespace std::chrono;
 using TMath::Abs;
 using TMath::Cos;
 using TMath::Power;
@@ -70,9 +72,14 @@ void setOutputFF(Hammer::Hammer& ham) {
     {"BD*", "CLN_2"},
   });
 
+  ham.addFFScheme("OutputFFBGL", {
+    {"BD", "BGL"}, // only vary B -> D, not B -> D* for demo
+    {"BD*", "BGL"},
+  });
+
   ham.addFFScheme("OutputFFBGLVar", {
-    {"BD", "BGLVar_1"}, // only vary B -> D, not B -> D* for demo
-    {"BD*", "BGL_2"},
+    {"BD", "BGLVar"}, // only vary B -> D, not B -> D* for demo
+    {"BD*", "BGL"},
   });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
@@ -425,6 +432,9 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   auto calcBDst   = BToDstaunu{};
   auto calcBD     = BToDtaunu{};
 
+  auto timeNoVar = microseconds(0);
+  auto timeVar   = microseconds(0);
+
   vector<PartEmu> cands{};
   for (auto i = 0; i < maxEntries; i++) try {
       cands.push_back(rng->gen());
@@ -617,26 +627,38 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
     if (procId != 0) {
       try {
         ham.processEvent();
-        ff    = ham.getWeight("OutputFF");
+        ff = ham.getWeight("OutputFF");
+
+        auto startNoVar = high_resolution_clock::now();
+        // just for timing purpose
+        ham.getWeight("OutputFFBGL");
+        auto stopNovar = high_resolution_clock::now();
+        timeNoVar += duration_cast<microseconds>(stopNovar - startNoVar);
+
         ffBgl = ham.getWeight("OutputFFBGLVar");
       } catch (const std::exception& e) {
         hamOk = false;
       }
 
-      if (hamOk)
-        if (isnan(ff) || isinf(ff) || isnan(ffBgl) || isinf(ffBgl))
-          hamOk = false;
+      if (hamOk && (isnan(ff) || isinf(ff) || isnan(ffBgl) || isinf(ffBgl)))
+        hamOk = false;
 
       if (hamOk) {
         // Compute FF variations, only compute u1p
         try {
           auto varParams = VAR_PARMS_B2DBGL[0];
+          auto startVar  = high_resolution_clock::now();
+
           ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
           ffBglVar = ham.getWeight("OutputFFBGLVar");
           ham.resetFFEigenvectors("BtoD", "BGLVar_1");
+
+          auto stopVar = high_resolution_clock::now();
+          timeVar += duration_cast<microseconds>(stopVar - startVar);
         } catch (const std::exception& e) {
           ffBglVar = 1.0;
         }
+
         // Compute FF weights w/ Manuel's calculator
         double calcIsgw2, calcCln, a1, v, a2, a0, fPlus, fMinus;
         auto   cosThetaL = Cos(thetaL);
@@ -672,6 +694,11 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
   outputNtp->Write();
   delete outputTree;
+
+  cout << "The no variation BGL took " << timeNoVar.count() << " us to execute."
+       << endl;
+  cout << "The variation BGL took " << timeVar.count() << " us to execute."
+       << endl;
 }
 
 //////////
