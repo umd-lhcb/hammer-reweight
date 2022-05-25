@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed May 25, 2022 at 04:46 PM -0400
+// Last Change: Wed May 25, 2022 at 04:59 PM -0400
 
 #include <any>
 #include <chrono>
@@ -452,7 +452,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   auto calcBD     = BToDtaunu{};
 
   auto timeNoVar = microseconds(0);
-  auto timeVar   = microseconds(0);
+  auto timeVarP  = microseconds(0);
+  auto timeVarM  = microseconds(0);
 
   vector<PartEmu> cands{};
   for (auto i = 0; i < maxEntries; i++) try {
@@ -481,8 +482,10 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("wff_bgl", &ffBgl);
   double ffBglVarRef;
   outputTree->Branch("wff_bgl_var_ref", &ffBglVarRef);
-  double ffBglVar;
-  outputTree->Branch("wff_bgl_var", &ffBglVar);
+  double ffBglVarP;
+  outputTree->Branch("wff_bgl_var_p", &ffBglVarP);
+  double ffBglVarM;
+  outputTree->Branch("wff_bgl_var_m", &ffBglVarM);
   double ffCalc;
   outputTree->Branch("wff_calc", &ffCalc);
 
@@ -543,7 +546,6 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   double piPE;
   outputTree->Branch("pi_pe", &piPE);
   double piPX;
-  //      $Id: RateCalc.hh,v 1.2 2021/09/09 00:43:50 yipengsun Exp $
   outputTree->Branch("pi_px", &piPX);
   double piPY;
   outputTree->Branch("pi_py", &piPY);
@@ -662,19 +664,33 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         hamOk = false;
 
       if (hamOk) {
-        // Compute FF variations, only compute u1p
+        // Compute FF variations: u1p
         try {
           auto varParams = VAR_PARMS_B2DBGL[0];
-          auto startVar  = high_resolution_clock::now();
+          auto startVarP = high_resolution_clock::now();
 
           ham.setFFEigenvectors("BtoD", "BGLVar_2", varParams);
-          ffBglVar = ham.getWeight("OutputFFBGLVar");
+          ffBglVarP = ham.getWeight("OutputFFBGLVar");
           ham.resetFFEigenvectors("BtoD", "BGLVar_2");
 
-          auto stopVar = high_resolution_clock::now();
-          timeVar += duration_cast<microseconds>(stopVar - startVar);
+          auto stopVarP = high_resolution_clock::now();
+          timeVarP += duration_cast<microseconds>(stopVarP - startVarP);
         } catch (const std::exception& e) {
-          ffBglVar = 1.0;
+          ffBglVarP = 1.0;
+        }
+        // Compute FF variations: u1m
+        try {
+          auto varParams = VAR_PARMS_B2DBGL[1];
+          auto startVarM = high_resolution_clock::now();
+
+          ham.setFFEigenvectors("BtoD", "BGLVar_2", varParams);
+          ffBglVarM = ham.getWeight("OutputFFBGLVar");
+          ham.resetFFEigenvectors("BtoD", "BGLVar_2");
+
+          auto stopVarM = high_resolution_clock::now();
+          timeVarM += duration_cast<microseconds>(stopVarM - startVarM);
+        } catch (const std::exception& e) {
+          ffBglVarM = 1.0;
         }
 
         // Compute FF weights w/ Manuel's calculator
@@ -701,10 +717,11 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         ffCalc = calcCln / calcIsgw2;
         if (isnan(ffCalc) || isinf(ffCalc)) ffCalcOk = false;
       } else {
-        ff       = 1.0;
-        ffBgl    = 1.0;
-        ffBglVar = 1.0;
-        ffCalc   = 1.0;
+        ff        = 1.0;
+        ffBgl     = 1.0;
+        ffBglVarP = 1.0;
+        ffBglVarM = 1.0;
+        ffCalc    = 1.0;
       }
     }
     outputTree->Fill();
@@ -715,7 +732,9 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
 
   cout << "The no variation BGL took " << timeNoVar.count() << " us to execute."
        << endl;
-  cout << "The variation BGL took " << timeVar.count() << " us to execute."
+  cout << "The +1 variation BGL took " << timeVarP.count() << " us to execute."
+       << endl;
+  cout << "The -1 variation BGL took " << timeVarM.count() << " us to execute."
        << endl;
 }
 
