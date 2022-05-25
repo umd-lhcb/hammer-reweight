@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed May 25, 2022 at 04:26 PM -0400
+// Last Change: Wed May 25, 2022 at 04:46 PM -0400
 
 #include <any>
 #include <chrono>
@@ -667,9 +667,9 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
           auto varParams = VAR_PARMS_B2DBGL[0];
           auto startVar  = high_resolution_clock::now();
 
-          ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
+          ham.setFFEigenvectors("BtoD", "BGLVar_2", varParams);
           ffBglVar = ham.getWeight("OutputFFBGLVar");
-          ham.resetFFEigenvectors("BtoD", "BGLVar_1");
+          ham.resetFFEigenvectors("BtoD", "BGLVar_2");
 
           auto stopVar = high_resolution_clock::now();
           timeVar += duration_cast<microseconds>(stopVar - startVar);
