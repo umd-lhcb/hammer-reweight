@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed May 25, 2022 at 04:59 PM -0400
+// Last Change: Mon May 30, 2022 at 06:19 PM -0400
 
 #include <any>
 #include <chrono>
@@ -74,17 +74,14 @@ void setOutputFF(Hammer::Hammer& ham) {
 
   ham.addFFScheme("OutputFFBGL", {
     {"BD", "BGL_1"},
-    {"BD*", "BGL"},
   });
 
-  ham.addFFScheme("OutputFFBGLVarRef", {
-    {"BD", "BGLVar_1"},
-    {"BD*", "BGLVar"},
+  ham.addFFScheme("OutputFFBGLVarShift", {
+    {"BD", "BGL_2"},
   });
 
   ham.addFFScheme("OutputFFBGLVar", {
-    {"BD", "BGLVar_2"},
-    {"BD*", "BGLVar"},
+    {"BD", "BGLVar_1"},
   });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
@@ -93,26 +90,28 @@ void setOutputFF(Hammer::Hammer& ham) {
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
   // BGL settings
-  ham.setOptions("BtoDBGL_1, {ChiT, 0.0006486}");
-  ham.setOptions("BtoDBGL_1, {ChiL, 0.006204}");
-  ham.setOptions("BtoDBGL_1, {BcStatesp, [6.329, 6.92, 7.02]}");
-  ham.setOptions("BtoDBGL_1, {BcStates0, [6.716, 7.121]}");
-  ham.setOptions("BtoDBGL_1, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
-  ham.setOptions("BtoDBGL_1, {a0, [0.07935, -0.205, -0.23, 0.0]}");
+  ham.setOptions("BtoDBGL_1: {ChiT: 0.0006486}");
+  ham.setOptions("BtoDBGL_1: {ChiL: 0.006204}");
+  ham.setOptions("BtoDBGL_1: {BcStatesp: [6.329, 6.92, 7.02]}");
+  ham.setOptions("BtoDBGL_1: {BcStates0: [6.716, 7.121]}");
+  ham.setOptions("BtoDBGL_1: {ap: [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions("BtoDBGL_1: {a0: [0.07935, -0.205, -0.23, 0.0]}");
 
-  ham.setOptions("BtoDBGLVar_1, {ChiT, 0.0006486}");
-  ham.setOptions("BtoDBGLVar_1, {ChiL, 0.006204}");
-  ham.setOptions("BtoDBGLVar_1, {BcStatesp, [6.329, 6.92, 7.02]}");
-  ham.setOptions("BtoDBGLVar_1, {BcStates0, [6.716, 7.121]}");
-  ham.setOptions("BtoDBGLVar_1, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
-  ham.setOptions("BtoDBGLVar_1, {a0, [0.07935, -0.205, -0.23, 0.0]}");
+  // +1 variation by shifting nominal
+  ham.setOptions("BtoDBGL_2: {ChiT: 0.0006486}");
+  ham.setOptions("BtoDBGL_2: {ChiL: 0.006204}");
+  ham.setOptions("BtoDBGL_2: {BcStatesp: [6.329, 6.92, 7.02]}");
+  ham.setOptions("BtoDBGL_2: {BcStates0: [6.716, 7.121]}");
+  ham.setOptions("BtoDBGL_2: {ap: [0.015642660612597052, -0.034035685234997386, -0.0898070271651518, 0.0]}");
+  ham.setOptions("BtoDBGL_2: {a0: [0.0858147593040351, -0.3050702334404309, -0.22752112980378628, 0.0]}");
 
-  ham.setOptions("BtoDBGLVar_2, {ChiT, 0.0006486}");
-  ham.setOptions("BtoDBGLVar_2, {ChiL, 0.006204}");
-  ham.setOptions("BtoDBGLVar_2, {BcStatesp, [6.329, 6.92, 7.02]}");
-  ham.setOptions("BtoDBGLVar_2, {BcStates0, [6.716, 7.121]}");
-  ham.setOptions("BtoDBGLVar_2, {ap, [0.01566, -0.0342, -0.09, 0.0]}");
-  ham.setOptions("BtoDBGLVar_2, {a0, [0.07935, -0.205, -0.23, 0.0]}");
+  // +1 variation w/ BGLVar
+  ham.setOptions("BtoDBGLVar_1: {ChiT: 0.0006486}");
+  ham.setOptions("BtoDBGLVar_1: {ChiL: 0.006204}");
+  ham.setOptions("BtoDBGLVar_1: {BcStatesp: [6.329, 6.92, 7.02]}");
+  ham.setOptions("BtoDBGLVar_1: {BcStates0: [6.716, 7.121]}");
+  ham.setOptions("BtoDBGLVar_1: {ap: [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions("BtoDBGLVar_1: {a0: [0.07935, -0.205, -0.23, 0.0]}");
 }
 
 // FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
@@ -338,11 +337,6 @@ void BToDRealGenerator::buildHisto() {
            thetaL <= thetaLMax - thetaLStep / 2; thetaL += thetaLStep) {
         auto ffVal = ffModel.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
         histo->Fill(q2, thetaL, ffVal);
-
-        // DEBUG
-        // cout << "q2: " << q2 << " theta_l: " << thetaL << " ff val: " <<
-        // ffVal
-        //<< endl;
       }
     }
   } else if (ffMode == "CLN") {
@@ -451,9 +445,9 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   auto calcBDst   = BToDstaunu{};
   auto calcBD     = BToDtaunu{};
 
-  auto timeNoVar = microseconds(0);
-  auto timeVarP  = microseconds(0);
-  auto timeVarM  = microseconds(0);
+  auto timeNoVar     = microseconds(0);
+  auto timeVarP      = microseconds(0);
+  auto timeVarPShift = microseconds(0);
 
   vector<PartEmu> cands{};
   for (auto i = 0; i < maxEntries; i++) try {
@@ -484,8 +478,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("wff_bgl_var_ref", &ffBglVarRef);
   double ffBglVarP;
   outputTree->Branch("wff_bgl_var_p", &ffBglVarP);
-  double ffBglVarM;
-  outputTree->Branch("wff_bgl_var_m", &ffBglVarM);
+  double ffBglVarPShift;
+  outputTree->Branch("wff_bgl_var_p_shift", &ffBglVarPShift);
   double ffCalc;
   outputTree->Branch("wff_calc", &ffCalc);
 
@@ -649,15 +643,20 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
       try {
         ham.processEvent();
         ff = ham.getWeight("OutputFF");
+      } catch (const std::exception& e) {
+        hamOk = false;
+      }
 
+      try {
         auto startNoVar = high_resolution_clock::now();
-        ffBglVarRef     = ham.getWeight("OutputFFBGL");
+        ffBgl           = ham.getWeight("OutputFFBGL");
         auto stopNovar  = high_resolution_clock::now();
         timeNoVar += duration_cast<microseconds>(stopNovar - startNoVar);
 
-        ffBgl = ham.getWeight("OutputFFBGLVar");
+        // don't compare BGL vs. BGLVar, as we've shown that they are equal
+        ffBglVarRef = ffBgl;
       } catch (const std::exception& e) {
-        hamOk = false;
+        ffBgl = ffBglVarRef = 1.0;
       }
 
       if (hamOk && (isnan(ff) || isinf(ff) || isnan(ffBgl) || isinf(ffBgl)))
@@ -669,28 +668,24 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
           auto varParams = VAR_PARMS_B2DBGL[0];
           auto startVarP = high_resolution_clock::now();
 
-          ham.setFFEigenvectors("BtoD", "BGLVar_2", varParams);
+          ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
           ffBglVarP = ham.getWeight("OutputFFBGLVar");
-          ham.resetFFEigenvectors("BtoD", "BGLVar_2");
+          ham.resetFFEigenvectors("BtoD", "BGLVar_1");
 
           auto stopVarP = high_resolution_clock::now();
           timeVarP += duration_cast<microseconds>(stopVarP - startVarP);
         } catch (const std::exception& e) {
           ffBglVarP = 1.0;
         }
-        // Compute FF variations: u1m
+        // Compute FF variations u1p by shifting the central values
         try {
-          auto varParams = VAR_PARMS_B2DBGL[1];
-          auto startVarM = high_resolution_clock::now();
-
-          ham.setFFEigenvectors("BtoD", "BGLVar_2", varParams);
-          ffBglVarM = ham.getWeight("OutputFFBGLVar");
-          ham.resetFFEigenvectors("BtoD", "BGLVar_2");
-
-          auto stopVarM = high_resolution_clock::now();
-          timeVarM += duration_cast<microseconds>(stopVarM - startVarM);
+          auto startVarPShift = high_resolution_clock::now();
+          ffBglVarPShift      = ham.getWeight("OutputFFBGLVarShift");
+          auto stopVarPShift  = high_resolution_clock::now();
+          timeVarPShift +=
+              duration_cast<microseconds>(stopVarPShift - startVarPShift);
         } catch (const std::exception& e) {
-          ffBglVarM = 1.0;
+          ffBglVarPShift = 1.0;
         }
 
         // Compute FF weights w/ Manuel's calculator
@@ -717,11 +712,11 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         ffCalc = calcCln / calcIsgw2;
         if (isnan(ffCalc) || isinf(ffCalc)) ffCalcOk = false;
       } else {
-        ff        = 1.0;
-        ffBgl     = 1.0;
-        ffBglVarP = 1.0;
-        ffBglVarM = 1.0;
-        ffCalc    = 1.0;
+        ff             = 1.0;
+        ffBgl          = 1.0;
+        ffBglVarP      = 1.0;
+        ffBglVarPShift = 1.0;
+        ffCalc         = 1.0;
       }
     }
     outputTree->Fill();
@@ -734,8 +729,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
        << endl;
   cout << "The +1 variation BGL took " << timeVarP.count() << " us to execute."
        << endl;
-  cout << "The -1 variation BGL took " << timeVarM.count() << " us to execute."
-       << endl;
+  cout << "The +1 by shift nominal BGL took " << timeVarPShift.count()
+       << " us to execute." << endl;
 }
 
 //////////
