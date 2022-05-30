@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Mon May 30, 2022 at 05:00 PM -0400
+# Last Change: Mon May 30, 2022 at 05:57 PM -0400
 
 import yaml
 import numpy as np
@@ -30,7 +30,7 @@ def parse_input():
 ###########
 
 def print_param_general(ff_alias, param, val):
-    print(f'  ham.setOptions("{ff_alias}, {{{param}, {val}}}")')
+    print(f'  ham.setOptions("{ff_alias}, {{{param}, {val}}}");')
 
 
 def print_param_ff_var(process, model, shifts, params, comments):
