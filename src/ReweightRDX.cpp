@@ -1,8 +1,9 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 10, 2022 at 02:02 AM -0400
+// Last Change: Mon May 30, 2022 at 09:58 PM -0400
 
 #include <algorithm>
+#include <array>
 #include <exception>
 #include <iostream>
 #include <map>
@@ -48,7 +49,7 @@ using ROOT::VecOps::RVec;
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
 // clang-format off
-void setInputFf(Hammer::Hammer& ham, TString run) {
+void setInputFF(Hammer::Hammer& ham, TString run) {
   if (run == "run1") {
     ham.setFFInputScheme({
       {"BD", "ISGW2"},  // 12573010
@@ -72,12 +73,97 @@ void setInputFf(Hammer::Hammer& ham, TString run) {
     // 11574011, 11574021
     // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
     ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
-    // 11874440
+    // 11874440, rest of D**
     // ISGW2, which has no configurable parameter
   }
 }
 
-void setOutputFf(Hammer::Hammer& ham) {
+// +, -, +, -, ...
+vector<vector<string>> BtoDVars = {
+  // shifting 1-th param in + direction....
+  {
+    "{ap: [0.015642660612597052, -0.034035685234997386, -0.0898070271651518, 0.0]}",
+    "{a0: [0.0858147593040351, -0.3050702334404309, -0.22752112980378628, 0.0]}"
+  },
+  //shifting 1-th param in - direction....
+  {
+    "{ap: [0.01567733938740295, -0.03436431476500262, -0.09019297283484819, 0.0]}",
+    "{a0: [0.07288524069596491, -0.10492976655956911, -0.23247887019621374, 0.0]}"
+  },
+  // shifting 2-th param in + direction....
+  {
+    "{ap: [0.015536159303514138, -0.03274798737619622, -0.08610235496526895, 0.0]}",
+    "{a0: [0.07939786111920759, -0.2055198293137311, -0.2513856759832376, 0.0]}"
+  },
+  // shifting 2-th param in - direction....
+  {
+    "{ap: [0.015783840696485862, -0.03565201262380378, -0.09389764503473104, 0.0]}",
+    "{a0: [0.07930213888079242, -0.20448017068626886, -0.20861432401676247, 0.0]}"
+  },
+  // shifting 3-th param in + direction....
+  {
+    "{ap: [0.015185466182351984, -0.04806686174041869, -0.08969198838997502, 0.0]}",
+    "{a0: [0.07255753045478437, -0.20504393049104058, -0.23088155901344717, 0.0]}"
+  },
+  // shifting 3-th param in - direction....
+  {
+    "{ap: [0.016134533817648015, -0.020333138259581315, -0.09030801161002497, 0.0]}",
+    "{a0: [0.08614246954521564, -0.2049560695089594, -0.22911844098655285, 0.0]}"
+  },
+  // shifting 4-th param in + direction....
+  {
+    "{ap: [0.01566286514976162, -0.034199101149958354, -0.08990582046864679, 0.0]}",
+    "{a0: [0.07936645416843903, -0.20499939148119928, -0.22998280566971113, 0.0]}"
+  },
+  // shifting 4-th param in - direction....
+  {
+    "{ap: [0.01565713485023838, -0.03420089885004165, -0.09009417953135321, 0.0]}",
+    "{a0: [0.07933354583156098, -0.2050006085188007, -0.2300171943302889, 0.0]}"
+  },
+  //shifting 5-th param in + direction....
+  {
+    "{ap: [0.014646019937572174, -0.034165525575076655, -0.08997191655772308, 0.0]}",
+    "{a0: [0.07430176773341135, -0.2049993836925806, -0.22998668416129328, 0.0]}"
+  },
+  // shifting 5-th param in - direction....
+  {
+    "{ap: [0.016673980062427828, -0.03423447442492335, -0.09002808344227692, 0.0]}",
+    "{a0: [0.08439823226658866, -0.20500061630741936, -0.23001331583870674, 0.0]}"
+  }
+};
+
+map<string, vector<vector<string>>> ffVarSpecs = {
+  {"BD", BtoDVars}
+};
+
+map<string, string> ffSchemeByDecay = {
+  {"BD", "BGL"},
+  {"BD*", "BGL"},
+  {"BD**0", "BLR"},
+  {"BD**1", "BLR"},
+  {"BD**1*", "BLR"},
+  {"BD**2", "BLR"},
+};
+
+void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {ChiT: 0.0006486}");
+  ham.setOptions(scheme + ": {ChiL: 0.006204}");
+  ham.setOptions(scheme + ": {BcStatesp: [6.329, 6.92, 7.02]}");
+  ham.setOptions(scheme + ": {BcStates0: [6.716, 7.121]}");
+  ham.setOptions(scheme + ": {ap: [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions(scheme + ": {a0: [0.07935, -0.205, -0.23, 0.0]}");
+}
+
+map<string, function<void(Hammer::Hammer&, const string)>>
+ffSchemeDefaultsByDecay = {
+  {"BD", setBtoDBGLDefault}
+};
+
+const int numOfFFVar = 20;
+
+vector<string> setOutputFF(Hammer::Hammer& ham) {
+  vector<string> hamFFSchemes{"OutputFF"};
+
   ham.addFFScheme("OutputFF", {
       {"BD", "BGL"},
       {"BD*", "BGL"},
@@ -87,17 +173,27 @@ void setOutputFf(Hammer::Hammer& ham) {
       {"BD**2*", "BLR"}
   });
 
-  ham.addFFScheme("OutputFFVar0", {
-      {"BD", "BGLVar_BD_0"},
-      {"BD*", "BGLVar_BDst_0"},
-      {"BD**0*", "BLR"},
-      {"BD**1", "BLR"},
-      {"BD**1*", "BLR"},
-      {"BD**2*", "BLR"}
-  });
+  // Set defaults
+  setBtoDBGLDefault(ham, "BtoDBGL");
 
-  ham.setFFEigenvectors("BtoD", "BGLVar_BD_0", {{"delta_ap0", 1.0}});
-  ham.setFFEigenvectors("BtoD*", "BGLVar_BDst_0", {{"delta_a0", 1.0}});
+  // Set variations
+  for (int i = 1; i <= numOfFFVar; i++) {
+    map<string, string> schemes{};
+    for (auto const &[decay, vars] : ffVarSpecs) {
+      if (i <= vars.size()) {
+        // Need to reweight the decay in this HAMMER scheme
+        auto ffName = ffSchemeByDecay[decay] + "_" + to_string(i);
+        schemes[decay] = ffName;
+        // Configure the FF scheme for this decay
+        ffSchemeDefaultsByDecay[decay](ham, ffName);
+        for (auto const &shift : vars[i-1])
+          ham.setOptions(ffName + ": " + shift);
+      }
+    }
+    ham.addFFScheme("OutputFFVar" + to_string(i), schemes);
+  }
+
+  return hamFFSchemes;
 }
 // clang-format on
 
@@ -331,19 +427,29 @@ pair<RNode, vector<string>> prepHamInput(RNode df, string bMesonName) {
 }
 
 auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
-                     unsigned long& numOfEvtOk) {
+                     unsigned long& numOfEvtOk, vector<string>& schemes) {
   return [&](bool truthMatchOk, bool isTau, HamPartCtn pB, HamPartCtn pD,
              HamPartCtn pDDau0, HamPartCtn pDDau1, HamPartCtn pDDau2,
              HamPartCtn pL, HamPartCtn pNuL, HamPartCtn pMu, HamPartCtn pNuMu,
              HamPartCtn pNuTau, vector<HamPartCtn> pPhotons) {
-    bool   hamOk    = true;
-    double wtFF     = 1.0;
-    double wtFFVar0 = 1.0;
+    bool                      hamOk = true;
+    double                    wtFF  = 1.0;
+    array<double, numOfFFVar> wtFFVars;
+    fill_n(wtFFVars.begin(), numOfFFVar, 1.0);  // all default to 1.0
 
     string debugMsg = "====\n";
     numOfEvt += 1;
     if (!truthMatchOk)
-      return tuple<bool, double, double>{false, wtFF, wtFFVar0};
+      // FIXME: it's ugly! but not sure RDataFrame frame can deduce type if we
+      // use anything fancy.
+      return tuple<bool, double, double, double, double, double, double, double,
+                   double, double, double, double, double, double, double,
+                   double, double, double, double, double, double, double>{
+          false,        wtFF,         wtFFVars[0],  wtFFVars[1],  wtFFVars[2],
+          wtFFVars[3],  wtFFVars[4],  wtFFVars[5],  wtFFVars[6],  wtFFVars[7],
+          wtFFVars[8],  wtFFVars[9],  wtFFVars[10], wtFFVars[11], wtFFVars[12],
+          wtFFVars[13], wtFFVars[14], wtFFVars[15], wtFFVars[16], wtFFVars[17],
+          wtFFVars[18], wtFFVars[19]};
 
     Hammer::Process proc;
     auto            partB   = buildHamPart(pB);
@@ -443,10 +549,11 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     }
 
     // compute FF weight
+    auto nominalFFScheme = schemes[0];
     if (hamOk) {
       try {
         ham.processEvent();
-        wtFF = ham.getWeight("OutputFF");
+        wtFF = ham.getWeight(nominalFFScheme);
       } catch (const exception& e) {
         cout << "  WARN: HAMMER doesn't like candidate for reweighting: "
              << numOfEvt << endl;
@@ -454,15 +561,19 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         hamOk = false;
       }
 
-      if (!isnan(wtFF) && !isinf(wtFF) && hamOk) {
+      if (isnan(wtFF) || isinf(wtFF)) hamOk = false;
+
+      if (hamOk) {
         numOfEvtOk += 1;
         // compute various FF variation weights here
-        wtFFVar0 = ham.getWeight("OutputFFVar0");
-      } else {
-        hamOk = false;
-#ifndef DEBUG_CLI
-        cout << debugMsg;
-#endif
+        // failure's allowed because not all FF schemes require 20 variations!
+        try {
+          for (int i = 0; i < numOfFFVar; i++) {
+            auto ffName = "OutputFFVar" + to_string(i + 1);
+            wtFFVars[i] = ham.getWeight(ffName);
+          }
+        } catch (const exception& e) {
+        }
       }
     }
 
@@ -470,7 +581,16 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     if (hamOk) cout << "  FF weight: " << wtFF << endl;
 #endif
 
-    return tuple<bool, double, double>{hamOk, wtFF, wtFFVar0};
+    // FIXME: it's ugly! but not sure RDataFrame frame can deduce type if we
+    // use anything fancy.
+    return tuple<bool, double, double, double, double, double, double, double,
+                 double, double, double, double, double, double, double, double,
+                 double, double, double, double, double, double>{
+        false,        wtFF,         wtFFVars[0],  wtFFVars[1],  wtFFVars[2],
+        wtFFVars[3],  wtFFVars[4],  wtFFVars[5],  wtFFVars[6],  wtFFVars[7],
+        wtFFVars[8],  wtFFVars[9],  wtFFVars[10], wtFFVars[11], wtFFVars[12],
+        wtFFVars[13], wtFFVars[14], wtFFVars[15], wtFFVars[16], wtFFVars[17],
+        wtFFVars[18], wtFFVars[19]};
   };
 }
 
@@ -515,8 +635,8 @@ int main(int argc, char** argv) {
   Hammer::Hammer ham{};
 
   setDecays(ham);
-  setInputFf(ham, run);
-  setOutputFf(ham);
+  setInputFF(ham, run);
+  auto ffSchemes = setOutputFF(ham);
 
   ham.setUnits("MeV");
   ham.setOptions("ProcessCalc: {CheckForNaNs: true}");
@@ -545,18 +665,20 @@ int main(int argc, char** argv) {
     tie(df, ignore) = prepHamInput(df, bMeson);
 
     // reweight FF
-    auto reweight = reweightWrapper(ham, numOfEvt, numOfEvtOk);
+    auto reweight = reweightWrapper(ham, numOfEvt, numOfEvtOk, ffSchemes);
     df            = df.Define("ff_result", reweight,
                    {"ham_tm_ok", "is_tau", "part_B", "part_D", "part_D_dau0",
                     "part_D_dau1", "part_D_dau2", "part_L", "part_NuL",
                     "part_Mu", "part_NuMu", "part_NuTau", "part_photon_arr"});
     df            = df.Define("ham_ok", "get<0>(ff_result)");
     df            = df.Define("wff", "get<1>(ff_result)");
-    df            = df.Define("wff_var0", "get<2>(ff_result)");
+    for (int i = 0; i < numOfFFVar; i++) {
+      auto outputBrName = "wff_var" + to_string(i + 1);
+      df = df.Define(outputBrName, "get<" + to_string(i + 2) + ">(ff_result)");
+      outputBrs.emplace_back(outputBrName);
+    }
     outputBrs.emplace_back("ham_ok");
-    // all FF branches
     outputBrs.emplace_back("wff");
-    outputBrs.emplace_back("wff_var0");
 
     df.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
 
