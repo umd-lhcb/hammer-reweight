@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 31, 2022 at 01:31 PM -0400
+// Last Change: Tue May 31, 2022 at 01:42 PM -0400
 
 #include <any>
 #include <chrono>
@@ -751,15 +751,11 @@ int main(int, char** argv) {
   ham.initRun();
 
   // only use SM Wilson coefficients
-  // FIXME: Hammer.ExternalData: ERROR  Wilson coefficients BD not found.
-  /*
-   * map<string, complex<double>> wCoeff = {
-   *     {"SM", 1},     {"S_qLlL", 0}, {"S_qRlL", 0}, {"V_qLlL", 0},
-   *     {"V_qRlL", 0}, {"T_qLlL", 0}, {"S_qLlR", 0}, {"S_qRlR", 0},
-   *     {"V_qLlR", 0}, {"V_qRlR", 0}, {"T_qRlR", 0}};
-   * ham.specializeWCInWeights("BtoD", wCoeff);
-   * ham.specializeWCInWeights("BtoD*", wCoeff);
-   */
+  map<string, complex<double>> wCoeff = {
+      {"SM", 1},     {"S_qLlL", 0}, {"S_qRlL", 0}, {"V_qLlL", 0},
+      {"V_qRlL", 0}, {"T_qLlL", 0}, {"S_qLlR", 0}, {"S_qRlR", 0},
+      {"V_qLlR", 0}, {"V_qRlR", 0}, {"T_qRlR", 0}};
+  ham.specializeWCInWeights("BtoCTauNu", wCoeff);
 
   auto q2Min = TAU_MASS * TAU_MASS;
 
