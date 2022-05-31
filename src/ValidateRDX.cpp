@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 31, 2022 at 01:42 PM -0400
+// Last Change: Tue May 31, 2022 at 01:47 PM -0400
 
 #include <any>
 #include <chrono>
@@ -128,6 +128,11 @@ auto VAR_PARMS_B2DBGL = vector<map<string, double>> {
   {{"delta_ap0", 0.0010139800624278266}, {"delta_ap1", -3.447442492334894e-05}, {"delta_ap2", -2.808344227692626e-05}, {"delta_a01", -6.163074193685879e-07}, {"delta_a02", -1.3315838706715554e-05}, {"delta_a00", 0.005048232266588653}},
 };
 // clang-format on
+
+map<string, complex<double>> SPECIALIZED_WC = {
+    {"SM", 1},     {"S_qLlL", 0}, {"S_qRlL", 0}, {"V_qLlL", 0},
+    {"V_qRlL", 0}, {"T_qLlL", 0}, {"S_qLlR", 0}, {"S_qRlR", 0},
+    {"V_qLlR", 0}, {"V_qRlR", 0}, {"T_qRlR", 0}};
 
 void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BDTauNu");
@@ -751,11 +756,8 @@ int main(int, char** argv) {
   ham.initRun();
 
   // only use SM Wilson coefficients
-  map<string, complex<double>> wCoeff = {
-      {"SM", 1},     {"S_qLlL", 0}, {"S_qRlL", 0}, {"V_qLlL", 0},
-      {"V_qRlL", 0}, {"T_qLlL", 0}, {"S_qLlR", 0}, {"S_qRlR", 0},
-      {"V_qLlR", 0}, {"V_qRlR", 0}, {"T_qRlR", 0}};
-  ham.specializeWCInWeights("BtoCTauNu", wCoeff);
+  ham.specializeWCInWeights("BtoCTauNu", SPECIALIZED_WC);
+  ham.specializeWCInWeights("BtoCMuNu", SPECIALIZED_WC);
 
   auto q2Min = TAU_MASS * TAU_MASS;
 
