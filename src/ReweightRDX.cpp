@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Mon May 30, 2022 at 09:58 PM -0400
+// Last Change: Tue May 31, 2022 at 02:38 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -48,36 +48,35 @@ using ROOT::VecOps::RVec;
 
 typedef map<vector<Int_t>, unsigned long> DecayFreq;
 
-// clang-format off
 void setInputFF(Hammer::Hammer& ham, TString run) {
   if (run == "run1") {
     ham.setFFInputScheme({
-      {"BD", "ISGW2"},  // 12573010
-      {"BD*", "ISGW2"}  // 11574010
-      // for run 1, B -> D*MuNu is modelled w/ HQET, which is not implemented in HAMMER
+        {"BD", "ISGW2"},  // 12573010
+        {"BD*", "ISGW2"}  // 11574010
+        // for run 1, B -> D*MuNu is modelled w/ HQET, which is not implemented
+        // in HAMMER
     });
-
   } else if (run == "run2") {
-    ham.setFFInputScheme({
-      {"BD", "CLN_1"},
-      {"BD*", "CLN_2"},
-      {"BD**0*", "ISGW2"},
-      {"BD**1", "ISGW2"},
-      {"BD**1*", "ISGW2"},
-      {"BD**2*", "ISGW2"}
-    });
+    ham.setFFInputScheme({{"BD", "CLN_1"},
+                          {"BD*", "CLN_2"},
+                          {"BD**0*", "ISGW2"},
+                          {"BD**1", "ISGW2"},
+                          {"BD**1*", "ISGW2"},
+                          {"BD**2*", "ISGW2"}});
 
     // 12573001, 12573012
+    // clang-format off
     // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
     ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET3
     // 11574011, 11574021
     // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
-    ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
-    // 11874440, rest of D**
+    ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2 11874440, rest of D**
     // ISGW2, which has no configurable parameter
+    // clang-format on
   }
 }
 
+// clang-format off
 // +, -, +, -, ...
 vector<vector<string>> BtoDVars = {
   // shifting 1-th param in + direction....
@@ -132,6 +131,7 @@ vector<vector<string>> BtoDVars = {
   }
 };
 
+// Various FF config
 map<string, vector<vector<string>>> ffVarSpecs = {
   {"BD", BtoDVars}
 };
@@ -154,39 +154,56 @@ void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {a0: [0.07935, -0.205, -0.23, 0.0]}");
 }
 
+void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
+  // placeholder
+}
+
+void setGenericFFDefault(Hammer::Hammer& ham, const string scheme) {};
+
 map<string, function<void(Hammer::Hammer&, const string)>>
 ffSchemeDefaultsByDecay = {
-  {"BD", setBtoDBGLDefault}
+  {"BD", setBtoDBGLDefault},
+  {"BD*", setBtoDstarBGLDefault},
+  {"BD**0", setGenericFFDefault},
+  {"BD**1", setGenericFFDefault},
+  {"BD**1*", setGenericFFDefault},
+  {"BD**2", setGenericFFDefault}
 };
+// clang-format on
 
 const int numOfFFVar = 20;
+
+string decayDescr(const string decay) {
+  auto daughter = decay.substr(1);
+  return "Bto" + daughter;
+}
 
 vector<string> setOutputFF(Hammer::Hammer& ham) {
   vector<string> hamFFSchemes{"OutputFF"};
 
-  ham.addFFScheme("OutputFF", {
-      {"BD", "BGL"},
-      {"BD*", "BGL"},
-      {"BD**0*", "BLR"},
-      {"BD**1", "BLR"},
-      {"BD**1*", "BLR"},
-      {"BD**2*", "BLR"}
-  });
-
+  ham.addFFScheme("OutputFF", ffSchemeByDecay);
   // Set defaults
-  setBtoDBGLDefault(ham, "BtoDBGL");
+  for (auto [decay, ffName] : ffSchemeByDecay) {
+    auto fullDescr = decayDescr(decay) + ffName;
+    cout << "Decay: " << decay << "; default FF: " << fullDescr << endl;
+    ffSchemeDefaultsByDecay[decay](ham, fullDescr);
+  }
 
   // Set variations
   for (int i = 1; i <= numOfFFVar; i++) {
+    cout << "Configuring FF scheme: OutputFFVar" + to_string(i) << endl;
     map<string, string> schemes{};
-    for (auto const &[decay, vars] : ffVarSpecs) {
+    for (auto const& [decay, vars] : ffVarSpecs) {
       if (i <= vars.size()) {
         // Need to reweight the decay in this HAMMER scheme
-        auto ffName = ffSchemeByDecay[decay] + "_" + to_string(i);
+        auto ffName    = ffSchemeByDecay[decay] + "_" + to_string(i);
+        auto descr     = decayDescr(decay);
         schemes[decay] = ffName;
         // Configure the FF scheme for this decay
-        ffSchemeDefaultsByDecay[decay](ham, ffName);
-        for (auto const &shift : vars[i-1])
+        cout << "  Variation for decay: " << decay
+             << "; with FF: " << descr + ffName << endl;
+        ffSchemeDefaultsByDecay[decay](ham, descr + ffName);
+        for (auto const& shift : vars[i - 1])
           ham.setOptions(ffName + ": " + shift);
       }
     }
@@ -195,7 +212,6 @@ vector<string> setOutputFF(Hammer::Hammer& ham) {
 
   return hamFFSchemes;
 }
-// clang-format on
 
 void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BDTauNu");
