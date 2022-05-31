@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 31, 2022 at 01:47 PM -0400
+// Last Change: Tue May 31, 2022 at 01:57 PM -0400
 
 #include <any>
 #include <chrono>
@@ -115,7 +115,7 @@ void setOutputFF(Hammer::Hammer& ham) {
 }
 
 // FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
-auto VAR_PARMS_B2DBGL = vector<map<string, double>> {
+auto varParamsB2DBGL = vector<map<string, double>> {
   {{"delta_ap0", -1.7339387402949836e-05}, {"delta_ap1", 0.0001643147650026172}, {"delta_ap2", 0.0001929728348481839}, {"delta_a01", -0.10007023344043088}, {"delta_a02", 0.0024788701962137416}, {"delta_a00", 0.006464759304035082}},
   {{"delta_ap0", 1.7339387402949836e-05}, {"delta_ap1", -0.0001643147650026172}, {"delta_ap2", -0.0001929728348481839}, {"delta_a01", 0.10007023344043088}, {"delta_a02", -0.0024788701962137416}, {"delta_a00", -0.006464759304035082}},
   {{"delta_ap0", -0.0001238406964858629}, {"delta_ap1", 0.0014520126238037846}, {"delta_ap2", 0.003897645034731049}, {"delta_a01", -0.0005198293137311275}, {"delta_a02", -0.02138567598323755}, {"delta_a00", 4.7861119207580826e-05}},
@@ -129,7 +129,7 @@ auto VAR_PARMS_B2DBGL = vector<map<string, double>> {
 };
 // clang-format on
 
-map<string, complex<double>> SPECIALIZED_WC = {
+map<string, complex<double>> specializedWC = {
     {"SM", 1},     {"S_qLlL", 0}, {"S_qRlL", 0}, {"V_qLlL", 0},
     {"V_qRlL", 0}, {"T_qLlL", 0}, {"S_qLlR", 0}, {"S_qRlR", 0},
     {"V_qLlR", 0}, {"V_qRlR", 0}, {"T_qRlR", 0}};
@@ -670,7 +670,7 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
       if (hamOk) {
         // Compute FF variations: u1p
         try {
-          auto varParams = VAR_PARMS_B2DBGL[0];
+          auto varParams = varParamsB2DBGL[0];
           auto startVarP = high_resolution_clock::now();
 
           ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
@@ -756,8 +756,8 @@ int main(int, char** argv) {
   ham.initRun();
 
   // only use SM Wilson coefficients
-  ham.specializeWCInWeights("BtoCTauNu", SPECIALIZED_WC);
-  ham.specializeWCInWeights("BtoCMuNu", SPECIALIZED_WC);
+  ham.specializeWCInWeights("BtoCTauNu", specializedWC);
+  ham.specializeWCInWeights("BtoCMuNu", specializedWC);
 
   auto q2Min = TAU_MASS * TAU_MASS;
 
