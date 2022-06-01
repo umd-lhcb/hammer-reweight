@@ -96,7 +96,7 @@ validation-plots: gen/rdx-run2-validation.root
 		--weights "wff_calc" "wff" "wff_bgl_n3" "wff_bgl" "wff_bgl_var_p" "wff_bgl_var_p_shift" \
 		--colors cornflowerblue black darkgoldenrod crimson limegreen purple deeppink \
 		--debug
-	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B02D0_q2_true_no_shift.png \
+	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0_q2_true_no_shift.png \
 		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
 		-XD 3.2 11.0 --bins 20 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
@@ -114,7 +114,7 @@ validation-plots: gen/rdx-run2-validation.root
 		--weights "wff_calc" "wff" "wff_bgl_n3" "wff_bgl" "wff_bgl_var_p" "wff_bgl_var_p_shift" \
 		--colors cornflowerblue black darkgoldenrod crimson limegreen purple deeppink \
 		--debug
-	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B02D0_q2_true_no_shift.pdf \
+	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0_q2_true_no_shift.pdf \
 		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
 		-XD 3.2 11.0 --bins 20 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
