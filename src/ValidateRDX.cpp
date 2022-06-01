@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue May 31, 2022 at 01:57 PM -0400
+// Last Change: Wed Jun 01, 2022 at 08:33 AM -0400
 
 #include <any>
 #include <chrono>
@@ -66,23 +66,21 @@ void setInputFF(Hammer::Hammer& ham) {
   });
 }
 
+void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {ChiT: 0.0006486}");
+  ham.setOptions(scheme + ": {ChiL: 0.006204}");
+  ham.setOptions(scheme + ": {BcStatesp: [6.329, 6.92, 7.02]}");
+  ham.setOptions(scheme + ": {BcStates0: [6.716, 7.121]}");
+  ham.setOptions(scheme + ": {ap: [0.01566, -0.0342, -0.09, 0.0]}");
+  ham.setOptions(scheme + ": {a0: [0.07935, -0.205, -0.23, 0.0]}");
+}
+
 void setOutputFF(Hammer::Hammer& ham) {
-  ham.addFFScheme("OutputFF", {
-    {"BD", "CLN_1"},
-    {"BD*", "CLN_2"},
-  });
-
-  ham.addFFScheme("OutputFFBGL", {
-    {"BD", "BGL_1"},
-  });
-
-  ham.addFFScheme("OutputFFBGLVarShift", {
-    {"BD", "BGL_2"},
-  });
-
-  ham.addFFScheme("OutputFFBGLVar", {
-    {"BD", "BGLVar_1"},
-  });
+  ham.addFFScheme("OutputFF", {{"BD", "CLN_1"}, {"BD*", "CLN_2"}});
+  ham.addFFScheme("OutputFFBGL", {{"BD", "BGL_1"} });
+  ham.addFFScheme("OutputFFBGLVarShift", {{"BD", "BGL_2"}});
+  ham.addFFScheme("OutputFFBGLVar", {{"BD", "BGLVar_1"}});
+  ham.addFFScheme("OutputFFBGLN3", {{"BD", "BGL_3"} });
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
   ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET2
@@ -90,28 +88,13 @@ void setOutputFF(Hammer::Hammer& ham) {
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
   // BGL settings
-  ham.setOptions("BtoDBGL_1: {ChiT: 0.0006486}");
-  ham.setOptions("BtoDBGL_1: {ChiL: 0.006204}");
-  ham.setOptions("BtoDBGL_1: {BcStatesp: [6.329, 6.92, 7.02]}");
-  ham.setOptions("BtoDBGL_1: {BcStates0: [6.716, 7.121]}");
-  ham.setOptions("BtoDBGL_1: {ap: [0.01566, -0.0342, -0.09, 0.0]}");
-  ham.setOptions("BtoDBGL_1: {a0: [0.07935, -0.205, -0.23, 0.0]}");
-
+  setBtoDBGLDefault(ham, "BtoDBGL_1");
   // +1 variation by shifting nominal
-  ham.setOptions("BtoDBGL_2: {ChiT: 0.0006486}");
-  ham.setOptions("BtoDBGL_2: {ChiL: 0.006204}");
-  ham.setOptions("BtoDBGL_2: {BcStatesp: [6.329, 6.92, 7.02]}");
-  ham.setOptions("BtoDBGL_2: {BcStates0: [6.716, 7.121]}");
+  setBtoDBGLDefault(ham, "BtoDBGL_2");
   ham.setOptions("BtoDBGL_2: {ap: [0.015642660612597052, -0.034035685234997386, -0.0898070271651518, 0.0]}");
   ham.setOptions("BtoDBGL_2: {a0: [0.0858147593040351, -0.3050702334404309, -0.22752112980378628, 0.0]}");
-
   // +1 variation w/ BGLVar
-  ham.setOptions("BtoDBGLVar_1: {ChiT: 0.0006486}");
-  ham.setOptions("BtoDBGLVar_1: {ChiL: 0.006204}");
-  ham.setOptions("BtoDBGLVar_1: {BcStatesp: [6.329, 6.92, 7.02]}");
-  ham.setOptions("BtoDBGLVar_1: {BcStates0: [6.716, 7.121]}");
-  ham.setOptions("BtoDBGLVar_1: {ap: [0.01566, -0.0342, -0.09, 0.0]}");
-  ham.setOptions("BtoDBGLVar_1: {a0: [0.07935, -0.205, -0.23, 0.0]}");
+  setBtoDBGLDefault(ham, "BtoDBGLVar_1");
 }
 
 // FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
@@ -479,8 +462,8 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
   outputTree->Branch("wff", &ff);
   double ffBgl;
   outputTree->Branch("wff_bgl", &ffBgl);
-  double ffBglVarRef;
-  outputTree->Branch("wff_bgl_var_ref", &ffBglVarRef);
+  double ffBglN3;
+  outputTree->Branch("wff_bgl_n3", &ffBglN3);
   double ffBglVarP;
   outputTree->Branch("wff_bgl_var_p", &ffBglVarP);
   double ffBglVarPShift;
@@ -650,18 +633,19 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
         ff = ham.getWeight("OutputFF");
       } catch (const std::exception& e) {
         hamOk = false;
+        ff    = 1.0;
       }
 
       try {
+        // reference weight at N=3
+        ffBglN3 = ham.getWeight("OutputFFBGLN3");
+
         auto startNoVar = high_resolution_clock::now();
         ffBgl           = ham.getWeight("OutputFFBGL");
         auto stopNovar  = high_resolution_clock::now();
         timeNoVar += duration_cast<microseconds>(stopNovar - startNoVar);
-
-        // don't compare BGL vs. BGLVar, as we've shown that they are equal
-        ffBglVarRef = ffBgl;
       } catch (const std::exception& e) {
-        ffBgl = ffBglVarRef = 1.0;
+        ffBgl = ffBglN3 = 1.0;
       }
 
       if (hamOk && (isnan(ff) || isinf(ff) || isnan(ffBgl) || isinf(ffBgl)))
