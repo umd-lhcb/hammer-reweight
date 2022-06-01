@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Jun 01, 2022 at 08:33 AM -0400
+// Last Change: Wed Jun 01, 2022 at 12:46 PM -0400
 
 #include <any>
 #include <chrono>
@@ -67,8 +67,8 @@ void setInputFF(Hammer::Hammer& ham) {
 }
 
 void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
-  ham.setOptions(scheme + ": {ChiT: 0.0006486}");
-  ham.setOptions(scheme + ": {ChiL: 0.006204}");
+  ham.setOptions(scheme + ": {ChiT: 0.0005131}");
+  ham.setOptions(scheme + ": {ChiL: 0.006332}");
   ham.setOptions(scheme + ": {BcStatesp: [6.329, 6.92, 7.02]}");
   ham.setOptions(scheme + ": {BcStates0: [6.716, 7.121]}");
   ham.setOptions(scheme + ": {ap: [0.01566, -0.0342, -0.09, 0.0]}");
