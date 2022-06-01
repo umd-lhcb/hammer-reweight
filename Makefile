@@ -105,6 +105,24 @@ validation-plots: gen/rdx-run2-validation.root
 		--weights "wff_calc" "wff" "wff_bgl_n3" "wff_bgl" "wff_bgl_var_p" "wff_bgl_var_p_shift" \
 		--colors cornflowerblue black darkgoldenrod crimson limegreen purple deeppink \
 		--debug
+	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B2D0_q2_true.pdf \
+		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
+		-XD 3.2 11.0 --bins 20 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-l "Theory CLN" "HAM CLN" "HAM BGL (\$$N=3$$)" "HAM BGL (\$$N=2$$)" "HAM BGL + (\$$N=2$$)" "HAMMER BGL + (shift, \$$N=2$$)" \
+		--cuts "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
+		--weights "wff_calc" "wff" "wff_bgl_n3" "wff_bgl" "wff_bgl_var_p" "wff_bgl_var_p_shift" \
+		--colors cornflowerblue black darkgoldenrod crimson limegreen purple deeppink \
+		--debug
+	@plotbr -n $</tree_BD -o gen/rdx-run2-validation-B02D0_q2_true_no_shift.pdf \
+		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
+		-XD 3.2 11.0 --bins 20 \
+		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
+		-l "Theory CLN" "HAM CLN" "HAM BGL (\$$N=3$$)" "HAM BGL (\$$N=2$$)" "HAM BGL + (\$$N=2$$)" \
+		--cuts "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
+		--weights "wff_calc" "wff" "wff_bgl_n3" "wff_bgl" "wff_bgl_var_p" "wff_bgl_var_p_shift" \
+		--colors cornflowerblue black darkgoldenrod crimson limegreen purple deeppink \
+		--debug
 
 rdx-run2-ntuples: \
 	gen/rdx-run2-Bd2Dst0MuNu-sim09k-reweighted.root \
