@@ -1,7 +1,7 @@
 BtoDBGLVar:
     # from 1606.08030
     ChiT: 5.131e-4  # p.6, eq.2.11
-    ChiL: 6.332e-3  # p.5, eq.2.8
+    ChiL: 6.332e-3  # p.5, eq.2.9
     BcStatesp: [6.329,6.920,7.020]   # Tab.1, 1-. pole at 7.280 omitted for it's above BD thresh
     BcStates0: [6.716,7.121]         # Tab.1, 0+
     ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
