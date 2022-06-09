@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Jun 01, 2022 at 01:18 PM -0400
+// Last Change: Thu Jun 09, 2022 at 06:00 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -75,6 +75,11 @@ void setInputFF(Hammer::Hammer& ham, TString run) {
     // clang-format on
   }
 }
+
+map<string, complex<double>> specializedWC = {
+    {"SM", 1},     {"S_qLlL", 0}, {"S_qRlL", 0}, {"V_qLlL", 0},
+    {"V_qRlL", 0}, {"T_qLlL", 0}, {"S_qLlR", 0}, {"S_qRlR", 0},
+    {"V_qLlR", 0}, {"V_qRlR", 0}, {"T_qRlR", 0}};
 
 // clang-format off
 // +, -, +, -, ...
@@ -657,6 +662,10 @@ int main(int argc, char** argv) {
   ham.setUnits("MeV");
   ham.setOptions("ProcessCalc: {CheckForNaNs: true}");
   ham.initRun();
+
+  // only use SM Wilson coefficients
+  ham.specializeWCInWeights("BtoCTauNu", specializedWC);
+  ham.specializeWCInWeights("BtoCMuNu", specializedWC);
 
   // output option
   auto writeOpts  = ROOT::RDF::RSnapshotOptions{};
