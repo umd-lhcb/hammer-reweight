@@ -1,5 +1,5 @@
 {
-  description = "Code for FF reweighting in  HAMMER.";
+  description = "Code for FF reweighting in HAMMER.";
 
   inputs = {
     root-curated.url = "github:umd-lhcb/root-curated";
@@ -44,12 +44,11 @@
             hammer-phys
             ff_calc
             cxxopts
+            boost
 
             # Python stack
             #pythonPackages.pyTuplingUtils
             virtualenvwrapper
-            jedi
-            flake8
             pylint
 
             # Pinned Python dependencies
