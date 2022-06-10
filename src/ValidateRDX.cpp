@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Jun 01, 2022 at 12:46 PM -0400
+// Last Change: Fri Jun 10, 2022 at 01:08 PM -0400
 
 #include <any>
 #include <chrono>
@@ -137,64 +137,66 @@ class IRandGenerator {
   virtual ~IRandGenerator() = 0;  // Just in case to avoid potential memory leak
 };
 
-IRandGenerator::~IRandGenerator() {
-  cout << "Generator itself doesn't provide a destructor or it was deleted via "
-          "a base pointer."
-       << endl;
-}
+IRandGenerator::~IRandGenerator() {}
 
-//////////////////////////
-// Event generation: D0 //
-//////////////////////////
+/////////////////////////////////////////////
+// Event generation: D0, real distribution //
+/////////////////////////////////////////////
 
-class BToDUniformGenerator : public IRandGenerator {
+class BToDRealGenerator : public IRandGenerator {
  public:
-  BToDUniformGenerator(double q2Min, double q2Max, double thetaLMin,
-                       double thetaLMax, TRandom* rng);
+  BToDRealGenerator(double q2Min, double q2Max, double thetaLMin,
+                    double thetaLMax, TRandom* rng, string ffMode = "ISGW2",
+                    int xBins = 300, int yBins = 300);
+  ~BToDRealGenerator();
 
   vector<double> get() override;
   PartEmu        gen() override;
 
-  void setStepInQ(double step) { q2Step = step; };
-  void reset() { q2 = q2Min; };
+  void setFF(string ffMode);
 
  protected:
-  double   q2Min  = 0.;
-  double   q2Step = 0.01;
-  double   q2, q2Max, thetaLMin, thetaLMax;
   TRandom* rng;
+  double   q2Min, q2Max, q2Step;
+  double   thetaLMin, thetaLMax, thetaLStep;
+  int      xBins, yBins;
+  string   ffMode;
+  TH2D*    histo;
 
-  double  computeP(double m2_mom, double m2_dau1, double m2_dau2);
-  PartEmu genBD(int B_id, double B_mass, int D_id, double D_mass, int l_id,
-                double l_mass, int nu_id, double q2, double theta_l);
+  void    buildHisto();
+  double  computeP(double m2Mom, double m2Dau1, double m2Dau2);
+  PartEmu genBD(int bID, double mB, int dID, double mD, int lId, double mL,
+                int nuId, double q2, double thetaL);
 };
 
-BToDUniformGenerator::BToDUniformGenerator(double q2Min, double q2Max,
-                                           double thetaLMin, double thetaLMax,
-                                           TRandom* rng)
+BToDRealGenerator::BToDRealGenerator(double q2Min, double q2Max,
+                                     double thetaLMin, double thetaLMax,
+                                     TRandom* rng, string ffMode, int xBins,
+                                     int yBins)
     : q2Min(q2Min),
       q2Max(q2Max),
       thetaLMin(thetaLMin),
       thetaLMax(thetaLMax),
-      rng(rng) {
-  reset();
+      xBins(yBins),
+      yBins(yBins),
+      rng(rng),
+      ffMode(ffMode) {
+  q2Step     = (q2Max - q2Min) / xBins;
+  thetaLStep = (thetaLMax - thetaLMin) / yBins;
+  buildHisto();
 }
 
-vector<double> BToDUniformGenerator::get() {
-  vector<double> result{};
-  if (q2 <= q2Max) {
-    result.push_back(q2);
-    result.push_back(rng->Uniform(thetaLMin, thetaLMax));
-    q2 += q2Step;
-  } else
-    throw(
-        domain_error("The q2 is out of its upper limit. Reset the generator to "
-                     "start over!"));
+BToDRealGenerator::~BToDRealGenerator() { delete histo; }
 
-  return result;
+void BToDRealGenerator::setFF(string ffMode) { this->ffMode = ffMode; }
+
+vector<double> BToDRealGenerator::get() {
+  double q2, thetaL;
+  histo->GetRandom2(q2, thetaL, rng);
+  return vector<double>{q2, thetaL};
 }
 
-PartEmu BToDUniformGenerator::gen() {
+PartEmu BToDRealGenerator::gen() {
   auto inputs = get();
   auto q2     = inputs[0];
   auto thetaL = inputs[1];
@@ -202,8 +204,8 @@ PartEmu BToDUniformGenerator::gen() {
 }
 
 // Protected methods ///////////////////////////////////////////////////////////
-double BToDUniformGenerator::computeP(double m2Mom, double m2Dau1,
-                                      double m2Dau2) {
+
+double BToDRealGenerator::computeP(double m2Mom, double m2Dau1, double m2Dau2) {
   auto denom = 2 * Sqrt(m2Mom);
   auto nom   = Sqrt(m2Mom * m2Mom + m2Dau1 * m2Dau1 + m2Dau2 * m2Dau2 -
                   2 * (m2Mom * m2Dau1 + m2Mom * m2Dau2 + m2Dau1 * m2Dau2));
@@ -211,9 +213,9 @@ double BToDUniformGenerator::computeP(double m2Mom, double m2Dau1,
 }
 
 // Everything's in GeV!
-PartEmu BToDUniformGenerator::genBD(int bId, double mB, int dId, double mD,
-                                    int lId, double mL, int nuId, double q2,
-                                    double thetaL) {
+PartEmu BToDRealGenerator::genBD(int bId, double mB, int dId, double mD,
+                                 int lId, double mL, int nuId, double q2,
+                                 double thetaL) {
   PartEmu result{};
 
   // Remember that we are in the B rest frame
@@ -258,94 +260,33 @@ PartEmu BToDUniformGenerator::genBD(int bId, double mB, int dId, double mD,
   return result;
 }
 
-/////////////////////////////////////////////
-// Event generation: D0, real distribution //
-/////////////////////////////////////////////
-
-class BToDRealGenerator : public BToDUniformGenerator {
- public:
-  BToDRealGenerator(double q2Min, double q2Max, double thetaLMin,
-                    double thetaLMax, TRandom* rng, string ffMode = "ISGW2",
-                    int xBins = 200, int yBins = 200);
-  ~BToDRealGenerator();
-
-  vector<double> get() override;
-  PartEmu        gen() override;
-
-  void setFF(string ffMode);
-
- protected:
-  double thetaLStep;
-  string ffMode;
-  TH2D*  histo;
-
-  void buildHisto();
-
- private:
-};
-
-BToDRealGenerator::BToDRealGenerator(double q2Min, double q2Max,
-                                     double thetaLMin, double thetaLMax,
-                                     TRandom* rng, string ffMode, int xBins,
-                                     int yBins)
-    : BToDUniformGenerator(q2Min, q2Max, thetaLMin, thetaLMax, rng),
-      ffMode(ffMode) {
-  histo = new TH2D("histo_BD", "histo_BD", xBins, q2Min, q2Max, yBins,
-                   thetaLMin, thetaLMax);
-
-  q2Step     = (q2Max - q2Min) / xBins;
-  thetaLStep = (thetaLMax - thetaLMin) / yBins;
-  buildHisto();
-}
-
-BToDRealGenerator::~BToDRealGenerator() { delete histo; }
-
-void BToDRealGenerator::setFF(string ffMode) { this->ffMode = ffMode; }
-
-vector<double> BToDRealGenerator::get() {
-  double q2, thetaL;
-  histo->GetRandom2(q2, thetaL, rng);
-  return vector<double>{q2, thetaL};
-}
-
-PartEmu BToDRealGenerator::gen() { return BToDUniformGenerator::gen(); }
-
-// Protected methods ///////////////////////////////////////////////////////////
-
 // NOTE: We hard-code to use B0 and Tau
 void BToDRealGenerator::buildHisto() {
+  histo          = new TH2D("histo_BD", "histo_BD", xBins, q2Min, q2Max, yBins,
+                   thetaLMin, thetaLMax);
   auto   ffModel = BToDtaunu{};
   double fPlus, fMinus;
 
-  if (ffMode == "ISGW2") {
-    // using the center of each bin
-    for (auto q2 = q2Min + q2Step / 2; q2 <= q2Max - q2Step / 2; q2 += q2Step) {
+  // using the center of each bin
+  for (auto q2 = q2Min + q2Step / 2; q2 <= q2Max - q2Step / 2; q2 += q2Step) {
+    if (ffMode == "ISGW2")
       ffModel.ComputeISGW2(q2, fPlus, fMinus);
-      for (auto thetaL = thetaLMin + thetaLStep / 2;
-           thetaL <= thetaLMax - thetaLStep / 2; thetaL += thetaLStep) {
-        auto ffVal = ffModel.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
-        histo->Fill(q2, thetaL, ffVal);
-      }
-    }
-  } else if (ffMode == "CLN") {
-    for (auto q2 = q2Min; q2 <= q2Max; q2 += q2Step) {
+    else if (ffMode == "CLN")
       ffModel.ComputeCLN(q2, fPlus, fMinus);
-      for (auto thetaL = thetaLMin; thetaL <= thetaLMax; thetaL += thetaLStep) {
-        auto ffVal = ffModel.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
-        histo->Fill(q2, thetaL, ffVal);
-      }
+
+    for (auto thetaL = thetaLMin + thetaLStep / 2;
+         thetaL <= thetaLMax - thetaLStep / 2; thetaL += thetaLStep) {
+      auto ffVal = ffModel.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
+      histo->Fill(q2, thetaL, ffVal);
     }
-  } else
-    throw(domain_error("Unknown FF parameterization: " + ffMode));
+  }
 }
 
 //////////////////////////
 // Event generation: D* //
 //////////////////////////
 
-class BToDstUniformGenerator : public BToDUniformGenerator {
-  double thetaVMin, thetaVMax, chiMin, chiMax;
-
+class BToDstUniformGenerator : public BToDRealGenerator {
  public:
   BToDstUniformGenerator(double q2Min, double q2Max, double thetaLMin,
                          double thetaLMax, double thetaVMin, double thetaVMax,
@@ -355,6 +296,8 @@ class BToDstUniformGenerator : public BToDUniformGenerator {
   PartEmu        gen() override;
 
  protected:
+  double thetaVMin, thetaVMax, chiMin, chiMax;
+
   PartEmu genBDst(int bId, double mB, int dId, double mD, int lId, double mL,
                   int nuId, int dDauId, double mDDau, int piId, double mPi,
                   double q2, double thetaL, double thetaV, double chi);
@@ -366,14 +309,15 @@ BToDstUniformGenerator::BToDstUniformGenerator(double q2Min, double q2Max,
                                                double thetaVMin,
                                                double thetaVMax, double chiMin,
                                                double chiMax, TRandom* rng)
-    : BToDUniformGenerator(q2Min, q2Max, thetaLMin, thetaLMax, rng),
+    : BToDRealGenerator(q2Min, q2Max, thetaLMin, thetaLMax, rng, "ISGW2", 100,
+                        100),
       thetaVMin(thetaVMin),
       thetaVMax(thetaVMax),
       chiMin(chiMin),
       chiMax(chiMax) {}
 
 vector<double> BToDstUniformGenerator::get() {
-  auto result = BToDUniformGenerator::get();
+  auto result = BToDRealGenerator::get();
   result.push_back(rng->Uniform(thetaVMin, thetaVMax));
   result.push_back(rng->Uniform(chiMin, chiMax));
   return result;
