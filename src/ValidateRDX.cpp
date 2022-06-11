@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri Jun 10, 2022 at 01:08 PM -0400
+// Last Change: Sat Jun 11, 2022 at 03:12 PM -0400
 
 #include <any>
 #include <chrono>
@@ -9,9 +9,11 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 #include <vector>
 
-#include <math.h>
+#include <boost/histogram.hpp>
+#include <boost/histogram/fwd.hpp>
 
 #include <TFile.h>
 #include <TH2D.h>
@@ -34,11 +36,8 @@
 
 using namespace std;
 using namespace std::chrono;
-using TMath::Abs;
-using TMath::Cos;
-using TMath::Power;
-using TMath::Sin;
-using TMath::Sqrt;
+using namespace boost::histogram;
+using namespace TMath;
 
 ///////////////////
 // Configurables //
@@ -120,6 +119,52 @@ map<string, complex<double>> specializedWC = {
 void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BDTauNu");
   ham.includeDecay("BD*TauNu");
+}
+
+//////////////////
+// Stat helpers //
+//////////////////
+
+// Get histogram bin edges
+template <typename Axes>
+vector<pair<double, double>> getBinEdges(const histogram<Axes>& histo) {
+  vector<pair<double, double>> binEdges;
+  int                          ndim = histo.rank();
+  for (int axisIdx = 0; axisIdx < ndim; axisIdx++) {
+    auto axis = histo.axis(axisIdx);
+    binEdges.emplace_back(
+        {axis.bin(0).lower(), axis.bin(axis.size() - 1).upper()});
+  }
+  return binEdges;
+}
+
+template <typename Axes>
+double getMaxBinCount(const histogram<Axes>& histo) {
+  double max = 0;
+  for (auto x : indexed(histo)) {
+    const double binCount = *x;
+    if (binCount >= max) max = binCount;
+  }
+  return max;
+}
+
+// Naive MC sampling
+template <typename Axes>
+vector<double> getRand(const histogram<Axes>& histo, TRandom* rng) {
+  auto         binEdges    = getBinEdges(histo);
+  auto         maxBinCount = getMaxBinCount(histo);
+  const size_t ndim        = binEdges.size();
+
+  // Naive MC sampling
+  while (true) {
+    vector<double> randVals{};
+    // generate some random numbers
+    for (const auto& [min, max] : binEdges)
+      randVals.emplace_back(rng->Uniform(min, max));
+
+    auto valTuple = createTuple<ndim>(randVals);
+    auto binIdx   = histo.index(valTuple);
+  }
 }
 
 /////////////////////////////////

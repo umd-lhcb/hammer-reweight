@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed May 04, 2022 at 10:25 AM -0400
+// Last Change: Sat Jun 11, 2022 at 03:11 PM -0400
 
 #pragma once
 
@@ -77,6 +77,17 @@ string getParticleName(int id, TDatabasePDG* db, bool useAbsId = false) {
 
   if (particle != nullptr) return string(particle->GetName()) + buf;
   return string("Unknown") + buf;
+}
+
+template <typename T, size_t... Indices>
+auto createTupleHelper(const vector<T>& vec, std::index_sequence<Indices...>) {
+  return std::make_tuple(vec[Indices]...);
+}
+
+template <size_t N, typename T>
+auto createTuple(const vector<T>& vec) {
+  assert(vec.size() >= N);
+  return createTupleHelper(vec, std::make_index_sequence<N>{});
 }
 
 ////////////////////////
