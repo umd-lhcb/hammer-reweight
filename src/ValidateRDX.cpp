@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sat Jun 11, 2022 at 03:12 PM -0400
+// Last Change: Sat Jun 11, 2022 at 07:51 PM -0400
 
 #include <any>
 #include <chrono>
@@ -127,13 +127,14 @@ void setDecays(Hammer::Hammer& ham) {
 
 // Get histogram bin edges
 template <typename Axes>
-vector<pair<double, double>> getBinEdges(const histogram<Axes>& histo) {
+auto getBinEdges(const histogram<Axes>& histo) {
   vector<pair<double, double>> binEdges;
-  int                          ndim = histo.rank();
+  const size_t                 ndim = histo.rank();
   for (int axisIdx = 0; axisIdx < ndim; axisIdx++) {
-    auto axis = histo.axis(axisIdx);
-    binEdges.emplace_back(
-        {axis.bin(0).lower(), axis.bin(axis.size() - 1).upper()});
+    auto   axis   = histo.axis(axisIdx);
+    double binLow = axis.bin(0).lower();
+    double binHi  = axis.bin(axis.size() - 1).upper();
+    binEdges.emplace_back(pair<double, double>{binLow, binHi});
   }
   return binEdges;
 }
@@ -148,23 +149,36 @@ double getMaxBinCount(const histogram<Axes>& histo) {
   return max;
 }
 
+template <typename Axes, typename T>
+auto getBinIdx(const histogram<Axes>& histo, vector<T> vals) {
+  vector<unsigned int> binIdx{};
+  for (int axisIdx = 0; axisIdx < vals.size(); axisIdx++)
+    binIdx.emplace_back(histo.axis(axisIdx).index(vals[axisIdx]));
+  return binIdx;
+}
+
 // Naive MC sampling
 template <typename Axes>
-vector<double> getRand(const histogram<Axes>& histo, TRandom* rng) {
+auto getRand(const histogram<Axes>& histo, TRandom* rng, int maxTry = 1000) {
   auto         binEdges    = getBinEdges(histo);
   auto         maxBinCount = getMaxBinCount(histo);
-  const size_t ndim        = binEdges.size();
+  const size_t ndim        = histo.rank();
 
-  // Naive MC sampling
-  while (true) {
-    vector<double> randVals{};
+  int            numTry = 0;
+  vector<double> randVals;
+  while (numTry <= maxTry) {
+    randVals = {};
     // generate some random numbers
     for (const auto& [min, max] : binEdges)
       randVals.emplace_back(rng->Uniform(min, max));
 
-    auto valTuple = createTuple<ndim>(randVals);
-    auto binIdx   = histo.index(valTuple);
+    auto   binIdx = getBinIdx(histo, randVals);
+    double freq   = rng->Uniform(0, maxBinCount);
+    if (freq <= histo.at(binIdx)) return randVals;
+
+    numTry += 1;
   }
+  return randVals;
 }
 
 /////////////////////////////////
@@ -178,22 +192,19 @@ class IRandGenerator {
  public:
   virtual vector<double> get() = 0;
   virtual PartEmu        gen() = 0;
-
-  virtual ~IRandGenerator() = 0;  // Just in case to avoid potential memory leak
 };
-
-IRandGenerator::~IRandGenerator() {}
 
 /////////////////////////////////////////////
 // Event generation: D0, real distribution //
 /////////////////////////////////////////////
+
+typedef histogram<tuple<axis::regular<double>, axis::regular<double>>> Histo2D;
 
 class BToDRealGenerator : public IRandGenerator {
  public:
   BToDRealGenerator(double q2Min, double q2Max, double thetaLMin,
                     double thetaLMax, TRandom* rng, string ffMode = "ISGW2",
                     int xBins = 300, int yBins = 300);
-  ~BToDRealGenerator();
 
   vector<double> get() override;
   PartEmu        gen() override;
@@ -206,7 +217,7 @@ class BToDRealGenerator : public IRandGenerator {
   double   thetaLMin, thetaLMax, thetaLStep;
   int      xBins, yBins;
   string   ffMode;
-  TH2D*    histo;
+  Histo2D  histo;
 
   void    buildHisto();
   double  computeP(double m2Mom, double m2Dau1, double m2Dau2);
@@ -231,15 +242,9 @@ BToDRealGenerator::BToDRealGenerator(double q2Min, double q2Max,
   buildHisto();
 }
 
-BToDRealGenerator::~BToDRealGenerator() { delete histo; }
-
 void BToDRealGenerator::setFF(string ffMode) { this->ffMode = ffMode; }
 
-vector<double> BToDRealGenerator::get() {
-  double q2, thetaL;
-  histo->GetRandom2(q2, thetaL, rng);
-  return vector<double>{q2, thetaL};
-}
+vector<double> BToDRealGenerator::get() { return getRand(histo, rng); }
 
 PartEmu BToDRealGenerator::gen() {
   auto inputs = get();
@@ -307,8 +312,11 @@ PartEmu BToDRealGenerator::genBD(int bId, double mB, int dId, double mD,
 
 // NOTE: We hard-code to use B0 and Tau
 void BToDRealGenerator::buildHisto() {
-  histo          = new TH2D("histo_BD", "histo_BD", xBins, q2Min, q2Max, yBins,
-                   thetaLMin, thetaLMax);
+  auto axes = vector<axis::regular<double>>{
+      axis::regular<double>(xBins, q2Min, q2Max),
+      axis::regular<double>(yBins, thetaLMin, thetaLMax),
+  };
+  histo          = make_histogram(std::move(axes));
   auto   ffModel = BToDtaunu{};
   double fPlus, fMinus;
 
@@ -322,7 +330,7 @@ void BToDRealGenerator::buildHisto() {
     for (auto thetaL = thetaLMin + thetaLStep / 2;
          thetaL <= thetaLMax - thetaLStep / 2; thetaL += thetaLStep) {
       auto ffVal = ffModel.Gamma_q2tL(q2, thetaL, fPlus, fMinus, TAU_MASS);
-      histo->Fill(q2, thetaL, ffVal);
+      histo(q2, thetaL, weight(ffVal));
     }
   }
 }
