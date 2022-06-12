@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Mon May 30, 2022 at 06:38 PM -0400
+# Last Change: Sun Jun 12, 2022 at 02:39 AM -0400
 
 import yaml
 import numpy as np
@@ -151,4 +151,7 @@ if __name__ == '__main__':
             if not isinstance(val, str):
                 print_param_general(ff_model, param, val)
             else:
-                eval_fake_sandbox(val, cfg[ff_model])
+                result = eval_fake_sandbox(val, cfg[ff_model])
+                if result:
+                    print_param_general(ff_model, param, result)
+        print()

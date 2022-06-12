@@ -21,3 +21,12 @@ BtoDBGLVar:
     _param_names: ['ap0', 'ap1', 'ap2', 'a01', 'a02']  # Tab.5
     _add_params:
         a00: [4.99,0.32,0.021,-0.065,-0.004]  # a00 constrained in caption of Tab.5
+
+BtoDstarBGLVar:
+    # from hep-ph/9705252, u = 0.33
+    Vcb: 41.5e-3
+    Chim: 3.068e-4
+    Chip: 5.280e-4
+    ChimL: 2.466e-3
+    avec: "[_eta_ew * Vcb * i for i in [0.0319,-0.146,-0.60]]"
+    _eta_ew: 1.0066
