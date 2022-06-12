@@ -74,7 +74,7 @@ validation-plots: gen/rdx-run2-validation.root
 		-b q2_true q2_true q2_true q2_true q2_true q2_true q2_true \
 		-XD 3.2 11.0 --bins 20 \
 		-XL "True \$$q^2$$ [GeV\$$^2$$]" \
-		-l "Theory CLN" "HAM CLN" "HAM BGL (\$$N=3$$)" "HAM BGL (\$$N=2$$)" "HAM BGL +\$$\sigma$$ (\$$N=2$$)" "HAM BGL +$$\sigma$$ (shift, \$$N=2$$)" \
+		-l "Theory CLN" "HAM CLN" "HAM BGL (default)" "HAM BGL (lattice)" "HAM BGL +\$$\sigma$$ (lattice)" "HAM BGL +$$\sigma$$ (shift, lattice)" \
 		--cuts "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" "ham_ok & ff_calc_ok" \
 		--weights "wff_calc" "wff" "wff_bgl_n3" "wff_bgl" "wff_bgl_var_p" "wff_bgl_var_p_shift" \
 		--colors cornflowerblue black darkgoldenrod crimson limegreen purple deeppink \
