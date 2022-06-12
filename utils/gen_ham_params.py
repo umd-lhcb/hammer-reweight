@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Sun Jun 12, 2022 at 03:49 PM -0400
+# Last Change: Sun Jun 12, 2022 at 07:17 PM -0400
 
 import yaml
 import numpy as np
@@ -135,10 +135,11 @@ def gen_param_shifted_BtoDBGL(
 
 def gen_param_shifted_BtoDstarBGL(
     process, model, m_corr, avec, bvec, cvec, dvec, aerr, berr, cerr, derr,
-    verbose=True
+    scale, verbose=True
 ):
     m_corr = np.matrix(m_corr)
-    v_err = np.array(aerr + berr + cerr + derr)
+    # scale error w/ Vcb * eta_ew as well!
+    v_err = np.array(aerr + berr + cerr + derr) * scale
 
     m_cov = np.einsum('ij,i,j->ij', m_corr, v_err, v_err)
     v_eigen, m_eigen = np.linalg.eig(m_cov)

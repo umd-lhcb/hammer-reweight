@@ -40,7 +40,7 @@ BtoDstarBGLVar:
     dvec: "[_eta_ew * Vcb * i for i in [0.0527,-0.195]]"
     # FIXME: the ordering of the definition matters!
     #        define 'abcdmat' after 'avec', etc.
-    abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err)
+    abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err, _eta_ew*Vcb)
     # temp vars
     _process: BtoD*
     _model: BGL

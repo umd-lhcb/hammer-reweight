@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sun Jun 12, 2022 at 03:52 PM -0400
+// Last Change: Sun Jun 12, 2022 at 07:50 PM -0400
 
 #include <any>
 #include <chrono>
@@ -110,10 +110,10 @@ void setOutputFF(Hammer::Hammer& ham) {
   setBtoDstarBGLDefault(ham, "BtoD*BGL_1");
   // +1 variation by shifting nominal
   setBtoDstarBGLDefault(ham, "BtoD*BGL_2");
-  ham.setOptions("BtoD*BGL_2: {avec: [0.0008114699123721471, -0.004631584454197874, -0.02429938680585102]}");
-  ham.setOptions("BtoD*BGL_2: {bvec: [-0.0018359948207371597, 0.007957426467960936, -0.0026798133074302896]}");
-  ham.setOptions("BtoD*BGL_2: {cvec: [0.0035313301382053435, -0.05061613053283295]}");
-  ham.setOptions("BtoD*BGL_2: {dvec: [0.21894683897618344, 0.008025663780733465]}");
+  ham.setOptions("BtoD*BGL_2: {avec: [0.0013108182997658437, -0.006037690172534556, -0.02503238492176294]}");
+  ham.setOptions("BtoD*BGL_2: {bvec: [0.00042046154464058124, 0.0004805194502614706, 0.0006886305724524865]}");
+  ham.setOptions("BtoD*BGL_2: {cvec: [0.00015352175825219725, 0.001007816444481259]}");
+  ham.setOptions("BtoD*BGL_2: {dvec: [0.011255783292099688, -0.007470360773153175]}");
   // +1 variation w/ BGLVar
   setBtoDstarBGLDefault(ham, "BtoD*BGLVar_1");
 }
