@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Sun Jun 12, 2022 at 02:46 AM -0400
+# Last Change: Sun Jun 12, 2022 at 03:13 AM -0400
 
 import yaml
 import numpy as np
@@ -99,7 +99,7 @@ def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
 
 
 def gen_param_shifted_BtoDBGL(
-        process, model, m_corr, v_err, add_params, ap, a0, verbose=False):
+        process, model, m_corr, v_err, add_params, ap, a0, verbose=True):
     m_corr = np.matrix(m_corr)
     v_err = np.array(v_err)
 
@@ -123,12 +123,12 @@ def gen_param_shifted_BtoDBGL(
         var_a0 = np.append(var_a0, 0.0)
 
         if verbose:
-            print(f' shifting {i+1}-th param in + direction....')
+            print(f'  // shifting {i+1}-th param in + direction....')
         print_param_general(process+model, 'ap', list(np.array(ap) + var_ap))
         print_param_general(process+model, 'a0', list(np.array(a0) + var_a0))
 
         if verbose:
-            print(f' shifting {i+1}-th param in - direction....')
+            print(f'  // shifting {i+1}-th param in - direction....')
         print_param_general(process+model, 'ap', list(np.array(ap) - var_ap))
         print_param_general(process+model, 'a0', list(np.array(a0) - var_a0))
 

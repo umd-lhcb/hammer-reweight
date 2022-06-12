@@ -6,8 +6,8 @@ BtoDBGLVar:
     BcStates0: [6.716,7.121]         # Tab.1, 0+
     ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
     a0: [0.07935,-0.205,-0.23,0.]    #   so we need to kill N=3 terms with a coefficient of 0
-    # apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
-    apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
+    apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
+    # apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
     # temp vars
     _process: BtoD
     _model: BGLVar
@@ -28,9 +28,11 @@ BtoDstarBGLVar:
     Chim: 3.068e-4
     Chip: 5.280e-4
     ChimL: 2.466e-3
+    # Tab. XXII, from 2105.14019
     avec: "[_eta_ew * Vcb * i for i in [0.0319,-0.146,-0.60]]"
     bvec: "[_eta_ew * Vcb * i for i in [0.01242,0.0037,0.02]]"
     # Note this vector in HAMMER is [c1, c2] instead of [c0, c1]
     cvec: "[_eta_ew * Vcb * i for i in [0.00015,0.078]]"
     dvec: "[_eta_ew * Vcb * i for i in [0.0527,-0.195]]"
+    # temp vars
     _eta_ew: 1.0066
