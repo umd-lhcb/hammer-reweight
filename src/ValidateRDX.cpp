@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sun Jun 12, 2022 at 12:02 AM -0400
+// Last Change: Sun Jun 12, 2022 at 03:11 AM -0400
 
 #include <any>
 #include <chrono>
@@ -74,19 +74,30 @@ void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {a0: [0.07935, -0.205, -0.23, 0.0]}");
 }
 
+void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {Vcb: 0.0415}");
+  ham.setOptions(scheme + ": {Chim: 0.0003068}");
+  ham.setOptions(scheme + ": {Chip: 0.000528}");
+  ham.setOptions(scheme + ": {ChimL: 0.002466}");
+  ham.setOptions(scheme + ": {avec: [0.00133258741, -0.0060989894, -0.02506434]}");
+  ham.setOptions(scheme + ": {bvec: [0.0005188318380000001, 0.00015456343000000002, 0.0008354780000000001]}");
+  ham.setOptions(scheme + ": {cvec: [6.266085e-06, 0.0032583642]}");
+  ham.setOptions(scheme + ": {dvec: [0.00220148453, -0.0081459105]}");
+}
+
 void setOutputFF(Hammer::Hammer& ham) {
   ham.addFFScheme("OutputFF", {{"BD", "CLN_1"}, {"BD*", "CLN_2"}});
-  ham.addFFScheme("OutputFFBGL", {{"BD", "BGL_1"} });
+  ham.addFFScheme("OutputFFBGL", {{"BD", "BGL_1"}, {"BD*", "BGL_1"}});
   ham.addFFScheme("OutputFFBGLVarShift", {{"BD", "BGL_2"}});
   ham.addFFScheme("OutputFFBGLVar", {{"BD", "BGLVar_1"}});
-  ham.addFFScheme("OutputFFBGLN3", {{"BD", "BGL_3"} });
+  ham.addFFScheme("OutputFFBGLN3", {{"BD", "BGL_3"}, {"BD*", "BGL_3"}});
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
   ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET2
   // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
   ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
-  // BGL settings
+  // D0, BGL settings
   setBtoDBGLDefault(ham, "BtoDBGL_1");
   // +1 variation by shifting nominal
   setBtoDBGLDefault(ham, "BtoDBGL_2");
@@ -94,6 +105,9 @@ void setOutputFF(Hammer::Hammer& ham) {
   ham.setOptions("BtoDBGL_2: {a0: [0.0858147593040351, -0.3050702334404309, -0.22752112980378628, 0.0]}");
   // +1 variation w/ BGLVar
   setBtoDBGLDefault(ham, "BtoDBGLVar_1");
+
+  // D*, BGL settings
+  setBtoDstarBGLDefault(ham, "BtoD*BGL_1");
 }
 
 // FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
