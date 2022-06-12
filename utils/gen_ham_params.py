@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Sun Jun 12, 2022 at 03:13 AM -0400
+# Last Change: Sun Jun 12, 2022 at 03:49 PM -0400
 
 import yaml
 import numpy as np
@@ -133,6 +133,45 @@ def gen_param_shifted_BtoDBGL(
         print_param_general(process+model, 'a0', list(np.array(a0) - var_a0))
 
 
+def gen_param_shifted_BtoDstarBGL(
+    process, model, m_corr, avec, bvec, cvec, dvec, aerr, berr, cerr, derr,
+    verbose=True
+):
+    m_corr = np.matrix(m_corr)
+    v_err = np.array(aerr + berr + cerr + derr)
+
+    m_cov = np.einsum('ij,i,j->ij', m_corr, v_err, v_err)
+    v_eigen, m_eigen = np.linalg.eig(m_cov)
+    m_c = np.einsum('ij,i->ij', np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
+    m_a = np.einsum('ik,kj', m_c, m_eigen)
+    m_a_inv = np.linalg.inv(m_a)
+
+    print()
+    print(f'{process}{model} shifted central values:')
+    for i in range(10):
+        var_values = m_a_inv[:,i]
+        var_a = var_values[:3]
+        var_b = var_values[3:6]
+        var_c = var_values[6:8]
+        var_d = var_values[8:10]
+
+        if verbose:
+            print(f'  // shifting {i+1}-th param in + direction....')
+        for name, nom, delta in zip(['avec', 'bvec', 'cvec', 'dvec'],
+                                    [avec, bvec, cvec, dvec],
+                                    [var_a, var_b, var_c, var_d]):
+            print_param_general(
+                process+model, name, list(np.array(nom) + delta))
+
+        if verbose:
+            print(f'  // shifting {i+1}-th param in - direction....')
+        for name, nom, delta in zip(['avec', 'bvec', 'cvec', 'dvec'],
+                                    [avec, bvec, cvec, dvec],
+                                    [var_a, var_b, var_c, var_d]):
+            print_param_general(
+                process+model, name, list(np.array(nom) - delta))
+
+
 
 ########
 # Main #
@@ -156,4 +195,5 @@ if __name__ == '__main__':
                 result = eval_fake_sandbox(val, cfg[ff_model])
                 if result:
                     print_param_general(ff_model, param, result)
+                    cfg[ff_model][param] = result
         print()

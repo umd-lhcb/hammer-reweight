@@ -10,7 +10,8 @@ BtoDBGLVar:
     # apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
     # temp vars
     _process: BtoD
-    _model: BGLVar
+    _model: BGL
+    #_model: BGLVar
     _corr: # this is how you define a 2D array in YAML
         - [1,0.304,-0.294,0.212,0.161]
         - [0.304,1,-0.422,0.747,0.190]
@@ -23,7 +24,7 @@ BtoDBGLVar:
         a00: [4.99,0.32,0.021,-0.065,-0.004]  # a00 constrained in caption of Tab.5
 
 BtoDstarBGLVar:
-    # from hep-ph/9705252, u = 0.33
+    # from hep-ph/9705252, u = 0.33 (HAMMER's default)
     Vcb: 41.5e-3
     Chim: 3.068e-4
     Chip: 5.280e-4
@@ -34,10 +35,15 @@ BtoDstarBGLVar:
     # Tab. XXII, from 2105.14019
     avec: "[_eta_ew * Vcb * i for i in [0.0319,-0.146,-0.60]]"
     bvec: "[_eta_ew * Vcb * i for i in [0.01242,0.0037,0.02]]"
-    # Note this vector in HAMMER is [c1, c2] instead of [c0, c1]
+    # note this vector in HAMMER is [c1, c2] instead of [c0, c1]
     cvec: "[_eta_ew * Vcb * i for i in [0.00015,0.078]]"
     dvec: "[_eta_ew * Vcb * i for i in [0.0527,-0.195]]"
+    # FIXME: the ordering of the definition matters!
+    #        define 'abcdmat' after 'avec', etc.
+    abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err)
     # temp vars
+    _process: BtoD*
+    _model: BGL
     _eta_ew: 1.0066
     _a_err: [0.0010,0.031,0.22]
     _b_err: [0.01242,0.0037,0.02]
