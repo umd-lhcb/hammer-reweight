@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sun Jun 12, 2022 at 03:11 AM -0400
+// Last Change: Sun Jun 12, 2022 at 03:52 PM -0400
 
 #include <any>
 #include <chrono>
@@ -86,16 +86,16 @@ void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
 }
 
 void setOutputFF(Hammer::Hammer& ham) {
-  ham.addFFScheme("OutputFF", {{"BD", "CLN_1"}, {"BD*", "CLN_2"}});
+  ham.addFFScheme("OutputFF", {{"BD", "CLN_1"}, {"BD*", "CLN_1"}});
   ham.addFFScheme("OutputFFBGL", {{"BD", "BGL_1"}, {"BD*", "BGL_1"}});
-  ham.addFFScheme("OutputFFBGLVarShift", {{"BD", "BGL_2"}});
-  ham.addFFScheme("OutputFFBGLVar", {{"BD", "BGLVar_1"}});
+  ham.addFFScheme("OutputFFBGLVarShift", {{"BD", "BGL_2"}, {"BD*", "BGL_2"}});
+  ham.addFFScheme("OutputFFBGLVar", {{"BD", "BGLVar_1"}, {"BD", "BGLVar_1"}});
   ham.addFFScheme("OutputFFBGLN3", {{"BD", "BGL_3"}, {"BD*", "BGL_3"}});
 
   // HQET2(hqetrho2, hqetv1_1, indelta): 1.131 1.035 0.38
   ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET2
   // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
-  ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
+  ham.setOptions("BtoD*CLN_1: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2
 
   // D0, BGL settings
   setBtoDBGLDefault(ham, "BtoDBGL_1");
@@ -108,6 +108,14 @@ void setOutputFF(Hammer::Hammer& ham) {
 
   // D*, BGL settings
   setBtoDstarBGLDefault(ham, "BtoD*BGL_1");
+  // +1 variation by shifting nominal
+  setBtoDstarBGLDefault(ham, "BtoD*BGL_2");
+  ham.setOptions("BtoD*BGL_2: {avec: [0.0008114699123721471, -0.004631584454197874, -0.02429938680585102]}");
+  ham.setOptions("BtoD*BGL_2: {bvec: [-0.0018359948207371597, 0.007957426467960936, -0.0026798133074302896]}");
+  ham.setOptions("BtoD*BGL_2: {cvec: [0.0035313301382053435, -0.05061613053283295]}");
+  ham.setOptions("BtoD*BGL_2: {dvec: [0.21894683897618344, 0.008025663780733465]}");
+  // +1 variation w/ BGLVar
+  setBtoDstarBGLDefault(ham, "BtoD*BGLVar_1");
 }
 
 // FF variations for B -> D, in u1p, u1m, u2p, u2m, ... order
@@ -485,8 +493,8 @@ void BToDstRealGenerator::buildHisto() {
         for (auto chi = chiMin + chiStep / 2; chi <= chiMax - chiStep / 2;
              chi += chiStep) {
           auto ffVal =
-              ffModel.Gamma_q2Angular(q2, Cos(thetaL), Cos(thetaV), chi, 0,
-                                      false, A1, V, A2, A0, TAU_MASS);
+              ffModel.Gamma_q2Angular(q2, Cos(thetaL), Cos(thetaV), chi, false,
+                                      LEPTON_POSITIVE, A1, V, A2, A0, TAU_MASS);
           histo(q2, thetaL, thetaV, chi, weight(ffVal));
         }
       }
@@ -726,15 +734,18 @@ void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
       if (hamOk) {
         // Compute FF variations: u1p
         try {
-          auto varParams = varParamsB2DBGL[0];
-          auto startVarP = high_resolution_clock::now();
+          if (!isDst) {
+            auto varParams = varParamsB2DBGL[0];
+            auto startVarP = high_resolution_clock::now();
 
-          ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
-          ffBglVarP = ham.getWeight("OutputFFBGLVar");
-          ham.resetFFEigenvectors("BtoD", "BGLVar_1");
+            ham.setFFEigenvectors("BtoD", "BGLVar_1", varParams);
+            ffBglVarP = ham.getWeight("OutputFFBGLVar");
+            ham.resetFFEigenvectors("BtoD", "BGLVar_1");
 
-          auto stopVarP = high_resolution_clock::now();
-          timeVarP += duration_cast<microseconds>(stopVarP - startVarP);
+            auto stopVarP = high_resolution_clock::now();
+            timeVarP += duration_cast<microseconds>(stopVarP - startVarP);
+          } else
+            ffBglVarP = 1.0;
         } catch (const std::exception& e) {
           ffBglVarP = 1.0;
         }
@@ -823,7 +834,7 @@ int main(int, char** argv) {
                                            0, PI, 0, PI, 0, 2 * PI, rng);
 
   weightGen(genBToD, outputNtp, "tree_BD", ham, 1e5);
-  weightGen(genBToDst, outputNtp, "tree_BDst", ham, 3e4);
+  weightGen(genBToDst, outputNtp, "tree_BDst", ham, 2e4);
 
   delete genBToD;
   delete genBToDst;
