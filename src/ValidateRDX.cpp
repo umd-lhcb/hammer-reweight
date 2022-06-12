@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sat Jun 11, 2022 at 07:51 PM -0400
+// Last Change: Sun Jun 12, 2022 at 12:02 AM -0400
 
 #include <any>
 #include <chrono>
@@ -174,7 +174,11 @@ auto getRand(const histogram<Axes>& histo, TRandom* rng, int maxTry = 1000) {
 
     auto   binIdx = getBinIdx(histo, randVals);
     double freq   = rng->Uniform(0, maxBinCount);
-    if (freq <= histo.at(binIdx)) return randVals;
+    if (freq <= histo.at(binIdx)) {
+      // for (const auto& elem : randVals) cout << elem << " ";
+      // cout << endl;
+      return randVals;
+    }
 
     numTry += 1;
   }
@@ -198,10 +202,11 @@ class IRandGenerator {
 // Event generation: D0, real distribution //
 /////////////////////////////////////////////
 
-typedef histogram<tuple<axis::regular<double>, axis::regular<double>>> Histo2D;
+typedef histogram<vector<axis::regular<double>>> HistoND;
 
 class BToDRealGenerator : public IRandGenerator {
  public:
+  BToDRealGenerator(){};
   BToDRealGenerator(double q2Min, double q2Max, double thetaLMin,
                     double thetaLMax, TRandom* rng, string ffMode = "ISGW2",
                     int xBins = 300, int yBins = 300);
@@ -217,7 +222,7 @@ class BToDRealGenerator : public IRandGenerator {
   double   thetaLMin, thetaLMax, thetaLStep;
   int      xBins, yBins;
   string   ffMode;
-  Histo2D  histo;
+  HistoND  histo;
 
   void    buildHisto();
   double  computeP(double m2Mom, double m2Dau1, double m2Dau2);
@@ -339,63 +344,85 @@ void BToDRealGenerator::buildHisto() {
 // Event generation: D* //
 //////////////////////////
 
-class BToDstUniformGenerator : public BToDRealGenerator {
+class BToDstRealGenerator : public BToDRealGenerator {
  public:
-  BToDstUniformGenerator(double q2Min, double q2Max, double thetaLMin,
-                         double thetaLMax, double thetaVMin, double thetaVMax,
-                         double chiMin, double chiMax, TRandom* rng);
+  BToDstRealGenerator(double q2Min, double q2Max, double thetaLMin,
+                      double thetaLMax, double thetaVMin, double thetaVMax,
+                      double chiMin, double chiMax, TRandom* rng, string ffMode,
+                      int xBins, int yBins, int zBins, int wBins);
 
   vector<double> get() override;
   PartEmu        gen() override;
 
  protected:
-  double thetaVMin, thetaVMax, chiMin, chiMax;
+  TRandom* rng;
+  double   q2Min, q2Max, q2Step;
+  double   thetaLMin, thetaLMax, thetaLStep;
+  double   thetaVMin, thetaVMax, thetaVStep;
+  double   chiMin, chiMax, chiStep;
+  int      xBins, yBins, zBins, wBins;
+  string   ffMode;
+  HistoND  histo;
 
+  void    buildHisto();
   PartEmu genBDst(int bId, double mB, int dId, double mD, int lId, double mL,
                   int nuId, int dDauId, double mDDau, int piId, double mPi,
                   double q2, double thetaL, double thetaV, double chi);
+
+ private:
+  friend class BToDRealGenerator;
 };
 
-BToDstUniformGenerator::BToDstUniformGenerator(double q2Min, double q2Max,
-                                               double thetaLMin,
-                                               double thetaLMax,
-                                               double thetaVMin,
-                                               double thetaVMax, double chiMin,
-                                               double chiMax, TRandom* rng)
-    : BToDRealGenerator(q2Min, q2Max, thetaLMin, thetaLMax, rng, "ISGW2", 100,
-                        100),
+BToDstRealGenerator::BToDstRealGenerator(double q2Min, double q2Max,
+                                         double thetaLMin, double thetaLMax,
+                                         double thetaVMin, double thetaVMax,
+                                         double chiMin, double chiMax,
+                                         TRandom* rng, string ffMode = "ISGW2",
+                                         int xBins = 100, int yBins = 50,
+                                         int zBins = 50, int wBins = 50)
+    : q2Min(q2Min),
+      q2Max(q2Max),
+      thetaLMin(thetaLMin),
+      thetaLMax(thetaLMax),
       thetaVMin(thetaVMin),
       thetaVMax(thetaVMax),
       chiMin(chiMin),
-      chiMax(chiMax) {}
+      chiMax(chiMax),
+      xBins(xBins),
+      yBins(yBins),
+      zBins(zBins),
+      wBins(wBins),
+      rng(rng),
+      ffMode(ffMode) {
+  q2Step = (q2Max - q2Min) / xBins;
 
-vector<double> BToDstUniformGenerator::get() {
-  auto result = BToDRealGenerator::get();
-  result.push_back(rng->Uniform(thetaVMin, thetaVMax));
-  result.push_back(rng->Uniform(chiMin, chiMax));
-  return result;
+  thetaLStep = (thetaLMax - thetaLMin) / yBins;
+  thetaVStep = (thetaVMax - thetaVMin) / zBins;
+  chiStep    = (chiMax - chiMin) / wBins;
+  buildHisto();
 }
 
-PartEmu BToDstUniformGenerator::gen() {
+vector<double> BToDstRealGenerator::get() { return getRand(histo, rng); }
+
+PartEmu BToDstRealGenerator::gen() {
   auto inputs = get();
   auto q2     = inputs[0];
   auto thetaL = inputs[1];
   auto thetaV = inputs[2];
   auto chi    = inputs[3];
-
   return genBDst(511, B0_MASS, -413, DST_MASS, -15, TAU_MASS, 16, -421, D0_MASS,
                  -211, PI_MASS, q2, thetaL, thetaV, chi);
 }
 
 // Protected methods ///////////////////////////////////////////////////////////
-PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
-                                        int lId, double mL, int nuId,
-                                        int dDauId, double mDDau, int piId,
-                                        double mPi, double q2, double thetaL,
-                                        double thetaV, double chi) {
+PartEmu BToDstRealGenerator::genBDst(int bId, double mB, int dId, double mD,
+                                     int lId, double mL, int nuId, int dDauId,
+                                     double mDDau, int piId, double mPi,
+                                     double q2, double thetaL, double thetaV,
+                                     double chi) {
   auto result = genBD(bId, mB, dId, mD, lId, mL, nuId, q2, thetaL);
-
-  auto pDDauMag = computeP(mD * mD, mDDau * mDDau, mPi * mPi);
+  auto pDDauMag =
+      BToDRealGenerator::computeP(mD * mD, mDDau * mDDau, mPi * mPi);
 
   // These are defined in the D* rest frame
   auto pDDauRest =
@@ -420,12 +447,46 @@ PartEmu BToDstUniformGenerator::genBDst(int bId, double mB, int dId, double mD,
   return result;
 }
 
+void BToDstRealGenerator::buildHisto() {
+  auto axes = vector<axis::regular<double>>{
+      axis::regular<double>(xBins, q2Min, q2Max),
+      axis::regular<double>(yBins, thetaLMin, thetaLMax),
+      axis::regular<double>(zBins, thetaVMin, thetaVMax),
+      axis::regular<double>(wBins, chiMin, chiMax)};
+  histo          = make_histogram(std::move(axes));
+  auto   ffModel = BToDstaunu{};
+  double A1, V, A2, A0;
+
+  // using the center of each bin
+  for (auto q2 = q2Min + q2Step / 2; q2 <= q2Max - q2Step / 2; q2 += q2Step) {
+    if (ffMode == "ISGW2")
+      ffModel.ComputeISGW2(q2, A1, V, A2, A0);
+    else if (ffMode == "CLN")
+      ffModel.ComputeCLN(q2, A1, V, A2, A0);
+
+    for (auto thetaL = thetaLMin + thetaLStep / 2;
+         thetaL <= thetaLMax - thetaLStep / 2; thetaL += thetaLStep) {
+      for (auto thetaV = thetaVMin + thetaVStep / 2;
+           thetaV <= thetaVMax - thetaLStep / 2; thetaV += thetaVStep) {
+        for (auto chi = chiMin + chiStep / 2; chi <= chiMax - chiStep / 2;
+             chi += chiStep) {
+          auto ffVal =
+              ffModel.Gamma_q2Angular(q2, Cos(thetaL), Cos(thetaV), chi, 0,
+                                      false, A1, V, A2, A0, TAU_MASS);
+          histo(q2, thetaL, thetaV, chi, weight(ffVal));
+        }
+      }
+    }
+  }
+}
+
 /////////////////
 // Reweighting //
 /////////////////
 
 void weightGen(IRandGenerator* rng, TFile* outputNtp, TString treeName,
-               Hammer::Hammer& ham, int maxEntries = 100000) {
+               Hammer::Hammer& ham, int maxEntries = 5e4) {
+  cout << "Start generating tree: " << treeName << endl;
   auto outputTree = new TTree(treeName, treeName);
   auto calcBDst   = BToDstaunu{};
   auto calcBD     = BToDtaunu{};
@@ -744,11 +805,11 @@ int main(int, char** argv) {
 
   auto genBToD =
       new BToDRealGenerator(q2Min, Power(B0_MASS - D0_MASS, 2), 0, PI, rng);
-  auto genBToDst = new BToDstUniformGenerator(
-      q2Min, Power(B0_MASS - DST_MASS, 2), 0, PI, 0, PI, 0, 2 * PI, rng);
+  auto genBToDst = new BToDstRealGenerator(q2Min, Power(B0_MASS - DST_MASS, 2),
+                                           0, PI, 0, PI, 0, 2 * PI, rng);
 
-  weightGen(genBToDst, outputNtp, "tree_BDst", ham);
-  weightGen(genBToD, outputNtp, "tree_BD", ham);
+  weightGen(genBToD, outputNtp, "tree_BD", ham, 1e5);
+  weightGen(genBToDst, outputNtp, "tree_BDst", ham, 3e4);
 
   delete genBToD;
   delete genBToDst;
