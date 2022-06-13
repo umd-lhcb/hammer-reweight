@@ -5,7 +5,13 @@ Code for FF reweighting in HAMMER.
 ## Installation
 
 Install `nix` with flake support, then type in `nix develop`. In the resulting
-shell prompt you can do:
+shell prompt, first install required Python dependencies with:
+
+```
+make install-dep
+```
+
+Now you can do:
 
 ```
 make
@@ -25,9 +31,8 @@ To compile programs (which will be put in the `bin` folder) and
 make sample-plots
 ```
 
-To generate sample reweighting plots (which will be put in the `gen` folder).
-
-You can generate some reweighting validation plots with:
+To generate some reweighting validation plots (which will be put in the `gen`
+folder):
 ```
 make validation-plots
 ```
