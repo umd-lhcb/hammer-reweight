@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Sun Jun 12, 2022 at 07:50 PM -0400
+// Last Change: Mon Jun 13, 2022 at 03:07 AM -0400
 
 #include <any>
 #include <chrono>
@@ -79,6 +79,9 @@ void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {Chim: 0.0003068}");
   ham.setOptions(scheme + ": {Chip: 0.000528}");
   ham.setOptions(scheme + ": {ChimL: 0.002466}");
+  ham.setOptions(scheme + ": {BcStatesf: [6.73, 6.736, 7.135, 7.142]}");
+  ham.setOptions(scheme + ": {BcStatesg: [6.337, 6.899, 7.012, 7.28]}");
+  ham.setOptions(scheme + ": {BcStatesP1: [6.275, 6.842, 7.25]}");
   ham.setOptions(scheme + ": {avec: [0.00133258741, -0.0060989894, -0.02506434]}");
   ham.setOptions(scheme + ": {bvec: [0.0005188318380000001, 0.00015456343000000002, 0.0008354780000000001]}");
   ham.setOptions(scheme + ": {cvec: [6.266085e-06, 0.0032583642]}");
@@ -110,10 +113,10 @@ void setOutputFF(Hammer::Hammer& ham) {
   setBtoDstarBGLDefault(ham, "BtoD*BGL_1");
   // +1 variation by shifting nominal
   setBtoDstarBGLDefault(ham, "BtoD*BGL_2");
-  ham.setOptions("BtoD*BGL_2: {avec: [0.0013108182997658437, -0.006037690172534556, -0.02503238492176294]}");
-  ham.setOptions("BtoD*BGL_2: {bvec: [0.00042046154464058124, 0.0004805194502614706, 0.0006886305724524865]}");
-  ham.setOptions("BtoD*BGL_2: {cvec: [0.00015352175825219725, 0.001007816444481259]}");
-  ham.setOptions("BtoD*BGL_2: {dvec: [0.011255783292099688, -0.007470360773153175]}");
+  ham.setOptions("BtoD*BGL_2: {avec: [0.001309359578796952, -0.006085426132949664, -0.025170335831386732]}");
+  ham.setOptions("BtoD*BGL_2: {bvec: [0.00046842382043563353, -0.00016195225293225718, 0.000790434370119119]}");
+  ham.setOptions("BtoD*BGL_2: {cvec: [0.003152772380981239, -0.0027771913155404675]}");
+  ham.setOptions("BtoD*BGL_2: {dvec: [-0.0040444465715125735, -0.0067898966427725775]}");
   // +1 variation w/ BGLVar
   setBtoDstarBGLDefault(ham, "BtoD*BGLVar_1");
 }
