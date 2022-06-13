@@ -32,7 +32,7 @@ BtoDstarBGLVar:
     BcStatesf: [6.730,6.736,7.135,7.142]  # GeV
     BcStatesg: [6.337,6.899,7.012,7.280]
     BcStatesP1: [6.275,6.842,7.250]
-    # Tab. XXII, from 2105.14019
+    # Tab. XII, from 2105.14019, v1, last column
     avec: "[_eta_ew * Vcb * i for i in [0.0319,-0.146,-0.60]]"
     bvec: "[_eta_ew * Vcb * i for i in [0.01242,0.0037,0.02]]"
     # note this vector in HAMMER is [c1, c2] instead of [c0, c1]
@@ -49,6 +49,7 @@ BtoDstarBGLVar:
     _b_err: [0.00023,0.0046,0.12]
     _c_err: [0.00094,0.036]
     _d_err: [0.0015,0.043]
+    # Tab. XXII, from 2105.14019, v1
     _corr: # rows/columns: [a0,a1,a2,b0,b1,b2,c1,c2,d0,d1]
         - [1.0000, -0.7498, -0.5389, 0.2891, -0.1705, 0.3224, 0.0411, 0.1373, 0.4154, -0.2309]
         - [-0.7498, 1.0000, 0.5868, 0.1557, 0.2210, -0.4885, 0.1694, -0.2891, -0.0447, 0.2790]
