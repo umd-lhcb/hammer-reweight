@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Mon Jun 13, 2022 at 03:07 AM -0400
+// Last Change: Mon Jun 13, 2022 at 06:14 PM -0400
 
 #include <any>
 #include <chrono>
@@ -492,7 +492,7 @@ void BToDstRealGenerator::buildHisto() {
     for (auto thetaL = thetaLMin + thetaLStep / 2;
          thetaL <= thetaLMax - thetaLStep / 2; thetaL += thetaLStep) {
       for (auto thetaV = thetaVMin + thetaVStep / 2;
-           thetaV <= thetaVMax - thetaLStep / 2; thetaV += thetaVStep) {
+           thetaV <= thetaVMax - thetaVStep / 2; thetaV += thetaVStep) {
         for (auto chi = chiMin + chiStep / 2; chi <= chiMax - chiStep / 2;
              chi += chiStep) {
           auto ffVal =

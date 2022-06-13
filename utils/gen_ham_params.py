@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun
-# Last Change: Sun Jun 12, 2022 at 07:17 PM -0400
+# Last Change: Mon Jun 13, 2022 at 04:18 AM -0400
 
 import yaml
 import numpy as np
@@ -76,7 +76,7 @@ def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
     m_c = np.einsum('ij,i->ij', np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
     m_a = np.einsum('ik,kj', m_c, m_eigen)
     # NOTE: uncomment the line below to reproduce RD+'s numbers
-    #m_a = m_eigen
+    m_a = m_eigen
     # now find the inverse of A, A^-1 tells us how to transform from
     #  an ERROR eigenbasis to our NORMAL FF paramterization basis (HAMMER basis)
     m_a_inv = np.linalg.inv(m_a)

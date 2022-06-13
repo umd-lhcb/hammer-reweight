@@ -6,8 +6,8 @@ BtoDBGLVar:
     BcStates0: [6.716,7.121]         # Tab.1, 0+
     ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
     a0: [0.07935,-0.205,-0.23,0.]    #   so we need to kill N=3 terms with a coefficient of 0
-    apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
-    # apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
+    # apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
+    apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
     # temp vars
     _process: BtoD
     _model: BGL
@@ -40,7 +40,9 @@ BtoDstarBGLVar:
     dvec: "[_eta_ew * Vcb * i for i in [0.0527,-0.195]]"
     # FIXME: the ordering of the definition matters!
     #        define 'abcdmat' after 'avec', etc.
-    abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err, _eta_ew*Vcb)
+    # abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err, _eta_ew*Vcb)
+    abcderr: "[_eta_ew * Vcb * i for i in _a_err+_b_err+_c_err+_d_err]"
+    abcdmat: "gen_param_var(_process, _model, _corr, abcderr, _param_names, {})"
     # temp vars
     _process: BtoD*
     _model: BGL
@@ -61,3 +63,4 @@ BtoDstarBGLVar:
         - [0.1373, -0.2891, 0.4548, -0.0909, 0.1386, -0.2483, -0.5957, 1.0000, -0.2090, 0.1544]
         - [0.4154, -0.0447, -0.1166, 0.6870, -0.1702, 0.1759, 0.2131, -0.2090, 1.0000, -0.4124]
         - [-0.2309, 0.2790, 0.2525, -0.0098, 0.4012, -0.3723, 0.1312, 0.1544, -0.4124, 1.0000]
+    _param_names: ['a0', 'a1', 'a2', 'b0', 'b1', 'b2', 'c1', 'c2', 'd0', 'd1']
