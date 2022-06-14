@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Thu Jun 09, 2022 at 06:00 AM -0400
+// Last Change: Tue Jun 14, 2022 at 12:58 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -58,7 +58,7 @@ void setInputFF(Hammer::Hammer& ham, TString run) {
     });
   } else if (run == "run2") {
     ham.setFFInputScheme({{"BD", "CLN_1"},
-                          {"BD*", "CLN_2"},
+                          {"BD*", "CLN_1"},
                           {"BD**0*", "ISGW2"},
                           {"BD**1", "ISGW2"},
                           {"BD**1*", "ISGW2"},
@@ -70,7 +70,7 @@ void setInputFF(Hammer::Hammer& ham, TString run) {
     ham.setOptions("BtoDCLN_1: {RhoSq: 1.131, Delta: 0.38, G1: 1.035}");  // HQET3
     // 11574011, 11574021
     // HQET2(hqetrho2, hqetha1_1, hqetr1_1, hqetr2_1, hqetr0_1): 1.122 0.908 1.270 0.852 1.15
-    ham.setOptions("BtoD*CLN_2: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2 11874440, rest of D**
+    ham.setOptions("BtoD*CLN_1: {RhoSq: 1.122, F1: 0.908, R1: 1.270, R2: 0.852, R0: 1.15}");  // HQET2 11874440, rest of D**
     // ISGW2, which has no configurable parameter
     // clang-format on
   }
