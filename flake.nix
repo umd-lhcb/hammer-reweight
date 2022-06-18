@@ -5,16 +5,10 @@
     root-curated.url = "github:umd-lhcb/root-curated";
     nixpkgs.follows = "root-curated/nixpkgs";
     flake-utils.follows = "root-curated/flake-utils";
-
-    #pyTuplingUtils.url = "github:umd-lhcb/pyTuplingUtils";
-    # FIXME: Can't use the flake above because of a "follows" problem
-    #        For more details, see this:
-    #          https://github.com/NixOS/nix/issues/3602
-    #        This problem is fixed in a very recent nix release (circa Sep 2021),
-    #        but it's a hassle to update so let's use a workaround instead
+    pyTuplingUtils.url = "github:umd-lhcb/pyTuplingUtils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, root-curated }:
+  outputs = { self, nixpkgs, flake-utils, root-curated, pyTuplingUtils }:
     {
       overlay = import ./nix/overlay.nix;
     } //
@@ -23,8 +17,7 @@
         pkgs = import nixpkgs {
           inherit system;
           config = { allowUnfree = true; };
-          #overlays = [ root-curated.overlay self.overlay pyTuplingUtils.overlay ];
-          overlays = [ root-curated.overlay self.overlay ];
+          overlays = [ root-curated.overlay pyTuplingUtils.overlay self.overlay ];
         };
         python = pkgs.python3;
         pythonPackages = python.pkgs;
@@ -47,42 +40,18 @@
             boost
 
             # Python stack
-            #pythonPackages.pyTuplingUtils
-            virtualenvwrapper
             pylint
-
-            # Pinned Python dependencies
-            numpy
+            pythonPackages.pyTuplingUtils
           ]);
 
           FONTCONFIG_FILE = pkgs.makeFontsConf {
             fontDirectories = with pkgs; [
-              corefonts
+              gyre-fonts
             ];
           };
 
           shellHook = ''
             export PATH=$(pwd)/bin:$(pwd)/utils:$PATH
-
-            # Allow the use of wheels.
-            SOURCE_DATE_EPOCH=$(date +%s)
-
-            if test -d $HOME/build/python-venv; then
-              VENV=$HOME/build/python-venv/${name}
-            else
-              VENV=./.virtualenv
-            fi
-
-            if test ! -d $VENV; then
-              virtualenv $VENV
-            fi
-            source $VENV/bin/activate
-
-            # allow for the environment to pick up packages installed with virtualenv
-            export PYTHONPATH=$VENV/${python.sitePackages}/:$PYTHONPATH
-
-            # fix libstdc++.so not found error
-            export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH
           '';
         };
       });
