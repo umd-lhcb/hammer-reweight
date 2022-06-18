@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri Jun 17, 2022 at 10:49 PM -0400
+// Last Change: Fri Jun 17, 2022 at 11:08 PM -0400
 
 #include <algorithm>
 #include <array>
@@ -208,9 +208,10 @@ vector<string> setOutputFF(Hammer::Hammer& ham) {
         // Configure the FF scheme defaults for this decay
         cout << "  Variation for decay: " << decay
              << "; with FF: " << descr + ffName << endl;
-        ffSchemeDefaultsByDecay[decay](ham, ffName);
+        ffSchemeDefaultsByDecay[decay](ham, descr + ffName);
         for (auto const& shift : vars[i - 1])
-          ham.setOptions(ffName + ": " + shift);  // configure FF variations
+          ham.setOptions(descr + ffName + ": " +
+                         shift);  // configure FF variations
       }
     }
     ham.addFFScheme("OutputFFVar" + to_string(i), schemes);
