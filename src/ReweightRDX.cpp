@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Fri Jun 17, 2022 at 11:08 PM -0400
+// Last Change: Sat Jun 18, 2022 at 02:35 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 
-#include <math.h>
+#include <stdio.h>
 
 #include <TMath.h>
 #include <TString.h>
@@ -236,6 +236,25 @@ void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BD**1MuNu");
   ham.includeDecay("BD**1*MuNu");
   ham.includeDecay("BD**2*MuNu");
+}
+
+/////////////
+// Helpers //
+/////////////
+
+// For muting hammer logging
+// NOTE: Hammer always uses 'stdout' for logging
+int muteStdout() {
+  fflush(stdout);
+  int  fd      = dup(STDOUT_FILENO);
+  auto devNull = freopen("/dev/null", "w", stdout);
+  return fd;
+}
+
+void restoreStdout(int fd) {
+  fflush(stdout);
+  dup2(fd, fileno(stdout));
+  close(fd);
 }
 
 /////////////
@@ -590,6 +609,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
         numOfEvtOk += 1;
         // compute various FF variation weights here
         // failure's allowed because not all FF schemes require 20 variations!
+        auto fd = muteStdout();
         try {
           for (int i = 0; i < numOfFFVar; i++) {
             auto ffName = "OutputFFVar" + to_string(i + 1);
@@ -597,6 +617,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
           }
         } catch (const exception& e) {
         }
+        restoreStdout(fd);
       }
     }
 
