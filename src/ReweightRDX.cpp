@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue Jun 14, 2022 at 12:58 AM -0400
+// Last Change: Fri Jun 17, 2022 at 10:49 PM -0400
 
 #include <algorithm>
 #include <array>
@@ -151,6 +151,7 @@ map<string, string> ffSchemeByDecay = {
 };
 
 void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
+  cout << "Configuring default BtoDBGL for scheme " << scheme << endl;
   ham.setOptions(scheme + ": {ChiT: 0.0005131}");
   ham.setOptions(scheme + ": {ChiL: 0.006332}");
   ham.setOptions(scheme + ": {BcStatesp: [6.329, 6.92, 7.02]}");
@@ -204,12 +205,12 @@ vector<string> setOutputFF(Hammer::Hammer& ham) {
         auto ffName    = ffSchemeByDecay[decay] + "_" + to_string(i);
         auto descr     = decayDescr(decay);
         schemes[decay] = ffName;
-        // Configure the FF scheme for this decay
+        // Configure the FF scheme defaults for this decay
         cout << "  Variation for decay: " << decay
              << "; with FF: " << descr + ffName << endl;
-        ffSchemeDefaultsByDecay[decay](ham, descr + ffName);
+        ffSchemeDefaultsByDecay[decay](ham, ffName);
         for (auto const& shift : vars[i - 1])
-          ham.setOptions(ffName + ": " + shift);
+          ham.setOptions(ffName + ": " + shift);  // configure FF variations
       }
     }
     ham.addFFScheme("OutputFFVar" + to_string(i), schemes);
@@ -607,7 +608,7 @@ auto reweightWrapper(Hammer::Hammer& ham, unsigned long& numOfEvt,
     return tuple<bool, double, double, double, double, double, double, double,
                  double, double, double, double, double, double, double, double,
                  double, double, double, double, double, double>{
-        false,        wtFF,         wtFFVars[0],  wtFFVars[1],  wtFFVars[2],
+        hamOk,        wtFF,         wtFFVars[0],  wtFFVars[1],  wtFFVars[2],
         wtFFVars[3],  wtFFVars[4],  wtFFVars[5],  wtFFVars[6],  wtFFVars[7],
         wtFFVars[8],  wtFFVars[9],  wtFFVars[10], wtFFVars[11], wtFFVars[12],
         wtFFVars[13], wtFFVars[14], wtFFVars[15], wtFFVars[16], wtFFVars[17],
