@@ -4,5 +4,6 @@ gen
 .lvimrc
 .DS_Store
 .idea
+.matplotlib
 
 *.root

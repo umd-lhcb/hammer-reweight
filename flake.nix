@@ -52,6 +52,8 @@
 
           shellHook = ''
             export PATH=$(pwd)/bin:$(pwd)/utils:$PATH
+            export MPLBACKEND=agg  # the backend w/o a UI
+            export MPLCONFIGDIR=$(pwd)/.matplotlib
           '';
         };
       });
