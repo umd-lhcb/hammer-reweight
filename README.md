@@ -4,12 +4,8 @@ Code for FF reweighting in HAMMER.
 
 ## Installation
 
-Install `nix` with flake support, then type in `nix develop`. In the resulting
-shell prompt, first install required Python dependencies with:
-
-```
-make install-dep
-```
+Install `nix` with flake support, then type in `nix develop`. All dependencies
+will be installed automatically for you.
 
 Now you can do:
 
