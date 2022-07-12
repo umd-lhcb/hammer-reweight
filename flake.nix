@@ -40,6 +40,7 @@
             boost
 
             # Python stack
+            pyyaml
             pylint
             pythonPackages.pyTuplingUtils
           ]);
