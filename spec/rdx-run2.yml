@@ -64,3 +64,26 @@ BtoDstarBGLVar:
         - [0.4154, -0.0447, -0.1166, 0.6870, -0.1702, 0.1759, 0.2131, -0.2090, 1.0000, -0.4124]
         - [-0.2309, 0.2790, 0.2525, -0.0098, 0.4012, -0.3723, 0.1312, 0.1544, -0.4124, 1.0000]
     _param_names: ['a0', 'a1', 'a2', 'b0', 'b1', 'b2', 'c1', 'c2', 'd0', 'd1']
+
+BtoD0starBLRVar:
+    # from 1711.03110 (HAMMER default), NOT 1606.09300 (used for run1)
+    as: 0.26
+    mb: 4.710
+    mc: 4.710 - 3.400
+    zt1: 0.7
+    ztp: 0.2
+    zeta1: 0.6
+    chi1: 0.
+    chi2: 0.
+    laB: 0.4
+    laS: 0.76
+
+    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    _process: BtoD0*
+    _model: BLR
+    _corr: # rows/cols [zt1, ztp, zeta1]
+        - [1, -0.95, -0.44]
+        - [-0.95, 1, 0.61]
+        - [-0.44, 0.61, 1]
+    _err: [0.21, 1.4, 0.3]
+    _param_names: ['zt1', 'ztp', 'zeta1']
