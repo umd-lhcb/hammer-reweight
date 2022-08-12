@@ -6,6 +6,8 @@ BtoDBGLVar:
     BcStates0: [6.716,7.121]         # Tab.1, 0+
     ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
     a0: [0.07935,-0.205,-0.23,0.]    #   so we need to kill N=3 terms with a coefficient of 0
+    # Note: this matrix isn't actually set here, apa0matrix will be None; instead, either
+    # shifted parameters or transformation matrix gets printed out
     apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
     # apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
     # temp vars
@@ -38,11 +40,9 @@ BtoDstarBGLVar:
     # note this vector in HAMMER is [c1, c2] instead of [c0, c1]
     cvec: "[_eta_ew * Vcb * i for i in [0.00015,0.078]]"
     dvec: "[_eta_ew * Vcb * i for i in [0.0527,-0.195]]"
-    # FIXME: the ordering of the definition matters!
-    #        define 'abcdmat' after 'avec', etc.
-    # abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err, _eta_ew*Vcb)
     abcderr: "[_eta_ew * Vcb * i for i in _a_err+_b_err+_c_err+_d_err]"
-    abcdmat: "gen_param_var(_process, _model, _corr, abcderr, _param_names, {})"
+    abcdmat: gen_param_shifted_BtoDstarBGL(_process, _model, _corr, avec, bvec, cvec, dvec, _a_err, _b_err, _c_err, _d_err, _eta_ew*Vcb)
+    # abcdmat: "gen_param_var(_process, _model, _corr, abcderr, _param_names, {})"
     # temp vars
     _process: BtoD*
     _model: BGL
@@ -78,7 +78,8 @@ BtoD0starBLRVar:
     laB: 0.4
     laS: 0.76
 
-    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
+    # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
     _process: BtoD0*
     _model: BLR
     _corr: # rows/cols [zt1, ztp, zeta1]
@@ -101,7 +102,8 @@ BtoD1starBLRVar:
     laB: 0.4
     laS: 0.76
 
-    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
+    # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
     _process: BtoD1*
     _model: BLR
     _corr: # rows/cols [zt1, ztp, zeta1]
@@ -126,7 +128,8 @@ BtoD1BLRVar:
     laB: 0.4
     laS: 0.8
 
-    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
+    # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
     _process: BtoD1
     _model: BLR
     _corr: # rows/cols [t1, tp, tau1, tau2]
@@ -152,7 +155,8 @@ BtoD2starBLRVar:
     laB: 0.4
     laS: 0.8
 
-    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
+    # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
     _process: BtoD2star
     _model: BLR
     _corr: # rows/cols [t1, tp, tau1, tau2]

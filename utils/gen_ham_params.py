@@ -174,6 +174,32 @@ def gen_param_shifted_BtoDstarBGL(
                 process+model, name, list(np.array(nom) - delta))
 
 
+def gen_param_shifted_BtoDstarstarBLR(
+        process, model, m_corr, v_nom, v_err, param_names, verbose=True):
+    m_corr = np.matrix(m_corr)
+    v_err = np.array(v_err)
+
+    m_cov = np.einsum('ij,i,j->ij', m_corr, v_err, v_err)
+    v_eigen, m_eigen = np.linalg.eig(m_cov)
+    m_c = np.einsum('ij,i->ij', np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
+    m_a = np.einsum('ik,kj', m_c, m_eigen)
+    m_a_inv = np.linalg.inv(m_a)
+
+    print()
+    print(f'{process}{model} shifted central values:')
+    for i in range(len(v_nom)):
+        var_values = m_a_inv[:,i]
+
+        if verbose:
+            print(f'  // shifting {i+1}-th param in + direction....')
+        for name, nom, delta in zip(param_names, v_nom, var_values):
+            print_param_general(process+model, name, nom + delta)
+
+        if verbose:
+            print(f'  // shifting {i+1}-th param in - direction....')
+        for name, nom, delta in zip(param_names, v_nom, var_values):
+            print_param_general(process+model, name, nom - delta)
+
 
 ########
 # Main #
