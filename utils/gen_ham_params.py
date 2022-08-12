@@ -20,7 +20,8 @@ def parse_input():
     parser.add_argument('input', help='specify input YAML.')
 
     parser.add_argument('-m', '--modes', nargs='+',
-                        default=['BtoDBGLVar', 'BtoDstarBGLVar', 'BtoD0starBLRVar'],
+                        default=['BtoDBGLVar', 'BtoDstarBGLVar', 'BtoD0starBLRVar',
+                                 'BtoD1starBLRVar', 'BtoD1BLRVar', 'BtoD2starBLRVar'],
                         help='specify FF params to print')
 
     return parser.parse_args()

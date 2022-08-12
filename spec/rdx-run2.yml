@@ -6,8 +6,8 @@ BtoDBGLVar:
     BcStates0: [6.716,7.121]         # Tab.1, 0+
     ap: [0.01566,-0.0342,-0.090,0.]  # Tab.4, N=2. The last element is set to 0 b.c. HAMMER hard-coded a N=3 scheme,
     a0: [0.07935,-0.205,-0.23,0.]    #   so we need to kill N=3 terms with a coefficient of 0
-    # apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
-    apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
+    apa0matrix: gen_param_shifted_BtoDBGL(_process, _model, _corr, _err, _add_params, ap, a0)
+    # apa0matrix: gen_param_var(_process, _model, _corr, _err, _param_names, _add_params)
     # temp vars
     _process: BtoD
     _model: BGL
@@ -87,3 +87,78 @@ BtoD0starBLRVar:
         - [-0.44, 0.61, 1]
     _err: [0.21, 1.4, 0.3]
     _param_names: ['zt1', 'ztp', 'zeta1']
+
+BtoD1starBLRVar:
+    # from 1711.03110 (HAMMER default), NOT 1606.09300 (used for run1); identical to D0*
+    as: 0.26
+    mb: 4.710
+    mc: 4.710 - 3.400
+    zt1: 0.7
+    ztp: 0.2
+    zeta1: 0.6
+    chi1: 0.
+    chi2: 0.
+    laB: 0.4
+    laS: 0.76
+
+    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    _process: BtoD1*
+    _model: BLR
+    _corr: # rows/cols [zt1, ztp, zeta1]
+        - [1, -0.95, -0.44]
+        - [-0.95, 1, 0.61]
+        - [-0.44, 0.61, 1]
+    _err: [0.21, 1.4, 0.3]
+    _param_names: ['zt1', 'ztp', 'zeta1']
+
+BtoD1BLRVar:
+    # from 1711.03110 (HAMMER default), NOT 1606.09300
+    as: 0.26
+    mb: 4.710
+    mc: 4.710 - 3.400
+    t1: 0.7
+    tp: -1.6
+    tau1: -0.5
+    tau2: 2.9
+    eta1: 0.
+    eta2: 0.
+    eta3: 0.
+    laB: 0.4
+    laS: 0.8
+
+    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    _process: BtoD1
+    _model: BLR
+    _corr: # rows/cols [t1, tp, tau1, tau2]
+        - [1,-0.85,0.53,-0.49]
+        - [-0.85,1,-0.17,0.086]
+        - [0.53,-0.17,1,-0.89]
+        - [-0.49,0.086,-0.89,1]
+    _err: [0.07,0.2,0.3,1.4]
+    _param_names: ['t1', 'tp', 'tau1', 'tau2']
+
+BtoD2starBLRVar:
+    # from 1711.03110 (HAMMER default), NOT 1606.09300; identical to D1
+    as: 0.26
+    mb: 4.710
+    mc: 4.710 - 3.400
+    t1: 0.7
+    tp: -1.6
+    tau1: -0.5
+    tau2: 2.9
+    eta1: 0.
+    eta2: 0.
+    eta3: 0.
+    laB: 0.4
+    laS: 0.8
+
+    sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+    _process: BtoD2star
+    _model: BLR
+    _corr: # rows/cols [t1, tp, tau1, tau2]
+        - [1,-0.85,0.53,-0.49]
+        - [-0.85,1,-0.17,0.086]
+        - [0.53,-0.17,1,-0.89]
+        - [-0.49,0.086,-0.89,1]
+    _err: [0.07,0.2,0.3,1.4]
+    _param_names: ['t1', 'tp', 'tau1', 'tau2']
