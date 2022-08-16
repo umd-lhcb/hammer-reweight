@@ -78,6 +78,8 @@ BtoD0starBLRVar:
     laB: 0.4
     laS: 0.76
 
+    # note: variations are multiplied by 2 (in all entries) wrt to what would nominally be calculated from
+    # paper values; do not fully trust the paper constraints
     sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
     # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
     _process: BtoD0*

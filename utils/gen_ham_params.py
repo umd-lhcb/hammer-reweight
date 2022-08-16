@@ -193,12 +193,13 @@ def gen_param_shifted_BtoDstarstarBLR(
         if verbose:
             print(f'  // shifting {i+1}-th param in + direction....')
         for name, nom, delta in zip(param_names, v_nom, var_values):
-            print_param_general(process+model, name, nom + delta)
+            # multiplying deltas by 2, because don't fully trust paper constraints
+            print_param_general(process+model, name, nom + 2*delta)
 
         if verbose:
             print(f'  // shifting {i+1}-th param in - direction....')
         for name, nom, delta in zip(param_names, v_nom, var_values):
-            print_param_general(process+model, name, nom - delta)
+            print_param_general(process+model, name, nom - 2*delta)
 
 
 ########
