@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# Author: Yipeng Sun
-# Last Change: Mon Jun 13, 2022 at 04:18 AM -0400
+# Author: Yipeng Sun, Alex Fernez
+# Last Change: Sun Aug 14, 2022 at 05:45 PM -0400
 
 import yaml
 import numpy as np
@@ -31,7 +31,7 @@ def parse_input():
 ###########
 
 def print_param_general(ff_alias, param, val):
-    print(f'  ham.setOptions("{ff_alias}: {{{param}: {val}}}");')
+    print(f'    "{ff_alias}: {{{param}: {val}}}",')
 
 
 def print_param_ff_var(process, model, shifts, params, comments):
@@ -125,13 +125,19 @@ def gen_param_shifted_BtoDBGL(
 
         if verbose:
             print(f'  // shifting {i+1}-th param in + direction....')
+            print('  {')
         print_param_general(process+model, 'ap', list(np.array(ap) + var_ap))
         print_param_general(process+model, 'a0', list(np.array(a0) + var_a0))
+        if verbose:
+            print('  },')
 
         if verbose:
             print(f'  // shifting {i+1}-th param in - direction....')
+            print('  {')
         print_param_general(process+model, 'ap', list(np.array(ap) - var_ap))
         print_param_general(process+model, 'a0', list(np.array(a0) - var_a0))
+        if verbose:
+            print('  },')
 
 
 def gen_param_shifted_BtoDstarBGL(
@@ -159,19 +165,25 @@ def gen_param_shifted_BtoDstarBGL(
 
         if verbose:
             print(f'  // shifting {i+1}-th param in + direction....')
+            print('  {')
         for name, nom, delta in zip(['avec', 'bvec', 'cvec', 'dvec'],
                                     [avec, bvec, cvec, dvec],
                                     [var_a, var_b, var_c, var_d]):
             print_param_general(
                 process+model, name, list(np.array(nom) + delta))
+        if verbose:
+            print('  },')
 
         if verbose:
             print(f'  // shifting {i+1}-th param in - direction....')
+            print('  {')
         for name, nom, delta in zip(['avec', 'bvec', 'cvec', 'dvec'],
                                     [avec, bvec, cvec, dvec],
                                     [var_a, var_b, var_c, var_d]):
             print_param_general(
                 process+model, name, list(np.array(nom) - delta))
+        if verbose:
+            print('  },')
 
 
 def gen_param_shifted_BtoDstarstarBLR(
@@ -192,14 +204,20 @@ def gen_param_shifted_BtoDstarstarBLR(
 
         if verbose:
             print(f'  // shifting {i+1}-th param in + direction....')
+            print('  {')
         for name, nom, delta in zip(param_names, v_nom, var_values):
             # multiplying deltas by 2, because don't fully trust paper constraints
             print_param_general(process+model, name, nom + 2*delta)
+        if verbose:
+            print('  },')
 
         if verbose:
             print(f'  // shifting {i+1}-th param in - direction....')
+            print('  {')
         for name, nom, delta in zip(param_names, v_nom, var_values):
             print_param_general(process+model, name, nom - 2*delta)
+        if verbose:
+            print('  },')
 
 
 ########
