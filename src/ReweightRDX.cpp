@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Aug 17, 2022 at 05:56 AM -0400
+// Last Change: Wed Aug 17, 2022 at 06:06 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -491,7 +491,7 @@ map<string, string> ffSchemeByDecay = {
   {"BD**0", "BLR"},
   {"BD**1", "BLR"},
   {"BD**1*", "BLR"},
-  {"BD**2", "BLR"},
+  {"BD**2*", "BLR"},
 };
 
 void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
@@ -580,7 +580,7 @@ ffSchemeDefaultsByDecay = {
   {"BD**0", setBtoD0starBLRDefault},
   {"BD**1", setBtoD1BLRDefault},
   {"BD**1*", setBtoD1starBLRDefault},
-  {"BD**2", setBtoD2starBLRDefault}
+  {"BD**2*", setBtoD2starBLRDefault}
 };
 // clang-format on
 
