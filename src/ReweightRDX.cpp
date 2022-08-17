@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue Aug 02, 2022 at 10:46 PM -0400
+// Last Change: Wed Aug 17, 2022 at 05:36 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -279,10 +279,210 @@ vector<vector<string>> BtoDstVars = {
   }
 };
 
+vector<vector<string>> BtoD0starVars = {
+  // shifting 1-th param in + direction....
+  {
+    "BtoD0*BLR: {zt1: 1.098150778538033}",
+    "BtoD0*BLR: {ztp: -2.5782005874353002}",
+    "BtoD0*BLR: {zeta1: 1.1090232758998373}",
+  },
+  // shifting 1-th param in - direction....
+  {
+    "BtoD0*BLR: {zt1: 0.3018492214619671}",
+    "BtoD0*BLR: {ztp: 2.9782005874353006}",
+    "BtoD0*BLR: {zeta1: 0.09097672410016278}",
+  },
+  // shifting 2-th param in + direction....
+  {
+    "BtoD0*BLR: {zt1: 0.5963724470564943}",
+    "BtoD0*BLR: {ztp: 0.18310737440727248}",
+    "BtoD0*BLR: {zeta1: 0.5888576579281841}",
+  },
+  // shifting 2-th param in - direction....
+  {
+    "BtoD0*BLR: {zt1: 0.8036275529435056}",
+    "BtoD0*BLR: {ztp: 0.21689262559272754}",
+    "BtoD0*BLR: {zeta1: 0.6111423420718158}",
+  },
+  // shifting 3-th param in + direction....
+  {
+    "BtoD0*BLR: {zt1: 0.637119328388831}",
+    "BtoD0*BLR: {ztp: 0.27680365896258735}",
+    "BtoD0*BLR: {zeta1: 1.0683714283645744}",
+  },
+  // shifting 3-th param in - direction....
+  {
+    "BtoD0*BLR: {zt1: 0.7628806716111689}",
+    "BtoD0*BLR: {ztp: 0.12319634103741266}",
+    "BtoD0*BLR: {zeta1: 0.13162857163542552}",
+  }
+};
+
+vector<vector<string>> BtoD1Vars = {
+  // shifting 1-th param in + direction....
+  {
+    "BtoD1BLR: {t1: 0.7694432788984408}",
+    "BtoD1BLR: {tp: -2.372337805334135}",
+    "BtoD1BLR: {tau1: -3.2416986114558015}",
+    "BtoD1BLR: {tau2: 2.7747263953487225}",
+  },
+  // shifting 1-th param in - direction....
+  {
+    "BtoD1BLR: {t1: 0.6305567211015591}",
+    "BtoD1BLR: {tp: -0.8276621946658654}",
+    "BtoD1BLR: {tau1: 2.2416986114558015}",
+    "BtoD1BLR: {tau2: 3.0252736046512774}",
+  },
+  // shifting 2-th param in + direction....
+  {
+    "BtoD1BLR: {t1: 0.6945480372695823}",
+    "BtoD1BLR: {tp: -1.2056731495789785}",
+    "BtoD1BLR: {tau1: -0.6152812019868762}",
+    "BtoD1BLR: {tau2: 2.988878858706443}",
+  },
+  // shifting 2-th param in - direction....
+  {
+    "BtoD1BLR: {t1: 0.7054519627304177}",
+    "BtoD1BLR: {tp: -1.9943268504210216}",
+    "BtoD1BLR: {tau1: -0.38471879801312386}",
+    "BtoD1BLR: {tau2: 2.811121141293557}",
+  },
+  // shifting 3-th param in + direction....
+  {
+    "BtoD1BLR: {t1: 0.708079553210943}",
+    "BtoD1BLR: {tp: -1.6088894147532562}",
+    "BtoD1BLR: {tau1: -0.49916538047982556}",
+    "BtoD1BLR: {tau2: 2.9410176316310555}",
+  },
+  // shifting 3-th param in - direction....
+  {
+    "BtoD1BLR: {t1: 0.691920446789057}",
+    "BtoD1BLR: {tp: -1.591110585246744}",
+    "BtoD1BLR: {tau1: -0.5008346195201745}",
+    "BtoD1BLR: {tau2: 2.8589823683689444}",
+  },
+  // shifting 4-th param in + direction....
+  {
+    "BtoD1BLR: {t1: 0.44568095475294084}",
+    "BtoD1BLR: {tp: -1.6153253350947394}",
+    "BtoD1BLR: {tau1: -0.5042655344258667}",
+    "BtoD1BLR: {tau2: 2.946860606539276}",
+  },
+  // shifting 4-th param in - direction....
+  {
+    "BtoD1BLR: {t1: 0.9543190452470591}",
+    "BtoD1BLR: {tp: -1.5846746649052608}",
+    "BtoD1BLR: {tau1: -0.49573446557413325}",
+    "BtoD1BLR: {tau2: 2.8531393934607236}",
+  }
+};
+
+vector<vector<string>> BtoD1starVars = {
+    // shifting 1-th param in + direction....
+  {
+    "BtoD1*BLR: {zt1: 1.098150778538033}",
+    "BtoD1*BLR: {ztp: -2.5782005874353002}",
+    "BtoD1*BLR: {zeta1: 1.1090232758998373}",
+  },
+  // shifting 1-th param in - direction....
+  {
+    "BtoD1*BLR: {zt1: 0.3018492214619671}",
+    "BtoD1*BLR: {ztp: 2.9782005874353006}",
+    "BtoD1*BLR: {zeta1: 0.09097672410016278}",
+  },
+  // shifting 2-th param in + direction....
+  {
+    "BtoD1*BLR: {zt1: 0.5963724470564943}",
+    "BtoD1*BLR: {ztp: 0.18310737440727248}",
+    "BtoD1*BLR: {zeta1: 0.5888576579281841}",
+  },
+  // shifting 2-th param in - direction....
+  {
+    "BtoD1*BLR: {zt1: 0.8036275529435056}",
+    "BtoD1*BLR: {ztp: 0.21689262559272754}",
+    "BtoD1*BLR: {zeta1: 0.6111423420718158}",
+  },
+  // shifting 3-th param in + direction....
+  {
+    "BtoD1*BLR: {zt1: 0.637119328388831}",
+    "BtoD1*BLR: {ztp: 0.27680365896258735}",
+    "BtoD1*BLR: {zeta1: 1.0683714283645744}",
+  },
+  // shifting 3-th param in - direction....
+  {
+    "BtoD1*BLR: {zt1: 0.7628806716111689}",
+    "BtoD1*BLR: {ztp: 0.12319634103741266}",
+    "BtoD1*BLR: {zeta1: 0.13162857163542552}",
+  }
+};
+
+vector<vector<string>> BtoD2starVars = {
+    // shifting 1-th param in + direction....
+  {
+    "BtoD2starBLR: {t1: 0.7694432788984408}",
+    "BtoD2starBLR: {tp: -2.372337805334135}",
+    "BtoD2starBLR: {tau1: -3.2416986114558015}",
+    "BtoD2starBLR: {tau2: 2.7747263953487225}",
+  },
+  // shifting 1-th param in - direction....
+  {
+    "BtoD2starBLR: {t1: 0.6305567211015591}",
+    "BtoD2starBLR: {tp: -0.8276621946658654}",
+    "BtoD2starBLR: {tau1: 2.2416986114558015}",
+    "BtoD2starBLR: {tau2: 3.0252736046512774}",
+  },
+  // shifting 2-th param in + direction....
+  {
+    "BtoD2starBLR: {t1: 0.6945480372695823}",
+    "BtoD2starBLR: {tp: -1.2056731495789785}",
+    "BtoD2starBLR: {tau1: -0.6152812019868762}",
+    "BtoD2starBLR: {tau2: 2.988878858706443}",
+  },
+  // shifting 2-th param in - direction....
+  {
+    "BtoD2starBLR: {t1: 0.7054519627304177}",
+    "BtoD2starBLR: {tp: -1.9943268504210216}",
+    "BtoD2starBLR: {tau1: -0.38471879801312386}",
+    "BtoD2starBLR: {tau2: 2.811121141293557}",
+  },
+  // shifting 3-th param in + direction....
+  {
+    "BtoD2starBLR: {t1: 0.708079553210943}",
+    "BtoD2starBLR: {tp: -1.6088894147532562}",
+    "BtoD2starBLR: {tau1: -0.49916538047982556}",
+    "BtoD2starBLR: {tau2: 2.9410176316310555}",
+  },
+  // shifting 3-th param in - direction....
+  {
+    "BtoD2starBLR: {t1: 0.691920446789057}",
+    "BtoD2starBLR: {tp: -1.591110585246744}",
+    "BtoD2starBLR: {tau1: -0.5008346195201745}",
+    "BtoD2starBLR: {tau2: 2.8589823683689444}",
+  },
+  // shifting 4-th param in + direction....
+  {
+    "BtoD2starBLR: {t1: 0.44568095475294084}",
+    "BtoD2starBLR: {tp: -1.6153253350947394}",
+    "BtoD2starBLR: {tau1: -0.5042655344258667}",
+    "BtoD2starBLR: {tau2: 2.946860606539276}",
+  },
+  // shifting 4-th param in - direction....
+  {
+    "BtoD2starBLR: {t1: 0.9543190452470591}",
+    "BtoD2starBLR: {tp: -1.5846746649052608}",
+    "BtoD2starBLR: {tau1: -0.49573446557413325}",
+    "BtoD2starBLR: {tau2: 2.8531393934607236}",
+  }
+};
+
 // Various FF config
 map<string, vector<vector<string>>> ffVarSpecs = {
   {"BD", BtoDVars},
   {"BD*", BtoDstVars},
+  {"BD**0", BtoD0starVars},
+  {"BD**1", BtoD1Vars},
+  {"BD**1*", BtoD1starVars},
+  {"BD**2*", BtoD2starVars},
 };
 
 map<string, string> ffSchemeByDecay = {
@@ -295,7 +495,6 @@ map<string, string> ffSchemeByDecay = {
 };
 
 void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
-  cout << "Configuring default BtoDBGL for scheme " << scheme << endl;
   ham.setOptions(scheme + ": {ChiT: 0.0005131}");
   ham.setOptions(scheme + ": {ChiL: 0.006332}");
   ham.setOptions(scheme + ": {BcStatesp: [6.329, 6.92, 7.02]}");
@@ -318,16 +517,70 @@ void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {dvec: [0.00220148453, -0.0081459105]}");
 }
 
-void setGenericFFDefault(Hammer::Hammer& ham, const string scheme) {};
+void setBtoD0starBLRDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {as: 0.26}");
+  ham.setOptions(scheme + ": {mb: 4.71}");
+  ham.setOptions(scheme + ": {mc: 1.31}");
+  ham.setOptions(scheme + ": {zt1: 0.7}");
+  ham.setOptions(scheme + ": {ztp: 0.2}");
+  ham.setOptions(scheme + ": {zeta1: 0.6}");
+  ham.setOptions(scheme + ": {chi1: 0.0}");
+  ham.setOptions(scheme + ": {chi2: 0.0}");
+  ham.setOptions(scheme + ": {laB: 0.4}");
+  ham.setOptions(scheme + ": {laS: 0.76}");
+};
+
+void setBtoD1BLRDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {as: 0.26}");
+  ham.setOptions(scheme + ": {mb: 4.71}");
+  ham.setOptions(scheme + ": {mc: 1.31}");
+  ham.setOptions(scheme + ": {t1: 0.7}");
+  ham.setOptions(scheme + ": {tp: -1.6}");
+  ham.setOptions(scheme + ": {tau1: -0.5}");
+  ham.setOptions(scheme + ": {tau2: 2.9}");
+  ham.setOptions(scheme + ": {eta1: 0.0}");
+  ham.setOptions(scheme + ": {eta2: 0.0}");
+  ham.setOptions(scheme + ": {eta3: 0.0}");
+  ham.setOptions(scheme + ": {laB: 0.4}");
+  ham.setOptions(scheme + ": {laS: 0.8}");
+};
+
+void setBtoD1starBLRDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {as: 0.26}");
+  ham.setOptions(scheme + ": {mb: 4.71}");
+  ham.setOptions(scheme + ": {mc: 1.31}");
+  ham.setOptions(scheme + ": {zt1: 0.7}");
+  ham.setOptions(scheme + ": {ztp: 0.2}");
+  ham.setOptions(scheme + ": {zeta1: 0.6}");
+  ham.setOptions(scheme + ": {chi1: 0.0}");
+  ham.setOptions(scheme + ": {chi2: 0.0}");
+  ham.setOptions(scheme + ": {laB: 0.4}");
+  ham.setOptions(scheme + ": {laS: 0.76}");
+};
+
+void setBtoD2starBLRDefault(Hammer::Hammer& ham, const string scheme) {
+  ham.setOptions(scheme + ": {as: 0.26}");
+  ham.setOptions(scheme + ": {mb: 4.71}");
+  ham.setOptions(scheme + ": {mc: 1.31}");
+  ham.setOptions(scheme + ": {t1: 0.7}");
+  ham.setOptions(scheme + ": {tp: -1.6}");
+  ham.setOptions(scheme + ": {tau1: -0.5}");
+  ham.setOptions(scheme + ": {tau2: 2.9}");
+  ham.setOptions(scheme + ": {eta1: 0.0}");
+  ham.setOptions(scheme + ": {eta2: 0.0}");
+  ham.setOptions(scheme + ": {eta3: 0.0}");
+  ham.setOptions(scheme + ": {laB: 0.4}");
+  ham.setOptions(scheme + ": {laS: 0.8}");
+};
 
 map<string, function<void(Hammer::Hammer&, const string)>>
 ffSchemeDefaultsByDecay = {
   {"BD", setBtoDBGLDefault},
   {"BD*", setBtoDstarBGLDefault},
-  {"BD**0", setGenericFFDefault},
-  {"BD**1", setGenericFFDefault},
-  {"BD**1*", setGenericFFDefault},
-  {"BD**2", setGenericFFDefault}
+  {"BD**0", setBtoD0starBLRDefault},
+  {"BD**1", setBtoD1BLRDefault},
+  {"BD**1*", setBtoD1starBLRDefault},
+  {"BD**2", setBtoD2starBLRDefault}
 };
 // clang-format on
 
