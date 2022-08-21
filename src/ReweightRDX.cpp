@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Aug 17, 2022 at 06:06 AM -0400
+// Last Change: Sun Aug 21, 2022 at 12:38 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -479,7 +479,7 @@ vector<vector<string>> BtoD2starVars = {
 map<string, vector<vector<string>>> ffVarSpecs = {
   {"BD", BtoDVars},
   {"BD*", BtoDstVars},
-  {"BD**0", BtoD0starVars},
+  {"BD**0*", BtoD0starVars},
   {"BD**1", BtoD1Vars},
   {"BD**1*", BtoD1starVars},
   {"BD**2*", BtoD2starVars},
@@ -488,7 +488,7 @@ map<string, vector<vector<string>>> ffVarSpecs = {
 map<string, string> ffSchemeByDecay = {
   {"BD", "BGL"},
   {"BD*", "BGL"},
-  {"BD**0", "BLR"},
+  {"BD**0*", "BLR"},
   {"BD**1", "BLR"},
   {"BD**1*", "BLR"},
   {"BD**2*", "BLR"},
@@ -577,7 +577,7 @@ map<string, function<void(Hammer::Hammer&, const string)>>
 ffSchemeDefaultsByDecay = {
   {"BD", setBtoDBGLDefault},
   {"BD*", setBtoDstarBGLDefault},
-  {"BD**0", setBtoD0starBLRDefault},
+  {"BD**0*", setBtoD0starBLRDefault},
   {"BD**1", setBtoD1BLRDefault},
   {"BD**1*", setBtoD1starBLRDefault},
   {"BD**2*", setBtoD2starBLRDefault}
