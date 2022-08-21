@@ -129,10 +129,11 @@ rdx-run2-ntuples: \
 	gen/rdx-run2-Bd2DstMuNu-reweighted.root \
 	gen/rdx-run2-Bd2DststTauNu-reweighted.root \
 	gen/rdx-run2-Bd2DstTauNu-reweighted.root \
-	gen/rdx-run2-Bd2D0DX_MuNu-reweighted.root
+	gen/rdx-run2-Bd2D0DX_MuNu-reweighted.root \
+	gen/rdx-run2-Bd2DststMuNu_D0_cocktail-sim09k-reweighted.root
 
-#rdx-run2-ntuples: \
-#	gen/rdx-run2-Bd2Dst0MuNu-sim09k-reweighted.root
+rdx-run2-ntuples-latest: \
+	gen/rdx-run2-Bd2DststMuNu_D0_cocktail-sim09k-reweighted.root
 
 
 ####################
