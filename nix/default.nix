@@ -6,7 +6,7 @@
 
 stdenv.mkDerivation {
   pname = "hammer-reweight";
-  version = "0.4.2";
+  version = "0.4.3";
 
   src = builtins.path { path = ./..; name = "hammer-reweight"; };
 
