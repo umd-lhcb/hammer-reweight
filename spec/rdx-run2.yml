@@ -80,16 +80,23 @@ BtoD0starBLRVar:
 
     # note: variations are multiplied by 2 (in all entries) wrt to what would nominally be calculated from
     # paper values; do not fully trust the paper constraints
-    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [ztp,zeta1], _err, _param_names)
+    # sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
     # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+
     _process: BtoD0*
     _model: BLR
-    _corr: # rows/cols [zt1, ztp, zeta1]
-        - [1, -0.95, -0.44]
-        - [-0.95, 1, 0.61]
-        - [-0.44, 0.61, 1]
-    _err: [0.21, 1.4, 0.3]
-    _param_names: ['zt1', 'ztp', 'zeta1']
+    _corr: # rows/cols [ztp, zeta1]
+        - [1,0]
+        - [0,1]
+    # _corr: # rows/cols [zt1, ztp, zeta1]
+    #     - [1, -0.95, -0.44]
+    #     - [-0.95, 1, 0.61]
+    #     - [-0.44, 0.61, 1]
+    _err: [1.4, 0.3]
+    # _err: [0.21, 1.4, 0.3]
+    _param_names: ['ztp', 'zeta1']
+    # _param_names: ['zt1', 'ztp', 'zeta1']
 
 BtoD1starBLRVar:
     # from 1711.03110 (HAMMER default), NOT 1606.09300 (used for run1); identical to D0*
@@ -104,16 +111,23 @@ BtoD1starBLRVar:
     laB: 0.4
     laS: 0.76
 
-    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [ztp,zeta1], _err, _param_names)
+    # sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [zt1,ztp,zeta1], _err, _param_names)
     # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+
     _process: BtoD1*
     _model: BLR
-    _corr: # rows/cols [zt1, ztp, zeta1]
-        - [1, -0.95, -0.44]
-        - [-0.95, 1, 0.61]
-        - [-0.44, 0.61, 1]
-    _err: [0.21, 1.4, 0.3]
-    _param_names: ['zt1', 'ztp', 'zeta1']
+    _corr: # rows/cols [ztp, zeta1]
+        - [1,0]
+        - [0,1]
+    # _corr: # rows/cols [zt1, ztp, zeta1]
+    #     - [1, -0.95, -0.44]
+    #     - [-0.95, 1, 0.61]
+    #     - [-0.44, 0.61, 1]
+    _err: [1.4, 0.3]
+    # _err: [0.21, 1.4, 0.3]
+    _param_names: ['ztp', 'zeta1']
+    # _param_names: ['zt1', 'ztp', 'zeta1']
 
 BtoD1BLRVar:
     # from 1711.03110 (HAMMER default), NOT 1606.09300
@@ -130,17 +144,25 @@ BtoD1BLRVar:
     laB: 0.4
     laS: 0.8
 
-    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [tp,tau1,tau2], _err, _param_names)
+    # sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
     # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+
     _process: BtoD1
     _model: BLR
-    _corr: # rows/cols [t1, tp, tau1, tau2]
-        - [1,-0.85,0.53,-0.49]
-        - [-0.85,1,-0.17,0.086]
-        - [0.53,-0.17,1,-0.89]
-        - [-0.49,0.086,-0.89,1]
-    _err: [0.07,0.2,0.3,1.4]
-    _param_names: ['t1', 'tp', 'tau1', 'tau2']
+    _corr: # rows/cols [tp, tau1, tau2]
+        - [1,0,0]
+        - [0,1,0]
+        - [0,0,1]
+    # _corr: # rows/cols [t1, tp, tau1, tau2]
+    #     - [1,-0.85,0.53,-0.49]
+    #     - [-0.85,1,-0.17,0.086]
+    #     - [0.53,-0.17,1,-0.89]
+    #     - [-0.49,0.086,-0.89,1]
+    _err: [0.2,0.3,1.4]
+    # _err: [0.07,0.2,0.3,1.4]
+    _param_names: ['tp', 'tau1', 'tau2']
+    # _param_names: ['t1', 'tp', 'tau1', 'tau2']
 
 BtoD2starBLRVar:
     # from 1711.03110 (HAMMER default), NOT 1606.09300; identical to D1
@@ -157,14 +179,22 @@ BtoD2starBLRVar:
     laB: 0.4
     laS: 0.8
 
-    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
+    sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [tp,tau1,tau2], _err, _param_names)
+    # sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
     # sliwmat: gen_param_var(_process, _model, _corr, _err, _param_names, {})
+
     _process: BtoD2star
     _model: BLR
-    _corr: # rows/cols [t1, tp, tau1, tau2]
-        - [1,-0.85,0.53,-0.49]
-        - [-0.85,1,-0.17,0.086]
-        - [0.53,-0.17,1,-0.89]
-        - [-0.49,0.086,-0.89,1]
-    _err: [0.07,0.2,0.3,1.4]
-    _param_names: ['t1', 'tp', 'tau1', 'tau2']
+    # _corr: # rows/cols [t1, tp, tau1, tau2]
+    #     - [1,-0.85,0.53,-0.49]
+    #     - [-0.85,1,-0.17,0.086]
+    #     - [0.53,-0.17,1,-0.89]
+    #     - [-0.49,0.086,-0.89,1]
+    _corr: # rows/cols [tp, tau1, tau2]
+        - [1,0,0]
+        - [0,1,0]
+        - [0,0,1]
+    _err: [0.2,0.3,1.4]
+    # _err: [0.07,0.2,0.3,1.4]
+    _param_names: ['tp', 'tau1', 'tau2']
+    # _param_names: ['t1', 'tp', 'tau1', 'tau2']
