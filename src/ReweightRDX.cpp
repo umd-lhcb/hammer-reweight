@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Aug 24, 2022 at 04:21 AM -0400
+// Last Change: Wed Aug 24, 2022 at 04:34 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -470,7 +470,7 @@ void setBtoD1BLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {eta2: 0.0}");
   ham.setOptions(scheme + ": {eta3: 0.0}");
   ham.setOptions(scheme + ": {laB: 0.4}");
-  ham.setOptions(scheme + ": {laS: 0.8}");
+  ham.setOptions(scheme + ": {laP: 0.8}");
 };
 
 void setBtoD1starBLRDefault(Hammer::Hammer& ham, const string scheme) {
@@ -498,7 +498,7 @@ void setBtoD2starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {eta2: 0.0}");
   ham.setOptions(scheme + ": {eta3: 0.0}");
   ham.setOptions(scheme + ": {laB: 0.4}");
-  ham.setOptions(scheme + ": {laS: 0.8}");
+  ham.setOptions(scheme + ": {laP: 0.8}");
 };
 
 map<string, function<void(Hammer::Hammer&, const string)>>

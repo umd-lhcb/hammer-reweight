@@ -142,7 +142,7 @@ BtoD1BLRVar:
     eta2: 0.
     eta3: 0.
     laB: 0.4
-    laS: 0.8
+    laP: 0.8
 
     sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [tp,tau1,tau2], _err, _param_names)
     # sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
@@ -177,7 +177,7 @@ BtoD2starBLRVar:
     eta2: 0.
     eta3: 0.
     laB: 0.4
-    laS: 0.8
+    laP: 0.8
 
     sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [tp,tau1,tau2], _err, _param_names)
     # sliwmat: gen_param_shifted_BtoDstarstarBLR(_process, _model, _corr, [t1,tp,tau1,tau2], _err, _param_names)
