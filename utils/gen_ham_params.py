@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun, Alex Fernez
-# Last Change: Wed Aug 17, 2022 at 05:25 AM -0400
+# Last Change: Wed Aug 24, 2022 at 04:18 AM -0400
 
 import yaml
 import numpy as np
@@ -46,7 +46,7 @@ def print_param_general(ff_alias, param, val, add_hammer=False):
     if add_hammer:
         print(f'  ham.setOptions(scheme + ": {{{param}: {val}}}");')
     else:
-        print(f'    "{ff_alias}: {{{param}: {val}}}",')
+        print(f'    "{{{param}: {val}}}",')
 
 
 def print_param_ff_var(process, model, shifts, params, comments):
