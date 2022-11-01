@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Aug 24, 2022 at 04:34 AM -0400
+// Last Change: Tue Nov 01, 2022 at 04:16 PM -0400
 
 #include <algorithm>
 #include <array>
@@ -282,124 +282,124 @@ vector<vector<string>> BtoDstVars = {
 vector<vector<string>> BtoD0starVars = {
   // shifting 1-th param in + direction....
   {
-    "{ztp: 3.0}",
-    "{zeta1: 0.6}",
+    "{ztp: 1.3199999999999998}",
+    "{zeta1: 1.98}",
   },
   // shifting 1-th param in - direction....
   {
-    "{ztp: -2.5999999999999996}",
-    "{zeta1: 0.6}",
+    "{ztp: -4.279999999999999}",
+    "{zeta1: 1.98}",
   },
   // shifting 2-th param in + direction....
   {
-    "{ztp: 0.2}",
-    "{zeta1: 1.2}",
+    "{ztp: -1.48}",
+    "{zeta1: 2.58}",
   },
   // shifting 2-th param in - direction....
   {
-    "{ztp: 0.2}",
-    "{zeta1: 0.0}",
-  }
+    "{ztp: -1.48}",
+    "{zeta1: 1.38}",
+  },
 };
 
 vector<vector<string>> BtoD1Vars = {
   // shifting 1-th param in + direction....
   {
-    "{tp: -1.2000000000000002}",
-    "{tau1: -0.5}",
-    "{tau2: 2.9}",
+    "{tp: -0.4}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 1-th param in - direction....
   {
-    "{tp: -2.0}",
-    "{tau1: -0.5}",
-    "{tau2: 2.9}",
+    "{tp: -1.2000000000000002}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in + direction....
   {
-    "{tp: -1.6}",
-    "{tau1: 0.09999999999999998}",
-    "{tau2: 2.9}",
+    "{tp: -0.8}",
+    "{tau1: 1.9}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in - direction....
   {
-    "{tp: -1.6}",
-    "{tau1: -1.1}",
-    "{tau2: 2.9}",
+    "{tp: -0.8}",
+    "{tau1: 0.6999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 3-th param in + direction....
   {
-    "{tp: -1.6}",
-    "{tau1: -0.5}",
-    "{tau2: 5.699999999999999}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: 2.06}",
   },
   // shifting 3-th param in - direction....
   {
-    "{tp: -1.6}",
-    "{tau1: -0.5}",
-    "{tau2: 0.10000000000000009}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -3.5399999999999996}",
   },
 };
 
 vector<vector<string>> BtoD1starVars = {
   // shifting 1-th param in + direction....
   {
-    "{ztp: 3.0}",
-    "{zeta1: 0.6}",
+    "{ztp: 1.3199999999999998}",
+    "{zeta1: 1.98}",
   },
   // shifting 1-th param in - direction....
   {
-    "{ztp: -2.5999999999999996}",
-    "{zeta1: 0.6}",
+    "{ztp: -4.279999999999999}",
+    "{zeta1: 1.98}",
   },
   // shifting 2-th param in + direction....
   {
-    "{ztp: 0.2}",
-    "{zeta1: 1.2}",
+    "{ztp: -1.48}",
+    "{zeta1: 2.58}",
   },
   // shifting 2-th param in - direction....
   {
-    "{ztp: 0.2}",
-    "{zeta1: 0.0}",
+    "{ztp: -1.48}",
+    "{zeta1: 1.38}",
   },
 };
 
 vector<vector<string>> BtoD2starVars = {
   // shifting 1-th param in + direction....
   {
-    "{tp: -1.2000000000000002}",
-    "{tau1: -0.5}",
-    "{tau2: 2.9}",
+    "{tp: -0.4}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 1-th param in - direction....
   {
-    "{tp: -2.0}",
-    "{tau1: -0.5}",
-    "{tau2: 2.9}",
+    "{tp: -1.2000000000000002}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in + direction....
   {
-    "{tp: -1.6}",
-    "{tau1: 0.09999999999999998}",
-    "{tau2: 2.9}",
+    "{tp: -0.8}",
+    "{tau1: 1.9}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in - direction....
   {
-    "{tp: -1.6}",
-    "{tau1: -1.1}",
-    "{tau2: 2.9}",
+    "{tp: -0.8}",
+    "{tau1: 0.6999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 3-th param in + direction....
   {
-    "{tp: -1.6}",
-    "{tau1: -0.5}",
-    "{tau2: 5.699999999999999}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: 2.06}",
   },
   // shifting 3-th param in - direction....
   {
-    "{tp: -1.6}",
-    "{tau1: -0.5}",
-    "{tau2: 0.10000000000000009}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -3.5399999999999996}",
   },
 };
 
