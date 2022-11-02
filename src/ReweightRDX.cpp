@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Tue Nov 01, 2022 at 04:16 PM -0400
+// Last Change: Wed Nov 02, 2022 at 06:28 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -450,8 +450,8 @@ void setBtoD0starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {zt1: 0.7}");
-  ham.setOptions(scheme + ": {ztp: 0.2}");
-  ham.setOptions(scheme + ": {zeta1: 0.6}");
+  ham.setOptions(scheme + ": {ztp: -1.48}");
+  ham.setOptions(scheme + ": {zeta1: 1.98}");
   ham.setOptions(scheme + ": {chi1: 0.0}");
   ham.setOptions(scheme + ": {chi2: 0.0}");
   ham.setOptions(scheme + ": {laB: 0.4}");
@@ -463,9 +463,9 @@ void setBtoD1BLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {t1: 0.7}");
-  ham.setOptions(scheme + ": {tp: -1.6}");
-  ham.setOptions(scheme + ": {tau1: -0.5}");
-  ham.setOptions(scheme + ": {tau2: 2.9}");
+  ham.setOptions(scheme + ": {tp: -0.8}");
+  ham.setOptions(scheme + ": {tau1: 1.2999999999999998}");
+  ham.setOptions(scheme + ": {tau2: -0.7399999999999998}");
   ham.setOptions(scheme + ": {eta1: 0.0}");
   ham.setOptions(scheme + ": {eta2: 0.0}");
   ham.setOptions(scheme + ": {eta3: 0.0}");
@@ -478,8 +478,8 @@ void setBtoD1starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {zt1: 0.7}");
-  ham.setOptions(scheme + ": {ztp: 0.2}");
-  ham.setOptions(scheme + ": {zeta1: 0.6}");
+  ham.setOptions(scheme + ": {ztp: -1.48}");
+  ham.setOptions(scheme + ": {zeta1: 1.98}");
   ham.setOptions(scheme + ": {chi1: 0.0}");
   ham.setOptions(scheme + ": {chi2: 0.0}");
   ham.setOptions(scheme + ": {laB: 0.4}");
@@ -491,9 +491,9 @@ void setBtoD2starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {t1: 0.7}");
-  ham.setOptions(scheme + ": {tp: -1.6}");
-  ham.setOptions(scheme + ": {tau1: -0.5}");
-  ham.setOptions(scheme + ": {tau2: 2.9}");
+  ham.setOptions(scheme + ": {tp: -0.8}");
+  ham.setOptions(scheme + ": {tau1: 1.2999999999999998}");
+  ham.setOptions(scheme + ": {tau2: -0.7399999999999998}");
   ham.setOptions(scheme + ": {eta1: 0.0}");
   ham.setOptions(scheme + ": {eta2: 0.0}");
   ham.setOptions(scheme + ": {eta3: 0.0}");
