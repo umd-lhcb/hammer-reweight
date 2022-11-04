@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Thu Nov 03, 2022 at 05:08 PM -0400
+// Last Change: Wed Nov 02, 2022 at 06:28 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -282,124 +282,124 @@ vector<vector<string>> BtoDstVars = {
 vector<vector<string>> BtoD0starVars = {
   // shifting 1-th param in + direction....
   {
-    "{ztp: 1.04}",
-    "{zeta1: 2.2199999999999998}",
+    "{ztp: 1.3199999999999998}",
+    "{zeta1: 1.98}",
   },
   // shifting 1-th param in - direction....
   {
-    "{ztp: -4.56}",
-    "{zeta1: 2.2199999999999998}",
+    "{ztp: -4.279999999999999}",
+    "{zeta1: 1.98}",
   },
   // shifting 2-th param in + direction....
   {
-    "{ztp: -1.7599999999999998}",
-    "{zeta1: 2.82}",
+    "{ztp: -1.48}",
+    "{zeta1: 2.58}",
   },
   // shifting 2-th param in - direction....
   {
-    "{ztp: -1.7599999999999998}",
-    "{zeta1: 1.6199999999999997}",
+    "{ztp: -1.48}",
+    "{zeta1: 1.38}",
   },
 };
 
 vector<vector<string>> BtoD1Vars = {
   // shifting 1-th param in + direction....
   {
-    "{tp: -0.92}",
-    "{tau1: 1.12}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -0.4}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 1-th param in - direction....
   {
-    "{tp: -1.7200000000000002}",
-    "{tau1: 1.12}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -1.2000000000000002}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in + direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 1.7200000000000002}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -0.8}",
+    "{tau1: 1.9}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in - direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 0.5200000000000001}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -0.8}",
+    "{tau1: 0.6999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 3-th param in + direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 1.12}",
-    "{tau2: 4.02}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: 2.06}",
   },
   // shifting 3-th param in - direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 1.12}",
-    "{tau2: -1.58}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -3.5399999999999996}",
   },
 };
 
 vector<vector<string>> BtoD1starVars = {
   // shifting 1-th param in + direction....
   {
-    "{ztp: 1.04}",
-    "{zeta1: 2.2199999999999998}",
+    "{ztp: 1.3199999999999998}",
+    "{zeta1: 1.98}",
   },
   // shifting 1-th param in - direction....
   {
-    "{ztp: -4.56}",
-    "{zeta1: 2.2199999999999998}",
+    "{ztp: -4.279999999999999}",
+    "{zeta1: 1.98}",
   },
   // shifting 2-th param in + direction....
   {
-    "{ztp: -1.7599999999999998}",
-    "{zeta1: 2.82}",
+    "{ztp: -1.48}",
+    "{zeta1: 2.58}",
   },
   // shifting 2-th param in - direction....
   {
-    "{ztp: -1.7599999999999998}",
-    "{zeta1: 1.6199999999999997}",
+    "{ztp: -1.48}",
+    "{zeta1: 1.38}",
   },
 };
 
 vector<vector<string>> BtoD2starVars = {
   // shifting 1-th param in + direction....
   {
-    "{tp: -0.92}",
-    "{tau1: 1.12}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -0.4}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 1-th param in - direction....
   {
-    "{tp: -1.7200000000000002}",
-    "{tau1: 1.12}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -1.2000000000000002}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in + direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 1.7200000000000002}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -0.8}",
+    "{tau1: 1.9}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 2-th param in - direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 0.5200000000000001}",
-    "{tau2: 1.2199999999999998}",
+    "{tp: -0.8}",
+    "{tau1: 0.6999999999999998}",
+    "{tau2: -0.7399999999999998}",
   },
   // shifting 3-th param in + direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 1.12}",
-    "{tau2: 4.02}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: 2.06}",
   },
   // shifting 3-th param in - direction....
   {
-    "{tp: -1.32}",
-    "{tau1: 1.12}",
-    "{tau2: -1.58}",
+    "{tp: -0.8}",
+    "{tau1: 1.2999999999999998}",
+    "{tau2: -3.5399999999999996}",
   },
 };
 
@@ -450,8 +450,8 @@ void setBtoD0starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {zt1: 0.7}");
-  ham.setOptions(scheme + ": {ztp: -1.7599999999999998}");
-  ham.setOptions(scheme + ": {zeta1: 2.2199999999999998}");
+  ham.setOptions(scheme + ": {ztp: -1.48}");
+  ham.setOptions(scheme + ": {zeta1: 1.98}");
   ham.setOptions(scheme + ": {chi1: 0.0}");
   ham.setOptions(scheme + ": {chi2: 0.0}");
   ham.setOptions(scheme + ": {laB: 0.4}");
@@ -463,9 +463,9 @@ void setBtoD1BLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {t1: 0.7}");
-  ham.setOptions(scheme + ": {tp: -1.32}");
-  ham.setOptions(scheme + ": {tau1: 1.12}");
-  ham.setOptions(scheme + ": {tau2: 1.2199999999999998}");
+  ham.setOptions(scheme + ": {tp: -0.8}");
+  ham.setOptions(scheme + ": {tau1: 1.2999999999999998}");
+  ham.setOptions(scheme + ": {tau2: -0.7399999999999998}");
   ham.setOptions(scheme + ": {eta1: 0.0}");
   ham.setOptions(scheme + ": {eta2: 0.0}");
   ham.setOptions(scheme + ": {eta3: 0.0}");
@@ -478,8 +478,8 @@ void setBtoD1starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {zt1: 0.7}");
-  ham.setOptions(scheme + ": {ztp: -1.7599999999999998}");
-  ham.setOptions(scheme + ": {zeta1: 2.2199999999999998}");
+  ham.setOptions(scheme + ": {ztp: -1.48}");
+  ham.setOptions(scheme + ": {zeta1: 1.98}");
   ham.setOptions(scheme + ": {chi1: 0.0}");
   ham.setOptions(scheme + ": {chi2: 0.0}");
   ham.setOptions(scheme + ": {laB: 0.4}");
@@ -491,9 +491,9 @@ void setBtoD2starBLRDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {mb: 4.71}");
   ham.setOptions(scheme + ": {mc: 1.31}");
   ham.setOptions(scheme + ": {t1: 0.7}");
-  ham.setOptions(scheme + ": {tp: -1.32}");
-  ham.setOptions(scheme + ": {tau1: 1.12}");
-  ham.setOptions(scheme + ": {tau2: 1.2199999999999998}");
+  ham.setOptions(scheme + ": {tp: -0.8}");
+  ham.setOptions(scheme + ": {tau1: 1.2999999999999998}");
+  ham.setOptions(scheme + ": {tau2: -0.7399999999999998}");
   ham.setOptions(scheme + ": {eta1: 0.0}");
   ham.setOptions(scheme + ": {eta2: 0.0}");
   ham.setOptions(scheme + ": {eta3: 0.0}");
