@@ -20,9 +20,6 @@ clean:
 	@rm -rf ./bin/*
 	@rm -rf ./gen/*
 
-install-dep:
-	pip install -r ./requirements.txt
-
 
 #########
 # Tools #
