@@ -1,6 +1,6 @@
 // Author: Yipeng Sun
 // License: BSD 2-clause
-// Last Change: Wed Aug 24, 2022 at 04:34 AM -0400
+// Last Change: Thu Mar 23, 2023 at 02:12 AM -0400
 
 #include <algorithm>
 #include <array>
@@ -1054,14 +1054,13 @@ int main(int argc, char** argv) {
                     "part_D_dau1", "part_D_dau2", "part_L", "part_NuL",
                     "part_Mu", "part_NuMu", "part_NuTau", "part_photon_arr"});
     df            = df.Define("ham_ok", "get<0>(ff_result)");
-    df            = df.Define("wff", "get<1>(ff_result)");
+    df            = df.Define("wff_orig", "get<1>(ff_result)");
     for (int i = 0; i < numOfFFVar; i++) {
-      auto outputBrName = "wff_var" + to_string(i + 1);
+      auto outputBrName = "wff_orig_var" + to_string(i + 1);
       df = df.Define(outputBrName, "get<" + to_string(i + 2) + ">(ff_result)");
       outputBrs.emplace_back(outputBrName);
     }
-    outputBrs.emplace_back("ham_ok");
-    outputBrs.emplace_back("wff");
+    outputBrs.emplace_back("wff_orig");
 
     df.Snapshot(trees[idx], ntpOut, outputBrs, writeOpts);
 
