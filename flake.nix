@@ -34,7 +34,8 @@
             clang-tools
 
             root
-            hammer-phys
+            # hammer-phys
+            hammer-phys-dev
             ff_calc
             cxxopts
             boost
