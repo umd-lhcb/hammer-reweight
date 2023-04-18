@@ -93,7 +93,7 @@ def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
     # m_eigen is essentially M in the ANA
     # now we need to find C in the ANA to construct A
     m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c, m_eigen).T
+    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
     # NOTE: uncomment the line below to reproduce RD+'s numbers
     #  m_a = m_eigen.T
     # now find the inverse of A, A^-1 tells us how to transform from
