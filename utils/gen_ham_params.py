@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun, Alex Fernez
-# Last Change: Wed Aug 24, 2022 at 04:18 AM -0400
+# Last Change: Tue Apr 18, 2023 at 12:07 PM +0800
 
 import yaml
 import numpy as np
@@ -93,9 +93,9 @@ def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
     # m_eigen is essentially M in the ANA
     # now we need to find C in the ANA to construct A
     m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c, m_eigen)
+    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
     # NOTE: uncomment the line below to reproduce RD+'s numbers
-    m_a = m_eigen
+    #  m_a = m_eigen.T
     # now find the inverse of A, A^-1 tells us how to transform from
     #  an ERROR eigenbasis to our NORMAL FF paramterization basis (HAMMER basis)
     m_a_inv = np.linalg.inv(m_a)
@@ -126,7 +126,7 @@ def gen_param_shifted_BtoDBGL(
     m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
     v_eigen, m_eigen = np.linalg.eig(m_cov)
     m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c, m_eigen)
+    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
     m_a_inv = np.linalg.inv(m_a)
 
     print()
@@ -181,7 +181,7 @@ def gen_param_shifted_BtoDstarBGL(
     m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
     v_eigen, m_eigen = np.linalg.eig(m_cov)
     m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c, m_eigen)
+    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
     m_a_inv = np.linalg.inv(m_a)
 
     print()
@@ -227,7 +227,7 @@ def gen_param_shifted_BtoDstarstarBLR(
     m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
     v_eigen, m_eigen = np.linalg.eig(m_cov)
     m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c, m_eigen)
+    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
     m_a_inv = np.linalg.inv(m_a)
 
     print()
