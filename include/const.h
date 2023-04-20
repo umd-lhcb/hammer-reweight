@@ -8,4 +8,4 @@
 
 using std::vector;
 
-const auto LEGAL_B_MESON_IDS = vector<int>{511, 521};
+const auto LEGAL_B_MESON_IDS = vector<int>{511, 521, 531};

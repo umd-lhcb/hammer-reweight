@@ -68,7 +68,9 @@ void setInputFF(Hammer::Hammer& ham, TString run) {
                           {"BD**0*", "ISGW2"},
                           {"BD**1", "ISGW2"},
                           {"BD**1*", "ISGW2"},
-                          {"BD**2*", "ISGW2"}});
+                          {"BD**2*", "ISGW2"},
+                          {"BsDs**1", "ISGW2"},
+                          {"BsDs**2*", "ISGW2"}});
 
     // 12573001, 12573012
     // clang-format off
@@ -417,6 +419,8 @@ map<string, vector<vector<string>>> ffVarSpecs = {
   {"BD**1", BtoD1Vars},
   {"BD**1*", BtoD1starVars},
   {"BD**2*", BtoD2starVars},
+  {"BsDs**1", BtoD1Vars},
+  {"BsDs**2*", BtoD2starVars}
 };
 
 map<string, string> ffSchemeByDecay = {
@@ -426,6 +430,8 @@ map<string, string> ffSchemeByDecay = {
   {"BD**1", "BLR"},
   {"BD**1*", "BLR"},
   {"BD**2*", "BLR"},
+  {"BsDs**1", "BLR"},
+  {"BsDs**2*", "BLR"}
 };
 
 void setBtoDBGLDefault(Hammer::Hammer& ham, const string scheme) {
@@ -517,15 +523,22 @@ ffSchemeDefaultsByDecay = {
   {"BD**0*", setBtoD0starBLRDefault},
   {"BD**1", setBtoD1BLRDefault},
   {"BD**1*", setBtoD1starBLRDefault},
-  {"BD**2*", setBtoD2starBLRDefault}
+  {"BD**2*", setBtoD2starBLRDefault},
+  {"BsDs**1", setBtoD1BLRDefault},
+  {"BsDs**2*", setBtoD2starBLRDefault}
 };
 // clang-format on
 
 const int numOfFFVar = 20;
 
 string decayDescr(const string decay) {
-  auto daughter = decay.substr(1);
-  return "Bto" + daughter;
+  // the pattern seems to be you just need to insert the word "to"
+  // I'm going to assume the fact (that should be fine for our analysis) that the
+  // decay string only contains 'D' once (where the name of the daughter begins)
+  auto daughterPos = decay.find("D");
+  auto bMeson = decay.substr(0,daughterPos);
+  auto daughter = decay.substr(daughterPos);
+  return bMeson + "to" + daughter;
 }
 
 vector<string> setOutputFF(Hammer::Hammer& ham) {
@@ -580,6 +593,9 @@ void setDecays(Hammer::Hammer& ham) {
   ham.includeDecay("BD**1MuNu");
   ham.includeDecay("BD**1*MuNu");
   ham.includeDecay("BD**2*MuNu");
+
+  ham.includeDecay("BsDs**1MuNu");
+  ham.includeDecay("BsDs**2*MuNu");
 }
 
 /////////////
