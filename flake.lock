@@ -75,11 +75,11 @@
         "root-curated": "root-curated"
       },
       "locked": {
-        "lastModified": 1655306590,
-        "narHash": "sha256-vF0GHgYXChQ+d0+7ExJzq6FaOfNIzeR+vHX/mpdjnMI=",
+        "lastModified": 1677886269,
+        "narHash": "sha256-OqaHwyPRAEaXw3Ap93yEAR2vEOqMopI/FZu/OCp6R1Q=",
         "owner": "umd-lhcb",
         "repo": "pyTuplingUtils",
-        "rev": "fa3202c6083ce8223414a8191e7e3fd5f36db0cf",
+        "rev": "85f3ca90f01389f834af6de1044364843210c4c5",
         "type": "github"
       },
       "original": {
@@ -127,11 +127,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1681315659,
-        "narHash": "sha256-KN1Bfif22K38TFjAS7PliQcZqpc06xB/nxGAHhnpaT8=",
+        "lastModified": 1685458505,
+        "narHash": "sha256-o7UzbnWsEZaTfn5MFuEngLOsiB+PbOFhrqUAq0lIs+I=",
         "owner": "umd-lhcb",
         "repo": "root-curated",
-        "rev": "f03c15dd06ce507a93eb337bffc5af9b59b65f52",
+        "rev": "a2e80b6df7e446391b20dc75a7f3712ed318a578",
         "type": "github"
       },
       "original": {
