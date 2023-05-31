@@ -13,7 +13,7 @@ VALLINKFLAGS	:=	-lff_calc
 # General #
 ###########
 
-exe: PrintMCDecay ReweightRDX ReweightRDXDebug ReweightRDXDefault
+exe: PrintMCDecay ReweightRDX ReweightRDXDebug ReweightRDXDefault ReweightRDXNonsenseDst ReweightRDXRun1Dst
 
 .PHONY: clean
 clean:
@@ -39,6 +39,12 @@ ReweightRDXDefault: ReweightRDXDefault.cpp
 
 ReweightRDXDebug: ReweightRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -DDEBUG_CLI -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
+
+ReweightRDXNonsenseDst: ReweightRDXNonsenseDst.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
+
+ReweightRDXRun1Dst: ReweightRDXRun1Dst.cpp
+	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
 ff-params-RDX:
 	./utils/gen_ham_params.py ./spec/rdx-run2.yml
