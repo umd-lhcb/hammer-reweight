@@ -186,12 +186,12 @@ def gen_param_shifted_BtoDstarBGL(
 
     print()
     print(f"{process}{model} shifted central values:")
-    for i in range(10):
+    for i in range(12):
         var_values = m_a_inv[:, i]
         var_a = var_values[:3]
         var_b = var_values[3:6]
-        var_c = var_values[6:8]
-        var_d = var_values[8:10]
+        var_c = var_values[6:9]
+        var_d = var_values[9:12]
 
         if verbose:
             print(f"  // shifting {i+1}-th param in + direction....")
