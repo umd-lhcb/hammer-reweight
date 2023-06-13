@@ -13,7 +13,7 @@ VALLINKFLAGS	:=	-lff_calc
 # General #
 ###########
 
-exe: PrintMCDecay ReweightRDX ReweightRDXDebug ReweightRDXDefault ReweightRDXNonsenseDst ReweightRDXRun1Dst
+exe: PrintMCDecay ReweightRDX ReweightRDXDebug ReweightRDXDefault ReweightRDXDst10Sig ReweightRDXRun1Dst
 
 .PHONY: clean
 clean:
@@ -40,7 +40,7 @@ ReweightRDXDefault: ReweightRDXDefault.cpp
 ReweightRDXDebug: ReweightRDX.cpp
 	$(COMPILER) $(CXXFLAGS) -DDEBUG_CLI -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
-ReweightRDXNonsenseDst: ReweightRDXNonsenseDst.cpp
+ReweightRDXDst10Sig: ReweightRDXDst10Sig.cpp
 	$(COMPILER) $(CXXFLAGS) -o $(BINPATH)/$@ $< $(LINKFLAGS) $(ADDLINKFLAGS)
 
 ReweightRDXRun1Dst: ReweightRDXRun1Dst.cpp
