@@ -1,7 +1,26 @@
 #!/usr/bin/env python
 #
 # Author: Yipeng Sun, Alex Fernez
-# Last Change: Tue Apr 18, 2023 at 12:07 PM +0800
+
+# Compared to gen_ham_params.py, this script generates variations with rescaling removed
+# Motivation: rescaling the FFs has the effect of simply multiplying the diff cross section
+# by an overall factor, which won't affect template shapes, and in fact allowing this 
+# effective variation in the fit can lead to stability issues
+# Math: assuming FF parameters f have (potentially non-diagonal) covariance U, the first step is to
+# diagonalize to get the variations in an uncorrelated basis: U=VLV^T (in the uncorrelated basis
+# 1sigma variations of f' look like f' -> f' +- sigma'_i*e_i [e_i this ith unit vector, sigma'_i is
+# the sqrt of the ith eigenvalue found when diagonalizing], corresponding to 
+# f=Af' -> f +- sigma'_i*v_i [v_i is the ith column of V; the ith eigenvector found from 
+# diagonalizing]). Next, the overlap of the variations with the rescaling direction (the direction
+# of the nominal FF params, n) can be removed, creating w_i=v_i-(v_i.n)n, which are now 
+# unnormalized, non-orthogonal, and (potentially) don't correspond to variations in an
+# uncorrelated basis. To account for this, define normalized vectors x_i s.t. sigma'_i*w_i = s_i*x_i
+# (s_i is the length of the ith variation with rescaling removed) and an effective covariance matrix
+# U'=XS^2X^T (where the columns of X are the x_i and S is a diagonal matrix with the s_i on the 
+# diag; note that X^T != X^-1 here!). Finally, again diagonalize: U'=AZA^T (now A^T=A^-1), where Z
+# will have one 0 on the diagonal corresponding to an eigenvector (column of A) equal to n. The 
+# columns of A, excluding the one equal to n, multiplied by the sqrt of the corresponding eigenvalue
+# in Z, are the final variations with rescaling removed
 
 import yaml
 import numpy as np
@@ -15,7 +34,8 @@ from argparse import ArgumentParser
 
 
 def parse_input():
-    parser = ArgumentParser(description="generate HAMMER parameters.")
+    parser = ArgumentParser(description="generate HAMMER parameters and variations, \
+                                         excluding rescaling.")
 
     parser.add_argument("input", help="specify input YAML.")
 
@@ -41,6 +61,10 @@ def parse_input():
 # Helpers #
 ###########
 
+# need to determine if some numpy scalars/vectors are equal, modulo some floating point arithmetic
+# and overall minus signs
+def almost_equal(a, b, z=1e-14):
+    return np.linalg.norm(a-b) < z or np.linalg.norm(a+b) < z
 
 def print_param_general(ff_alias, param, val, add_hammer=False):
     if add_hammer:
@@ -75,64 +99,54 @@ def eval_fake_sandbox(code, add_vars):
     exec(f"__result = {code}", sandbox, loc)
     return loc["__result"]
 
+def remove_rescale(Vars, nom):
+    # take in n variations that include rescaling component, return n-1 variations with rescaling
+    # removed (for notation, see Math comments at beginning of script)
+    nom = np.array(nom)/np.linalg.norm(nom) # just need the direction
+    Vars_minus_rescale = Vars - (np.array([np.dot(col,nom)*nom for col in Vars.T])).T # sigma'_i*w_i
+    X = (np.array([col/np.linalg.norm(col) for col in Vars_minus_rescale.T])).T
+    S = np.diag([np.linalg.norm(col) for col in Vars_minus_rescale.T])
+    Up = np.matmul(X, np.matmul(S**2, X.T))
+    z, A = np.linalg.eig(Up) # z is a vector (of variances) here
+    # do a quick check that there's exactly 1 zero eval with corresponding evec = nom
+    nom_entry = -1
+    for i in range(len(z)):
+        val = z[i]
+        if almost_equal(val, 0):
+            if not nom_entry == -1:
+                print(f'\n\nMore than one 0 eigenval found when removing rescale!!! ({val})\n\n')
+            nom_entry = i
+            if not almost_equal(nom, A.T[nom_entry], 1e-8): # a little more forgiving for vectors
+                print(f'\n\nFound 0 eigenval with eigenvec not equal to nom direc!!!\n{nom}\
+                      \n{A.T[nom_entry]}\n\n')
+    # assuming nothing gets printed out, can safely return variations with rescaling removed!
+    z = np.concatenate((z[:nom_entry],z[nom_entry+1:]))
+    A = (np.concatenate((A.T[:nom_entry],A.T[nom_entry+1:]))).T
+    return z**(1/2)*A
+
 
 #################
 # Model helpers #
 #################
 
-# Not used! Edit function if you use it! Consider this a template...
-def gen_param_var(process, model, m_corr, v_err, param_names, add_params):
-    m_corr = np.matrix(m_corr)
-    v_err = np.array(v_err)
-
-    # make the covariance matrix based on the correlation and errors
-    m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
-    v_eigen, m_eigen = np.linalg.eig(m_cov)
-    # m_eigen is the matrix formed by eigen vectors; v_eigen is the vector
-    #   formed by eigenvalues
-    # m_eigen is essentially M in the ANA
-    # now we need to find C in the ANA to construct A
-    m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
-    # NOTE: uncomment the line below to reproduce RD+'s numbers
-    #  m_a = m_eigen.T
-    # now find the inverse of A, A^-1 tells us how to transform from
-    #  an ERROR eigenbasis to our NORMAL FF paramterization basis (HAMMER basis)
-    m_a_inv = np.linalg.inv(m_a)
-
-    # define variations in the ERROR eigenbasis:
-    # m_variation_ham: each column represents a variation of +1sigma for a
-    # ERROR eigen vector
-    # the output will be: u1p, u1m, u2p, u2m, ...
-    print()
-    print(f"{process}{model} FF variations:")
-    for i in range(len(param_names)):
-        var_values = m_a_inv[:, i]
-        var_pos = {"delta_" + k: v for k, v in zip(param_names, var_values)}
-        for name, coeff in add_params.items():
-            var_pos["delta_" + name] = np.dot(np.array(coeff), var_values)
-
-        var_neg = {k: -v for k, v in var_pos.items()}
-        print(f"  {fmt_dict_as_cpp_map(var_pos)}")
-        print(f"  {fmt_dict_as_cpp_map(var_neg)}")
-
 
 def gen_param_shifted_BtoDBGL(
     process, model, m_corr, v_err, add_params, ap, a0, verbose=True
 ):
-    m_corr = np.matrix(m_corr)
-    v_err = np.array(v_err)
-
-    m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
-    v_eigen, m_eigen = np.linalg.eig(m_cov)
-    m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
-    m_a_inv = np.linalg.inv(m_a)
+    # build the covariance matrix
+    C = np.array(m_corr)
+    Std = np.diag(np.array(v_err))
+    U = np.matmul(Std, np.matmul(C, Std))
+    # extract uncorrelated variations
+    L, V = np.linalg.eig(U) # evals (variances), evecs
+    Vars = L**(1/2)*V
+    # remove rescaling
+    Vars = remove_rescale(Vars, ap[:-1]+a0[1:-1]) # ap/a0 have 0 appended as last element, a00 fixed
 
     print()
-    print(f"{process}{model} 1sigma variated central values:")
-    for i in range(5):
-        var_values = m_a_inv[:, i]
+    print(f"{process}{model} 1sigma variated (with rescaling removed) central values:")
+    for i in range(5-1):
+        var_values = Vars.T[i]
         # compute shift for ap's
         var_ap = var_values[:3]
         var_ap = np.append(var_ap, 0.0)
@@ -174,20 +188,20 @@ def gen_param_shifted_BtoDstarBGL(
     scale,
     verbose=True,
 ):
-    m_corr = np.matrix(m_corr)
-    # scale error w/ Vcb * eta_ew as well!
-    v_err = np.array(aerr + berr + cerr + derr) * scale
-
-    m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
-    v_eigen, m_eigen = np.linalg.eig(m_cov)
-    m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
-    m_a_inv = np.linalg.inv(m_a)
+    # build the covariance matrix
+    C = np.array(m_corr)
+    Std = np.diag(np.array(aerr + berr + cerr + derr) * scale) # scale error w/ Vcb * eta_ew as well!
+    U = np.matmul(Std, np.matmul(C, Std))
+    # extract uncorrelated variations
+    L, V = np.linalg.eig(U) # evals (variances), evecs
+    Vars = L**(1/2)*V
+    # remove rescaling
+    Vars = remove_rescale(Vars, avec+bvec+cvec+dvec)
 
     print()
-    print(f"{process}{model} 1sigma variated central values:")
-    for i in range(12):
-        var_values = m_a_inv[:, i]
+    print(f"{process}{model} 1sigma variated (with rescaling removed) central values:")
+    for i in range(12-1):
+        var_values = Vars.T[i]
         var_a = var_values[:3]
         var_b = var_values[3:6]
         var_c = var_values[6:9]
@@ -224,19 +238,20 @@ def gen_param_shifted_BtoDstarstarBLR(
     # if don't fully trust paper constraints, optionally increase 1sigma variations by a factor
     delta_factor = 2
 
-    m_corr = np.matrix(m_corr)
-    v_err = np.array(v_err)
-
-    m_cov = np.einsum("ij,i,j->ij", m_corr, v_err, v_err)
-    v_eigen, m_eigen = np.linalg.eig(m_cov)
-    m_c = np.einsum("ij,i->ij", np.eye(v_eigen.size), (1 / np.sqrt(v_eigen)))
-    m_a = np.einsum("ik,kj", m_c.T, m_eigen.T)
-    m_a_inv = np.linalg.inv(m_a)
+    # build the covariance matrix
+    C = np.array(m_corr)
+    Std = np.diag(np.array(v_err))
+    U = np.matmul(Std, np.matmul(C, Std))
+    # extract uncorrelated variations
+    L, V = np.linalg.eig(U) # evals (variances), evecs
+    Vars = L**(1/2)*V
+    # remove rescaling
+    Vars = remove_rescale(Vars, v_nom)
 
     print()
-    print(f"{process}{model} 1sigma variated central values:")
-    for i in range(len(v_nom)):
-        var_values = m_a_inv[:, i]
+    print(f"{process}{model} 1sigma variated (with rescaling removed) central values:")
+    for i in range(len(v_nom)-1):
+        var_values = Vars.T[i]
 
         if verbose:
             print(f"  // shifting in {i+1}-th direction (+)...")
