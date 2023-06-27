@@ -55,6 +55,9 @@ ReweightRDXDstRun1: ReweightRDXDstRun1.cpp
 ff-params-RDX:
 	./utils/gen_ham_params.py ./spec/rdx-run2.yml
 
+ff-params-RDX-no-rescale:
+	./utils/gen_ham_params_no_rescale.py ./spec/rdx-run2.yml
+
 
 #########
 # Plots #
