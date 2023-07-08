@@ -7,13 +7,14 @@ Code for FF reweighting in HAMMER.
 Install `nix` with flake support, then type in `nix develop`. All dependencies
 will be installed automatically for you.
 
-Now you can do:
+To build all binaries:
 
 ```
 make
 ```
 
-To generate weight ntuples based on sample ntuples from RDX run 2 analysis:
+Once this is done, to generate weight ntuples (using the nominal reweighting script 
+`src/ReweightRDX.cpp`) based on sample ntuples (stored in `samples/`) from RDX run 2 analysis:
 
 ```
 make rdx-run2-ntuples
@@ -21,14 +22,13 @@ make rdx-run2-ntuples
 
 Note that the `stdout` from the reweighter will also be saved as log files.
 
-To compile programs (which will be put in the `bin` folder) and
+To plot resulting sample `q2` (stored in `gen/`):
 
 ```
 make sample-plots
 ```
 
-To generate some reweighting validation plots (which will be put in the `gen`
-folder):
+To generate some reweighting validation plots (stored in `gen`):
 ```
 make validation-plots
 ```
@@ -65,16 +65,39 @@ First daughter ID: D*+ (413)
   Third G-daughter ID: gamma (22)
 ```
 
-Note that all particle IDs are taken to be absolute value so they may be unphysical.
+Note that all particle IDs are taken to be absolute value.
 
 ### `ReweightRDX`
 
-Form factor reweighter for RDX analyses. You can do something like this:
+To do the actual form factor reweighting for RDX analyses, you can do something like this:
 ```
 ReweightRDX samples/rdx-run2-Bd2DstMuNu.root output.root TupleB0/DecayTree run2
 ```
+This will generate weight ntuples, stored in the home directory (and named `output.root`). Notably,
+you can also run other reweighting scripts (stored in `src/`) or the nominal reweighting with more
+printouts for debugging with similar commands (eg. `ReweightRDXDstNoCorr`, or `'ReweightRDXDebug`
+for debugging, instead of `ReweightRDX`). The additional reweighting scripts are mostly used for 
+studies.
 
 The `output.root` contains a `w_ff` branch and some other debugging branches.
+
+NOTE: currently, the FF parameters/errors/variations set in the nominal reweighter `ReweightRDX`
+have
+
+- For $B\rightarrow D$: parameter values and errors taken from [1606.08030](https://arxiv.org/abs/1606.08030),
+with one variation (along the direction of the nominal FF parameters, ie. the rescaling direction)
+removed. Correlations from the paper are taken into account.
+- For $B\rightarrow D^{\*}$: parameter values and errors taken from [2105.14019](https://arxiv.org/abs/2105.14019)
+(v3, Table 12- "Lattice + both"), with one variation (along the rescaling direction) removed. Correlations
+from the paper are taken into account.
+- For $B\rightarrow D\_{(s)}^{\*\*}$: parameter values and errors taken from [1711.03110](https://arxiv.org/abs/1711.03110),
+with one variation (in the direction of parameter that mainly effect normalization/rescaling: $\tau (1)$
+and $\zeta (1)$) removed for both the wide/narrow states (which are parametrized separately). The $D_s^{\*\*}$
+FFs are taken to be the same as for the $D^{\*\*}$. Previous fit results indicated that the paper errors were
+too constraining, and potentially the central values ought to be shifted; currently, the errors used for
+variations are _double_ the paper errors, and the central values are _not_ shifted. Correlations from
+the paper are _not_ taken into account; the variations are exactly $\mathbf{f}\_{nom} +- \mathbf{sigma}\_i$
+(where $\mathbf{sigma}\_i$ is a vector of 0's and the $i^{th}$ FF param error in the $i^{th}$ position).
 
 ### `ValidateRDX`
 
@@ -88,6 +111,9 @@ ValidateRDX test.root
 
 ### Compute FF variation parameters
 
+To produce code that can be pasted into a reweighting script (eg. `ReweightRDX.cpp`) that specifies
+the parameter values as well as the FF variations, use
+
 ```
 make ff-params-RDX
 ```
@@ -95,6 +121,15 @@ make ff-params-RDX
 See [`utils/gen_ham_params.py`](./utils/gen_ham_params.py) and [`spec/rdx-run2.yml`](./spec/rdx-run2.yml)
 for how these are computed.
 
+To produce the variations with rescaling removed from the variations (not nominally used for 
+$D_{(s)}^{\*\*}$), use
+
+```
+make ff-params-RDX-no-rescale
+```
+
+The motivation and math underlying removing the rescaling from the variations can be found in
+[`utils/gen_ham_params_no_rescale.py`](./utils/gen_ham_params_no_rescale.py).
 
 ## HAMMER tips
 

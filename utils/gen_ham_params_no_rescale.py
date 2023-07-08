@@ -32,7 +32,6 @@ from argparse import ArgumentParser
 # Command line parser #
 #######################
 
-
 def parse_input():
     parser = ArgumentParser(description="generate HAMMER parameters and variations, \
                                          excluding rescaling.")
@@ -56,7 +55,6 @@ def parse_input():
 
     return parser.parse_args()
 
-
 ###########
 # Helpers #
 ###########
@@ -72,7 +70,6 @@ def print_param_general(ff_alias, param, val, add_hammer=False):
     else:
         print(f'    "{{{param}: {val}}}",')
 
-
 def print_param_ff_var(process, model, shifts, params, comments):
     print("  FF variation params:")
     for single, c in zip(shifts, comments):
@@ -83,14 +80,12 @@ def print_param_ff_var(process, model, shifts, params, comments):
             f'    ham.setFFEigenvectors{{"{process}", "{model}", {eigen_vector_str}}}; // {c};'
         )
 
-
 def fmt_dict_as_cpp_map(dct):
     output = "{"
     for key, value in dct.items():
         elem = f'{{"{key}", {value}}}, '
         output += elem
     return output[:-2] + "},"
-
 
 def eval_fake_sandbox(code, add_vars):
     loc = dict()
@@ -124,11 +119,9 @@ def remove_rescale(Vars, nom):
     A = (np.concatenate((A.T[:nom_entry],A.T[nom_entry+1:]))).T
     return z**(1/2)*A
 
-
 #################
 # Model helpers #
 #################
-
 
 def gen_param_shifted_BtoDBGL(
     process, model, m_corr, v_err, add_params, ap, a0, verbose=True
@@ -171,7 +164,6 @@ def gen_param_shifted_BtoDBGL(
         print_param_general(process + model, "a0", list(np.array(a0) - var_a0))
         if verbose:
             print("  },")
-
 
 def gen_param_shifted_BtoDstarBGL(
     process,
@@ -231,7 +223,6 @@ def gen_param_shifted_BtoDstarBGL(
         if verbose:
             print("  },")
 
-
 def gen_param_shifted_BtoDstarstarBLR(
     process, model, m_corr, v_nom, v_err, param_names, verbose=True
 ):
@@ -268,7 +259,6 @@ def gen_param_shifted_BtoDstarstarBLR(
             print_param_general(process + model, name, nom - delta_factor*delta)
         if verbose:
             print("  },")
-
 
 ########
 # Main #
