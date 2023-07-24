@@ -137,7 +137,7 @@ def gen_param_shifted_BtoDBGL(
     Vars = remove_rescale(Vars, ap[:-1]+a0[1:-1]) # ap/a0 have 0 appended as last element, a00 fixed
 
     print()
-    print(f"{process}{model} 1sigma variated (with rescaling removed) central values:")
+    print(f"{process}{model} 1sigma variated (with rescaling removed) FF values:")
     for i in range(5-1):
         var_values = Vars.T[i]
         # compute shift for ap's
@@ -191,7 +191,7 @@ def gen_param_shifted_BtoDstarBGL(
     Vars = remove_rescale(Vars, avec+bvec+cvec+dvec)
 
     print()
-    print(f"{process}{model} 1sigma variated (with rescaling removed) central values:")
+    print(f"{process}{model} 1sigma variated (with rescaling removed) FF values:")
     for i in range(12-1):
         var_values = Vars.T[i]
         var_a = var_values[:3]
@@ -240,7 +240,7 @@ def gen_param_shifted_BtoDstarstarBLR(
     Vars = remove_rescale(Vars, v_nom)
 
     print()
-    print(f"{process}{model} 1sigma variated (with rescaling removed) central values:")
+    print(f"{process}{model} 1sigma variated (with rescaling removed) FF values:")
     for i in range(len(v_nom)-1):
         var_values = Vars.T[i]
 

@@ -130,7 +130,7 @@ def gen_param_shifted_BtoDBGL(
     m_a_inv = np.linalg.inv(m_a)
 
     print()
-    print(f"{process}{model} 1sigma variated central values:")
+    print(f"{process}{model} 1sigma variated FF values:")
     for i in range(5):
         var_values = m_a_inv[:, i]
         # compute shift for ap's
@@ -185,7 +185,7 @@ def gen_param_shifted_BtoDstarBGL(
     m_a_inv = np.linalg.inv(m_a)
 
     print()
-    print(f"{process}{model} 1sigma variated central values:")
+    print(f"{process}{model} 1sigma variated FF values:")
     for i in range(12):
         var_values = m_a_inv[:, i]
         var_a = var_values[:3]
@@ -234,7 +234,7 @@ def gen_param_shifted_BtoDstarstarBLR(
     m_a_inv = np.linalg.inv(m_a)
 
     print()
-    print(f"{process}{model} 1sigma variated central values:")
+    print(f"{process}{model} 1sigma variated FF values:")
     for i in range(len(v_nom)):
         var_values = m_a_inv[:, i]
 
