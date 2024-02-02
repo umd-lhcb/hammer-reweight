@@ -1,5 +1,9 @@
 // Author: Yipeng Sun, Alex Fernez
-// License: BSD 2-clause
+
+// Variated parameter values generated using utils/gen_ham_params.py + 
+// gen_ham_params_no_rescale.py (the latter used for B->D(*) and the former used for
+// B->D**), with central values/errors/correlations/related parameter values set in
+// spec/rdx-run2.yml
 
 #include <algorithm>
 #include <array>
@@ -452,9 +456,6 @@ void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {bvec: [0.00048278146559999996, 8.117222399999999e-05, 0.0027057408]}");
   ham.setOptions(scheme + ": {cvec: [2.39651328e-05, 0.0023192063999999996, -0.036334233599999995]}");
   ham.setOptions(scheme + ": {dvec: [0.002052497664, -0.00776934144, 2.7057407999999998e-05]}");
-  // Alex note to self: gen_ham_params outputs setOptions(... abcderr: [...10 values...]) too,
-  // but I don't think Hammer needs the errors (they weren't set in previous iterations of Hammer
-  // reweighting, either)
 }
 
 void setBtoD0starBLRDefault(Hammer::Hammer& ham, const string scheme) {

@@ -1,12 +1,12 @@
 // Author: Yipeng Sun, Alex Fernez
-// License: BSD 2-clause
-// Last Change: Thu Mar 23, 2023 at 02:12 AM -0400
 
-// Alex note to self: here the filename "default" just refers to the fact that the nominal
-// parameter values for the D** decays have been reset to the paper values (ie. not our shifted
-// values that we chose because the fit seemed to want to move these FF params far from the paper
-// values); the corresponding set nominal values and corresponding variations are thus different
-// from the reweighter script in this folder without "default" in the filename
+// Variated parameter values generated using utils/gen_ham_params.py, with central 
+// values/errors/correlations/related parameter values set in spec/rdx-run2.yml, 
+// EXCEPT FOR B->D*, where the parameters/variations are set by hand to match run1 (note
+// that they include a factor of nEW*Vcb=1.0066*0.0406 compared to the values from the
+// last column of table V in 1707.09509)
+// Note (Alex): can't produce run1 B->D because Hammer doesn't seem to have a BCL
+// reweighting class?
 
 #include <algorithm>
 #include <array>
@@ -92,52 +92,52 @@ map<string, complex<double>> specializedWC = {
 // clang-format off
 // +, -, +, -, ...
 vector<vector<string>> BtoDVars = {
-  // shifting 1-th param in + direction....
+  // shifting in 1-th direction (+)...
   {
     "{ap: [0.01564266061259705, -0.034768835742855116, -0.09341578728622298, 0.0]}",
     "{a0: [0.07921507727285786, -0.20200574935567273, -0.32999651965104015, 0.0]}",
   },
-  // shifting 1-th param in - direction....
+  // shifting in 1-th direction (-)...
   {
     "{ap: [0.015677339387402952, -0.03363116425714489, -0.08658421271377702, 0.0]}",
     "{a0: [0.07948492272714215, -0.20799425064432725, -0.13000348034895984, 0.0]}",
   },
-  // shifting 2-th param in + direction....
+  // shifting in 2-th direction (+)...
   {
     "{ap: [0.0156957728134992, -0.03274798737619618, -0.11173093154013228, 0.0]}",
     "{a0: [0.07952054730874657, -0.20479549469640895, -0.22925983421113325, 0.0]}",
   },
-  // shifting 2-th param in - direction....
+  // shifting in 2-th direction (-)...
   {
     "{ap: [0.015624227186500802, -0.035652012623803825, -0.06826906845986772, 0.0]}",
     "{a0: [0.07917945269125344, -0.20520450530359102, -0.23074016578886677, 0.0]}",
   },
-  // shifting 3-th param in + direction....
+  // shifting in 3-th direction (+)...
   {
     "{ap: [0.015686808500749508, -0.031712849151909125, -0.08969198838997502, 0.0]}",
     "{a0: [0.07939582669134693, -0.19132668876796238, -0.22961524687243018, 0.0]}",
   },
-  // shifting 3-th param in - direction....
+  // shifting in 3-th direction (-)...
   {
     "{ap: [0.015633191499250493, -0.03668715084809088, -0.09030801161002497, 0.0]}",
     "{a0: [0.07930417330865308, -0.2186733112320376, -0.23038475312756984, 0.0]}",
   },
-  // shifting 4-th param in + direction....
+  // shifting in 4-th direction (+)...
   {
     "{ap: [0.015564244420542984, -0.03420228477497694, -0.09000030258603699, 0.0]}",
     "{a0: [0.07887140238985467, -0.20499939148119928, -0.22999994184165481, 0.0]}",
   },
-  // shifting 4-th param in - direction....
+  // shifting in 4-th direction (-)...
   {
     "{ap: [0.015755755579457017, -0.03419771522502306, -0.089999697413963, 0.0]}",
     "{a0: [0.07982859761014534, -0.2050006085188007, -0.2300000581583452, 0.0]}",
   },
-  // shifting 5-th param in + direction....
+  // shifting in 5-th direction (+)...
   {
     "{ap: [0.015685136124387915, -0.03519607262617201, -0.09006434570610047, 0.0]}",
     "{a0: [0.07914343789044714, -0.2048177906662987, -0.22998668416129328, 0.0]}",
   },
-  // shifting 5-th param in - direction....
+  // shifting in 5-th direction (-)...
   {
     "{ap: [0.015634863875612085, -0.03320392737382799, -0.08993565429389952, 0.0]}",
     "{a0: [0.07955656210955286, -0.20518220933370127, -0.23001331583870674, 0.0]}",
@@ -145,140 +145,140 @@ vector<vector<string>> BtoDVars = {
 };
 
 vector<vector<string>> BtoDstVars = {
-  // shifting 1-th param in + direction....
+  // shifting in 1-th direction (+)...
   {
     "{avec: [0.001401771028, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 1-th param in - direction....
+  // shifting in 1-th direction (-)...
   {
     "{avec: [0.0010421329799999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 2-th param in + direction....
+  // shifting in 2-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0071518929999999994, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 2-th param in - direction....
+  // shifting in 2-th direction (-)...
   {
     "{avec: [0.0012219520039999999, -0.0038824562000000003, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 3-th param in + direction....
+  // shifting in 3-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, 0.0]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 3-th param in - direction....
+  // shifting in 3-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.073562328]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 4-th param in + direction....
+  // shifting in 4-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0004904155199999999, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 4-th param in - direction....
+  // shifting in 4-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0018799261599999999, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 5-th param in + direction....
+  // shifting in 5-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.026564173999999996]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 5-th param in - direction....
+  // shifting in 5-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.014303785999999999]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 6-th param in + direction....
+  // shifting in 6-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-8.173592e-05, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 6-th param in - direction....
+  // shifting in 6-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00033511727199999995, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 7-th param in + direction....
+  // shifting in 7-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.00465894744]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 7-th param in - direction....
+  // shifting in 7-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0006538873599999996]}",
     "{dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}",
   },
-  // shifting 8-th param in + direction....
+  // shifting in 8-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0028117156479999994, -0.012996011279999999, 0.0]}",
   },
-  // shifting 8-th param in - direction....
+  // shifting in 8-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0020515715919999997, -0.012996011279999999, 0.0]}",
   },
-  // shifting 9-th param in + direction....
+  // shifting in 9-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.006048458079999999, 0.0]}",
   },
-  // shifting 9-th param in - direction....
+  // shifting in 9-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.01994356448, 0.0]}",
   },
-  // shifting 10-th param in + direction....
+  // shifting in 10-th direction (+)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
     "{cvec: [-0.00020842659599999998, 0.0026564173999999996]}",
     "{dvec: [0.0024316436199999995, -0.015284617039999998, 0.040867959999999995]}",
   },
-  // shifting 10-th param in - direction....
+  // shifting in 10-th direction (-)...
   {
     "{avec: [0.0012219520039999999, 0.0016347183999999998, -0.036781164]}",
     "{bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}",
@@ -288,22 +288,22 @@ vector<vector<string>> BtoDstVars = {
 };
 
 vector<vector<string>> BtoD0starVars = {
-  // shifting 1-th param in + direction....
+  // shifting in 1-th direction (+)...
   {
     "{ztp: 3.0}",
     "{zeta1: 0.6}",
   },
-  // shifting 1-th param in - direction....
+  // shifting in 1-th direction (-)...
   {
     "{ztp: -2.5999999999999996}",
     "{zeta1: 0.6}",
   },
-  // shifting 2-th param in + direction....
+  // shifting in 2-th direction (+)...
   {
     "{ztp: 0.2}",
     "{zeta1: 1.2}",
   },
-  // shifting 2-th param in - direction....
+  // shifting in 2-th direction (-)...
   {
     "{ztp: 0.2}",
     "{zeta1: 0.0}",
@@ -311,37 +311,37 @@ vector<vector<string>> BtoD0starVars = {
 };
 
 vector<vector<string>> BtoD1Vars = {
-  // shifting 1-th param in + direction....
+  // shifting in 1-th direction (+)...
   {
     "{tp: -1.2000000000000002}",
     "{tau1: -0.5}",
     "{tau2: 2.9}",
   },
-  // shifting 1-th param in - direction....
+  // shifting in 1-th direction (-)...
   {
     "{tp: -2.0}",
     "{tau1: -0.5}",
     "{tau2: 2.9}",
   },
-  // shifting 2-th param in + direction....
+  // shifting in 2-th direction (+)...
   {
     "{tp: -1.6}",
     "{tau1: 0.09999999999999998}",
     "{tau2: 2.9}",
   },
-  // shifting 2-th param in - direction....
+  // shifting in 2-th direction (-)...
   {
     "{tp: -1.6}",
     "{tau1: -1.1}",
     "{tau2: 2.9}",
   },
-  // shifting 3-th param in + direction....
+  // shifting in 3-th direction (+)...
   {
     "{tp: -1.6}",
     "{tau1: -0.5}",
     "{tau2: 5.699999999999999}",
   },
-  // shifting 3-th param in - direction....
+  // shifting in 3-th direction (-)...
   {
     "{tp: -1.6}",
     "{tau1: -0.5}",
@@ -350,22 +350,22 @@ vector<vector<string>> BtoD1Vars = {
 };
 
 vector<vector<string>> BtoD1starVars = {
-  // shifting 1-th param in + direction....
+  // shifting in 1-th direction (+)...
   {
     "{ztp: 3.0}",
     "{zeta1: 0.6}",
   },
-  // shifting 1-th param in - direction....
+  // shifting in 1-th direction (-)...
   {
     "{ztp: -2.5999999999999996}",
     "{zeta1: 0.6}",
   },
-  // shifting 2-th param in + direction....
+  // shifting in 2-th direction (+)...
   {
     "{ztp: 0.2}",
     "{zeta1: 1.2}",
   },
-  // shifting 2-th param in - direction....
+  // shifting in 2-th direction (-)...
   {
     "{ztp: 0.2}",
     "{zeta1: 0.0}",
@@ -373,37 +373,37 @@ vector<vector<string>> BtoD1starVars = {
 };
 
 vector<vector<string>> BtoD2starVars = {
-  // shifting 1-th param in + direction....
+  // shifting in 1-th direction (+)...
   {
     "{tp: -1.2000000000000002}",
     "{tau1: -0.5}",
     "{tau2: 2.9}",
   },
-  // shifting 1-th param in - direction....
+  // shifting in 1-th direction (-)...
   {
     "{tp: -2.0}",
     "{tau1: -0.5}",
     "{tau2: 2.9}",
   },
-  // shifting 2-th param in + direction....
+  // shifting in 2-th direction (+)...
   {
     "{tp: -1.6}",
     "{tau1: 0.09999999999999998}",
     "{tau2: 2.9}",
   },
-  // shifting 2-th param in - direction....
+  // shifting in 2-th direction (-)...
   {
     "{tp: -1.6}",
     "{tau1: -1.1}",
     "{tau2: 2.9}",
   },
-  // shifting 3-th param in + direction....
+  // shifting in 3-th direction (+)...
   {
     "{tp: -1.6}",
     "{tau1: -0.5}",
     "{tau2: 5.699999999999999}",
   },
-  // shifting 3-th param in - direction....
+  // shifting in 3-th direction (-)...
   {
     "{tp: -1.6}",
     "{tau1: -0.5}",
@@ -455,9 +455,6 @@ void setBtoDstarBGLDefault(Hammer::Hammer& ham, const string scheme) {
   ham.setOptions(scheme + ": {bvec: [0.0004977717527999999, -0.0011851708399999998, 0.020433979999999997]}");
   ham.setOptions(scheme + ": {cvec: [-0.00020842659599999998, 0.0026564173999999996]}");
   ham.setOptions(scheme + ": {dvec: [0.0024316436199999995, -0.012996011279999999, 0.0]}");
-  // Alex note to self: gen_ham_params outputs setOptions(... abcderr: [...10 values...]) too,
-  // but I don't think Hammer needs the errors (they weren't set in previous iterations of Hammer
-  // reweighting, either)
 }
 
 void setBtoD0starBLRDefault(Hammer::Hammer& ham, const string scheme) {
